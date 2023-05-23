@@ -8,13 +8,15 @@ public class BoardController : MonoBehaviour
     //waypoint information
     public Transform[] waypoints; //most likely create a waypointinfo component
     public Transform[] startingWaypoints;
-    public GameObject playerOne;
 
     //player and turn information
     public GameObject[] players;
     public int numPlayers;
     private GameObject currentPlayer;
     private int currentPlayer_i; //index of current player
+
+    //leaderboard
+    public Leaderboard leaderboard;
     
     //dices
     public GameObject mainDice;
@@ -27,18 +29,22 @@ public class BoardController : MonoBehaviour
     public bool debug;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
         diceSprites = Resources.LoadAll<Sprite>("DiceSides/");
+        leaderboard.SetNumPlayers(numPlayers);
         StartCoroutine("SetupOrder");
     }
 
+    /*
     // Update is called once per frame
     void Update()
     {
         
     }
+    */
 
     private IEnumerator SetupOrder()
     {
@@ -78,23 +84,25 @@ public class BoardController : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
 
             //setup the correct order
-            GameObject[] temp = new GameObject[4];
+            GameObject[] temp = new GameObject[numPlayers];
             for (int i = 0; i < numPlayers; i++)
             {
-                //startingDie[i].SetActive(false);
+                startingDie[i].SetActive(false);
                 temp[i] = (UnityEngine.GameObject) playerOrder.GetByIndex(numPlayers - (i + 1));
             }
 
-            //TODO SETUP MARIOPARTY LEADERBOARD HERE
             players = temp;
         }
 
+        leaderboard.SetRankings(players);
+        leaderboard.SetVisibility(true);
+
         currentPlayer_i = -1;
         Dice.OnDiceFinish += SubscribeMovePlayer;
-
+        mainDice.SetActive(true);
         SetupNextTurn();
     }
 
@@ -132,6 +140,7 @@ public class BoardController : MonoBehaviour
         for (int currentStep = 1; currentStep <= roll; currentStep++)
         {
             countdownSprite.sprite = diceSprites[roll - currentStep];
+            infoObj.currentPosition = currentPosition + currentStep;
             SpaceInfo spaceInfo = waypoints[currentPosition + currentStep].GetComponent<SpaceInfo>();
             moveObj.SetTargetAndMove(spaceInfo.transform.position);
             spaceInfo.AdjustPlayers();
@@ -143,9 +152,9 @@ public class BoardController : MonoBehaviour
             Debug.Log("Reached Location: " + (currentPosition + currentStep));
             yield return new WaitForSeconds(0.05f);
             spaceInfo.ResetPlayers(false);
+            leaderboard.UpdateBoard(players);
         }
         rollCountdown.SetActive(false);
-        infoObj.currentPosition = currentPosition + roll;
         waypoints[currentPosition + roll].GetComponent<SpaceInfo>().AddPlayer(currentPlayer);
         SetupNextTurn();
     }

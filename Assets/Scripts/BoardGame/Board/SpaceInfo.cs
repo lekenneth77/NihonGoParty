@@ -18,14 +18,6 @@ public class SpaceInfo : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    /*
-    void Update()
-    {
-        
-    }
-    */
-
     public void AddPlayer(GameObject player)
     {
         playersOnMe.Enqueue(player);
