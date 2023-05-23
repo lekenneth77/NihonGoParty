@@ -23,6 +23,9 @@ public class BoardController : MonoBehaviour
     //misc sprites
     private Sprite[] diceSprites;
 
+    //debug flag
+    public bool debug;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,50 +49,64 @@ public class BoardController : MonoBehaviour
             players[i].transform.position = startingWaypoints[i].position;
         }
 
-        SortedList playerOrder = new SortedList();
-
-        //get the dice rolls
-        for (int i = 0; i < numPlayers; i++)
+        if (!debug)
         {
-            startingDie[i].SetActive(true);
-            Dice currentDice = startingDie[i].GetComponent<Dice>();
-            currentDice.Reset();
-            while (!currentDice.GetStopRoll())
+            SortedList playerOrder = new SortedList();
+
+            //get the dice rolls
+            for (int i = 0; i < numPlayers; i++)
             {
-                //poll for the dice to finish.
-                yield return new WaitForSeconds(0.01f);
+                startingDie[i].SetActive(true);
+                Dice currentDice = startingDie[i].GetComponent<Dice>();
+                currentDice.Reset();
+                while (!currentDice.GetStopRoll())
+                {
+                    //poll for the dice to finish.
+                    yield return new WaitForSeconds(0.01f);
+                }
+                startingDie[i].GetComponent<Dice>().SetAllowStart(false);
+                int roll = currentDice.GetRoll();
+                //its unfair like this but, whatever, does order really matter? this is just for fun
+                if (playerOrder.ContainsKey(roll))
+                {
+                    Debug.Log("Reroll!");
+                    i--;
+                } else
+                {
+                    playerOrder.Add(currentDice.GetRoll(), players[i]);
+                }
+                yield return new WaitForSeconds(0.5f);
             }
-            startingDie[i].GetComponent<Dice>().SetAllowStart(false);
-            int roll = currentDice.GetRoll();
-            //its unfair like this but, whatever, does order really matter? this is just for fun
-            if (playerOrder.ContainsKey(roll))
+
+            yield return new WaitForSeconds(1f);
+
+            //setup the correct order
+            GameObject[] temp = new GameObject[4];
+            for (int i = 0; i < numPlayers; i++)
             {
-                Debug.Log("Reroll!");
-                i--;
-            } else
-            {
-                playerOrder.Add(currentDice.GetRoll(), players[i]);
+                //startingDie[i].SetActive(false);
+                temp[i] = (UnityEngine.GameObject) playerOrder.GetByIndex(numPlayers - (i + 1));
             }
-            yield return new WaitForSeconds(0.5f);
+
+            //TODO SETUP MARIOPARTY LEADERBOARD HERE
+            players = temp;
         }
 
-
-        yield return new WaitForSeconds(1f);
-
-        //setup the correct order
-        GameObject[] temp = new GameObject[4];
-        for (int i = 0; i < numPlayers; i++)
-        {
-            //startingDie[i].SetActive(false);
-            temp[i] = (UnityEngine.GameObject) playerOrder.GetByIndex(numPlayers - (i + 1));
-        }
-
-        players = temp;
-
-        currentPlayer_i = 0;
-        currentPlayer = players[0];
+        currentPlayer_i = -1;
         Dice.OnDiceFinish += SubscribeMovePlayer;
+
+        SetupNextTurn();
+    }
+
+    private void SetupNextTurn()
+    {
+        SetNextPlayer();
         mainDice.GetComponent<Dice>().Reset();
+        //lol this is pretty jank and might be slow but it's kind of funny
+        foreach (Transform obj in waypoints)
+        {
+            obj.gameObject.GetComponent<SpaceInfo>().ResetPlayers(true);
+        }
     }
 
 
@@ -107,26 +124,30 @@ public class BoardController : MonoBehaviour
         GameObject rollCountdown = currentPlayer.transform.GetChild(0).gameObject;
         SpriteRenderer countdownSprite = rollCountdown.GetComponent<SpriteRenderer>();
         int currentPosition = infoObj.currentPosition;
-        rollCountdown.SetActive(true);
-        for (int currentStep = 0; currentStep < roll; currentStep++)
+        if (currentPosition != -1)
         {
-            countdownSprite.sprite = diceSprites[roll - currentStep - 1];
-            moveObj.target = waypoints[currentPosition + currentStep].localPosition;
-
-            moveObj.moveFlag = true;
-            while (moveObj.moveFlag)
+            waypoints[currentPosition].GetComponent<SpaceInfo>().RemovePlayer();
+        }
+        rollCountdown.SetActive(true);
+        for (int currentStep = 1; currentStep <= roll; currentStep++)
+        {
+            countdownSprite.sprite = diceSprites[roll - currentStep];
+            SpaceInfo spaceInfo = waypoints[currentPosition + currentStep].GetComponent<SpaceInfo>();
+            moveObj.SetTargetAndMove(spaceInfo.transform.position);
+            spaceInfo.AdjustPlayers();
+            while (moveObj.GetMoveFlag())
             {
                 //essentially polling
                 yield return new WaitForSeconds(0.01f);
             }
             Debug.Log("Reached Location: " + (currentPosition + currentStep));
             yield return new WaitForSeconds(0.05f);
+            spaceInfo.ResetPlayers(false);
         }
         rollCountdown.SetActive(false);
         infoObj.currentPosition = currentPosition + roll;
-        SetNextPlayer();
-        Dice.allowStart = true;
-        //for now allow dice to be clicked after movement, but in the future make it happen after a game
+        waypoints[currentPosition + roll].GetComponent<SpaceInfo>().AddPlayer(currentPlayer);
+        SetupNextTurn();
     }
 
     //Set the current player to be the next player.

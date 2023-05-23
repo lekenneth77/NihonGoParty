@@ -9,7 +9,7 @@ public class PlayerInfo : MonoBehaviour
 
     void Start()
     {
-        currentPosition = 0;
+        currentPosition = -1;
     }
 
     // Update is called once per frame

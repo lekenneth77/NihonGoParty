@@ -6,8 +6,8 @@ public class BoardMovement : MonoBehaviour
 {
 
     private float movementSpeed;
-    public bool moveFlag;
-    public Vector3 target;
+    private bool moveFlag;
+    private Vector3 target;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,17 @@ public class BoardMovement : MonoBehaviour
         {
             Move();
         }
+    }
+
+    public void SetTargetAndMove(Vector3 tgt)
+    {
+        target = tgt;
+        moveFlag = true;
+    }
+
+    public bool GetMoveFlag()
+    {
+        return moveFlag;
     }
 
     private void Move()
