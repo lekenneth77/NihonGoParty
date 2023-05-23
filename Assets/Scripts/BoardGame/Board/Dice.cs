@@ -6,21 +6,21 @@ using UnityEngine;
 public class Dice : MonoBehaviour
 {
 
-    [SerializeField] private int roll;
+    [SerializeField] private int debugRoll;
+    public static int roll;
     public bool debug;
     public SpriteRenderer spriteRenderer;
     private Sprite[] sprites;
-    private bool allowStart, allowEnd, stopRoll; //TODO make allowStart a public static, so that the controller can set the dice
-                                                 //to be interactable again instead of it resetting immediately once the dice is done.
+    public static bool allowStart, stopRoll;
+    private bool allowEnd;
     public static event Action<int> OnDiceFinish;
+    //TODO add the inputsystem so that you can make the dice start with the space key? maybe?
 
     // Start is called before the first frame update
     void Start()
     {
         sprites = Resources.LoadAll<Sprite>("DiceSides/");
-        allowStart = true;
-        allowEnd = false;
-        stopRoll = false;
+        Reset();
     }
 
     private void OnMouseDown()
@@ -41,6 +41,7 @@ public class Dice : MonoBehaviour
         float tillAllowEnd = 0f;
         if (debug)
         {
+            roll = debugRoll;
             spriteRenderer.sprite = sprites[roll - 1];
             EndRoll();
         }
@@ -59,11 +60,30 @@ public class Dice : MonoBehaviour
     {
         stopRoll = true;
         Debug.Log("Roll: " + roll);
-        allowStart = true;
         allowEnd = false;
         //roll = 1;
         OnDiceFinish?.Invoke(roll);
     }
 
+    public void SetAllowStart(bool val)
+    {
+        allowStart = val;
+    }
 
+    public void Reset()
+    {
+        allowStart = true;
+        allowEnd = false;
+        stopRoll = false;
+    }
+
+    public bool GetStopRoll()
+    {
+        return stopRoll;
+    }
+
+    public int GetRoll()
+    {
+        return roll;
+    }
 }
