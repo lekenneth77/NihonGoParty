@@ -3033,7 +3033,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343877626}
-  m_LocalRotation: {x: 0.0000000020668094, y: 0.99033433, z: -0.13870122, w: 0.000000014757132}
+  m_LocalRotation: {x: -1.4752966e-16, y: 0.99033433, z: -0.1387012, w: -8.624239e-16}
   m_LocalPosition: {x: 5, y: 2, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3749,7 +3749,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.0000000020668094, y: 0.99033433, z: -0.13870122, w: 0.000000014757132}
+  m_LocalRotation: {x: -1.4752966e-16, y: 0.99033433, z: -0.1387012, w: -8.624239e-16}
   m_LocalPosition: {x: 5, y: 2, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4053,10 +4053,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4804,7 +4804,7 @@ MonoBehaviour:
   - {fileID: 1103573783}
   stillCameraObj: {fileID: 1343877626}
   moveCameraObj: {fileID: 626483979}
-  debug: 0
+  debug: 1
 --- !u!4 &2147000834
 Transform:
   m_ObjectHideFlags: 0
@@ -4837,3 +4837,4 @@ MonoBehaviour:
   - {fileID: 93821751}
   - {fileID: 131495348}
   - {fileID: 433973020}
+  boardController: {fileID: 2147000833}

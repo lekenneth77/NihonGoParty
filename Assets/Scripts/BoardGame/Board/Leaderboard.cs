@@ -9,7 +9,7 @@ public class Leaderboard : MonoBehaviour
     // Start is called before the first frame update
     public GameObject[] leaderboard;
     private int numPlayers;
-
+    public BoardController boardController; //ONLY USED TO GET DEBUG, kind of jank
     private Sprite[] rankingSprites;
 
 
@@ -60,7 +60,10 @@ public class Leaderboard : MonoBehaviour
         {
             PlayerInfo info = players[i].GetComponent<PlayerInfo>();
             info.currentRanking = i + 1;
-            leaderboard[info.containerPosition].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = rankingSprites[i];
+            if (!boardController.debug) //taking this out causes errors so idk
+            {
+                leaderboard[info.containerPosition].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = rankingSprites[i];
+            }
         }
     }
 

@@ -12,7 +12,7 @@ public class BoardController : MonoBehaviour
 
     //player and turn information
     public GameObject[] players;
-    public int numPlayers;
+    public static int numPlayers;
     private GameObject currentPlayer;
     private int currentPlayer_i; //index of current player
 
@@ -37,13 +37,16 @@ public class BoardController : MonoBehaviour
     public bool debug;
 
 
-
     // Start is called before the first frame update
     void Start()
     {
         diceSprites = Resources.LoadAll<Sprite>("DiceSides/");
         stillCameraCom = stillCameraObj.GetComponent<CinemachineVirtualCamera>();
         moveCameraCom = moveCameraObj.GetComponent<CinemachineVirtualCamera>();
+        if (debug)
+        {
+            numPlayers = 4;
+        }
         leaderboard.SetNumPlayers(numPlayers);
         StartCoroutine("SetupOrder");
     }
