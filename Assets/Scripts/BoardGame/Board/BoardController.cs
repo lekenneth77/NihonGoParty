@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class BoardController : MonoBehaviour
 {
@@ -22,6 +23,13 @@ public class BoardController : MonoBehaviour
     public GameObject mainDice;
     public GameObject[] startingDie;
 
+    //camera
+    public GameObject stillCameraObj, moveCameraObj;
+    private CinemachineVirtualCamera stillCameraCom, moveCameraCom;
+    private const float START_FOV = 60f;
+    private const float STILL_FOV = 30f;
+    private const float MOVE_FOV = 50f;
+
     //misc sprites
     private Sprite[] diceSprites;
 
@@ -34,6 +42,8 @@ public class BoardController : MonoBehaviour
     void Start()
     {
         diceSprites = Resources.LoadAll<Sprite>("DiceSides/");
+        stillCameraCom = stillCameraObj.GetComponent<CinemachineVirtualCamera>();
+        moveCameraCom = moveCameraObj.GetComponent<CinemachineVirtualCamera>();
         leaderboard.SetNumPlayers(numPlayers);
         StartCoroutine("SetupOrder");
     }
@@ -46,10 +56,9 @@ public class BoardController : MonoBehaviour
     }
     */
 
+    //Called once at the start
     private IEnumerator SetupOrder()
     {
-         //setup players at start TODO randomize order based on the dice they roll
-        //or something like mario party if you do that make sure to serialize field for main dice
         for (int i = 0; i < numPlayers; i++)
         {
             players[i].transform.position = startingWaypoints[i].position;
@@ -71,7 +80,7 @@ public class BoardController : MonoBehaviour
                     //poll for the dice to finish.
                     yield return new WaitForSeconds(0.01f);
                 }
-                currentDice.SetAllowStart(false); //statics are literally bullshit i hate it
+                currentDice.SetAllowStart(false); //statics are literally bum i hate it
                 int roll = currentDice.GetRoll();
                 if (illegalNums.IndexOf(roll) != -1) //no more rerolls
                 {
@@ -105,19 +114,27 @@ public class BoardController : MonoBehaviour
 
         currentPlayer_i = -1;
         Dice.OnDiceFinish += SubscribeMovePlayer;
-        mainDice.SetActive(true);
         SetupNextTurn();
     }
 
     private void SetupNextTurn()
     {
-        SetNextPlayer();
-        mainDice.GetComponent<Dice>().Reset();
         //lol this is pretty jank and might be slow but it's kind of funny
         foreach (Transform obj in waypoints)
         {
             obj.gameObject.GetComponent<SpaceInfo>().ResetPlayers(true);
         }
+        SetNextPlayer();
+
+        Vector3 playerPosition = currentPlayer.transform.position;
+        mainDice.SetActive(true);
+        mainDice.transform.position = new Vector3(playerPosition.x, playerPosition.y + 1.5f, playerPosition.z);
+        mainDice.GetComponent<Dice>().Reset();
+
+        stillCameraCom.LookAt = currentPlayer.transform;
+        stillCameraCom.Follow = currentPlayer.transform;
+        stillCameraCom.m_Lens.FieldOfView = STILL_FOV;
+        
     }
 
 
@@ -130,6 +147,12 @@ public class BoardController : MonoBehaviour
     //Moves the current player.
     private IEnumerator MovePlayer(int roll)
     {
+        yield return new WaitForSeconds(1f);
+        moveCameraCom.LookAt = currentPlayer.transform;
+        moveCameraCom.Follow = currentPlayer.transform;
+        moveCameraCom.m_Lens.FieldOfView = MOVE_FOV;
+        moveCameraObj.SetActive(true);
+        mainDice.SetActive(false);
         BoardMovement moveObj = currentPlayer.GetComponent<BoardMovement>();
         PlayerInfo infoObj = currentPlayer.GetComponent<PlayerInfo>();
         GameObject rollCountdown = currentPlayer.transform.GetChild(0).gameObject;
@@ -154,9 +177,15 @@ public class BoardController : MonoBehaviour
             }
             Debug.Log("Reached Location: " + (currentPosition + currentStep));
             yield return new WaitForSeconds(0.05f);
-            spaceInfo.ResetPlayers(false);
+            if (currentStep != roll)
+            {
+                spaceInfo.ResetPlayers(false);
+            }
             leaderboard.UpdateBoard(players);
         }
+        yield return new WaitForSeconds(0.1f);
+        moveCameraObj.SetActive(false);
+        yield return new WaitForSeconds(1f);
         rollCountdown.SetActive(false);
         waypoints[currentPosition + roll].GetComponent<SpaceInfo>().AddPlayer(currentPlayer);
         SetupNextTurn();
