@@ -58,29 +58,32 @@ public class BoardController : MonoBehaviour
         if (!debug)
         {
             SortedList playerOrder = new SortedList();
-
+            List<int> illegalNums = new List<int>();
             //get the dice rolls
             for (int i = 0; i < numPlayers; i++)
             {
-                startingDie[i].SetActive(true);
                 Dice currentDice = startingDie[i].GetComponent<Dice>();
+                startingDie[i].SetActive(true);
                 currentDice.Reset();
+
                 while (!currentDice.GetStopRoll())
                 {
                     //poll for the dice to finish.
                     yield return new WaitForSeconds(0.01f);
                 }
-                startingDie[i].GetComponent<Dice>().SetAllowStart(false);
+                currentDice.SetAllowStart(false); //statics are literally bullshit i hate it
                 int roll = currentDice.GetRoll();
-                //its unfair like this but, whatever, does order really matter? this is just for fun
-                if (playerOrder.ContainsKey(roll))
+                if (illegalNums.IndexOf(roll) != -1) //no more rerolls
                 {
-                    Debug.Log("Reroll!");
-                    i--;
-                } else
-                {
-                    playerOrder.Add(currentDice.GetRoll(), players[i]);
+                    Debug.Log("Duplicate!");
+                    while (illegalNums.IndexOf(roll) != -1)
+                    {
+                        roll = UnityEngine.Random.Range(0, 6) + 1;
+                    }
+                    currentDice.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = diceSprites[roll - 1];
                 }
+                playerOrder.Add(roll, players[i]);
+                illegalNums.Add(roll);
                 yield return new WaitForSeconds(0.5f);
             }
 

@@ -7,13 +7,13 @@ public class Dice : MonoBehaviour
 {
 
     [SerializeField] private int debugRoll;
-    public static int roll;
+    public int roll;
     public bool debug;
     public SpriteRenderer spriteRenderer;
     private Sprite[] sprites;
-    public static bool allowStart, stopRoll;
-    private bool allowEnd;
+    private bool stopRoll, allowStart, allowEnd;
     public static event Action<int> OnDiceFinish;
+
     //TODO add the inputsystem so that you can make the dice start with the space key? maybe?
 
     // Start is called before the first frame update
@@ -58,9 +58,9 @@ public class Dice : MonoBehaviour
 
     private void EndRoll()
     {
-        stopRoll = true;
-        Debug.Log("Roll: " + roll);
+        allowStart = false;
         allowEnd = false;
+        stopRoll = true;
         //roll = 1;
         OnDiceFinish?.Invoke(roll);
     }
