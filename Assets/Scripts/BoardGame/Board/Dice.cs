@@ -37,7 +37,6 @@ public class Dice : MonoBehaviour, Controls.IDiceActions
 
     public void OnRoll(InputAction.CallbackContext context)
     {
-        Debug.Log("Spacebar has been hit.");
         HandleDice();
     }
 

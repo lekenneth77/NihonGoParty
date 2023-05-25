@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
-public class BoardController : MonoBehaviour
+public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 {
 
     //waypoint information
@@ -18,17 +19,18 @@ public class BoardController : MonoBehaviour
 
     //leaderboard
     public Leaderboard leaderboard;
-    
+
     //dices
     public GameObject mainDice;
     public GameObject[] startingDie;
 
     //camera
-    public GameObject stillCameraObj, moveCameraObj;
+    public GameObject stillCameraObj, moveCameraObj, freeCameraObj;
     private CinemachineVirtualCamera stillCameraCom, moveCameraCom;
     private const float START_FOV = 60f;
     private const float STILL_FOV = 30f;
     private const float MOVE_FOV = 50f;
+    private bool freeCameraOn;
 
     //misc sprites
     private Sprite[] diceSprites;
@@ -36,17 +38,27 @@ public class BoardController : MonoBehaviour
     //debug flag
     public bool debug;
 
+    //controls
+    private Controls controls;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        controls = new Controls();
+        controls.BoardController.AddCallbacks(this);
+        controls.Enable();
+
+        freeCameraOn = false;
         diceSprites = Resources.LoadAll<Sprite>("DiceSides/");
         stillCameraCom = stillCameraObj.GetComponent<CinemachineVirtualCamera>();
         moveCameraCom = moveCameraObj.GetComponent<CinemachineVirtualCamera>();
+
         if (debug)
         {
             numPlayers = 4;
         }
+        numPlayers = 4;
         leaderboard.SetNumPlayers(numPlayers);
         StartCoroutine("SetupOrder");
     }
@@ -106,7 +118,7 @@ public class BoardController : MonoBehaviour
             for (int i = 0; i < numPlayers; i++)
             {
                 startingDie[i].SetActive(false);
-                temp[i] = (UnityEngine.GameObject) playerOrder.GetByIndex(numPlayers - (i + 1));
+                temp[i] = (UnityEngine.GameObject)playerOrder.GetByIndex(numPlayers - (i + 1));
             }
 
             players = temp;
@@ -137,7 +149,7 @@ public class BoardController : MonoBehaviour
         stillCameraCom.LookAt = currentPlayer.transform;
         stillCameraCom.Follow = currentPlayer.transform;
         stillCameraCom.m_Lens.FieldOfView = STILL_FOV;
-        
+
     }
 
 
@@ -166,10 +178,15 @@ public class BoardController : MonoBehaviour
             waypoints[currentPosition].GetComponent<SpaceInfo>().RemovePlayer();
         }
         rollCountdown.SetActive(true);
+        bool finished = false;
         for (int currentStep = 1; currentStep <= roll; currentStep++)
         {
             countdownSprite.sprite = diceSprites[roll - currentStep];
             infoObj.currentPosition = currentPosition + currentStep;
+
+            //check if reached goal line
+            finished = currentPosition + currentStep == (waypoints.Length - 1);
+
             SpaceInfo spaceInfo = waypoints[currentPosition + currentStep].GetComponent<SpaceInfo>();
             moveObj.SetTargetAndMove(spaceInfo.transform.position);
             spaceInfo.AdjustPlayers();
@@ -185,11 +202,18 @@ public class BoardController : MonoBehaviour
                 spaceInfo.ResetPlayers(false);
             }
             leaderboard.UpdateBoard(players);
+            if (finished) { break; }
         }
+        
         yield return new WaitForSeconds(0.1f);
         moveCameraObj.SetActive(false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         rollCountdown.SetActive(false);
+        if (finished)
+        {
+            Finish();
+            yield break;
+        }
         waypoints[currentPosition + roll].GetComponent<SpaceInfo>().AddPlayer(currentPlayer);
         SetupNextTurn();
     }
@@ -199,5 +223,26 @@ public class BoardController : MonoBehaviour
     {
         currentPlayer_i = (currentPlayer_i + 1) >= numPlayers ? 0 : currentPlayer_i + 1;
         currentPlayer = players[currentPlayer_i];
+    }
+
+    private void Finish()
+    {
+        Debug.Log("Finish!");
+    }
+
+    public void OnToggleFreelook(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+        {
+            return;
+        }
+        if (!freeCameraOn)
+        {
+            freeCameraObj.SetActive(true);
+        } else
+        {
+            freeCameraObj.SetActive(false);
+        }
+        freeCameraOn = !freeCameraOn;
     }
 }

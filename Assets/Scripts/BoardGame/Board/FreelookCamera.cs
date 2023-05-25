@@ -8,6 +8,13 @@ public class FreelookCamera : MonoBehaviour, Controls.IFreeCameraActions
 {
     private Vector2 moveVal;
     public float moveSpeed = 10f;
+    public float xLeftBounds;
+    public float xRightBounds;
+    public float zUpperBounds;
+    public float zLowerBounds;
+
+    private Vector3 initialPos;
+
     private bool move;
     private Controls controls;
 
@@ -16,6 +23,8 @@ public class FreelookCamera : MonoBehaviour, Controls.IFreeCameraActions
         controls = new Controls();
         controls.FreeCamera.AddCallbacks(this);
         controls.Enable();
+
+        initialPos = this.transform.position;
     }
 
     void Update()
@@ -26,7 +35,14 @@ public class FreelookCamera : MonoBehaviour, Controls.IFreeCameraActions
             movement.x = moveVal.x * -1;
             movement.y = 0;
             movement.z = moveVal.y * -1;
-            this.transform.Translate(moveSpeed * Time.deltaTime * movement, Space.World);
+            if (this.transform.position.x >= xLeftBounds  && this.transform.position.x <= xRightBounds 
+                && this.transform.position.z <= zUpperBounds && this.transform.position.z >= zLowerBounds)
+            {
+                this.transform.Translate(moveSpeed * Time.deltaTime * movement, Space.World);
+            } else
+            {
+                this.transform.position = initialPos;
+            }
         }
     }
 
@@ -36,7 +52,6 @@ public class FreelookCamera : MonoBehaviour, Controls.IFreeCameraActions
         move = true;
         if (context.canceled)
         {
-            Debug.Log("Hey I'm not moving here!");
             move = false;
         }
     }

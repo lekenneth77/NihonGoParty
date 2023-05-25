@@ -171,8 +171,36 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""BoardController"",
+            ""id"": ""92618c20-d3e4-4fef-9f89-f92a9c537996"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleFreelook"",
+                    ""type"": ""Button"",
+                    ""id"": ""571054da-728f-45f8-bcdf-29d23ba8304f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""874232f3-5b00-4d2e-bd2d-bf66d68e9da0"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ToggleFreelook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -199,6 +227,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Dice
         m_Dice = asset.FindActionMap("Dice", throwIfNotFound: true);
         m_Dice_Roll = m_Dice.FindAction("Roll", throwIfNotFound: true);
+        // BoardController
+        m_BoardController = asset.FindActionMap("BoardController", throwIfNotFound: true);
+        m_BoardController_ToggleFreelook = m_BoardController.FindAction("ToggleFreelook", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -348,6 +379,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public DiceActions @Dice => new DiceActions(this);
+
+    // BoardController
+    private readonly InputActionMap m_BoardController;
+    private List<IBoardControllerActions> m_BoardControllerActionsCallbackInterfaces = new List<IBoardControllerActions>();
+    private readonly InputAction m_BoardController_ToggleFreelook;
+    public struct BoardControllerActions
+    {
+        private @Controls m_Wrapper;
+        public BoardControllerActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleFreelook => m_Wrapper.m_BoardController_ToggleFreelook;
+        public InputActionMap Get() { return m_Wrapper.m_BoardController; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BoardControllerActions set) { return set.Get(); }
+        public void AddCallbacks(IBoardControllerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BoardControllerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BoardControllerActionsCallbackInterfaces.Add(instance);
+            @ToggleFreelook.started += instance.OnToggleFreelook;
+            @ToggleFreelook.performed += instance.OnToggleFreelook;
+            @ToggleFreelook.canceled += instance.OnToggleFreelook;
+        }
+
+        private void UnregisterCallbacks(IBoardControllerActions instance)
+        {
+            @ToggleFreelook.started -= instance.OnToggleFreelook;
+            @ToggleFreelook.performed -= instance.OnToggleFreelook;
+            @ToggleFreelook.canceled -= instance.OnToggleFreelook;
+        }
+
+        public void RemoveCallbacks(IBoardControllerActions instance)
+        {
+            if (m_Wrapper.m_BoardControllerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IBoardControllerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BoardControllerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BoardControllerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public BoardControllerActions @BoardController => new BoardControllerActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -364,5 +441,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IDiceActions
     {
         void OnRoll(InputAction.CallbackContext context);
+    }
+    public interface IBoardControllerActions
+    {
+        void OnToggleFreelook(InputAction.CallbackContext context);
     }
 }

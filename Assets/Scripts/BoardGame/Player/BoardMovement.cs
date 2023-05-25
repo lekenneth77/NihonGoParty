@@ -26,6 +26,8 @@ public class BoardMovement : MonoBehaviour
 
     public void SetTargetAndMove(Vector3 tgt)
     {
+        //TODO change once you have real models!
+        tgt.y = tgt.y + 0.5f;
         target = tgt;
         moveFlag = true;
     }

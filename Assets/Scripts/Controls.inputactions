@@ -149,8 +149,36 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "BoardController",
+            "id": "92618c20-d3e4-4fef-9f89-f92a9c537996",
+            "actions": [
+                {
+                    "name": "ToggleFreelook",
+                    "type": "Button",
+                    "id": "571054da-728f-45f8-bcdf-29d23ba8304f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "874232f3-5b00-4d2e-bd2d-bf66d68e9da0",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "ToggleFreelook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

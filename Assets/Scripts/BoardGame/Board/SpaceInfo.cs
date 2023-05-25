@@ -7,6 +7,14 @@ public class SpaceInfo : MonoBehaviour
 
     private Queue<GameObject> playersOnMe;
     private Vector3[] extraSpaces; //spaces used for when multiple players are on the same space
+
+    //honestly a lot of unncessary variables will probably populate this but yeah
+    /*
+    public bool amCrossroad;
+    public SpaceInfo nextPath; //shitty naming but whatever it's up to the editor which is which just make sure it lines up
+    public SpaceInfo alternatePath; //only for crossroads
+    */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +51,8 @@ public class SpaceInfo : MonoBehaviour
             Vector3 pos = index == 0 ? this.transform.position : extraSpaces[index - 1];
             if (transport)
             {
+                //TODO remove once you have actual models!
+                pos.y += 0.5f;
                 p.transform.position = pos;
             } else
             {
