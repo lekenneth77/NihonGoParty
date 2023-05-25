@@ -172,36 +172,43 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         PlayerInfo infoObj = currentPlayer.GetComponent<PlayerInfo>();
         GameObject rollCountdown = currentPlayer.transform.GetChild(0).gameObject;
         SpriteRenderer countdownSprite = rollCountdown.GetComponent<SpriteRenderer>();
-        int currentPosition = infoObj.currentPosition;
-        if (currentPosition != -1)
+        SpaceInfo currentSpace = infoObj.currentSpace;
+        if (currentSpace)
         {
-            waypoints[currentPosition].GetComponent<SpaceInfo>().RemovePlayer();
+            currentSpace.RemovePlayer();
         }
         rollCountdown.SetActive(true);
         bool finished = false;
         for (int currentStep = 1; currentStep <= roll; currentStep++)
         {
             countdownSprite.sprite = diceSprites[roll - currentStep];
-            infoObj.currentPosition = currentPosition + currentStep;
+            infoObj.numCrossed++; //TODO POSSIBLE BUG might cause inbalance in leaderboard with multiple crossroads?
+            currentSpace = infoObj.currentSpace;
+            SpaceInfo nextSpace;
+            if (currentSpace)
+            {
+                nextSpace = currentSpace.nextWP;
+            } else
+            {
+                nextSpace = waypoints[0].GetComponent<SpaceInfo>();
+            }
+            //check if reached finish line
+            finished = nextSpace.finishLine;
 
-            //check if reached goal line
-            finished = currentPosition + currentStep == (waypoints.Length - 1);
-
-            SpaceInfo spaceInfo = waypoints[currentPosition + currentStep].GetComponent<SpaceInfo>();
-            moveObj.SetTargetAndMove(spaceInfo.transform.position);
-            spaceInfo.AdjustPlayers();
+            moveObj.SetTargetAndMove(nextSpace.transform.position);
+            nextSpace.AdjustPlayers();
             while (moveObj.GetMoveFlag())
             {
                 //essentially polling
                 yield return new WaitForSeconds(0.01f);
             }
-            Debug.Log("Reached Location: " + (currentPosition + currentStep));
             yield return new WaitForSeconds(0.05f);
             if (currentStep != roll)
             {
-                spaceInfo.ResetPlayers(false);
+                nextSpace.ResetPlayers(false);
             }
             leaderboard.UpdateBoard(players);
+            infoObj.currentSpace = nextSpace; //linked list!
             if (finished) { break; }
         }
         
@@ -214,7 +221,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             Finish();
             yield break;
         }
-        waypoints[currentPosition + roll].GetComponent<SpaceInfo>().AddPlayer(currentPlayer);
+        infoObj.currentSpace.AddPlayer(currentPlayer);
         SetupNextTurn();
     }
 

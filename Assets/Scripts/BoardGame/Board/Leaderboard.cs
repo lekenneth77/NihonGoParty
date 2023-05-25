@@ -71,7 +71,7 @@ public class Leaderboard : MonoBehaviour
     {
         public int Compare(GameObject x, GameObject y)
         {
-            return y.GetComponent<PlayerInfo>().currentPosition - x.GetComponent<PlayerInfo>().currentPosition;
+            return y.GetComponent<PlayerInfo>().numCrossed - x.GetComponent<PlayerInfo>().numCrossed;
         }
     }
 }
