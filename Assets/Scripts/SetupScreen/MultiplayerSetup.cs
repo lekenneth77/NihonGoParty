@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class MultiplayerSetup : MonoBehaviour
 {
@@ -15,6 +16,19 @@ public class MultiplayerSetup : MonoBehaviour
     //honestly only used for disabling the button once confirm
     public GameObject[] characterChoosers;
     private int recentChosen;
+
+    //oh god save my sphere
+    public RotateObject daSphere;
+    public int numMaps;
+    private int currentMapI;
+
+
+
+    //cameras
+    public GameObject numCharsCamera, chooseCharsCamera, mapCamera, mapZoomCamera;
+
+    //overlay canvas
+    public GameObject overlayCanvas;
 
     private int numPlayers;
     private Sprite[] charSprites;
@@ -30,8 +44,8 @@ public class MultiplayerSetup : MonoBehaviour
     {
         this.numPlayers = numPlayers;
         BoardController.numPlayers = numPlayers;
-        chooseNumPlayersCon.SetActive(false);
-        chooseYourCharCon.SetActive(true);
+        chooseCharsCamera.SetActive(true);
+        numCharsCamera.SetActive(false);
     }
 
     public void ChooseYourCharacter(int charIndex)
@@ -63,7 +77,8 @@ public class MultiplayerSetup : MonoBehaviour
             {
                 obj.GetComponent<Button>().enabled = false;
             }
-            Debug.Log("Board game time!");
+            mapCamera.SetActive(true);
+            chooseCharsCamera.SetActive(false);
             //Load board game! or actually make a choose map screen? TODO
         }
         else
@@ -73,5 +88,50 @@ public class MultiplayerSetup : MonoBehaviour
         }
 
     }
+
+    public void RotateSphere(bool left)
+    {
+        int direction = left ? -1 : 1;
+        if (left)
+        {
+            currentMapI = (currentMapI - 1) < 0 ? numMaps - 1: currentMapI - 1;
+        } else
+        {
+            currentMapI = (currentMapI + 1) >= numMaps ? 0 : currentMapI + 1;
+        }
+        daSphere.Rotate(180f);
+    } 
+
+    public void ZoomInSphere()
+    {
+        //probably have to check so that you can't select left right select buttons
+        mapZoomCamera.SetActive(true);
+        //might need to delay
+        CinemachineBrain brain = FindObjectOfType<CinemachineBrain>();
+        brain.m_DefaultBlend.m_Time = 2f; // 0 Time equals a cut
+        StartCoroutine("iamsotired");
+    }
+
+    private IEnumerator iamsotired()
+    {
+        yield return new WaitForSeconds(2.1f);
+        overlayCanvas.SetActive(true);
+    }
+
+
+    public void ZoomOutSphere()
+    {
+        mapZoomCamera.SetActive(false);
+        overlayCanvas.SetActive(false);
+        CinemachineBrain brain = FindObjectOfType<CinemachineBrain>();
+        brain.m_DefaultBlend.m_Time = 1f; // 0 Time equals a cut
+    }
+
+    public void FinalSelectMap()
+    {
+        Debug.Log("Show time! " + currentMapI);
+        //TODO maybe do like a dramatic zoom in
+    }
+
 
 }
