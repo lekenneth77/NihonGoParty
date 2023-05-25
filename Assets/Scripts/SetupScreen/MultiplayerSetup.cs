@@ -112,6 +112,7 @@ public class MultiplayerSetup : MonoBehaviour
         StartCoroutine("iamsotired");
     }
 
+    //literally just to delay the zoom in into the map sphere when selecting. Very hot.
     private IEnumerator iamsotired()
     {
         yield return new WaitForSeconds(2.1f);

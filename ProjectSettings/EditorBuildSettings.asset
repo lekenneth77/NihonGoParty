@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Title Screen.unity
     guid: bb42cd1abf207fb4e96c84af249d77fd
   - enabled: 1
-    path: Assets/Scenes/Maps/MapOne.unity
+    path: Assets/Scenes/Maps/TestMap.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
     path: Assets/Scenes/Multiplayer Setup.unity

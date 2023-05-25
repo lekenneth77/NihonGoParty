@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Dice : MonoBehaviour
+public class Dice : MonoBehaviour, Controls.IDiceActions
 {
 
     [SerializeField] private int debugRoll;
@@ -14,21 +15,39 @@ public class Dice : MonoBehaviour
     private bool stopRoll, allowStart, allowEnd;
     public static event Action<int> OnDiceFinish;
 
+    private Controls controls;
+
     //TODO add the inputsystem so that you can make the dice start with the space key? maybe?
 
     // Start is called before the first frame update
     void Start()
     {
+        controls = new Controls();
+        controls.Dice.AddCallbacks(this);
+        controls.Dice.Enable();
+
         sprites = Resources.LoadAll<Sprite>("DiceSides/");
         Reset();
     }
 
     private void OnMouseDown()
     {
+        HandleDice();
+    }
+
+    public void OnRoll(InputAction.CallbackContext context)
+    {
+        Debug.Log("Spacebar has been hit.");
+        HandleDice();
+    }
+
+    private void HandleDice()
+    {
         if (allowEnd)
         {
             EndRoll();
-        } else if (allowStart)
+        }
+        else if (allowStart)
         {
             StartCoroutine("RollDice");
         }
@@ -86,4 +105,6 @@ public class Dice : MonoBehaviour
     {
         return roll;
     }
+
+    
 }
