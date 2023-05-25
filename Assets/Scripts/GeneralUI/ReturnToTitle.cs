@@ -7,6 +7,7 @@ public class ReturnToTitle : MonoBehaviour
 {
     public void GoToTitle()
     {
+        Time.timeScale = 1;
         SceneManager.LoadSceneAsync("Title Screen");
     }
 }
