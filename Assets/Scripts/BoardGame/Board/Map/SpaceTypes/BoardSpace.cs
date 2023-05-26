@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceInfo : MonoBehaviour
+public abstract class BoardSpace : MonoBehaviour
 {
-    //THIS CLASS HAS BEEN REPLACED WITH THE COOLER INHERITENCE CLASSES FOUND IN SPACE TYPES
+    //all the abstract stuff
+    public Sprite Sprite { get; set; }
+    public string TypeName { get; set; }
+
+    public abstract void Action();
+
+    //public abstract void Action(GameObject obj);
+
+    //all the stuff from the original spaceinfo class put into here!
     private Queue<GameObject> playersOnMe;
     private Vector3[] extraSpaces; //spaces used for when multiple players are on the same space
+    public BoardSpace chosenPath;
+    public BoardSpace nextWP;
+    public BoardSpace prevWP;
 
-    //honestly a lot of unncessary variables will probably populate this but yeah
-    public bool amCrossroad;
-    public SpaceInfo nextWP; //shitty naming but whatever it's up to the editor which is which just make sure it lines up
-    public SpaceInfo alternateWP; //only for crossroads
-    public SpaceInfo prevWP;
-    public string gameType;
-    public bool finishLine;
-
-    // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
+        chosenPath = nextWP;
         playersOnMe = new Queue<GameObject>();
         extraSpaces = new Vector3[3];
         for (int x = -1; x <= 1; x++)
@@ -26,7 +29,6 @@ public class SpaceInfo : MonoBehaviour
             extraSpaces[x + 1] = new Vector3(this.transform.position.x - x, this.transform.position.y, this.transform.position.z - 1);
         }
     }
-
     public void AddPlayer(GameObject player)
     {
         playersOnMe.Enqueue(player);
@@ -55,7 +57,8 @@ public class SpaceInfo : MonoBehaviour
                 //TODO remove once you have actual models!
                 pos.y += 0.5f;
                 p.transform.position = pos;
-            } else
+            }
+            else
             {
                 p.GetComponent<BoardMovement>().SetTargetAndMove(pos);
             }
@@ -76,6 +79,5 @@ public class SpaceInfo : MonoBehaviour
             pos = extraSpaces[index];
         }
     }
-
 
 }

@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class MapBuilder : MonoBehaviour
 {
+    //parent folders
     public Transform waypointFolder;
     public Transform lineFolder;
+
+    //templates
     public GameObject blankObj;
+    public GameObject crossObj;
+
+    //spawn position/rotation
     public Quaternion rotation;
     public Vector3 spawnPoint;
-    public bool useYourSpawnPoint;
+    public bool useYourSpawnPoint; //not used yet
 
-    public SpaceInfo prev; //if map is uninitialized, this should be as well
-    public SpaceInfo root; //please be consistent, the map is essentially a tree, so if this is changed or janked up oh god
+    //tree info
+    public BoardSpace prev; //if map is uninitialized, this should be as well
+    public BoardSpace root; //please be consistent, the map is essentially a tree, so if this is changed or janked up oh god
+
+    private GameObject BuildSpace(GameObject obj)
+    {
+        GameObject newObj = Instantiate(obj, spawnPoint, rotation);
+        newObj.transform.parent = waypointFolder;
+        newObj.name = "wp";
+        return newObj;
+    }
 
     public GameObject BuildBlankSpace()
     {
@@ -20,16 +35,15 @@ public class MapBuilder : MonoBehaviour
         {
             spawnPoint = prev.transform.position;
         }
-        GameObject newObj = Instantiate(blankObj, spawnPoint, rotation);
-        newObj.transform.parent = waypointFolder;
-        newObj.name = "wp";
-        SpaceInfo info = newObj.GetComponent<SpaceInfo>();
-        //lol jank 
+        GameObject newObj = BuildSpace(blankObj);
+        BoardSpace info = newObj.GetComponent<BoardSpace>();
+        //lol jank TODO REQUIRES ROOT OF TREE TO BE A BLANK SPACE! prob change in future
         if (!prev)
         {
             root = info;
         } else
         {
+            info.prevWP = prev;
             prev.nextWP = info;
         }
         prev = info;
@@ -38,7 +52,7 @@ public class MapBuilder : MonoBehaviour
     
     public void BuildCrossroad()
     {
-        //for now it has to build to two blanks but maybe change it in the future
+
     }
 
     public void BuildFinishLine()
@@ -53,25 +67,26 @@ public class MapBuilder : MonoBehaviour
             GameObject.DestroyImmediate(child.gameObject);
         }
         //oh lmao do recursion
-        traverseTree(root);
+        TraverseTree(root);
     }
 
-    private void traverseTree(SpaceInfo node)
+    private void TraverseTree(BoardSpace node)
     {
         if (!node.nextWP)
         {
             return;
         }
-        createSingleLine(node.transform.position, node.nextWP.transform.position);
-        traverseTree(node.nextWP);
-        if (node.amCrossroad)
+        CreateSingleLine(node.transform.position, node.nextWP.transform.position);
+        TraverseTree(node.nextWP);
+        if (node is CrossroadSpace)
         {
-            createSingleLine(node.transform.position, node.alternateWP.transform.position);
-            traverseTree(node.alternateWP);
+            CrossroadSpace crossNode = (CrossroadSpace)node;
+            CreateSingleLine(node.transform.position, crossNode.alternateWP.transform.position);
+            TraverseTree(crossNode.alternateWP);
         }
     }
 
-    private void createSingleLine(Vector3 start, Vector3 end)
+    private void CreateSingleLine(Vector3 start, Vector3 end)
     {
         GameObject line = new GameObject();
         line.name = "Line";
@@ -85,6 +100,16 @@ public class MapBuilder : MonoBehaviour
         renderer.endWidth = 0.1f;
         renderer.SetPosition(0, start);
         renderer.SetPosition(1, end);
+    }
+
+    public void RenameWPs()
+    {
+        int count = 0;
+        foreach (Transform child in waypointFolder)
+        {
+            child.name = "wp" + count;
+            count++;
+        }
     }
 
 }

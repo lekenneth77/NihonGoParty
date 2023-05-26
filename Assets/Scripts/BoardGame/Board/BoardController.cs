@@ -137,7 +137,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         //lol this is pretty jank and might be slow but it's kind of funny
         foreach (Transform obj in waypoints)
         {
-            obj.gameObject.GetComponent<SpaceInfo>().ResetPlayers(true);
+            obj.gameObject.GetComponent<BoardSpace>().ResetPlayers(true);
         }
         SetNextPlayer();
 
@@ -159,7 +159,8 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         StartCoroutine(MovePlayer(roll));
     }
 
-    //Moves the current player.
+    //Moves the current player. TODO THINK ABOUT POSSIBLE BUG WHERE GETTING SENT BACK PUTS YOU ON A CROSSROAD MAYBE PUT A LIMIT?
+    //IF PREV IS CROSSROAD DON'T GO BACK?
     private IEnumerator MovePlayer(int roll)
     {
         yield return new WaitForSeconds(1f);
@@ -172,28 +173,26 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         PlayerInfo infoObj = currentPlayer.GetComponent<PlayerInfo>();
         GameObject rollCountdown = currentPlayer.transform.GetChild(0).gameObject;
         SpriteRenderer countdownSprite = rollCountdown.GetComponent<SpriteRenderer>();
-        SpaceInfo currentSpace = infoObj.currentSpace;
+        BoardSpace currentSpace = infoObj.currentSpace;
+
         if (currentSpace)
         {
             currentSpace.RemovePlayer();
         }
         rollCountdown.SetActive(true);
-        bool finished = false;
         for (int currentStep = 1; currentStep <= roll; currentStep++)
         {
             countdownSprite.sprite = diceSprites[roll - currentStep];
             infoObj.numCrossed++; //TODO POSSIBLE BUG might cause inbalance in leaderboard with multiple crossroads?
             currentSpace = infoObj.currentSpace;
-            SpaceInfo nextSpace;
+            BoardSpace nextSpace;
             if (currentSpace)
             {
-                nextSpace = currentSpace.nextWP;
+                nextSpace = currentSpace.chosenPath;
             } else
             {
-                nextSpace = waypoints[0].GetComponent<SpaceInfo>();
+                nextSpace = waypoints[0].GetComponent<BoardSpace>();
             }
-            //check if reached finish line
-            finished = nextSpace.finishLine;
 
             moveObj.SetTargetAndMove(nextSpace.transform.position);
             nextSpace.AdjustPlayers();
@@ -208,19 +207,32 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                 nextSpace.ResetPlayers(false);
             }
             leaderboard.UpdateBoard(players);
+            //crossroad logic
+            if (nextSpace is CrossroadSpace) //YOU ONLY WANT TO DO AN ACTION MIDLOOP IF ITS A CROSSROAD SPACE...
+            {
+                bool finished = false;
+                nextSpace.Action(); 
+                while (!finished)
+                {
+                    finished = CrossroadArrow.choseSomething;
+                    if (finished)
+                    {
+                        nextSpace.chosenPath = CrossroadArrow.altPathChosen ? ((CrossroadSpace)nextSpace).alternateWP : nextSpace.nextWP;
+                        ((CrossroadSpace)nextSpace).DeactivateArrows();
+                    }
+                    yield return new WaitForSeconds(0.01f);
+                }
+                currentStep--; 
+            }
+
             infoObj.currentSpace = nextSpace; //linked list!
-            if (finished) { break; }
+            if (nextSpace is FinishSpace) { break; }
         }
-        
+        //WE WOULD ADD DO ACTION OUT HERE PROBABLY
         yield return new WaitForSeconds(0.1f);
         moveCameraObj.SetActive(false);
         yield return new WaitForSeconds(2f);
         rollCountdown.SetActive(false);
-        if (finished)
-        {
-            Finish();
-            yield break;
-        }
         infoObj.currentSpace.AddPlayer(currentPlayer);
         SetupNextTurn();
     }

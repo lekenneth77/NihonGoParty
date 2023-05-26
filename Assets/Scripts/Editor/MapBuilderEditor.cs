@@ -27,6 +27,12 @@ public class MapBuilderEditor : Editor
         {
             builder.DrawLines();
         }
+        if (GUILayout.Button("Rename WPs"))
+        {
+            builder.RenameWPs();
+        }
+
+        GUILayout.Box("Don't forget to update Board Controller's waypoints in the Script Object!");
     }
     
 }
