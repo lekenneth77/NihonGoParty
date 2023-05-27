@@ -10,6 +10,8 @@ public class KatakanaScramble : Minigame
 
     public AudioSource deal_card, failure_sfx, success_sfx, buttonclick_sfx, kids_cheer;
 
+    public GameObject roundStartContainer;
+    public TextMeshProUGUI randomCategory;
     public Image seacreature_img;
     public GameObject next;
     public GameObject correct_img, incorrect_img;
@@ -23,11 +25,9 @@ public class KatakanaScramble : Minigame
     public TextMeshProUGUI kata_text;
     public TextMeshProUGUI hint_text;
     public Button hint_button;
-    public Button speaker;
     public AudioSource bgm;
 
-    public GameObject choose_container;
-    public GameObject ans_container;
+    public GameObject interactableContainer;
 
     const int MAX_WORDS_ROW = 8;
     const int INTER_WIDTH = 25;
@@ -37,9 +37,10 @@ public class KatakanaScramble : Minigame
     List<GameObject> interactables;
     static int count_selected;
     int rounds_completed = 0;
-    int num_hints;
+    int max_rounds = 2;
+    float timeLimit = 5f;
+    int num_hints = 100;
     static bool disable_hints;
-    int giveups;
     float secs_passed = 0f;
     bool start = false;
     string cur_word;
@@ -50,8 +51,8 @@ public class KatakanaScramble : Minigame
     private List<string> words;
     private List<string> english_words;
     private List<int> words_selected;
-    public static TextAsset txtfile;
-    public static string category_name;
+    private TextAsset txtfile;
+    private string category_name;
 
     private Sprite[] inter_sprites;
     private Sprite[] seacreatures;
@@ -59,11 +60,6 @@ public class KatakanaScramble : Minigame
     // Start is called before the first frame update
     public override void Start() {
         base.Start();
-
-        TextAsset[] texts = Resources.LoadAll<TextAsset>("Minigames/Katakana/KatakanaScramble/Texts/");
-        txtfile = texts[0];
-        category_name = txtfile.text.Split("\n"[0])[0];
-        get_words();
         setup_music();
         inter_sprites = Resources.LoadAll<Sprite>("Minigames/Katakana/KatakanaScramble/interactables/");
         seacreatures = Resources.LoadAll<Sprite>("Minigames/Katakana/KatakanaScramble/seacreatures/");
@@ -71,20 +67,37 @@ public class KatakanaScramble : Minigame
         TMP_FontAsset[] fonts = Resources.LoadAll<TMP_FontAsset>("SU3DJPFont/TextMeshProFont/Selected/");
         font = fonts[0];
         rounds_completed = 0;
-        num_hints = 100;
         disable_hints = false;
-        giveups = 0;
         hint_text.text = "HINTS LEFT x" + num_hints;
         timer_text.text = secs_passed.ToString("0.00");
-        words_selected = new List<int>();
+
         next.GetComponent<Button>().onClick.AddListener(next_round);
-        hint_button.onClick.AddListener(hint);
+
         on_hover = GameObject.Find("on_hover");
         on_hover.SetActive(false);
-        category.text = category_name;
-        StartCoroutine("setup_game");
+
+        StartCoroutine("StartGame");
     }
 
+    private IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(0.1f);
+        randomCategory.transform.gameObject.SetActive(true);
+        TextAsset[] texts = Resources.LoadAll<TextAsset>("Minigames/Katakana/KatakanaScramble/Texts/");
+        txtfile = texts[Random.Range(0, texts.Length)];
+        category_name = txtfile.text.Split("\n"[0])[0];
+        randomCategory.text = category_name;
+        yield return new WaitForSeconds(2f);
+        randomCategory.transform.gameObject.SetActive(true);
+
+        get_words();
+
+        yield return new WaitForSeconds(2f);
+        category.text = category_name;
+        roundStartContainer.SetActive(false);
+        words_selected = new List<int>();
+        StartCoroutine("setup_game");
+    }
     private void get_words() { //could be a one liner but late night duct tape 
         words = new List<string>();
         english_words = new List<string>();
@@ -108,12 +121,9 @@ public class KatakanaScramble : Minigame
         }
         cur_word = words[random];
         cur_engl = english_words[random];
-        // Debug.Log(cur_word[cur_word.Length - 1]);
         if (string.IsNullOrWhiteSpace(cur_word[cur_word.Length - 1] + "")) {
-            // Debug.Log("Extra!");
             cur_word = cur_word.Substring(0, cur_word.Length - 1);
         }
-        // Debug.Log(cur_word);
         //create interactables
         interactables = create_interactables(cur_word);
         yield return new WaitForSeconds(0.5f);
@@ -146,6 +156,8 @@ public class KatakanaScramble : Minigame
             x_multiplier++;
         }
 
+        secs_passed = timeLimit;
+        timer_text.text = secs_passed.ToString("0.00");
         round_counter.text = (rounds_completed + 1).ToString() + "/" + words.Count.ToString();
         count_selected = 0;
         check_flag = false;
@@ -201,12 +213,37 @@ public class KatakanaScramble : Minigame
         }
 
         if (start) {
-            secs_passed += Time.deltaTime;
-            timer_text.text = secs_passed.ToString("0.00");
+            secs_passed -= Time.deltaTime;
+            if (secs_passed <= 0f)
+            {
+                start = false;
+                StartCoroutine("Failure");
+            } else
+            {
+                timer_text.text = secs_passed.ToString("0.00");
+            }
         }
         
     }
 
+    private IEnumerator Failure()
+    {
+        hint_button.interactable = false;
+        failure_sfx.Play();
+        foreach (GameObject letter in interactables)
+        {
+            letter.GetComponent<ClickLetter>().set_disable(true);
+        }
+        engl_text.text = cur_engl;
+        kata_text.text = cur_word;
+        correct_img.SetActive(true);
+        correct_correct_img.SetActive(false);
+        failure_img.SetActive(true);
+        hint_button.interactable = false;
+        yield return new WaitForSeconds(2f);
+        EndGame();
+    }
+ 
     private IEnumerator check_corr() {
         List<int> incorrect = new List<int>();
         for (int i = 0; i < wp.Length; i++) {
@@ -236,7 +273,7 @@ public class KatakanaScramble : Minigame
             success_sfx.Play();
             if (rounds_completed < words.Count) {
                 rounds_completed++;
-                if (rounds_completed >= 2) {
+                if (rounds_completed >= max_rounds) {
                     yield return new WaitForSeconds(2f);
                     display_finish();
                 } else {
@@ -288,7 +325,7 @@ public class KatakanaScramble : Minigame
         failure_img.SetActive(false);
         GameObject.Find("RoundContainer").SetActive(false);
         congrats_con.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>()
-            .text = "You finished " + (rounds_completed - giveups) + " out of " + rounds_completed +" rounds in "+ secs_passed.ToString("0.00") + " seconds!";
+            .text = "You finished " + (rounds_completed) + " out of " + rounds_completed +" rounds in "+ secs_passed.ToString("0.00") + " seconds!";
         congrats_con.SetActive(true);
     }
     
@@ -316,7 +353,7 @@ public class KatakanaScramble : Minigame
 
             GameObject inter = TMP_DefaultControls.CreateButton(resources);
             RectTransform trans = inter.GetComponent<RectTransform>();
-            trans.transform.SetParent(choose_container.transform);
+            trans.transform.SetParent(interactableContainer.transform);
             trans.localScale = new Vector3(INTER_WIDTH * 5, INTER_WIDTH * 5, 1);
             trans.sizeDelta = new Vector3(1, 1, 1);
             int rand_cap = -1;
@@ -389,16 +426,6 @@ public class KatakanaScramble : Minigame
         return GameObject.Find(gameobj_name).GetComponent<AudioSource>();
     }
 
-    void mute_music() {
-        if (bgm.isPlaying) {
-            speaker.GetComponent<Image>().sprite = inter_sprites[1];
-            bgm.Stop();
-        } else {
-            speaker.GetComponent<Image>().sprite = inter_sprites[3];
-            bgm.Play();
-        }
-    }
-
     //returns true if provided gameobject has not been selected and already in it's correct position.
     bool auto_correct(GameObject inter) {
         ClickLetter cl = inter.GetComponent<ClickLetter>();
@@ -413,7 +440,8 @@ public class KatakanaScramble : Minigame
         return !prev_disabled; 
     }
 
-    void hint() {
+    public void hint() {
+        Debug.Log("Hint?");
         if (num_hints <= 0 || !start || disable_hints) {
             return;
         }
@@ -440,7 +468,6 @@ public class KatakanaScramble : Minigame
     IEnumerator giveup() {
         start = false;
         failure_sfx.Play();
-        giveups++;
         foreach(GameObject letter in interactables) {
             letter.GetComponent<ClickLetter>().set_disable(true);
         }
