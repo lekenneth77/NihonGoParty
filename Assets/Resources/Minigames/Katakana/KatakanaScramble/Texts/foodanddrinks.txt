@@ -1,0 +1,16 @@
+Food and drinks
+ベジタリアン_Vegetarian
+ダークチョコレート_Dark Chocolate
+オレンジジュース_Orange Juice
+グレープフルーツ_Grapefruit
+ペパロニピザ_Pepperoni Pizza
+スパゲティソース_Spaghetti Sauce
+バニラアイスクリーム_Vanilla Ice Cream
+チーズバーガー_Cheeseburger
+コロンビアコーヒー_Colombian Coffee
+チキンフライドステーキ_Chicken Fried Steak
+ブルーベリーチーズケーキ_Blueberry Cheesecake
+ハムサンドイッチ_Ham Sandwich
+グリークヨーグルト_Greek Yogurt
+パイナップルケーキ_Pineapple Cake
+シーフードガンボ_Seafood Gumbo

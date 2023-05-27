@@ -1,0 +1,16 @@
+Football 
+キックオフリターン_Kickoff Return
+クォーターバック_Quarterback
+コーナーバック_Cornerback
+ゴールライン_Goal Line
+ショルダーパット_Shoulder Pad
+スペシャルチーム_Special Team
+セーフティー_Safety
+タッチバック_Touchback
+ディフェンスエンド_Defense End
+パーソナルファウル_Personal Foul
+フォーメーション_Formation
+マウスピース_Mouthpiece
+ランニングバック_Runningback
+タッチダウン_Touchdown
+ワイルドレシーバー_Wide Receiver

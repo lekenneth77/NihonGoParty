@@ -11,9 +11,14 @@ public class MapBuilderEditor : Editor
         DrawDefaultInspector();
 
         MapBuilder builder = (MapBuilder)target;
+        GUILayout.Box("Builders");
         if (GUILayout.Button("Build Blank Space"))
         {
             Selection.activeGameObject = builder.BuildBlankSpace();
+        }
+        if (GUILayout.Button("Build Katakana Space"))
+        {
+
         }
         if (GUILayout.Button("Build Crossroad"))
         {
@@ -23,6 +28,7 @@ public class MapBuilderEditor : Editor
         {
             Selection.activeGameObject = builder.BuildFinishLine();
         }
+        GUILayout.Box("Tools");
         if (GUILayout.Button("Draw Lines"))
         {
             builder.DrawLines();
@@ -31,6 +37,11 @@ public class MapBuilderEditor : Editor
         {
             builder.RenameWPs();
         }
+        if (GUILayout.Button("Change Selected To"))
+        {
+            builder.ChangeSelectedTo(Selection.activeGameObject);
+        }
+
 
         GUILayout.Box("Don't forget to update Board Controller's waypoints in the Script Object!");
     }

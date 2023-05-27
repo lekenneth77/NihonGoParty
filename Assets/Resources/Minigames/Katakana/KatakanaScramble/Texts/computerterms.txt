@@ -1,0 +1,13 @@
+Computer Terms
+コンピューターウイルス_Computer Virus
+アプリケーションソフトウェア_Application Software
+アドベンチャーゲーム_Adventure Game
+ヴァーチャルリアリティ_Virtual Reality
+ウェブブラウザー_Web Browser
+オパレーティングシステム_Operating System
+プログラミングランゲージ_Programming Language
+コンピューターネットワーク_Computer Network
+ソーシャルエンジニアリング_Social Networking
+ハードディスクドライブ_Hard Disk Drive
+ファイアーウォール_Firewall
+ユーザーインターフェイス_User Interface

@@ -8,12 +8,13 @@ public class FinishSpace : BoardSpace
     public override void Start()
     {
         base.Start();
-        TypeName = "Finish";
+        typeName = "Finish";
     }
 
     public override void Action()
     {
         Debug.Log("Hey we're finished!!");
+        InvokeFinish();
     }
 
 }

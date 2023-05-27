@@ -6,9 +6,11 @@ using UnityEngine.InputSystem;
 
 public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 {
+    //all assets on boardgame
+    public GameObject allAssets;
 
     //waypoint information
-    public Transform[] waypoints; //most likely create a waypointinfo component
+    public Transform[] waypoints; //todo just make it the root!
     public Transform[] startingWaypoints;
 
     //player and turn information
@@ -121,24 +123,31 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
         currentPlayer_i = -1;
         Dice.OnDiceFinish += SubscribeMovePlayer;
+        BoardSpace.ActionFinish += SetupNextTurn;
+
         SetupNextTurn();
     }
 
     private void SetupNextTurn()
     {
+        if (currentPlayer)
+        {
+            allAssets.SetActive(true);
+        }
         //lol this is pretty jank and might be slow but it's kind of funny
         //TODO change this so that you only need to store the root of the map not all waypoints!
         foreach (Transform obj in waypoints)
         {
             obj.gameObject.GetComponent<BoardSpace>().ResetPlayers(true);
         }
+
         SetNextPlayer();
 
         Vector3 playerPosition = currentPlayer.transform.position;
         mainDice.SetActive(true);
         mainDice.transform.position = new Vector3(playerPosition.x, playerPosition.y + 1.5f, playerPosition.z);
         mainDice.GetComponent<Dice>().Reset();
-
+        controls.Enable();
         stillCameraCom.LookAt = currentPlayer.transform;
         stillCameraCom.Follow = currentPlayer.transform;
         stillCameraCom.m_Lens.FieldOfView = STILL_FOV;
@@ -225,11 +234,13 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         //WE WOULD ADD DO ACTION OUT HERE PROBABLY
         yield return new WaitForSeconds(0.1f);
         moveCameraObj.SetActive(false);
-        infoObj.currentSpace.Action();
         yield return new WaitForSeconds(2f);
         rollCountdown.SetActive(false);
         infoObj.currentSpace.AddPlayer(currentPlayer);
-        SetupNextTurn();
+        //subscribe to the minigame!
+        controls.Disable();
+        allAssets.SetActive(false);
+        infoObj.currentSpace.Action();
     }
 
     //Set the current player to be the next player.

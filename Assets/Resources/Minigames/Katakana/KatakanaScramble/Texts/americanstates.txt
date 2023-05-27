@@ -1,0 +1,15 @@
+American States
+マサチューセッツ_Massachusetts
+ウィスコンシン_Winconsin
+ニューメキシコ_New Mexico
+ニュージャージ_New Jersey
+カリフォルニア_California
+ノースカロライナ_North Carolina
+サウスダコダ_South Dakota
+サウスカロライナ_South Carolina
+ロードアイランド_Rhode Island
+ペンシルバニア_Pennsylvania
+コネチカット_Connecticut
+ディストリクト・オブ・コロンビア_District of Columbia
+インディアナ_Indiana
+ニューヨーク_New York

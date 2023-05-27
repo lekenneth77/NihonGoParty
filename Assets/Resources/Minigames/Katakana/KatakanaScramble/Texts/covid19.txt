@@ -1,0 +1,17 @@
+Covid19
+コロナウイルス_Coronavirus
+クラスター_Cluster
+パンデミック_Pandemic
+アウトブレイク_Outbreak
+インフェクション_Infection
+ニューノーマル_New Normal
+ロックダウン_Lockdown
+リモートワーク_Remote Work
+ワクチン_Vaccination
+インパーソンクラス_In-person Class
+オンラインミーティング_Online Meeting
+ステイホーム_Stay Home
+ソーシャルディスタンス_Social Distance
+ウーバーイート_Uber Eats
+カーブサイドピックアップ_Curbside Pickup
+ズームミーティング_Zoom Meeting

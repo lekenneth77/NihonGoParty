@@ -1,0 +1,16 @@
+Holidays
+クリスマス_Christmas
+バレンタインデー_Valentine's Day
+ハロウィーン_Halloween
+インディペンデンスデー_Independence Day
+サンクスギビング_Thanksgiving
+エイプリルフール_April Fools
+デイオブザデッド_Day of the Dead
+マルディグラ_Mardi Gras
+シンコデマヨ_Cinco de Mayo
+ブラックフライデー_Black Friday
+セントパトリックデー_St. Patrick's Day
+メモリアルデー_Memorial Day
+レイバーデー_Labor Day
+ジューンティーンス_Juneteenth
+ベテランズデー_Veterans Day

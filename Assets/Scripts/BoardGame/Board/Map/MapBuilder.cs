@@ -12,6 +12,7 @@ public class MapBuilder : MonoBehaviour
     public GameObject blankObj;
     public GameObject crossObj;
     public GameObject finishObj;
+    public GameObject katakanaObj;
 
     //spawn position/rotation
     public Quaternion rotation;
@@ -21,6 +22,8 @@ public class MapBuilder : MonoBehaviour
     //tree info
     public BoardSpace prev; //if map is uninitialized, this should be as well
     public BoardSpace root; //please be consistent, the map is essentially a tree, so if this is changed or janked up oh god
+
+    public string changeToThis; //blank katakana finish (does not work for crossroad)
 
     private GameObject BuildSpace(GameObject obj)
     {
@@ -49,6 +52,12 @@ public class MapBuilder : MonoBehaviour
     public GameObject BuildBlankSpace()
     {
         GameObject newObj = BuildSpace(blankObj);
+        return newObj;
+    }
+
+    public GameObject BuildKatakana()
+    {
+        GameObject newObj = BuildSpace(katakanaObj);
         return newObj;
     }
 
@@ -114,15 +123,51 @@ public class MapBuilder : MonoBehaviour
         renderer.SetPosition(1, end);
     }
 
+
     public void RenameWPs()
     {
         int count = 0;
+        //typename doesn't work for some reason?
         foreach (Transform child in waypointFolder)
         {
 
-            child.name = "wp" + child.GetComponent<BoardSpace>().TypeName + count;
+            child.name = "wp" + child.gameObject.GetComponent<BoardSpace>().typeName + count;
             count++;
         }
     }
+
+    public void ChangeSelectedTo(GameObject selected)
+    {
+        if (!selected.GetComponent<BoardSpace>() || selected.GetComponent<BoardSpace>() is CrossroadSpace) return;
+        BoardSpace prev = selected.GetComponent<BoardSpace>().prevWP;
+        BoardSpace next = selected.GetComponent<BoardSpace>().nextWP;
+        DestroyImmediate(selected.GetComponent<BoardSpace>());
+        BoardSpace changed = null;
+        switch(changeToThis.ToLower())
+        {
+            case "katakana":
+                selected.GetComponent<SpriteRenderer>().color = Color.cyan;
+                changed = selected.AddComponent<MinigameSpace>();
+                ((MinigameSpace)changed).category = "KATAKANA";
+                break;
+            case "blank":
+                selected.GetComponent<SpriteRenderer>().color = Color.white;
+                changed = selected.AddComponent<BlankSpace>();
+                break;
+            case "finish":
+                selected.GetComponent<SpriteRenderer>().color = Color.red;
+                changed = selected.AddComponent<FinishSpace>();
+                break;
+            default:
+                return;
+        }
+        changed.typeName = changeToThis.ToLower();
+        prev.nextWP = changed;
+        next.prevWP = changed;
+        changed.nextWP = next;
+        changed.prevWP = prev;
+    }
+
+    //write a function to remap the sprites to the template once the template sprite changes
 
 }

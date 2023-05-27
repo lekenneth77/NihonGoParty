@@ -1,0 +1,15 @@
+Countries
+オーストラリア_Australia
+ナイジェリア_Nigeria
+ニュージーランド_New Zealand
+サウジアラビア_Saudi Arabia
+アフガニスタン_Afghanistan
+バングラデシュ_Bangladesh
+エルサルバドル_El Salvador
+ルクセンブルク_Luxembourg
+パプアニューギニア_Papua New Guinea
+スウェーデン_Sweden
+ウズベキスタン_Uzbekistan
+グレート・ブリテン_Great Britain
+コートジボワール_Ivory Coast
+シンガポール_Singapore

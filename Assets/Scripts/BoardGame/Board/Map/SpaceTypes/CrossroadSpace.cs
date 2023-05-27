@@ -10,7 +10,7 @@ public class CrossroadSpace : BoardSpace
     public override void Start()
     {
         base.Start();
-        TypeName = "Crossroad";
+        typeName = "Crossroad";
         arrows = transform.GetChild(0).gameObject;
         DeactivateArrows();
     }

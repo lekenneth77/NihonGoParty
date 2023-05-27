@@ -1,16 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class BoardSpace : MonoBehaviour
 {
-    //all the abstract stuff
     public Sprite Sprite { get; set; }
-    public string TypeName { get; set; }
+    public string typeName;
 
     public abstract void Action();
 
-    //public abstract void Action(GameObject obj);
+    public static event Action ActionFinish;
+
+    public static void InvokeFinish()
+    {
+        ActionFinish?.Invoke();
+    }
 
     //all the stuff from the original spaceinfo class put into here!
     private Queue<GameObject> playersOnMe;

@@ -1,0 +1,14 @@
+Sports 
+ウエイトリフティング_Weightlifting
+アメリアンフットボール_American Football
+ジムナスティックス_Gymnastics
+サッカーワールドカップ_Soccer World Cup
+オールスターゲーム_Allstar Game
+バスケットボール_Basketball
+ウィンブルドンチャンピョンシップ_Wimbledon Championship
+カレッジワールドシリーズ_College World Series
+モータースポーツ_Motor Sports
+フィギュアースケート_Figure Skating
+トラックアンドフィールド_Track and Field
+スケートボーディング_Skateboarding
+アーティスティックスイミング_Synchronized Swimming 

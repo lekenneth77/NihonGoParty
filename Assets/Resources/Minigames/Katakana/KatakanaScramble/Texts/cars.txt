@@ -1,0 +1,18 @@
+Cars
+パンク_Flat Tire
+クラクション_Collection
+ハンドル_Steering Wheel
+ワイパー_Windshield Wipers
+ナンバープレート_License Plate
+カーオーディオ_Car Radio
+ガソリンスタンド_Gas Station
+バックミラー_Back Mirror
+フロントガラス_Windshield
+ウィンカー_Blinker
+ブレーキ_Brakes
+アクセル_Accelerator
+シートベルト_Seatbelt
+フォルクスワーゲン・ビートル_Volkswagen Beetle
+ヒュンダイ・エラントラ_Hyundai Elantra
+ジープ・グランドチェロキー_Jeep Grand Cherokee
+フォード・エクスプローラー_Ford Explorer
