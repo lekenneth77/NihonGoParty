@@ -11,6 +11,7 @@ public class MapBuilder : MonoBehaviour
     //templates
     public GameObject blankObj;
     public GameObject crossObj;
+    public GameObject finishObj;
 
     //spawn position/rotation
     public Quaternion rotation;
@@ -23,25 +24,20 @@ public class MapBuilder : MonoBehaviour
 
     private GameObject BuildSpace(GameObject obj)
     {
-        GameObject newObj = Instantiate(obj, spawnPoint, rotation);
-        newObj.transform.parent = waypointFolder;
-        newObj.name = "wp";
-        return newObj;
-    }
-
-    public GameObject BuildBlankSpace()
-    {
         if (prev)
         {
             spawnPoint = prev.transform.position;
         }
-        GameObject newObj = BuildSpace(blankObj);
+        GameObject newObj = Instantiate(obj, spawnPoint, rotation);
+        newObj.transform.parent = waypointFolder;
+        newObj.name = "wp";
         BoardSpace info = newObj.GetComponent<BoardSpace>();
         //lol jank TODO REQUIRES ROOT OF TREE TO BE A BLANK SPACE! prob change in future
         if (!prev)
         {
             root = info;
-        } else
+        }
+        else
         {
             info.prevWP = prev;
             prev.nextWP = info;
@@ -49,15 +45,31 @@ public class MapBuilder : MonoBehaviour
         prev = info;
         return newObj;
     }
-    
-    public void BuildCrossroad()
-    {
 
+    public GameObject BuildBlankSpace()
+    {
+        GameObject newObj = BuildSpace(blankObj);
+        return newObj;
     }
 
-    public void BuildFinishLine()
+    public GameObject BuildCrossroad()
     {
-        //
+        CrossroadSpace crossroad = BuildSpace(crossObj).GetComponent<CrossroadSpace>();
+        //alt path
+        BoardSpace altPath = BuildSpace(blankObj).GetComponent<BoardSpace>();
+        altPath.transform.position = new Vector3(altPath.transform.position.x - 5, altPath.transform.position.y, altPath.transform.position.z);
+        crossroad.alternateWP = altPath;
+        prev = crossroad;
+        //next path
+        BoardSpace nextPath = BuildSpace(blankObj).GetComponent<BoardSpace>();
+        nextPath.transform.position = new Vector3(nextPath.transform.position.x + 5, nextPath.transform.position.y, nextPath.transform.position.z);
+        return crossroad.gameObject;
+    }
+
+    public GameObject BuildFinishLine()
+    {
+        GameObject newObj = BuildSpace(finishObj);
+        return newObj;
     }
 
     public void DrawLines()
@@ -107,7 +119,8 @@ public class MapBuilder : MonoBehaviour
         int count = 0;
         foreach (Transform child in waypointFolder)
         {
-            child.name = "wp" + count;
+
+            child.name = "wp" + child.GetComponent<BoardSpace>().TypeName + count;
             count++;
         }
     }

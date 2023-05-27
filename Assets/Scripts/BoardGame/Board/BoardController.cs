@@ -63,14 +63,6 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         StartCoroutine("SetupOrder");
     }
 
-    /*
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    */
-
     //Called once at the start
     private IEnumerator SetupOrder()
     {
@@ -135,6 +127,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     private void SetupNextTurn()
     {
         //lol this is pretty jank and might be slow but it's kind of funny
+        //TODO change this so that you only need to store the root of the map not all waypoints!
         foreach (Transform obj in waypoints)
         {
             obj.gameObject.GetComponent<BoardSpace>().ResetPlayers(true);
@@ -222,6 +215,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                     }
                     yield return new WaitForSeconds(0.01f);
                 }
+                CrossroadArrow.choseSomething = false;
                 currentStep--; 
             }
 
@@ -231,6 +225,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         //WE WOULD ADD DO ACTION OUT HERE PROBABLY
         yield return new WaitForSeconds(0.1f);
         moveCameraObj.SetActive(false);
+        infoObj.currentSpace.Action();
         yield return new WaitForSeconds(2f);
         rollCountdown.SetActive(false);
         infoObj.currentSpace.AddPlayer(currentPlayer);

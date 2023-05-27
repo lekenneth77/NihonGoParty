@@ -7,7 +7,7 @@ public class BlankSpace : BoardSpace
     public override void Start()
     {
         base.Start();
-        TypeName = "blank";
+        TypeName = "Blank";
 
     }
 

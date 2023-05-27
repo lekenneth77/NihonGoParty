@@ -17,11 +17,11 @@ public class MapBuilderEditor : Editor
         }
         if (GUILayout.Button("Build Crossroad"))
         {
-            builder.BuildCrossroad();
+            Selection.activeGameObject = builder.BuildCrossroad();
         }
         if (GUILayout.Button("Build Finish Line"))
         {
-            builder.BuildFinishLine();
+            Selection.activeGameObject = builder.BuildFinishLine();
         }
         if (GUILayout.Button("Draw Lines"))
         {
