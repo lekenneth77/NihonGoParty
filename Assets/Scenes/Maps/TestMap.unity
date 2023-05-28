@@ -2931,7 +2931,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2968,11 +2968,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeName: katakana
+  typeName: grammar
   chosenPath: {fileID: 0}
   nextWP: {fileID: 1142755013}
   prevWP: {fileID: 1833850531}
-  category: KATAKANA
+  category: GRAMMAR
 --- !u!1 &487353754
 GameObject:
   m_ObjectHideFlags: 0
@@ -4446,7 +4446,7 @@ MonoBehaviour:
   useYourSpawnPoint: 0
   prev: {fileID: 2060854414}
   root: {fileID: 1624710710}
-  changeToThis: katakana
+  changeToThis: grammar
 --- !u!1 &733214162
 GameObject:
   m_ObjectHideFlags: 0
@@ -4605,7 +4605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755735283}
   - component: {fileID: 755735285}
-  - component: {fileID: 755735284}
+  - component: {fileID: 755735286}
   m_Layer: 0
   m_Name: wp5
   m_TagString: Untagged
@@ -4628,22 +4628,6 @@ Transform:
   m_Father: {fileID: 702763856}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &755735284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 755735282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecdb1a30c99193f4c9c9d6075e181dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeName: 
-  chosenPath: {fileID: 0}
-  nextWP: {fileID: 997293161}
-  prevWP: {fileID: 1142755013}
 --- !u!212 &755735285
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4686,7 +4670,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4696,6 +4680,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &755735286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755735282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeName: grammar
+  chosenPath: {fileID: 0}
+  nextWP: {fileID: 997293161}
+  prevWP: {fileID: 1142755013}
+  category: GRAMMAR
 --- !u!1 &767793410
 GameObject:
   m_ObjectHideFlags: 0
@@ -5898,7 +5899,7 @@ MonoBehaviour:
   typeName: 
   chosenPath: {fileID: 0}
   nextWP: {fileID: 33889180}
-  prevWP: {fileID: 755735284}
+  prevWP: {fileID: 755735286}
   alternateWP: {fileID: 1365390857}
 --- !u!212 &997293162
 SpriteRenderer:
@@ -6322,7 +6323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: katakana
   chosenPath: {fileID: 0}
-  nextWP: {fileID: 755735284}
+  nextWP: {fileID: 755735286}
   prevWP: {fileID: 476290514}
   category: KATAKANA
 --- !u!21 &1179615220
@@ -8116,7 +8117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: 
   chosenPath: {fileID: 0}
-  nextWP: {fileID: 1877533953}
+  nextWP: {fileID: 1877533956}
   prevWP: {fileID: 0}
 --- !u!212 &1624710711
 SpriteRenderer:
@@ -9761,7 +9762,7 @@ MonoBehaviour:
   typeName: katakana
   chosenPath: {fileID: 0}
   nextWP: {fileID: 476290514}
-  prevWP: {fileID: 1877533953}
+  prevWP: {fileID: 1877533956}
   category: KATAKANA
 --- !u!1 &1841164401
 GameObject:
@@ -10015,7 +10016,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877533955}
   - component: {fileID: 1877533954}
-  - component: {fileID: 1877533953}
+  - component: {fileID: 1877533956}
   m_Layer: 0
   m_Name: wp1
   m_TagString: Untagged
@@ -10023,22 +10024,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1877533953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877533952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecdb1a30c99193f4c9c9d6075e181dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeName: 
-  chosenPath: {fileID: 0}
-  nextWP: {fileID: 1833850531}
-  prevWP: {fileID: 1624710710}
 --- !u!212 &1877533954
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10081,7 +10066,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10106,6 +10091,23 @@ Transform:
   m_Father: {fileID: 702763856}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1877533956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877533952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeName: grammar
+  chosenPath: {fileID: 0}
+  nextWP: {fileID: 1833850531}
+  prevWP: {fileID: 1624710710}
+  category: GRAMMAR
 --- !u!1 &1976912917
 GameObject:
   m_ObjectHideFlags: 0
@@ -11259,7 +11261,7 @@ MonoBehaviour:
   stillCameraObj: {fileID: 1343877626}
   moveCameraObj: {fileID: 626483979}
   freeCameraObj: {fileID: 498203454}
-  debug: 0
+  debug: 1
 --- !u!4 &2147000834
 Transform:
   m_ObjectHideFlags: 0

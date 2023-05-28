@@ -1,0 +1,14 @@
+YII CH1-2 review
+夏休み　に　海　へ　でも　行ったら　どう　です　か　。_ making a suggestion_1,10
+今日　ひま　だったら　、　私　を　ダラス　に　つれて　いって　ください　。_今日　ひま　だったら　、　ダラス　に　私　を　つれて　いって　ください　。_if.., please take me to…_1,4,12
+あの車　は　小さくて　、　きれいで　、　安い　から　、　買う　こと　に　しました　。_あの車　は　きれいで　、　小さくて　、　安い　から　、　買う　こと　に　しました　。_deciding to do something_1,8,14
+おんせん　に　入った　後　で　、　つめたい　ジュース　を　飲む　と　おいしい　です　。_After…, if,,,[suggestion]_4,14
+ここ　を　まっすぐ　行って　、　右　に　曲がる　と　、　郵便局　が　あります　。_if-then [direction]_1,5,10,14
+兄　は　いっしょ　に　ビデオゲーム　を　しろ　と　言う　が　、　かれは下手だ。_兄　は　ビデオゲーム　を　いっしょ　に　しろ　と　言う　が　、　かれは下手だ。_my brother says...[command],_1,12
+ここ　は　横断　歩道　な　ので　、　車　を　駐車　して　は　いけません　。_Because…, [prohibition]_1,7,14
+海外　旅行　に　は　パスポート　を　持って　行かなければ　いけません　。_[obligation]_1,4,10
+すし　を　食べ　に　日本　に　行く　こと　に　した　。_[purpose]. ..decided to do..._1,11
+テスト　で　F　だった　人は　もっと　勉強　した　ほう　が　いい　です　よ　。_[advice to the person who made an F]_1,5,14
+明日　パーティー　が　ある　ので　、　飲み物　や　食べ物　を　買って　おきましょう　。_明日　パーティー　が　ある　ので　、　食べ物　や　飲み物　を　買って　おきましょう　。_Because we will have a party tomorrow, doing...in advance._1,6,13
+私　は  山田さん　に　花　を　もらいました　。　本田先生　は　私　に　本　を　くださいました　。_私　は  山田さん　に　花　を　もらいました　。　私　に　本田先生　は　本　を　くださいました。_I go flowers from Yamada-san. Honda-sensei gave me a book._1,8,16
+娘　は　先生　に　本　を　いただきました　。　そして　、　娘　は　花　を　差し上げました　。_My daughter got a book from her teacher, and she gave her teacher flowers._1,8,16

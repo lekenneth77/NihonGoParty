@@ -1,0 +1,12 @@
+601D Review
+明日　いっしょ　に　べんきょう　しましょう　か　。_Tomorrow, shall we study together?_1,7
+わたし　は　日本語　の　学生　です　。_I am a Japanese (language) student._1,7
+わたし　の　日本語　の　クラス　に　学生　が　二十人　います。_There are 20 students in my Japanese class._1,11
+あの　マンガ　は　おもしろい　です　。_ That manga is interesting._1,6
+わたし　の　ねこ　は　大きく　ありません　。_ My cat is not big._1,7
+わたし　は　毎日　午前　七時　に　起きます。_ わたし　は　午前　七時　に　毎日　起きます。_ I get up at 7:00 am every day._1,8
+わたし　は　大きい　町　が　好き　です。_ I like large cities._1,8
+わたし　は　１日　に　三回　食べます。_ I eat three times a day._1,7
+この　クラス　に　学生　は　何人　います　か　。_ How many students are in this class?_1,9
+これ　は　何　の　本　です　か　。_ What book is this?_1,8
+どんな　食べもの　が　きらい　です　か　。_ what kind of food don’t you like?_1,7

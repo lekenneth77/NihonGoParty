@@ -1,0 +1,11 @@
+YII3 Review
+21さい　に　なって　、　お酒　が　飲める　よう　に　なった　ので　、　少し　ワイン　を　飲む　よう　に　なった　。_21さい　に　なって　、　お酒　が　飲める　よう　に　なった　ので　、　ワイン　を　少し　飲む　よう　に　なった　。_I became able to drink alcohol when I turned 21 so I started to drink wine._1,4,12,20
+社長　が　毎日　コーヒー　を　召し上がる　ので　、　私　は　10時　に　コーヒー　を　お入れいたします　。_社長　が　毎日　コーヒー　を　召し上がる　ので　、　私　は　コーヒー　を　10時　に　お入れいたします　。_My boss has coffee every day, so I prepare coffee at 10 always._1,3,8,16
+水はらくん　の　お母さん　は　私　に　日本語　の　まんが　を　くださいました　。私　は　それ　を　すずきくん　に　あげました　。_水はらくん　の　お母さん　は　私　に　日本語　の　まんが　を　くださいました　。　私　は　すずきくん　に　それ　を　あげました。_Kizuhara-kun’s mother game me Japanese Manga books, and I gave them to Suzuki-kun._1,5,12,20
+私　は　弟　に　私　が　一番　好き　な　ビデオゲーム　を　取られました　。_私　は　私　が　一番　好き　な　ビデオゲーム　を　弟　に 取られました。_I had my favorite video game taken by my brother._1,13
+日本　で　よく　飲まれて　いる　飲み物　は　カルピコ　です　。_[passive] – popular drink in Japan – Calpico_1,10
+私　は　ルームメイト　に　おさら　を　洗って　ほしい　ん　です　。_I want my roommate to do..._1,11
+まついさん　は　ルームメイト　に　部屋　を　そうじ　して　もらいたがって　います 。_Matsui-san  wants his roommate to do…._1,11
+吉田さん　は　日本語　だけで　なく　、　かんこく語　も　話せます　。_Yoshida-san can speak not only Japanese but also Korean._1,10
+クラス　の　前　で　日本語　で　話　を　させられました　。　はずかしかった　です　。_I was forced to give a talk in front of class. I was embarrassed._1,13
+万が一　これ　が　おいしくて　も　、　私　は　ぜったい　に　食べません　。_Even if...,_2,12

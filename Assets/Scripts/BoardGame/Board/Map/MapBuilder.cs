@@ -150,6 +150,11 @@ public class MapBuilder : MonoBehaviour
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "KATAKANA";
                 break;
+            case "grammar":
+                selected.GetComponent<SpriteRenderer>().color = Color.yellow;
+                changed = selected.AddComponent<MinigameSpace>();
+                ((MinigameSpace)changed).category = "GRAMMAR";
+                break;
             case "blank":
                 selected.GetComponent<SpriteRenderer>().color = Color.white;
                 changed = selected.AddComponent<BlankSpace>();

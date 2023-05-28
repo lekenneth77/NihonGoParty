@@ -1,0 +1,10 @@
+Relative Clause
+UT　は　オースティン　に　ある　有名　な　大学　です　。_ UT　は　有名　な　オースティン　に　ある　大学　です　。_ UT is a famous UNIVERSITY located in Austin._8,10
+山田さん　と　話して　いる　あの学生　は　誰　です　か　。_ Who is the STUDENT talking with Yamada-san?_5,10
+わたし　は　ジムさん　が　作る　ケーキ　が　好き　です　。_ I love the CAKE Jim bakes._1,10
+わたし　が　昨日　食べた　すし　は　おいしかった　です　。_The SUSHI I had yesterday was very delicious._1,9
+黒い　スニーカー　を　はいて　いる　人　は　わたし　の　兄　です　。_ The PERSON who is wearing black sneakers is my big brother._6,12
+リサさん　は　本　を　読んで　いる　人　です　。_Lisa is the PERSON who is reading a book._1,9
+わたし　が　一番　好き　な　飲み物　は　水　です　。_ My favorite DRINK is water._1,10
+日本語　が　上手　に　話せる　人　を　しって　います　か　。_上手　に　日本語　が　　話せる　人　を　しって　います　か　。_ Do you know THE PERSON who can speak Japanese?_6,10
+アメリカ　で　一番　大きい　大学　は　どこ　に　あります　か　。_ Where is the largest university in the USA?_1,11
