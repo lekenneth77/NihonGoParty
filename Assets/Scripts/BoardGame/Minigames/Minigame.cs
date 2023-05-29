@@ -12,8 +12,9 @@ public abstract class Minigame : MonoBehaviour
         
     }
 
-    public void EndGame()
+    public void EndGame(bool won)
     {
+        BoardController.wonMinigame = won;
         BoardSpace.InvokeFinish();
         SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
     }

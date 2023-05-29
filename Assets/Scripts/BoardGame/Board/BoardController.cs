@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     public static int numPlayers;
     private GameObject currentPlayer;
     private int currentPlayer_i; //index of current player
+
+    //minigame results information
+    public static bool wonMinigame;
 
     //leaderboard
     public Leaderboard leaderboard;
@@ -51,6 +55,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         controls.BoardController.AddCallbacks(this);
         controls.Enable();
 
+        wonMinigame = false;
         freeCameraOn = false;
         diceSprites = Resources.LoadAll<Sprite>("DiceSides/");
         stillCameraCom = stillCameraObj.GetComponent<CinemachineVirtualCamera>();
@@ -123,17 +128,33 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
         currentPlayer_i = -1;
         Dice.OnDiceFinish += SubscribeMovePlayer;
-        BoardSpace.ActionFinish += SetupNextTurn;
+        BoardSpace.ActionFinish += AfterSpaceAction;
 
         SetupNextTurn();
     }
 
+    private void AfterSpaceAction()
+    {
+        allAssets.SetActive(true);
+        BoardSpace currentSpace = currentPlayer.GetComponent<PlayerInfo>().currentSpace;
+        if (currentSpace is MinigameSpace)
+        {
+            //check lose bool
+            if (wonMinigame)
+            {
+                StartCoroutine(MovePlayer(3, true, false));
+            } else
+            {
+                StartCoroutine(MovePlayer(2, false, false));
+            }
+        } else
+        {
+            SetupNextTurn();
+        }
+    }
+
     private void SetupNextTurn()
     {
-        if (currentPlayer)
-        {
-            allAssets.SetActive(true);
-        }
         //lol this is pretty jank and might be slow but it's kind of funny
         //TODO change this so that you only need to store the root of the map not all waypoints!
         foreach (Transform obj in waypoints)
@@ -151,19 +172,18 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         stillCameraCom.LookAt = currentPlayer.transform;
         stillCameraCom.Follow = currentPlayer.transform;
         stillCameraCom.m_Lens.FieldOfView = STILL_FOV;
-
     }
 
 
     //Event called after the dice is finished. Starts the coroutine in the actual MovePlayer function.
     private void SubscribeMovePlayer(int roll)
     {
-        StartCoroutine(MovePlayer(roll));
+        StartCoroutine(MovePlayer(roll, true, true));
     }
 
     //Moves the current player. TODO THINK ABOUT POSSIBLE BUG WHERE GETTING SENT BACK PUTS YOU ON A CROSSROAD MAYBE PUT A LIMIT?
     //IF PREV IS CROSSROAD DON'T GO BACK?
-    private IEnumerator MovePlayer(int roll)
+    private IEnumerator MovePlayer(int roll, bool forward, bool triggerAction)
     {
         yield return new WaitForSeconds(1f);
         moveCameraCom.LookAt = currentPlayer.transform;
@@ -176,25 +196,24 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         GameObject rollCountdown = currentPlayer.transform.GetChild(0).gameObject;
         SpriteRenderer countdownSprite = rollCountdown.GetComponent<SpriteRenderer>();
         BoardSpace currentSpace = infoObj.currentSpace;
-
-        if (currentSpace)
-        {
-            currentSpace.RemovePlayer();
-        }
+        currentSpace?.RemovePlayer();
         rollCountdown.SetActive(true);
         for (int currentStep = 1; currentStep <= roll; currentStep++)
         {
-            countdownSprite.sprite = diceSprites[roll - currentStep];
-            infoObj.numCrossed++; //TODO POSSIBLE BUG might cause inbalance in leaderboard with multiple crossroads?
             currentSpace = infoObj.currentSpace;
             BoardSpace nextSpace;
             if (currentSpace)
             {
-                nextSpace = currentSpace.chosenPath;
+                nextSpace = forward ? currentSpace.chosenPath : currentSpace.prevWP;
             } else
             {
-                nextSpace = waypoints[0].GetComponent<BoardSpace>();
+                nextSpace = waypoints[0].GetComponent<BoardSpace>(); 
             }
+            //handles going backwards onto a crossroad or going past the starting point
+            if (nextSpace is CrossroadSpace && !forward || !nextSpace && !forward) { break; }
+
+            countdownSprite.sprite = diceSprites[roll - currentStep];
+            infoObj.numCrossed = forward ? infoObj.numCrossed + 1 : infoObj.numCrossed - 1;
 
             moveObj.SetTargetAndMove(nextSpace.transform.position);
             nextSpace.AdjustPlayers();
@@ -203,6 +222,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                 //essentially polling
                 yield return new WaitForSeconds(0.01f);
             }
+            //maybe takeout the slight pause when youre going backwards
             yield return new WaitForSeconds(0.05f);
             if (currentStep != roll)
             {
@@ -228,19 +248,24 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                 currentStep--; 
             }
 
-            infoObj.currentSpace = nextSpace; //linked list!
+            infoObj.currentSpace = nextSpace; //nextWP if forward, prevWP if backwards.
             if (nextSpace is FinishSpace) { break; }
         }
-        //WE WOULD ADD DO ACTION OUT HERE PROBABLY
         yield return new WaitForSeconds(0.1f);
         moveCameraObj.SetActive(false);
         yield return new WaitForSeconds(2f);
         rollCountdown.SetActive(false);
         infoObj.currentSpace.AddPlayer(currentPlayer);
-        //subscribe to the minigame!
-        controls.Disable();
-        allAssets.SetActive(false);
-        infoObj.currentSpace.Action();
+
+        if (triggerAction || infoObj.currentSpace is FinishSpace) {
+            controls.Disable();
+            allAssets.SetActive(false);
+            infoObj.currentSpace.Action();
+        } else
+        {
+            //if no trigger  
+            SetupNextTurn();
+        }
     }
 
     //Set the current player to be the next player.
@@ -248,11 +273,6 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     {
         currentPlayer_i = (currentPlayer_i + 1) >= numPlayers ? 0 : currentPlayer_i + 1;
         currentPlayer = players[currentPlayer_i];
-    }
-
-    private void Finish()
-    {
-        Debug.Log("Finish!");
     }
 
     public void OnToggleFreelook(InputAction.CallbackContext context)

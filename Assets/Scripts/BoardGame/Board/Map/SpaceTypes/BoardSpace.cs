@@ -73,6 +73,10 @@ public abstract class BoardSpace : MonoBehaviour
 
     public void RemovePlayer()
     {
+        if (playersOnMe.Count == 0)
+        {
+            return;
+        }
         playersOnMe.Dequeue();
         //fenceposted
         int index = -1;

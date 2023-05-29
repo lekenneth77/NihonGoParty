@@ -294,7 +294,7 @@ public class WordOrder : Minigame
         redo_button.interactable = false;
         giveup_button.interactable = false;
         yield return new WaitForSeconds(2f);
-        EndGame();
+        EndGame(false);
     }
 
     private IEnumerator check_corr() {

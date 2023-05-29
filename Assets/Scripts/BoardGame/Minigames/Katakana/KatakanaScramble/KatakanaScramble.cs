@@ -250,7 +250,7 @@ public class KatakanaScramble : Minigame
         failure_img.SetActive(true);
         hint_button.interactable = false;
         yield return new WaitForSeconds(2f);
-        EndGame();
+        EndGame(false);
     }
  
     private IEnumerator check_corr() {
