@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class MinigameSpace : BoardSpace
     public string category;
     private string[] KatakanaGames = {"KatakanaScramble"};
     private string[] GrammarGames = { "WordOrder"};
+
 
     Minigame currentMinigame;
 
@@ -39,8 +41,9 @@ public class MinigameSpace : BoardSpace
                 return;
         }
 
-        string chosenGame = gamesToChooseFrom[Random.Range(0, gamesToChooseFrom.Length)];
-        SceneManager.LoadSceneAsync(chosenGame, LoadSceneMode.Additive);
+        string chosenGame = gamesToChooseFrom[UnityEngine.Random.Range(0, gamesToChooseFrom.Length)];
+        InvokeLoad(chosenGame);
+        //SceneManager.LoadSceneAsync(chosenGame, LoadSceneMode.Additive);
     }
 
 }

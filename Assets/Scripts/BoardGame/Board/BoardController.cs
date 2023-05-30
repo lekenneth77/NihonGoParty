@@ -142,10 +142,10 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             //check lose bool
             if (wonMinigame)
             {
-                StartCoroutine(MovePlayer(3, true, false));
+                StartCoroutine(MovePlayer(2, true, false));
             } else
             {
-                StartCoroutine(MovePlayer(2, false, false));
+                StartCoroutine(MovePlayer(1, false, false));
             }
         } else
         {
