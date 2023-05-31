@@ -10,8 +10,8 @@ public class PlayerInfo : MonoBehaviour
     public int currentRanking;
     public int containerPosition; //used to tell which leaderboard container is this player
     public int numMinigamesWon; //maybe add a stats? is it neccessary?
-    public int numMoreThanFours; //how many >= fours rolled
-    public int numLessThanThrees; //how many <= threes rolled
+    public int numHighRolls; //how many >= fours rolled
+    public int numLowRolls; //how many <= threes rolled
 
     void Start()
     {

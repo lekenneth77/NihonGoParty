@@ -596,10 +596,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb19507e26310741a5b7d6d97334b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: red
   numCrossed: 0
   currentSpace: {fileID: 0}
   currentRanking: 0
   containerPosition: 0
+  numMinigamesWon: 0
+  numMoreThanFours: 0
+  numLessThanThrees: 0
 --- !u!1 &71378483
 GameObject:
   m_ObjectHideFlags: 0
@@ -4849,7 +4853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugRoll: 2
   roll: 0
-  debug: 1
+  debug: 0
   spriteRenderer: {fileID: 79811638}
 --- !u!1 &748925298
 GameObject:
@@ -6075,10 +6079,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb19507e26310741a5b7d6d97334b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: blue
   numCrossed: 0
   currentSpace: {fileID: 0}
   currentRanking: 0
   containerPosition: 1
+  numMinigamesWon: 0
+  numMoreThanFours: 0
+  numLessThanThrees: 0
 --- !u!114 &969075456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8045,10 +8053,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb19507e26310741a5b7d6d97334b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: green
   numCrossed: 0
   currentSpace: {fileID: 0}
   currentRanking: 0
   containerPosition: 3
+  numMinigamesWon: 0
+  numMoreThanFours: 0
+  numLessThanThrees: 0
 --- !u!114 &1590751231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8174,10 +8186,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb19507e26310741a5b7d6d97334b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: yellow
   numCrossed: 0
   currentSpace: {fileID: 0}
   currentRanking: 0
   containerPosition: 2
+  numMinigamesWon: 0
+  numMoreThanFours: 0
+  numLessThanThrees: 0
 --- !u!114 &1610423636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11549,7 +11565,7 @@ MonoBehaviour:
   stillCameraObj: {fileID: 1343877626}
   moveCameraObj: {fileID: 626483979}
   freeCameraObj: {fileID: 498203454}
-  debug: 1
+  debug: 0
 --- !u!4 &2147000834
 Transform:
   m_ObjectHideFlags: 0

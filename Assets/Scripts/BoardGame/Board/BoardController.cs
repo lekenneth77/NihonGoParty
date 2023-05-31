@@ -15,7 +15,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     public Transform[] startingWaypoints;
 
     //player and turn information
-    public static GameObject[] players;
+    public GameObject[] players;
     public static int numPlayers;
     public static GameObject currentPlayer;
     private int currentPlayer_i; //index of current player
@@ -66,6 +66,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             numPlayers = 4;
         }
         numPlayers = 4;
+        FinishController.tempResults = players;
         leaderboard.SetNumPlayers(numPlayers);
         StartCoroutine("SetupOrder");
     }
@@ -142,7 +143,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             //check lose bool
             if (wonMinigame)
             {
-                
+                currentPlayer.GetComponent<PlayerInfo>().numMinigamesWon += 1;
                 StartCoroutine(MovePlayer(2, true, false));
             } else
             {
@@ -199,6 +200,19 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         BoardSpace currentSpace = infoObj.currentSpace;
         currentSpace?.RemovePlayer();
         rollCountdown.SetActive(true);
+
+        if (forward)
+        {
+            //uh should work to count maybe double check this tomorrow?
+            if (roll <= 3)
+            {
+                currentPlayer.GetComponent<PlayerInfo>().numLowRolls += 1;
+            } else
+            {
+                currentPlayer.GetComponent<PlayerInfo>().numHighRolls += 1;
+            }
+        }
+
         for (int currentStep = 1; currentStep <= roll; currentStep++)
         {
             currentSpace = infoObj.currentSpace;
@@ -250,7 +264,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             }
 
             infoObj.currentSpace = nextSpace; //nextWP if forward, prevWP if backwards.
-            if (nextSpace is FinishSpace) { break; }
+            if (nextSpace is FinishSpace) {
+                break; 
+            }
         }
         yield return new WaitForSeconds(0.1f);
         moveCameraObj.SetActive(false);
