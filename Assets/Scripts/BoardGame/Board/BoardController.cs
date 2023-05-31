@@ -15,9 +15,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     public Transform[] startingWaypoints;
 
     //player and turn information
-    public GameObject[] players;
+    public static GameObject[] players;
     public static int numPlayers;
-    private GameObject currentPlayer;
+    public static GameObject currentPlayer;
     private int currentPlayer_i; //index of current player
 
     //minigame results information
@@ -142,6 +142,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             //check lose bool
             if (wonMinigame)
             {
+                
                 StartCoroutine(MovePlayer(2, true, false));
             } else
             {

@@ -42,7 +42,7 @@ public class MinigameSpace : BoardSpace
         }
 
         string chosenGame = gamesToChooseFrom[UnityEngine.Random.Range(0, gamesToChooseFrom.Length)];
-        InvokeLoad(chosenGame);
+        InvokeLoad(chosenGame, true);
         //SceneManager.LoadSceneAsync(chosenGame, LoadSceneMode.Additive);
     }
 

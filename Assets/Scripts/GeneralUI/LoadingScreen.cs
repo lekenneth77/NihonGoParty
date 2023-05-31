@@ -13,16 +13,17 @@ public class LoadingScreen : MonoBehaviour
         BoardSpace.TriggerLoad += LoadScene;
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadScene(string sceneName, bool additive)
     {
-        StartCoroutine(LoadSceneAsync(sceneName));
+        StartCoroutine(LoadSceneAsync(sceneName, additive));
     }
 
-    IEnumerator LoadSceneAsync(string sceneName)
+    IEnumerator LoadSceneAsync(string sceneName, bool additive)
     {
         loadingBarFill.fillAmount = 0;
         screen.SetActive(true);
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        LoadSceneMode mode = additive ? LoadSceneMode.Additive : LoadSceneMode.Single;
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, mode);
         while (!op.isDone)
         {
             float progressValue = Mathf.Clamp01(op.progress / 0.9f);

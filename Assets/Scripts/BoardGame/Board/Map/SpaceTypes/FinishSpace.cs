@@ -14,7 +14,8 @@ public class FinishSpace : BoardSpace
     public override void Action()
     {
         Debug.Log("Hey we're finished!!");
-        InvokeFinish();
+        InvokeLoad("FinishScreen", false);
+        //for now just load the scene, maybe play an animation or something?
     }
 
 }
