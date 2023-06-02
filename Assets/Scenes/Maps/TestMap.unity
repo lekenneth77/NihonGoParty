@@ -562,15 +562,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51898732}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 262587187}
   - {fileID: 629354635}
-  m_Father: {fileID: 1317729268}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &51898737
 MonoBehaviour:
@@ -596,14 +596,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb19507e26310741a5b7d6d97334b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: red
   numCrossed: 0
   currentSpace: {fileID: 0}
   currentRanking: 0
   containerPosition: 0
   numMinigamesWon: 0
-  numMoreThanFours: 0
-  numLessThanThrees: 0
+  numHighRolls: 0
+  numLowRolls: 0
 --- !u!1 &71378483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,7 +1565,7 @@ Transform:
   - {fileID: 626483980}
   - {fileID: 498203455}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &214577483
 Material:
@@ -2941,7 +2940,7 @@ RectTransform:
   - {fileID: 71378484}
   - {fileID: 962196179}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4529,7 +4528,7 @@ Transform:
   - {fileID: 109497775}
   - {fileID: 2060854413}
   m_Father: {fileID: 1978501932}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &702763857
 MonoBehaviour:
@@ -4714,7 +4713,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &725170119
 MonoBehaviour:
@@ -4837,7 +4836,7 @@ Transform:
   m_Children:
   - {fileID: 79811637}
   m_Father: {fileID: 1978501932}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &733214167
 MonoBehaviour:
@@ -4886,7 +4885,7 @@ Transform:
   - {fileID: 1735732002}
   - {fileID: 2079105790}
   m_Father: {fileID: 1978501932}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &755735282
 GameObject:
@@ -5661,7 +5660,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &896543481
 MonoBehaviour:
@@ -6057,15 +6056,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969075453}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1622431257}
   - {fileID: 2099315379}
-  m_Father: {fileID: 1317729268}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &969075455
 MonoBehaviour:
@@ -6079,14 +6078,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb19507e26310741a5b7d6d97334b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: blue
   numCrossed: 0
   currentSpace: {fileID: 0}
   currentRanking: 0
   containerPosition: 1
   numMinigamesWon: 0
-  numMoreThanFours: 0
-  numLessThanThrees: 0
+  numHighRolls: 0
+  numLowRolls: 0
 --- !u!114 &969075456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6691,7 +6689,7 @@ Transform:
   - {fileID: 201553047}
   - {fileID: 1841164402}
   m_Father: {fileID: 1978501932}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1239932843
 GameObject:
@@ -7226,13 +7224,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 51898736}
-  - {fileID: 969075454}
-  - {fileID: 1610423634}
-  - {fileID: 1590751229}
-  m_Father: {fileID: 1978501932}
-  m_RootOrder: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1343877626
 GameObject:
@@ -7296,7 +7290,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343877626}
-  m_LocalRotation: {x: 1.4752966e-16, y: 0.99033433, z: -0.1387012, w: 8.624239e-16}
+  m_LocalRotation: {x: 0.0000000020668092, y: 0.99033433, z: -0.13870122, w: 0.0000000147571315}
   m_LocalPosition: {x: 5, y: 2, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8001,7 +7995,7 @@ Transform:
   - {fileID: 822705328}
   - {fileID: 2035176120}
   m_Father: {fileID: 1978501932}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1590751228
 GameObject:
@@ -8031,15 +8025,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590751228}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 172406273}
   - {fileID: 1476386762}
-  m_Father: {fileID: 1317729268}
-  m_RootOrder: 3
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1590751230
 MonoBehaviour:
@@ -8053,14 +8047,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb19507e26310741a5b7d6d97334b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: green
   numCrossed: 0
   currentSpace: {fileID: 0}
   currentRanking: 0
   containerPosition: 3
   numMinigamesWon: 0
-  numMoreThanFours: 0
-  numLessThanThrees: 0
+  numHighRolls: 0
+  numLowRolls: 0
 --- !u!114 &1590751231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8164,15 +8157,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610423633}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 690439924}
   - {fileID: 391767828}
-  m_Father: {fileID: 1317729268}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1610423635
 MonoBehaviour:
@@ -8186,14 +8179,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb19507e26310741a5b7d6d97334b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: yellow
   numCrossed: 0
   currentSpace: {fileID: 0}
   currentRanking: 0
   containerPosition: 2
   numMinigamesWon: 0
-  numMoreThanFours: 0
-  numLessThanThrees: 0
+  numHighRolls: 0
+  numLowRolls: 0
 --- !u!114 &1610423636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8843,7 +8835,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 1.4752966e-16, y: 0.99033433, z: -0.1387012, w: 8.624239e-16}
+  m_LocalRotation: {x: 0.0000000020668092, y: 0.99033433, z: -0.13870122, w: 0.0000000147571315}
   m_LocalPosition: {x: 5, y: 2, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9545,7 +9537,7 @@ RectTransform:
   m_Children:
   - {fileID: 487353755}
   m_Father: {fileID: 1978501932}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10554,7 +10546,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1317729268}
   - {fileID: 748925299}
   - {fileID: 733214166}
   - {fileID: 1753722386}
@@ -10562,7 +10553,7 @@ Transform:
   - {fileID: 1551856541}
   - {fileID: 1208158800}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1981162396
 GameObject:
@@ -11579,7 +11570,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2147000835
 MonoBehaviour:

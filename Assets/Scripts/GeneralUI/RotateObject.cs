@@ -5,8 +5,8 @@ using UnityEngine;
 public class RotateObject : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float rotateSpeed = 250;
-    public float damping = 10;
+    public float rotateSpeed = 150;
+    public float damping = 2;
     private float rotAngle;
     private Quaternion desiredRot;
     private bool rotate;
@@ -28,11 +28,26 @@ public class RotateObject : MonoBehaviour
     }
 
     //uhhh might be bugged i think lerp doesn't go in the direction i want to force it to go into
-    public void Rotate(float angleToAdd)
+    public void Rotate(float angleToAdd, string axis)
     {
         rotAngle += angleToAdd;
         rotAngle = Mathf.Abs(rotAngle) == 360 ? 0 : rotAngle;
-        desiredRot = Quaternion.Euler(0, rotAngle, 0);
+        switch (axis.ToLower())
+        {
+            case "x":
+                desiredRot = Quaternion.Euler(rotAngle, 0, 0);
+                break;
+            case "y":
+                desiredRot = Quaternion.Euler(0, rotAngle, 0);
+                break;
+            case "z":
+                desiredRot = Quaternion.Euler(0, 0, rotAngle);
+                break;
+            default:
+                Debug.Log("oops wrong axis rotate");
+                break;
+        }
+        
         rotate = true;
     }
 }

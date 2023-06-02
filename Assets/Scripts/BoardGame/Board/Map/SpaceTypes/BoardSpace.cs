@@ -53,7 +53,7 @@ public abstract class BoardSpace : MonoBehaviour
         int index = 0;
         foreach (GameObject p in playersOnMe)
         {
-            p.GetComponent<BoardMovement>().SetTargetAndMove(extraSpaces[index]);
+            p.GetComponent<MoveObject>().SetTargetAndMove(extraSpaces[index]);
             index++;
         }
     }
@@ -72,7 +72,7 @@ public abstract class BoardSpace : MonoBehaviour
             }
             else
             {
-                p.GetComponent<BoardMovement>().SetTargetAndMove(pos);
+                p.GetComponent<MoveObject>().SetTargetAndMove(pos);
             }
             index++;
         }
@@ -90,7 +90,7 @@ public abstract class BoardSpace : MonoBehaviour
         Vector3 pos = this.transform.position;
         foreach (GameObject p in playersOnMe)
         {
-            p.GetComponent<BoardMovement>().SetTargetAndMove(pos);
+            p.GetComponent<MoveObject>().SetTargetAndMove(pos);
             index++;
             pos = extraSpaces[index];
         }

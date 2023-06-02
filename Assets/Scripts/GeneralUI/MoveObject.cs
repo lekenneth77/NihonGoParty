@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardMovement : MonoBehaviour
+public class MoveObject : MonoBehaviour
 {
 
-    private float movementSpeed;
+    public float movementSpeed = 5f;
     private bool moveFlag;
-    private Vector3 target;
+    public Vector3 target;
+    public Vector3 originalPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        movementSpeed = 5f;
+        originalPosition = this.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -24,11 +25,27 @@ public class BoardMovement : MonoBehaviour
         }
     }
 
+    public void TriggerMove()
+    {
+        moveFlag = true;
+    }
+
     public void SetTargetAndMove(Vector3 tgt)
     {
         //TODO change once you have real models!
         tgt.y = tgt.y + 0.5f;
         target = tgt;
+        moveFlag = true;
+    }
+
+    public void ChangeSpeed(float speedVal)
+    {
+        movementSpeed = speedVal;
+    }
+
+    public void GoHome()
+    {
+        target = originalPosition;
         moveFlag = true;
     }
 

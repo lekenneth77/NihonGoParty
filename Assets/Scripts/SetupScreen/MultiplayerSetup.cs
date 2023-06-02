@@ -99,7 +99,7 @@ public class MultiplayerSetup : MonoBehaviour
         {
             currentMapI = (currentMapI + 1) >= numMaps ? 0 : currentMapI + 1;
         }
-        daSphere.Rotate(180f);
+        daSphere.Rotate(180f, "y");
     } 
 
     public void ZoomInSphere()

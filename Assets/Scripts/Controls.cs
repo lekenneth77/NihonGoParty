@@ -244,6 +244,134 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""KanjiCrossRotate"",
+            ""id"": ""e0fef39f-f418-4d68-8139-7ed5f4283e6c"",
+            ""actions"": [
+                {
+                    ""name"": ""A"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5642539-9d3c-4d2c-ba21-62167c097ad7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""D"",
+                    ""type"": ""Button"",
+                    ""id"": ""64e79c80-e4c6-4089-a55f-e44becb37691"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""W"",
+                    ""type"": ""Button"",
+                    ""id"": ""58ae9c15-f18c-4317-8bcd-9733086672f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0c8b514-d966-48c3-bfdd-a47cd7319031"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b7e4d74-1601-42fd-b713-c348d15e087b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5babe2b-f922-476f-b1ec-806ae7c4ba38"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""903dbb41-06f0-4d25-8668-cb2323c58315"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""A"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4c6da33-f4f1-424a-a43c-a99191c32868"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""D"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c1e6a6d-19b8-445a-93de-58315bd08dc0"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""W"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e83e7fd9-78af-4739-84c0-3233a071448e"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2229ef99-cdfc-43bf-b8e7-3b483865c270"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87fdb68a-c4a7-4a55-a13e-4fbb5068c303"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -272,6 +400,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Pause
         m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
         m_Pause_Pause = m_Pause.FindAction("Pause", throwIfNotFound: true);
+        // KanjiCrossRotate
+        m_KanjiCrossRotate = asset.FindActionMap("KanjiCrossRotate", throwIfNotFound: true);
+        m_KanjiCrossRotate_A = m_KanjiCrossRotate.FindAction("A", throwIfNotFound: true);
+        m_KanjiCrossRotate_D = m_KanjiCrossRotate.FindAction("D", throwIfNotFound: true);
+        m_KanjiCrossRotate_W = m_KanjiCrossRotate.FindAction("W", throwIfNotFound: true);
+        m_KanjiCrossRotate_LeftKey = m_KanjiCrossRotate.FindAction("Left Key", throwIfNotFound: true);
+        m_KanjiCrossRotate_RightKey = m_KanjiCrossRotate.FindAction("Right Key", throwIfNotFound: true);
+        m_KanjiCrossRotate_UpKey = m_KanjiCrossRotate.FindAction("Up Key", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -513,6 +649,92 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public PauseActions @Pause => new PauseActions(this);
+
+    // KanjiCrossRotate
+    private readonly InputActionMap m_KanjiCrossRotate;
+    private List<IKanjiCrossRotateActions> m_KanjiCrossRotateActionsCallbackInterfaces = new List<IKanjiCrossRotateActions>();
+    private readonly InputAction m_KanjiCrossRotate_A;
+    private readonly InputAction m_KanjiCrossRotate_D;
+    private readonly InputAction m_KanjiCrossRotate_W;
+    private readonly InputAction m_KanjiCrossRotate_LeftKey;
+    private readonly InputAction m_KanjiCrossRotate_RightKey;
+    private readonly InputAction m_KanjiCrossRotate_UpKey;
+    public struct KanjiCrossRotateActions
+    {
+        private @Controls m_Wrapper;
+        public KanjiCrossRotateActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @A => m_Wrapper.m_KanjiCrossRotate_A;
+        public InputAction @D => m_Wrapper.m_KanjiCrossRotate_D;
+        public InputAction @W => m_Wrapper.m_KanjiCrossRotate_W;
+        public InputAction @LeftKey => m_Wrapper.m_KanjiCrossRotate_LeftKey;
+        public InputAction @RightKey => m_Wrapper.m_KanjiCrossRotate_RightKey;
+        public InputAction @UpKey => m_Wrapper.m_KanjiCrossRotate_UpKey;
+        public InputActionMap Get() { return m_Wrapper.m_KanjiCrossRotate; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KanjiCrossRotateActions set) { return set.Get(); }
+        public void AddCallbacks(IKanjiCrossRotateActions instance)
+        {
+            if (instance == null || m_Wrapper.m_KanjiCrossRotateActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_KanjiCrossRotateActionsCallbackInterfaces.Add(instance);
+            @A.started += instance.OnA;
+            @A.performed += instance.OnA;
+            @A.canceled += instance.OnA;
+            @D.started += instance.OnD;
+            @D.performed += instance.OnD;
+            @D.canceled += instance.OnD;
+            @W.started += instance.OnW;
+            @W.performed += instance.OnW;
+            @W.canceled += instance.OnW;
+            @LeftKey.started += instance.OnLeftKey;
+            @LeftKey.performed += instance.OnLeftKey;
+            @LeftKey.canceled += instance.OnLeftKey;
+            @RightKey.started += instance.OnRightKey;
+            @RightKey.performed += instance.OnRightKey;
+            @RightKey.canceled += instance.OnRightKey;
+            @UpKey.started += instance.OnUpKey;
+            @UpKey.performed += instance.OnUpKey;
+            @UpKey.canceled += instance.OnUpKey;
+        }
+
+        private void UnregisterCallbacks(IKanjiCrossRotateActions instance)
+        {
+            @A.started -= instance.OnA;
+            @A.performed -= instance.OnA;
+            @A.canceled -= instance.OnA;
+            @D.started -= instance.OnD;
+            @D.performed -= instance.OnD;
+            @D.canceled -= instance.OnD;
+            @W.started -= instance.OnW;
+            @W.performed -= instance.OnW;
+            @W.canceled -= instance.OnW;
+            @LeftKey.started -= instance.OnLeftKey;
+            @LeftKey.performed -= instance.OnLeftKey;
+            @LeftKey.canceled -= instance.OnLeftKey;
+            @RightKey.started -= instance.OnRightKey;
+            @RightKey.performed -= instance.OnRightKey;
+            @RightKey.canceled -= instance.OnRightKey;
+            @UpKey.started -= instance.OnUpKey;
+            @UpKey.performed -= instance.OnUpKey;
+            @UpKey.canceled -= instance.OnUpKey;
+        }
+
+        public void RemoveCallbacks(IKanjiCrossRotateActions instance)
+        {
+            if (m_Wrapper.m_KanjiCrossRotateActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IKanjiCrossRotateActions instance)
+        {
+            foreach (var item in m_Wrapper.m_KanjiCrossRotateActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_KanjiCrossRotateActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public KanjiCrossRotateActions @KanjiCrossRotate => new KanjiCrossRotateActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -537,5 +759,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IPauseActions
     {
         void OnPause(InputAction.CallbackContext context);
+    }
+    public interface IKanjiCrossRotateActions
+    {
+        void OnA(InputAction.CallbackContext context);
+        void OnD(InputAction.CallbackContext context);
+        void OnW(InputAction.CallbackContext context);
+        void OnLeftKey(InputAction.CallbackContext context);
+        void OnRightKey(InputAction.CallbackContext context);
+        void OnUpKey(InputAction.CallbackContext context);
     }
 }

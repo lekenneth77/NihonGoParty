@@ -65,6 +65,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         {
             numPlayers = 4;
         }
+        
         numPlayers = 4;
         FinishController.tempResults = players;
         leaderboard.SetNumPlayers(numPlayers);
@@ -77,6 +78,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         for (int i = 0; i < numPlayers; i++)
         {
             players[i].transform.position = startingWaypoints[i].position;
+            DontDestroyOnLoad(players[i]);
         }
 
         if (!debug)
@@ -137,6 +139,10 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     private void AfterSpaceAction()
     {
         allAssets.SetActive(true);
+        foreach (GameObject player in players)
+        {
+            player.SetActive(true);
+        }
         BoardSpace currentSpace = currentPlayer.GetComponent<PlayerInfo>().currentSpace;
         if (currentSpace is MinigameSpace)
         {
@@ -193,7 +199,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         moveCameraCom.m_Lens.FieldOfView = MOVE_FOV;
         moveCameraObj.SetActive(true);
         mainDice.SetActive(false);
-        BoardMovement moveObj = currentPlayer.GetComponent<BoardMovement>();
+        MoveObject moveObj = currentPlayer.GetComponent<MoveObject>();
         PlayerInfo infoObj = currentPlayer.GetComponent<PlayerInfo>();
         GameObject rollCountdown = currentPlayer.transform.GetChild(0).gameObject;
         SpriteRenderer countdownSprite = rollCountdown.GetComponent<SpriteRenderer>();
@@ -277,6 +283,10 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         if (triggerAction || infoObj.currentSpace is FinishSpace) {
             controls.Disable();
             allAssets.SetActive(false);
+            foreach (GameObject player in players)
+            {
+                player.SetActive(false);
+            }
             infoObj.currentSpace.Action();
         } else
         {

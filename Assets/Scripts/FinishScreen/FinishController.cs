@@ -30,7 +30,9 @@ public class FinishController : MonoBehaviour
         for (int i = 0; i < numPlayers; i++)
         {
             playerInfos[i] = tempResults[i].GetComponent<PlayerInfo>();
+            Destroy(tempResults[i]); //use the models later for the position standings
         }
+        
         currentTabIndex = 0;
 
         //setup results tab and get maxes and set appropriate numbers for other two tabs
@@ -49,6 +51,14 @@ public class FinishController : MonoBehaviour
         }
 
         //todo choose which cutscene to trigger
+    }
+
+    private void OnDestroy()
+    {
+        foreach (GameObject obj in tempResults)
+        {
+            Destroy(obj);
+        }
     }
 
     public void ChangeTab(int tabIndex)
@@ -103,6 +113,7 @@ public class FinishController : MonoBehaviour
 
     private IEnumerator DynamicBar(Image bar, float value, float max)
     {
+        if (value == 0) { bar.fillAmount = 0f; }
         for (float i = 0; i < (value / max); i += 0.025f)
         {
             bar.fillAmount = i;
