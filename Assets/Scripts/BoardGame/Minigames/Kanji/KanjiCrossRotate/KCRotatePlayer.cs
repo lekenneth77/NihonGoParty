@@ -65,6 +65,9 @@ public class KCRotatePlayer : MonoBehaviour
 
     public void SetRotatingText(string text)
     {
-        Debug.Log("lol not done yet");
+        for (int i = 0; i < rotatingBoxes.Length; i++)
+        {
+            rotatingBoxes[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = text[i] + "";
+        }
     }
 }
