@@ -5414,7 +5414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1387493886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6429,7 +6429,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707161827}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1707161829
 Camera:
   m_ObjectHideFlags: 0
@@ -7698,6 +7698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOne: {fileID: 1774290665}
   playerTwo: {fileID: 1158432744}
+  playerOneCamera: {fileID: 1707161829}
   playerTwoCamera: {fileID: 1600806507}
   twoPlayerContainer: {fileID: 217345366}
   timer: {fileID: 197909102}

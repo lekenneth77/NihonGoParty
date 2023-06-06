@@ -9,6 +9,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
 {
     public KCRotatePlayer playerOne;
     public KCRotatePlayer playerTwo;
+    public Camera playerOneCamera;
     public Camera playerTwoCamera;
     public GameObject twoPlayerContainer;
     public Timer timer;
@@ -34,21 +35,23 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         controls.Disable();
 
         timer.TimeUp += TimeOut;
-        duel = true;
+        //duel = true;
         loss = false;
+        won = false;
         
         if (duel)
         {
             timer.gameObject.transform.localPosition = new Vector3(0, 425, 0);
             playerTwoCamera.gameObject.SetActive(true);
             twoPlayerContainer.SetActive(true);
-            Camera.main.rect = new Rect(0, 0, 0.5f, 1);
+            playerOneCamera.rect = new Rect(0, 0, 0.5f, 1);
         } else
         {
+            Debug.Log("hey");
             timer.gameObject.transform.localPosition = new Vector3(750, 375, 0);
             playerTwoCamera.gameObject.SetActive(false);
             twoPlayerContainer.SetActive(false);
-            Camera.main.rect = new Rect(0, 0, 1, 1);
+            playerOneCamera.rect = new Rect(0, 0, 1, 1);
         }
         GetCrosses();
         StartCoroutine("RandomizeIt");
@@ -218,7 +221,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
            
         } else
         {
-
+            EndGame(true);
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this class uses lerp not transform.Rotate!
 public class RotateObject : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -10,6 +11,7 @@ public class RotateObject : MonoBehaviour
     private float rotAngle;
     private Quaternion desiredRot;
     private bool rotate;
+
     void Start()
     {
         rotAngle = 0;
@@ -25,6 +27,11 @@ public class RotateObject : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, desiredRot, Time.deltaTime * damping);
             rotate = Quaternion.Angle(transform.rotation, desiredRot) > 0.1;
         }
+    }
+
+    public void StopRotate()
+    {
+        rotate = false;
     }
 
     //uhhh might be bugged i think lerp doesn't go in the direction i want to force it to go into
