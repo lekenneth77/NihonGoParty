@@ -16,7 +16,6 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     public GameObject subtractTimerText;
     public KCSolutionPopup solution;
 
-    public static bool duel;
     private List<string> centerers;
     private List<string> rotators;
     private List<int> chosen;

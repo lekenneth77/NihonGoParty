@@ -13,6 +13,7 @@ public class PlayerInfo : MonoBehaviour
     public int numHighRolls; //how many >= fours rolled
     public int numLowRolls; //how many <= threes rolled
 
+    public Sprite sprite;
     void Start()
     {
         numCrossed = 0;

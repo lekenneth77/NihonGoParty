@@ -12,10 +12,9 @@ public class MinigameSpace : BoardSpace
     private string[] KatakanaGames = {"KatakanaScramble"};
     private string[] GrammarGames = { "WordOrder"};
     private string[] KanjiGames = { "KanjiCrossRotate" };
+    private string[] DuelGames = { "KanjiCrossRotate" };
 
     private string[] gamesToChooseFrom;
-
-    Minigame currentMinigame;
 
     //you can avoid the big switch statement by using an array and define enums or something but this is more easy to remember/work with
 
@@ -35,6 +34,9 @@ public class MinigameSpace : BoardSpace
             case "KANJI":
                 gamesToChooseFrom = KanjiGames;
                 break;
+            case "DUEL":
+                gamesToChooseFrom = DuelGames;
+                break;
             default:
                 Debug.Log("SPELLING ERROR PROBABLY OR NOT IMPLEMENTED: " + category);
                 InvokeFinish();
@@ -45,10 +47,7 @@ public class MinigameSpace : BoardSpace
     {
         Debug.Log("Minigame!");
         string chosenGame = gamesToChooseFrom[UnityEngine.Random.Range(0, gamesToChooseFrom.Length)];
-        if (chosenGame.Equals("KanjiCrossRotate"))
-        {
-            KanjiCRotate.duel = category.ToUpper().Equals("DUEL");
-        }
+        Minigame.duel = category.ToUpper().Equals("DUEL");
         InvokeLoad(chosenGame, true);
     }
 

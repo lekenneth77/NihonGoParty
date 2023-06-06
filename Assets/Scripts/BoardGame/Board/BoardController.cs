@@ -26,6 +26,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //leaderboard
     public Leaderboard leaderboard;
 
+    //spinner
+    public Spinner spinner;
+
     //dices
     public GameObject mainDice;
     public GameObject[] startingDie;
@@ -132,35 +135,11 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         currentPlayer_i = -1;
         Dice.OnDiceFinish += SubscribeMovePlayer;
         BoardSpace.ActionFinish += AfterSpaceAction;
+        spinner.OnSpinFinish += ChooseDuelPlayers;
 
         SetupNextTurn();
     }
-
-    private void AfterSpaceAction()
-    {
-        allAssets.SetActive(true);
-        foreach (GameObject player in players)
-        {
-            player.SetActive(true);
-        }
-        BoardSpace currentSpace = currentPlayer.GetComponent<PlayerInfo>().currentSpace;
-        if (currentSpace is MinigameSpace)
-        {
-            //check lose bool
-            if (wonMinigame)
-            {
-                currentPlayer.GetComponent<PlayerInfo>().numMinigamesWon += 1;
-                StartCoroutine(MovePlayer(2, true, false));
-            } else
-            {
-                StartCoroutine(MovePlayer(1, false, false));
-            }
-        } else
-        {
-            SetupNextTurn();
-        }
-    }
-
+  
     private void SetupNextTurn()
     {
         //lol this is pretty jank and might be slow but it's kind of funny
@@ -280,17 +259,30 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         rollCountdown.SetActive(false);
         infoObj.currentSpace.AddPlayer(currentPlayer);
 
-        if (triggerAction || infoObj.currentSpace is FinishSpace) {
-            controls.Disable();
-            allAssets.SetActive(false);
-            foreach (GameObject player in players)
+        //don't think you need the second conditional???
+        if (triggerAction || infoObj.currentSpace is FinishSpace)
+        {
+            //handles duels
+            if (infoObj.currentSpace is MinigameSpace && ((MinigameSpace)infoObj.currentSpace).category.ToUpper().Equals("DUEL"))
             {
-                player.SetActive(false);
+                //get spinner stuff
+                List<Sprite> spinnerSprites = new List<Sprite>(); //wait you can just use an array but whatever it doesn't matter prob
+                foreach (GameObject player in players)
+                {
+                    if (player != currentPlayer)
+                    {
+                        spinnerSprites.Add(player.GetComponent<PlayerInfo>().sprite);
+                    }
+                }
+                spinner.TriggerSpin(spinnerSprites);
+            } else
+            {
+                //regular action spaces
+                SpaceAction();
+                
             }
-            infoObj.currentSpace.Action();
         } else
         {
-            //if no trigger  
             SetupNextTurn();
         }
     }
@@ -300,6 +292,49 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     {
         currentPlayer_i = (currentPlayer_i + 1) >= numPlayers ? 0 : currentPlayer_i + 1;
         currentPlayer = players[currentPlayer_i];
+    }
+
+    private void SpaceAction()
+    {
+        controls.Disable();
+        allAssets.SetActive(false);
+        foreach (GameObject player in players)
+        {
+            player.SetActive(false);
+        }
+        currentPlayer.GetComponent<PlayerInfo>().currentSpace.Action();
+    }
+
+    private void AfterSpaceAction()
+    {
+        allAssets.SetActive(true);
+        foreach (GameObject player in players)
+        {
+            player.SetActive(true);
+        }
+        BoardSpace currentSpace = currentPlayer.GetComponent<PlayerInfo>().currentSpace;
+        if (currentSpace is MinigameSpace)
+        {
+            //check lose bool
+            if (wonMinigame)
+            {
+                currentPlayer.GetComponent<PlayerInfo>().numMinigamesWon += 1;
+                StartCoroutine(MovePlayer(2, true, false));
+            }
+            else
+            {
+                StartCoroutine(MovePlayer(1, false, false));
+            }
+        }
+        else
+        {
+            SetupNextTurn();
+        }
+    }
+
+    private void ChooseDuelPlayers(int challengerIndex)
+    {
+        Debug.Log("Duel duel duel duel duel duel!");
     }
 
     public void OnToggleFreelook(InputAction.CallbackContext context)

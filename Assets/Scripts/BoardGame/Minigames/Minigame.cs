@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public abstract class Minigame : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    //singleplayer if false
+    public static bool duel;
     public virtual void Start()
     {
         
