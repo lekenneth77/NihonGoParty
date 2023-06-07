@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 {
@@ -22,6 +23,12 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
     //minigame results information
     public static bool wonMinigame;
+
+    //duels
+    public GameObject duelPopup;
+    public GameObject duelWinChoices;
+    public static GameObject[] duelists = new GameObject[2];
+    private bool duelOn;
 
     //leaderboard
     public Leaderboard leaderboard;
@@ -165,22 +172,22 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //Event called after the dice is finished. Starts the coroutine in the actual MovePlayer function.
     private void SubscribeMovePlayer(int roll)
     {
-        StartCoroutine(MovePlayer(roll, true, true));
+        StartCoroutine(MovePlayer(currentPlayer, roll, true, true));
     }
 
     //Moves the current player. TODO THINK ABOUT POSSIBLE BUG WHERE GETTING SENT BACK PUTS YOU ON A CROSSROAD MAYBE PUT A LIMIT?
     //IF PREV IS CROSSROAD DON'T GO BACK?
-    private IEnumerator MovePlayer(int roll, bool forward, bool triggerAction)
+    private IEnumerator MovePlayer(GameObject player, int roll, bool forward, bool triggerAction)
     {
         yield return new WaitForSeconds(1f);
-        moveCameraCom.LookAt = currentPlayer.transform;
-        moveCameraCom.Follow = currentPlayer.transform;
+        moveCameraCom.LookAt = player.transform;
+        moveCameraCom.Follow = player.transform;
         moveCameraCom.m_Lens.FieldOfView = MOVE_FOV;
         moveCameraObj.SetActive(true);
         mainDice.SetActive(false);
-        MoveObject moveObj = currentPlayer.GetComponent<MoveObject>();
-        PlayerInfo infoObj = currentPlayer.GetComponent<PlayerInfo>();
-        GameObject rollCountdown = currentPlayer.transform.GetChild(0).gameObject;
+        MoveObject moveObj = player.GetComponent<MoveObject>();
+        PlayerInfo infoObj = player.GetComponent<PlayerInfo>();
+        GameObject rollCountdown = player.transform.GetChild(0).gameObject;
         SpriteRenderer countdownSprite = rollCountdown.GetComponent<SpriteRenderer>();
         BoardSpace currentSpace = infoObj.currentSpace;
         currentSpace?.RemovePlayer();
@@ -191,10 +198,10 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             //uh should work to count maybe double check this tomorrow?
             if (roll <= 3)
             {
-                currentPlayer.GetComponent<PlayerInfo>().numLowRolls += 1;
+                player.GetComponent<PlayerInfo>().numLowRolls += 1;
             } else
             {
-                currentPlayer.GetComponent<PlayerInfo>().numHighRolls += 1;
+                player.GetComponent<PlayerInfo>().numHighRolls += 1;
             }
         }
 
@@ -257,7 +264,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         moveCameraObj.SetActive(false);
         yield return new WaitForSeconds(2f);
         rollCountdown.SetActive(false);
-        infoObj.currentSpace.AddPlayer(currentPlayer);
+        infoObj.currentSpace.AddPlayer(player);
 
         //don't think you need the second conditional???
         if (triggerAction || infoObj.currentSpace is FinishSpace)
@@ -267,11 +274,11 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             {
                 //get spinner stuff
                 List<Sprite> spinnerSprites = new List<Sprite>(); //wait you can just use an array but whatever it doesn't matter prob
-                foreach (GameObject player in players)
+                foreach (GameObject p in players)
                 {
-                    if (player != currentPlayer)
+                    if (p != player)
                     {
-                        spinnerSprites.Add(player.GetComponent<PlayerInfo>().sprite);
+                        spinnerSprites.Add(p.GetComponent<PlayerInfo>().sprite);
                     }
                 }
                 spinner.TriggerSpin(spinnerSprites);
@@ -315,15 +322,20 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         BoardSpace currentSpace = currentPlayer.GetComponent<PlayerInfo>().currentSpace;
         if (currentSpace is MinigameSpace)
         {
+            if (duelOn)
+            {
+                duelWinChoices.SetActive(true);
+                return;
+            }
             //check lose bool
             if (wonMinigame)
             {
                 currentPlayer.GetComponent<PlayerInfo>().numMinigamesWon += 1;
-                StartCoroutine(MovePlayer(2, true, false));
+                StartCoroutine(MovePlayer(currentPlayer, 2, true, false));
             }
             else
             {
-                StartCoroutine(MovePlayer(1, false, false));
+                StartCoroutine(MovePlayer(currentPlayer, 1, false, false));
             }
         }
         else
@@ -332,9 +344,54 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         }
     }
 
+    //challenger index is zero indexed
     private void ChooseDuelPlayers(int challengerIndex)
     {
-        Debug.Log("Duel duel duel duel duel duel!");
+        duelOn = true;
+        duelists[0] = currentPlayer;
+        foreach (GameObject player in players)
+        {
+            if (player == currentPlayer) { continue; }
+            if (challengerIndex == 0)
+            {
+                duelists[1] = player;
+                break;
+            }
+            challengerIndex--;
+        }
+
+        StartCoroutine("PopupDuel");
+    }
+
+    private IEnumerator PopupDuel()
+    {
+        leaderboard.SetVisibility(false);
+        for (int i = 0; i < 2; i++)
+        {
+            duelPopup.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = duelists[i].GetComponent<PlayerInfo>().sprite;
+        }
+        duelPopup.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        duelPopup.SetActive(false);
+        SpaceAction();
+    }
+
+    public void DuelChoice(bool winnerForward)
+    {
+        duelWinChoices.SetActive(false);
+        GameObject winner = wonMinigame ? duelists[0] : duelists[1];
+        GameObject loser = wonMinigame ? duelists[1] : duelists[0];
+        winner.GetComponent<PlayerInfo>().numMinigamesWon += 1;
+        duelOn = false;
+        leaderboard.SetVisibility(true);
+        if (winnerForward)
+        {
+            StartCoroutine(MovePlayer(winner, 3, true, false));
+        } else
+        {
+            //TODO might be a bug if the loser is on the starting platform!
+            StartCoroutine(MovePlayer(loser, 3, false, false));
+        }
     }
 
     public void OnToggleFreelook(InputAction.CallbackContext context)

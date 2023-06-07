@@ -22,6 +22,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
 
     private bool loss; //only applies to single player
     private bool won;
+    private KCRotatePlayer winner; //only applies to duels
 
     private Controls controls;
     // Start is called before the first frame update
@@ -145,6 +146,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         {
             timer.StopTimer();
             won = player.Win();
+            winner = player;
             yield return new WaitForSeconds(1f);
             ShowAnswer();
         }
@@ -217,7 +219,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         yield return null;
         if (duel)
         {
-           
+            EndGame(playerOne == winner);
         } else
         {
             EndGame(true);
