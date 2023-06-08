@@ -350,6 +350,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "TreeHop",
+            "id": "3e10c6a7-70f7-45f9-b8a9-a6e1391ba1cf",
+            "actions": [
+                {
+                    "name": "A",
+                    "type": "Button",
+                    "id": "d85e5642-0eed-417f-8562-a75ff5b3adc0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "D",
+                    "type": "Button",
+                    "id": "e2a3ed5e-d2e2-4121-8b45-e8f0eb346532",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b2d0d611-5309-4e51-bdea-7ebf613477e6",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0fdf581a-474e-413c-8b80-2c48fea62b2c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "D",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

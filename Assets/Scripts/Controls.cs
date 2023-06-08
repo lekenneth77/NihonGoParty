@@ -372,6 +372,54 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TreeHop"",
+            ""id"": ""3e10c6a7-70f7-45f9-b8a9-a6e1391ba1cf"",
+            ""actions"": [
+                {
+                    ""name"": ""A"",
+                    ""type"": ""Button"",
+                    ""id"": ""d85e5642-0eed-417f-8562-a75ff5b3adc0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""D"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2a3ed5e-d2e2-4121-8b45-e8f0eb346532"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b2d0d611-5309-4e51-bdea-7ebf613477e6"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""A"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fdf581a-474e-413c-8b80-2c48fea62b2c"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""D"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -408,6 +456,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_KanjiCrossRotate_LeftKey = m_KanjiCrossRotate.FindAction("Left Key", throwIfNotFound: true);
         m_KanjiCrossRotate_RightKey = m_KanjiCrossRotate.FindAction("Right Key", throwIfNotFound: true);
         m_KanjiCrossRotate_UpKey = m_KanjiCrossRotate.FindAction("Up Key", throwIfNotFound: true);
+        // TreeHop
+        m_TreeHop = asset.FindActionMap("TreeHop", throwIfNotFound: true);
+        m_TreeHop_A = m_TreeHop.FindAction("A", throwIfNotFound: true);
+        m_TreeHop_D = m_TreeHop.FindAction("D", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -735,6 +787,60 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public KanjiCrossRotateActions @KanjiCrossRotate => new KanjiCrossRotateActions(this);
+
+    // TreeHop
+    private readonly InputActionMap m_TreeHop;
+    private List<ITreeHopActions> m_TreeHopActionsCallbackInterfaces = new List<ITreeHopActions>();
+    private readonly InputAction m_TreeHop_A;
+    private readonly InputAction m_TreeHop_D;
+    public struct TreeHopActions
+    {
+        private @Controls m_Wrapper;
+        public TreeHopActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @A => m_Wrapper.m_TreeHop_A;
+        public InputAction @D => m_Wrapper.m_TreeHop_D;
+        public InputActionMap Get() { return m_Wrapper.m_TreeHop; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TreeHopActions set) { return set.Get(); }
+        public void AddCallbacks(ITreeHopActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TreeHopActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TreeHopActionsCallbackInterfaces.Add(instance);
+            @A.started += instance.OnA;
+            @A.performed += instance.OnA;
+            @A.canceled += instance.OnA;
+            @D.started += instance.OnD;
+            @D.performed += instance.OnD;
+            @D.canceled += instance.OnD;
+        }
+
+        private void UnregisterCallbacks(ITreeHopActions instance)
+        {
+            @A.started -= instance.OnA;
+            @A.performed -= instance.OnA;
+            @A.canceled -= instance.OnA;
+            @D.started -= instance.OnD;
+            @D.performed -= instance.OnD;
+            @D.canceled -= instance.OnD;
+        }
+
+        public void RemoveCallbacks(ITreeHopActions instance)
+        {
+            if (m_Wrapper.m_TreeHopActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITreeHopActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TreeHopActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TreeHopActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TreeHopActions @TreeHop => new TreeHopActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -768,5 +874,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnLeftKey(InputAction.CallbackContext context);
         void OnRightKey(InputAction.CallbackContext context);
         void OnUpKey(InputAction.CallbackContext context);
+    }
+    public interface ITreeHopActions
+    {
+        void OnA(InputAction.CallbackContext context);
+        void OnD(InputAction.CallbackContext context);
     }
 }
