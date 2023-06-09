@@ -8,20 +8,25 @@ public class TreeTrunk : MonoBehaviour
     public FollowOneAxis treeCamera;
     public Transform platformFolder;
     public GameObject platform;
+    public StunStarSpin stars;
 
     public Transform nextLeftPlatform;
     public Transform nextRightPlatform;
+    public Transform tippyTop;
     private float distanceBetween;
 
     public bool leftCorrect;
     public int maxDepth;
+
+    public static string[] correctWords;
+    public static string[] wrongWords;
 
     private int currentDepth;
     private bool onLeft;
     // Start is called before the first frame update
     void Start() {
         currentDepth = 0;
-        distanceBetween = 3f;
+        distanceBetween = 2f;
         maxDepth = 10;
         int random = Random.Range(0, 2);
         //leftCorrect = random == 0 ? true : false;
@@ -34,7 +39,6 @@ public class TreeTrunk : MonoBehaviour
         if (left && leftCorrect || !left && !leftCorrect)
         {
             //correct!
-            Debug.Log("Correct Hop - left correct: " + leftCorrect);
             Vector3 nextPlatform = left ? nextLeftPlatform.position : nextRightPlatform.position;
             jumper.SetupAndJump(nextPlatform + new Vector3(0, 0.63f, 0), 1f, 2f);
 
@@ -43,6 +47,7 @@ public class TreeTrunk : MonoBehaviour
             if (currentDepth == maxDepth)
             {
                 Debug.Log("Finished!");
+                StartCoroutine("MoveCamera");
                 return 1;
             } else
             {
@@ -54,27 +59,28 @@ public class TreeTrunk : MonoBehaviour
             if ((left && onLeft) || (!left && !onLeft))
             {
                 //attempt jump to platform above self
-                jumper.SetupAndJump(transform.position, 1.5f, 1.5f);
+                jumper.SetupAndJump(jumper.gameObject.transform.position, 1f, 1.5f);
             } else
             {
                 //attempt to jump to other side
                 float dist = left ? -distanceBetween : distanceBetween;
-                jumper.SetupAndJump(new Vector3(transform.position.x + dist, transform.position.y, transform.position.z), 1f, 1.5f);
+                jumper.SetupAndJump(new Vector3(jumper.gameObject.transform.position.x + dist, jumper.gameObject.transform.position.y, jumper.gameObject.transform.position.z), 1f, 1.5f);
                 onLeft = left;
             }
 
-            Debug.Log("Wrong Hop lmao");
             return -1;
         }
     }
 
+    public void JumpToEnd() {
+        jumper.SetupAndJump(tippyTop.position, 2f, 2f);
+        StartCoroutine("MoveCamera");
+    }
+
     private void CreateNextPlatforms()
     {
-        Debug.Log("Hey Next Platfrom!");
-
         StartCoroutine("MoveCamera");
-        int random = Random.Range(0, 2);
-        leftCorrect = random == 0 ? true : false;
+        //create both new platforms
         GameObject newLeft = Instantiate(platform, nextLeftPlatform.position + new Vector3(0, 3f, 0), Quaternion.identity);
         GameObject newRight = Instantiate(platform, nextRightPlatform.position + new Vector3(0, 3f, 0), Quaternion.identity);
         newLeft.name = "plat" + currentDepth;
@@ -87,6 +93,11 @@ public class TreeTrunk : MonoBehaviour
         }
         nextLeftPlatform = newLeft.transform;
         nextRightPlatform = newRight.transform;
+
+        //setup words
+        int random = Random.Range(0, 2);
+        leftCorrect = random == 0 ? true : false;
+        leftCorrect = false;
     }
 
     private IEnumerator MoveCamera()

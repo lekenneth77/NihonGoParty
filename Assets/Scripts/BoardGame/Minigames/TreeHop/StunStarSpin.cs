@@ -5,10 +5,10 @@ using UnityEngine;
 public class StunStarSpin : MonoBehaviour
 {
     public float speed = 1.5f;
-    public float activeTime = 3f;
+    public float activeTime = 2f;
 
     public bool trigger = false;
-    
+
     public void StartSpin() {
         gameObject.SetActive(true);
         trigger = true;

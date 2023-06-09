@@ -394,6 +394,60 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""R"",
+                    ""type"": ""Button"",
+                    ""id"": ""fdcb136e-d3bd-411c-a236-173f9f9fdc62"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Y"",
+                    ""type"": ""Button"",
+                    ""id"": ""048f9cd4-a843-43d9-875e-96a609c44dfb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""J"",
+                    ""type"": ""Button"",
+                    ""id"": ""93e093f4-c36a-4cbb-88a9-a5be456ccc4b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""L"",
+                    ""type"": ""Button"",
+                    ""id"": ""145aa5c5-856f-477d-a5d0-6d93d2b95d26"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left AKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""c676aaee-acdc-410e-84e9-4f2cf56b281f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right AKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ab87fef-4bed-4a55-a517-9003f0a72574"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -416,6 +470,72 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""D"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d487a641-9daf-4f8e-8887-c327841a492d"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f54a1ae-f569-4556-8137-5138b0502161"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Y"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27bbec65-38f8-4334-95f3-e2e724b1a7d0"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""J"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""018dd8b2-edd5-45b4-b7a4-36c40a399172"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""L"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2be36c59-2f63-4168-a5c0-fe25e31250bb"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left AKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4901b0b8-825c-4413-b309-b6b08c77938c"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right AKey"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -460,6 +580,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_TreeHop = asset.FindActionMap("TreeHop", throwIfNotFound: true);
         m_TreeHop_A = m_TreeHop.FindAction("A", throwIfNotFound: true);
         m_TreeHop_D = m_TreeHop.FindAction("D", throwIfNotFound: true);
+        m_TreeHop_R = m_TreeHop.FindAction("R", throwIfNotFound: true);
+        m_TreeHop_Y = m_TreeHop.FindAction("Y", throwIfNotFound: true);
+        m_TreeHop_J = m_TreeHop.FindAction("J", throwIfNotFound: true);
+        m_TreeHop_L = m_TreeHop.FindAction("L", throwIfNotFound: true);
+        m_TreeHop_LeftAKey = m_TreeHop.FindAction("Left AKey", throwIfNotFound: true);
+        m_TreeHop_RightAKey = m_TreeHop.FindAction("Right AKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -793,12 +919,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<ITreeHopActions> m_TreeHopActionsCallbackInterfaces = new List<ITreeHopActions>();
     private readonly InputAction m_TreeHop_A;
     private readonly InputAction m_TreeHop_D;
+    private readonly InputAction m_TreeHop_R;
+    private readonly InputAction m_TreeHop_Y;
+    private readonly InputAction m_TreeHop_J;
+    private readonly InputAction m_TreeHop_L;
+    private readonly InputAction m_TreeHop_LeftAKey;
+    private readonly InputAction m_TreeHop_RightAKey;
     public struct TreeHopActions
     {
         private @Controls m_Wrapper;
         public TreeHopActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @A => m_Wrapper.m_TreeHop_A;
         public InputAction @D => m_Wrapper.m_TreeHop_D;
+        public InputAction @R => m_Wrapper.m_TreeHop_R;
+        public InputAction @Y => m_Wrapper.m_TreeHop_Y;
+        public InputAction @J => m_Wrapper.m_TreeHop_J;
+        public InputAction @L => m_Wrapper.m_TreeHop_L;
+        public InputAction @LeftAKey => m_Wrapper.m_TreeHop_LeftAKey;
+        public InputAction @RightAKey => m_Wrapper.m_TreeHop_RightAKey;
         public InputActionMap Get() { return m_Wrapper.m_TreeHop; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -814,6 +952,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @D.started += instance.OnD;
             @D.performed += instance.OnD;
             @D.canceled += instance.OnD;
+            @R.started += instance.OnR;
+            @R.performed += instance.OnR;
+            @R.canceled += instance.OnR;
+            @Y.started += instance.OnY;
+            @Y.performed += instance.OnY;
+            @Y.canceled += instance.OnY;
+            @J.started += instance.OnJ;
+            @J.performed += instance.OnJ;
+            @J.canceled += instance.OnJ;
+            @L.started += instance.OnL;
+            @L.performed += instance.OnL;
+            @L.canceled += instance.OnL;
+            @LeftAKey.started += instance.OnLeftAKey;
+            @LeftAKey.performed += instance.OnLeftAKey;
+            @LeftAKey.canceled += instance.OnLeftAKey;
+            @RightAKey.started += instance.OnRightAKey;
+            @RightAKey.performed += instance.OnRightAKey;
+            @RightAKey.canceled += instance.OnRightAKey;
         }
 
         private void UnregisterCallbacks(ITreeHopActions instance)
@@ -824,6 +980,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @D.started -= instance.OnD;
             @D.performed -= instance.OnD;
             @D.canceled -= instance.OnD;
+            @R.started -= instance.OnR;
+            @R.performed -= instance.OnR;
+            @R.canceled -= instance.OnR;
+            @Y.started -= instance.OnY;
+            @Y.performed -= instance.OnY;
+            @Y.canceled -= instance.OnY;
+            @J.started -= instance.OnJ;
+            @J.performed -= instance.OnJ;
+            @J.canceled -= instance.OnJ;
+            @L.started -= instance.OnL;
+            @L.performed -= instance.OnL;
+            @L.canceled -= instance.OnL;
+            @LeftAKey.started -= instance.OnLeftAKey;
+            @LeftAKey.performed -= instance.OnLeftAKey;
+            @LeftAKey.canceled -= instance.OnLeftAKey;
+            @RightAKey.started -= instance.OnRightAKey;
+            @RightAKey.performed -= instance.OnRightAKey;
+            @RightAKey.canceled -= instance.OnRightAKey;
         }
 
         public void RemoveCallbacks(ITreeHopActions instance)
@@ -879,5 +1053,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnA(InputAction.CallbackContext context);
         void OnD(InputAction.CallbackContext context);
+        void OnR(InputAction.CallbackContext context);
+        void OnY(InputAction.CallbackContext context);
+        void OnJ(InputAction.CallbackContext context);
+        void OnL(InputAction.CallbackContext context);
+        void OnLeftAKey(InputAction.CallbackContext context);
+        void OnRightAKey(InputAction.CallbackContext context);
     }
 }
