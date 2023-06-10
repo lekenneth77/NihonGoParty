@@ -4,21 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.Playables;
 
 public class TreeHop : Minigame, Controls.ITreeHopActions
 {
     // Start is called before the first frame update
     public TreeTrunk[] players;
+    public GameObject[] platformFolders; //literally just to enable at the start
     public Timer timer;
     public TextMeshProUGUI categoryText;
     public GameObject finishImage;
     public int numPlayers;
 
+    public PlayableDirector[] directors;
+
     public Camera[] playerCameras;
     private float[] zCameraPositions = new float[] { -4f, -4.5f, -6f, -7f };
-    private float[] yCameraPositions = new float[] { -.9f, -.9f, -.88f, -.85f };
+    private float[] yCameraPositions = new float[] { -.94f, -.94f, -.9f, -.87f };
 
-    public static event Action GotWords;
     private Controls controls;
 
     public override void Start()
@@ -27,8 +30,19 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
 
         controls = new Controls();
         controls.TreeHop.AddCallbacks(this);
-
+        GetWords();
         //numPlayers = BoardController.numPlayers;
+        for (int i = 0; i < numPlayers; i++) {
+            players[i].gameObject.SetActive(true);
+            platformFolders[i].SetActive(true);
+        }
+
+        directors[numPlayers - 1].stopped += SetupCameras;
+        directors[4].stopped += SetupGame;
+        directors[numPlayers - 1].Play();
+    }
+
+    public void SetupCameras(PlayableDirector dir) { 
         if (numPlayers == 1) {
             timer.gameObject.SetActive(true);
             playerCameras[0].rect = new Rect(0, 0, 1, 1);
@@ -45,19 +59,21 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
             }
         }
 
-        for (int i = 0; i < numPlayers; i++)
-        {
-            players[i].gameObject.SetActive(true);
+        for (int i = 0; i < numPlayers; i++) {
             playerCameras[i].gameObject.SetActive(true);
             players[i].gameObject.transform.GetChild(0).localPosition = new Vector3(0, yCameraPositions[numPlayers - 1], zCameraPositions[numPlayers - 1]);
         }
 
+        directors[4].Play();
+    }
 
-        GetWords();
+    public void SetupGame(PlayableDirector dir) {
+        categoryText.transform.parent.gameObject.SetActive(true);
         controls.Enable();
-        if (numPlayers == 1) {
+        if (numPlayers == 1)
+        {
             timer.ResetTimer();
-            timer.StartTimer(); 
+            timer.StartTimer();
         }
     }
 
@@ -100,8 +116,6 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
             tempWrong.Add(words[i]);
         }
         TreeTrunk.wrongWords = tempWrong;
-        Debug.Log("I got the words.");
-        GotWords?.Invoke();
     }
    
 

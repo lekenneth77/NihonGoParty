@@ -30,18 +30,13 @@ public class TreeTrunk : MonoBehaviour
     void Start() {
         currentDepth = 0;
         distanceBetween = 2f;
-        maxDepth = 10;
+        maxDepth = 15;
         int random = Random.Range(0, 2);
         leftCorrect = random == 0 ? true : false;
         //leftCorrect = false;
         onLeft = false;
         chosenCorrect = new HashSet<int>();
         chosenWrong = new HashSet<int>();
-        TreeHop.GotWords += TheyGotTheWords;
-    }
-
-    public void TheyGotTheWords() {
-        Debug.Log("He got the words!");
         if (leftCorrect) {
             ApplyWord(nextLeftPlatform, correctWords, chosenCorrect);
             ApplyWord(nextRightPlatform, wrongWords, chosenWrong);
@@ -50,8 +45,6 @@ public class TreeTrunk : MonoBehaviour
             ApplyWord(nextLeftPlatform, wrongWords, chosenWrong);
         }
     }
-
-
 
     public void ApplyWord(Transform plat, List<string> list, HashSet<int> chosen) {
 
@@ -68,7 +61,7 @@ public class TreeTrunk : MonoBehaviour
         {
             //correct!
             Vector3 nextPlatform = left ? nextLeftPlatform.position : nextRightPlatform.position;
-            jumper.SetupAndJump(nextPlatform + new Vector3(0, 0.63f, 0), 1f, 2f);
+            jumper.SetupAndJump(nextPlatform + new Vector3(0, 0.57f, 0), 1f, 2f);
 
             onLeft = left;
             currentDepth++;
@@ -125,7 +118,6 @@ public class TreeTrunk : MonoBehaviour
         //setup words
         int random = Random.Range(0, 2);
         leftCorrect = random == 0 ? true : false;
-        //leftCorrect = false;
         if (leftCorrect)
         {
             ApplyWord(nextLeftPlatform, correctWords, chosenCorrect);

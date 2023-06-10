@@ -18,7 +18,7 @@ public class FollowOneAxis : MonoBehaviour
     private void Move() {
         gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, 
                 new Vector3(gameObject.transform.position.x, follow.position.y + 1f, gameObject.transform.position.z), Time.deltaTime * speed);
-        if (Mathf.Abs(gameObject.transform.position.y - (follow.position.y + 1f)) <= Mathf.Epsilon)
+        if (Mathf.Abs(gameObject.transform.position.y - (follow.position.y + 1f)) <= 0.01f)
         {
             move = false;
         }

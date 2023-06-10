@@ -7,11 +7,9 @@ Body, Health, and Emotions
 耳
 口
 歯
-唇
 舌
 のど
 首
-肩
 胸
 せ中
 おなか
@@ -51,8 +49,6 @@ Body, Health, and Emotions
 こわがる
 恥ずかしい
 なく
-怒る
-怒っている
 おどろく
 心配
 安心
