@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class TreeHop : Minigame, Controls.ITreeHopActions
 {
     // Start is called before the first frame update
     public TreeTrunk[] players;
     public Timer timer;
+    public TextMeshProUGUI categoryText;
     public GameObject finishImage;
     public int numPlayers;
 
@@ -15,7 +18,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     private float[] zCameraPositions = new float[] { -4f, -4.5f, -6f, -7f };
     private float[] yCameraPositions = new float[] { -.9f, -.9f, -.88f, -.85f };
 
-
+    public static event Action GotWords;
     private Controls controls;
 
     public override void Start()
@@ -58,8 +61,47 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
         }
     }
 
-    private void GetWords() { 
+    private void GetWords() {
+        TextAsset[] texts = Resources.LoadAll<TextAsset>("Minigames/Vocabulary/ChapterVocabulary/");
+        HashSet<int> chosenIndicies = new HashSet<int>();
+        int random = UnityEngine.Random.Range(0, texts.Length);
+        chosenIndicies.Add(random);
+        TextAsset txtfile = texts[random];
+        string[] words = txtfile.text.Split("\n"[0]);
+        categoryText.text = words[0];
+        //add to correct
+        List<string> tempCorrect = new List<string>();
+        for (int i = 1; i < words.Length; i++) {
+            tempCorrect.Add(words[i]);
+        }
+        TreeTrunk.correctWords = tempCorrect;
 
+        //get two random text files and add to incorrect
+        List<string> tempWrong = new List<string>();
+        random = UnityEngine.Random.Range(0, texts.Length);
+        while (!chosenIndicies.Add(random)) {
+            random = UnityEngine.Random.Range(0, texts.Length);
+        }
+        txtfile = texts[random];
+        words = txtfile.text.Split("\n"[0]);
+        for (int i = 1; i < words.Length; i++) {
+            tempWrong.Add(words[i]);
+        }
+
+        random = UnityEngine.Random.Range(0, texts.Length);
+        while (!chosenIndicies.Add(random))
+        {
+            random = UnityEngine.Random.Range(0, texts.Length);
+        }
+        txtfile = texts[random];
+        words = txtfile.text.Split("\n"[0]);
+        for (int i = 1; i < words.Length; i++)
+        {
+            tempWrong.Add(words[i]);
+        }
+        TreeTrunk.wrongWords = tempWrong;
+        Debug.Log("I got the words.");
+        GotWords?.Invoke();
     }
    
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TreeTrunk : MonoBehaviour
 {
@@ -18,8 +19,10 @@ public class TreeTrunk : MonoBehaviour
     public bool leftCorrect;
     public int maxDepth;
 
-    public static string[] correctWords;
-    public static string[] wrongWords;
+    public static List<string> correctWords;
+    private HashSet<int> chosenCorrect;
+    public static List<string> wrongWords;
+    private HashSet<int> chosenWrong;
 
     private int currentDepth;
     private bool onLeft;
@@ -29,9 +32,34 @@ public class TreeTrunk : MonoBehaviour
         distanceBetween = 2f;
         maxDepth = 10;
         int random = Random.Range(0, 2);
-        //leftCorrect = random == 0 ? true : false;
-        leftCorrect = false;
+        leftCorrect = random == 0 ? true : false;
+        //leftCorrect = false;
         onLeft = false;
+        chosenCorrect = new HashSet<int>();
+        chosenWrong = new HashSet<int>();
+        TreeHop.GotWords += TheyGotTheWords;
+    }
+
+    public void TheyGotTheWords() {
+        Debug.Log("He got the words!");
+        if (leftCorrect) {
+            ApplyWord(nextLeftPlatform, correctWords, chosenCorrect);
+            ApplyWord(nextRightPlatform, wrongWords, chosenWrong);
+        } else {
+            ApplyWord(nextRightPlatform, correctWords, chosenCorrect);
+            ApplyWord(nextLeftPlatform, wrongWords, chosenWrong);
+        }
+    }
+
+
+
+    public void ApplyWord(Transform plat, List<string> list, HashSet<int> chosen) {
+
+        int random = Random.Range(0, list.Count);
+        while (!chosen.Add(random)) {
+            random = Random.Range(0, list.Count);
+        }
+        plat.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = list[random];
     }
 
     public int Jump(bool left)
@@ -97,7 +125,17 @@ public class TreeTrunk : MonoBehaviour
         //setup words
         int random = Random.Range(0, 2);
         leftCorrect = random == 0 ? true : false;
-        leftCorrect = false;
+        //leftCorrect = false;
+        if (leftCorrect)
+        {
+            ApplyWord(nextLeftPlatform, correctWords, chosenCorrect);
+            ApplyWord(nextRightPlatform, wrongWords, chosenWrong);
+        }
+        else
+        {
+            ApplyWord(nextRightPlatform, correctWords, chosenCorrect);
+            ApplyWord(nextLeftPlatform, wrongWords, chosenWrong);
+        }
     }
 
     private IEnumerator MoveCamera()

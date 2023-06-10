@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using UnityEngine.InputSystem;
 
 public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
@@ -47,7 +45,6 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
             playerOneCamera.rect = new Rect(0, 0, 0.5f, 1);
         } else
         {
-            Debug.Log("hey");
             timer.gameObject.transform.localPosition = new Vector3(750, 375, 0);
             playerTwoCamera.gameObject.SetActive(false);
             twoPlayerContainer.SetActive(false);
