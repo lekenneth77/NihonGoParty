@@ -160,10 +160,20 @@ public class MapBuilder : MonoBehaviour
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "KANJI";
                 break;
+            case "vocab":
+                selected.GetComponent<SpriteRenderer>().color = Color.black;
+                changed = selected.AddComponent<MinigameSpace>();
+                ((MinigameSpace)changed).category = "VOCAB";
+                break;
             case "duel":
                 selected.GetComponent<SpriteRenderer>().color = Color.magenta;
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "DUEL";
+                break;
+            case "multi":
+                selected.GetComponent<SpriteRenderer>().color = Color.clear;
+                changed = selected.AddComponent<MinigameSpace>();
+                ((MinigameSpace)changed).category = "MULTI";
                 break;
             case "blank":
                 selected.GetComponent<SpriteRenderer>().color = Color.white;

@@ -10,6 +10,8 @@ public class MultiplayerSetup : MonoBehaviour
     public GameObject chooseNumPlayersCon;
     public GameObject chooseYourCharCon;
 
+    public Animator[] characters;
+
     public GameObject[] playerChosens;
     private int currentChooser;
 
@@ -22,6 +24,7 @@ public class MultiplayerSetup : MonoBehaviour
     public int numMaps;
     private int currentMapI;
 
+    private bool choseACharacter;
 
 
     //cameras
@@ -38,6 +41,7 @@ public class MultiplayerSetup : MonoBehaviour
     {
         charSprites = Resources.LoadAll<Sprite>("CharacterPortraits/");
         currentChooser = 0;
+        choseACharacter = false;
     }
 
     public void ChooseNumPlayers(int numPlayers)
@@ -50,19 +54,23 @@ public class MultiplayerSetup : MonoBehaviour
 
     public void ChooseYourCharacter(int charIndex)
     {
-        playerChosens[currentChooser].GetComponent<Image>().sprite = charSprites[charIndex];
+        //TODO temporary lol used to check if something was selected
+        characters[charIndex].gameObject.transform.position = playerChosens[currentChooser].transform.GetChild(0).position;
+        characters[charIndex].Play("spin");
         recentChosen = charIndex;
+        choseACharacter = true;
     }
 
     public void ConfirmCharacter()
     {
-        if (playerChosens[currentChooser].GetComponent<Image>().sprite == null)
+        if (!choseACharacter)
         {
             Debug.Log("Hey choose a character!");
             //Maybe add a message popup that disappears when ChooseYourCharacter is called?
             return;
         }
 
+        choseACharacter = false;
         GameObject chosenChar = characterChoosers[recentChosen];
         chosenChar.GetComponent<Button>().enabled = false;
         Color temp = chosenChar.GetComponent<Image>().color;

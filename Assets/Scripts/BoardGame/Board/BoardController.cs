@@ -287,9 +287,14 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                         }
                     }
                     spinner.TriggerSpin(spinnerSprites);
-                } else {
+                } else if (((MinigameSpace)infoObj.currentSpace).category.ToUpper().Equals("MULTI"))
+                {
                     //multiplayer games
                     multiOn = true;
+                    SpaceAction();
+                } else {
+                    //singleplayer minigame
+                    SpaceAction();
                 }
 
             } else {
@@ -332,7 +337,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         {
             if (multiOn)
             {
-                //TODO start HERE!!!
+                //TODO be more creative with this at some point...!!! maybe use the spinner?
+                multiOn = false;
+                StartCoroutine(MovePlayer(players[multiWinIndex], 4, true, false));
                 return;
             }
             if (duelOn)

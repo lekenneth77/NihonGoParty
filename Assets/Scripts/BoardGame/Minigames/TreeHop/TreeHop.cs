@@ -14,7 +14,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     public Timer timer;
     public TextMeshProUGUI categoryText;
     public GameObject finishImage;
-    public int numPlayers;
+    private int numPlayers;
 
     public PlayableDirector[] directors;
 
@@ -30,8 +30,10 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
 
         controls = new Controls();
         controls.TreeHop.AddCallbacks(this);
+        timer.TimeUp += TimeOut;
+
         GetWords();
-        singleplayer = false;
+        //singleplayer = true;
         if (singleplayer) {
             numPlayers = 1;
             timer.gameObject.transform.localPosition = new Vector3(775, 425, 0);
@@ -39,7 +41,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
             numPlayers = BoardController.numPlayers;
             timer.gameObject.transform.localPosition = new Vector3(0, 425, 0);
         }
-        numPlayers = 3;
+        //numPlayers = 1;
         for (int i = 0; i < numPlayers; i++) {
             players[i].gameObject.SetActive(true);
             platformFolders[i].SetActive(true);
@@ -193,7 +195,23 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
             }
         }
         finishImage.SetActive(true);
+
         yield return new WaitForSeconds(4f);
+        if (singleplayer) {
+            EndGame(true);
+        } else {
+            EndMultiplayerGame(playerI);
+        }
+
+    }
+
+    private void TimeOut() {
+        //TODO add a cool timeout animation or something
+        StartCoroutine("OnTimeOut");
+    }
+
+    private IEnumerator OnTimeOut() {
+        yield return new WaitForSeconds(2f);
         EndGame(false);
     }
 
