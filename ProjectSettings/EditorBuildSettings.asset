@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Minigames/TreeHop.unity
+    path: Assets/Scenes/Minigames/Vocabulary/TreeHop.unity
     guid: b0a8012a747c57f4b862eed582259aae
   - enabled: 1
     path: Assets/Scenes/Title Screen.unity

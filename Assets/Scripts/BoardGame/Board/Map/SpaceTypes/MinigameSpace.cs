@@ -12,7 +12,10 @@ public class MinigameSpace : BoardSpace
     private string[] KatakanaGames = {"KatakanaScramble"};
     private string[] GrammarGames = { "WordOrder"};
     private string[] KanjiGames = { "KanjiCrossRotate" };
+    private string[] VocabGames = { "TreeHop" };
     private string[] DuelGames = { "KanjiCrossRotate" };
+    private string[] MultiplayerGames = { "TreeHop" };
+
 
     private string[] gamesToChooseFrom;
 
@@ -34,8 +37,14 @@ public class MinigameSpace : BoardSpace
             case "KANJI":
                 gamesToChooseFrom = KanjiGames;
                 break;
+            case "VOCAB":
+                gamesToChooseFrom = VocabGames;
+                break;
             case "DUEL":
                 gamesToChooseFrom = DuelGames;
+                break;
+            case "MULTI":
+                gamesToChooseFrom = MultiplayerGames;
                 break;
             default:
                 Debug.Log("SPELLING ERROR PROBABLY OR NOT IMPLEMENTED: " + category);
@@ -47,7 +56,7 @@ public class MinigameSpace : BoardSpace
     {
         Debug.Log("Minigame!");
         string chosenGame = gamesToChooseFrom[UnityEngine.Random.Range(0, gamesToChooseFrom.Length)];
-        Minigame.duel = category.ToUpper().Equals("DUEL");
+        Minigame.singleplayer = !(category.ToUpper().Equals("DUEL") || category.ToUpper().Equals("MULTI"));
         InvokeLoad(chosenGame, true);
     }
 

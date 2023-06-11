@@ -8,11 +8,16 @@ public abstract class Minigame : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    //singleplayer if false
-    public static bool duel;
+    //duel/multiplayer if false
+    public static bool singleplayer;
     public virtual void Start()
     {
         
+    }
+
+    public void EndMultiplayerGame(int winnerIndex) {
+        BoardController.multiWinIndex = winnerIndex;
+        EndGame(true);
     }
 
     public void EndGame(bool won)

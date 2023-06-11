@@ -18,6 +18,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     private List<string> rotators;
     private List<int> chosen;
 
+    private bool duel;
     private bool loss; //only applies to single player
     private bool won;
     private KCRotatePlayer winner; //only applies to duels
@@ -36,6 +37,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         //duel = true;
         loss = false;
         won = false;
+        duel = !singleplayer; //jank renaming
         
         if (duel)
         {

@@ -52,7 +52,7 @@ public class TreeTrunk : MonoBehaviour
         while (!chosen.Add(random)) {
             random = Random.Range(0, list.Count);
         }
-        plat.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = list[random];
+        plat.GetChild(1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = list[random];
     }
 
     public int Jump(bool left)
@@ -61,7 +61,7 @@ public class TreeTrunk : MonoBehaviour
         {
             //correct!
             Vector3 nextPlatform = left ? nextLeftPlatform.position : nextRightPlatform.position;
-            jumper.SetupAndJump(nextPlatform + new Vector3(0, 0.57f, 0), 1f, 2f);
+            jumper.SetupAndJump(nextPlatform + new Vector3(0, 0.55f, 0), 1f, 2f);
 
             onLeft = left;
             currentDepth++;

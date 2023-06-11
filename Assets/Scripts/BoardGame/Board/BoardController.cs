@@ -27,8 +27,12 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //duels
     public GameObject duelPopup;
     public GameObject duelWinChoices;
-    public static GameObject[] duelists = new GameObject[2];
+    private GameObject[] duelists = new GameObject[2];
     private bool duelOn;
+
+    //multiplayer
+    private bool multiOn;
+    public static int multiWinIndex;
 
     //leaderboard
     public Leaderboard leaderboard;
@@ -269,27 +273,31 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         //don't think you need the second conditional???
         if (triggerAction || infoObj.currentSpace is FinishSpace)
         {
-            //handles duels
-            if (infoObj.currentSpace is MinigameSpace && ((MinigameSpace)infoObj.currentSpace).category.ToUpper().Equals("DUEL"))
-            {
-                //get spinner stuff
-                List<Sprite> spinnerSprites = new List<Sprite>(); //wait you can just use an array but whatever it doesn't matter prob
-                foreach (GameObject p in players)
-                {
-                    if (p != player)
+            //EVENTUALLY ADD THE RANDOM MINIGAME THING SELECTION LIKE MARIO PARTY
+            if (infoObj.currentSpace is MinigameSpace) { 
+
+                if(((MinigameSpace)infoObj.currentSpace).category.ToUpper().Equals("DUEL")) {
+                    //hanldes duels
+                    List<Sprite> spinnerSprites = new List<Sprite>();
+                    foreach (GameObject p in players)
                     {
-                        spinnerSprites.Add(p.GetComponent<PlayerInfo>().sprite);
+                        if (p != player)
+                        {
+                            spinnerSprites.Add(p.GetComponent<PlayerInfo>().sprite);
+                        }
                     }
+                    spinner.TriggerSpin(spinnerSprites);
+                } else {
+                    //multiplayer games
+                    multiOn = true;
                 }
-                spinner.TriggerSpin(spinnerSprites);
-            } else
-            {
+
+            } else {
                 //regular action spaces
                 SpaceAction();
-                
             }
-        } else
-        {
+
+        } else {
             SetupNextTurn();
         }
     }
@@ -322,6 +330,11 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         BoardSpace currentSpace = currentPlayer.GetComponent<PlayerInfo>().currentSpace;
         if (currentSpace is MinigameSpace)
         {
+            if (multiOn)
+            {
+                //TODO start HERE!!!
+                return;
+            }
             if (duelOn)
             {
                 duelWinChoices.SetActive(true);

@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     public float timeLimit;
     private float secondsPassed;
     public event Action TimeUp;
+    public bool countUp;
     private bool tick;
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,13 @@ public class Timer : MonoBehaviour
         tick = false;
     }
 
+    public void ChangeToCountUp(bool val) {
+        countUp = val;
+        if (countUp) {
+            timeLimit = 0;
+        }
+    }
+
     public void ResetTimer()
     {
         tick = false;
@@ -52,7 +60,11 @@ public class Timer : MonoBehaviour
     {
         if (tick)
         {
-            secondsPassed -= Time.deltaTime;
+            if (countUp) {
+                secondsPassed += Time.deltaTime;
+            } else { 
+                secondsPassed -= Time.deltaTime;
+            }
             if (secondsPassed <= 0f)
             {
                 secondsPassed = 0f;

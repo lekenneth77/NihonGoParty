@@ -3923,7 +3923,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3957,14 +3957,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 476290510}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
+  m_Script: {fileID: 11500000, guid: ecdb1a30c99193f4c9c9d6075e181dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeName: duel
+  typeName: blank
   chosenPath: {fileID: 0}
   nextWP: {fileID: 1142755013}
   prevWP: {fileID: 1833850531}
-  category: DUEL
 --- !u!1 &487353754
 GameObject:
   m_ObjectHideFlags: 0
@@ -5776,7 +5775,7 @@ MonoBehaviour:
   useYourSpawnPoint: 0
   prev: {fileID: 2060854414}
   root: {fileID: 1624710710}
-  changeToThis: duel
+  changeToThis: blank
 --- !u!1 &733214162
 GameObject:
   m_ObjectHideFlags: 0
@@ -5888,9 +5887,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7a33c0665a6e845a8304d5972c06e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugRoll: 2
+  debugRoll: 3
   roll: 0
-  debug: 1
+  debug: 0
   spriteRenderer: {fileID: 79811638}
 --- !u!1 &748925298
 GameObject:
@@ -7996,7 +7995,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8030,14 +8029,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1142755009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
+  m_Script: {fileID: 11500000, guid: ecdb1a30c99193f4c9c9d6075e181dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeName: duel
+  typeName: blank
   chosenPath: {fileID: 0}
   nextWP: {fileID: 755735286}
   prevWP: {fileID: 476290514}
-  category: DUEL
 --- !u!1 &1152795136
 GameObject:
   m_ObjectHideFlags: 0
@@ -8994,7 +8992,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343877626}
-  m_LocalRotation: {x: 1.4752966e-16, y: 0.99033433, z: -0.1387012, w: 8.624239e-16}
+  m_LocalRotation: {x: -0.0000000020668094, y: 0.99033433, z: -0.13870122, w: -0.000000014757132}
   m_LocalPosition: {x: 5, y: 2, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11346,7 +11344,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 1.4752966e-16, y: 0.99033433, z: -0.1387012, w: 8.624239e-16}
+  m_LocalRotation: {x: -0.0000000020668094, y: 0.99033433, z: -0.13870122, w: -0.000000014757132}
   m_LocalPosition: {x: 5, y: 2, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12608,7 +12606,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -12642,14 +12640,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1833850527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
+  m_Script: {fileID: 11500000, guid: ecdb1a30c99193f4c9c9d6075e181dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeName: kanji
+  typeName: blank
   chosenPath: {fileID: 0}
   nextWP: {fileID: 476290514}
   prevWP: {fileID: 1877533956}
-  category: KANJI
 --- !u!1 &1835151421
 GameObject:
   m_ObjectHideFlags: 0
@@ -13028,7 +13025,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -13062,14 +13059,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1877533952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
+  m_Script: {fileID: 11500000, guid: ecdb1a30c99193f4c9c9d6075e181dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeName: duel
+  typeName: blank
   chosenPath: {fileID: 0}
   nextWP: {fileID: 1833850531}
   prevWP: {fileID: 1624710710}
-  category: DUEL
 --- !u!1 &1976912917
 GameObject:
   m_ObjectHideFlags: 0
@@ -14589,7 +14585,7 @@ MonoBehaviour:
   stillCameraObj: {fileID: 1343877626}
   moveCameraObj: {fileID: 626483979}
   freeCameraObj: {fileID: 498203454}
-  debug: 1
+  debug: 0
 --- !u!4 &2147000834
 Transform:
   m_ObjectHideFlags: 0

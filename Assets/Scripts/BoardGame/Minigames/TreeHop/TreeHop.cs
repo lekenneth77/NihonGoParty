@@ -31,7 +31,15 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
         controls = new Controls();
         controls.TreeHop.AddCallbacks(this);
         GetWords();
-        //numPlayers = BoardController.numPlayers;
+        singleplayer = false;
+        if (singleplayer) {
+            numPlayers = 1;
+            timer.gameObject.transform.localPosition = new Vector3(775, 425, 0);
+        } else { //multiplayer!
+            numPlayers = BoardController.numPlayers;
+            timer.gameObject.transform.localPosition = new Vector3(0, 425, 0);
+        }
+        numPlayers = 3;
         for (int i = 0; i < numPlayers; i++) {
             players[i].gameObject.SetActive(true);
             platformFolders[i].SetActive(true);
@@ -70,11 +78,12 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     public void SetupGame(PlayableDirector dir) {
         categoryText.transform.parent.gameObject.SetActive(true);
         controls.Enable();
-        if (numPlayers == 1)
-        {
-            timer.ResetTimer();
-            timer.StartTimer();
+        if (!singleplayer) { 
+            timer.ChangeToCountUp(true);
         }
+        timer.ResetTimer();
+        timer.gameObject.SetActive(true);
+        timer.StartTimer();
     }
 
     private void GetWords() {
@@ -172,9 +181,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     }
 
     private IEnumerator OnFinish(int playerI) {
-        if (numPlayers == 1) {
-            timer.StopTimer();
-        }
+        timer.StopTimer();
         yield return new WaitForSeconds(1.5f);
         players[playerI].JumpToEnd();
         yield return new WaitForSeconds(2f);
