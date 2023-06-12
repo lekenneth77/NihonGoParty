@@ -8,7 +8,9 @@ public class FinishController : MonoBehaviour
 {
     public static GameObject[] tempResults;
     public PlayerInfo[] playerInfos;
+    public Transform[] platformSpawns;
     private int numPlayers;
+
 
     public GameObject[] statBoards;
     public Image[] tabColors;
@@ -30,8 +32,14 @@ public class FinishController : MonoBehaviour
         for (int i = 0; i < numPlayers; i++)
         {
             playerInfos[i] = tempResults[i].GetComponent<PlayerInfo>();
-            Destroy(tempResults[i]); //use the models later for the position standings
+            tempResults[i].transform.position = platformSpawns[playerInfos[i].currentRanking - 1].position;
+            tempResults[i].transform.localScale = new Vector3(2f, 2f, 2f);
+            tempResults[i].transform.eulerAngles = new Vector3(0, 180f, 0);
+            tempResults[i].SetActive(true);
+            //Destroy(tempResults[i]); //use the models later for the position standings
         }
+
+
         
         currentTabIndex = 0;
 

@@ -27,6 +27,6 @@ EditorBuildSettings:
     path: Assets/Scenes/FinishScreen.unity
     guid: e992ad150e2d95b47a1f3ab8905c8281
   - enabled: 1
-    path: Assets/Scenes/Minigames/Kanji/KanjiCrossRotate.unity
+    path: Assets/Scenes/Minigames/Kanji/KanjiCrossRotate/KanjiCrossRotate.unity
     guid: fc2846ecab99b5b4c8a41b06ac23c4e0
   m_configObjects: {}

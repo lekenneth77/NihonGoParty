@@ -448,6 +448,7 @@ MonoBehaviour:
   movementSpeed: 0.25
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
+  rotateToo: 0
 --- !u!1 &34720168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 410937914}
   timeLimit: 60
+  countUp: 0
 --- !u!1 &217345366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,6 +2032,7 @@ MonoBehaviour:
   movementSpeed: 0.25
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
+  rotateToo: 0
 --- !u!1 &507677736
 GameObject:
   m_ObjectHideFlags: 0
@@ -3027,6 +3030,7 @@ MonoBehaviour:
   movementSpeed: 8
   target: {x: 0, y: -100, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
+  rotateToo: 0
 --- !u!1 &709768078
 GameObject:
   m_ObjectHideFlags: 0
@@ -3799,6 +3803,7 @@ MonoBehaviour:
   movementSpeed: 0.25
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
+  rotateToo: 0
 --- !u!1 &900073857
 GameObject:
   m_ObjectHideFlags: 0
@@ -5334,6 +5339,7 @@ MonoBehaviour:
   movementSpeed: 0.25
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
+  rotateToo: 0
 --- !u!65 &1302967937
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6102,6 +6108,7 @@ MonoBehaviour:
   movementSpeed: 0.25
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
+  rotateToo: 0
 --- !u!1 &1600806504
 GameObject:
   m_ObjectHideFlags: 0
@@ -6742,6 +6749,7 @@ MonoBehaviour:
   movementSpeed: 0.25
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
+  rotateToo: 0
 --- !u!65 &1833685798
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7126,6 +7134,7 @@ MonoBehaviour:
   movementSpeed: 0.25
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
+  rotateToo: 0
 --- !u!65 &1986871493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7589,6 +7598,7 @@ MonoBehaviour:
   movementSpeed: 0.25
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
+  rotateToo: 0
 --- !u!65 &2093260993
 BoxCollider:
   m_ObjectHideFlags: 0
