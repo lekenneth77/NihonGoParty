@@ -54,7 +54,18 @@ public abstract class BoardSpace : MonoBehaviour
         foreach (GameObject p in playersOnMe)
         {
             p.GetComponent<MoveObject>().SetTargetAndMove(extraSpaces[index]);
+            StartCoroutine(HandleQuickRotation(p));
             index++;
+        }
+    }
+
+    //holyshit i hate this function if everything hits the fucking shit fan change all of the boardspaces settargetandmove to STAMNAR
+    private IEnumerator HandleQuickRotation(GameObject p) {
+        yield return new WaitForSeconds(1f); //TODO really jank just consider not rotating at all!
+        p.GetComponent<MoveObject>().RotateToIdentity();
+        if (p.GetComponent<Animator>()) {
+            yield return new WaitForSeconds(0.5f); //LOLOL
+            p.GetComponent<MoveObject>().StartSlowDown();
         }
     }
 
@@ -69,10 +80,12 @@ public abstract class BoardSpace : MonoBehaviour
                 //TODO remove once you have actual models!
                 pos.y += 0.5f;
                 p.transform.position = pos;
+                p.transform.rotation = Quaternion.identity;
             }
             else
             {
                 p.GetComponent<MoveObject>().SetTargetAndMove(pos);
+                StartCoroutine(HandleQuickRotation(p));
             }
             index++;
         }
@@ -91,6 +104,7 @@ public abstract class BoardSpace : MonoBehaviour
         foreach (GameObject p in playersOnMe)
         {
             p.GetComponent<MoveObject>().SetTargetAndMove(pos);
+            StartCoroutine(HandleQuickRotation(p));
             index++;
             pos = extraSpaces[index];
         }

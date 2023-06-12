@@ -10,6 +10,16 @@ public class MoveObject : MonoBehaviour
     public Vector3 target;
     public Vector3 originalPosition;
 
+    //all for rotates before moving, please comment these the list keeps growing
+    public bool rotateToo;
+    private bool rotateFirst;
+    private Quaternion currentRotation;
+    private Quaternion tgtRotation;
+    private float rotationSpeed = 6f;
+    private float timeCount = 0;
+    private bool startWalkStop;
+    private bool noAnims;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +29,20 @@ public class MoveObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (moveFlag)
+        if (startWalkStop)
         {
+            SlowDown();
+            return;
+        }
+
+        if (!moveFlag) { return; }
+
+        if (rotateFirst) {
+            InitialRotate();
+        }  else {
             Move();
         }
+
     }
 
     public void TriggerMove()
@@ -35,6 +55,23 @@ public class MoveObject : MonoBehaviour
         //TODO change once you have real models!
         tgt.y = tgt.y + 0.5f;
         target = tgt;
+        if (rotateToo)
+        {
+            timeCount = 0;
+            currentRotation = transform.rotation;
+            tgtRotation = Quaternion.LookRotation((target - transform.localPosition).normalized);
+            rotateFirst = true;
+        } 
+        moveFlag = true;
+    }
+
+    //stands for set target and move no animation no rotation
+    //holy shit this entire class changed so much in the span of 2 hours im so tired just end my suffering
+    //NOT USED AND HOPEFULLY WILL STAY UNUSED
+    public void STAMNAR(Vector3 tgt) {
+        tgt.y = tgt.y + 0.5f;
+        target = tgt;
+        noAnims = true; //will be reset back to false once movement is over.
         moveFlag = true;
     }
 
@@ -53,15 +90,50 @@ public class MoveObject : MonoBehaviour
     {
         return moveFlag;
     }
+    public void RotateToIdentity() {
+        timeCount = 0;
+        currentRotation = transform.rotation;
+        tgtRotation = Quaternion.identity;
+        rotateFirst = true;
+        moveFlag = true;
+    }
+
+    public void StartSlowDown() {
+        startWalkStop = true;
+    }
+
+    private void InitialRotate() {
+        if (timeCount > (1f / rotationSpeed))
+        {
+            rotateFirst = false;
+            return;
+        }
+
+        transform.rotation = Quaternion.Lerp(currentRotation, tgtRotation, timeCount * rotationSpeed);
+        timeCount += Time.deltaTime;
+    }
+
+    private void SlowDown() {
+        gameObject.GetComponent<Animator>().SetFloat("IdleToWalk", 0f, 0.05f, Time.deltaTime);
+        if (gameObject.GetComponent<Animator>().GetFloat("IdleToWalk") <= 0.05f) {
+            gameObject.GetComponent<Animator>().SetFloat("IdleToWalk", 0f);
+            startWalkStop = false;
+            moveFlag = false;
+        }
+    }
 
     private void Move()
     {
-        if (Mathf.Abs(Vector3.Magnitude(target) - Vector3.Magnitude(this.transform.localPosition)) <= Mathf.Epsilon)
+        if (Mathf.Abs(Vector3.Magnitude(target) - Vector3.Magnitude(transform.localPosition)) <= Mathf.Epsilon)
         {
+            if (noAnims) { noAnims = false; }
             moveFlag = false;
         } else
         {
-            this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, target, movementSpeed * Time.deltaTime);
+            if (!noAnims && gameObject.GetComponent<Animator>()) { 
+                gameObject.GetComponent<Animator>()?.SetFloat("IdleToWalk", 1f, 0.05f, Time.deltaTime);
+            }
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, movementSpeed * Time.deltaTime);
         }
 
     }

@@ -192,6 +192,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         MoveObject moveObj = player.GetComponent<MoveObject>();
         PlayerInfo infoObj = player.GetComponent<PlayerInfo>();
         GameObject rollCountdown = player.transform.GetChild(0).gameObject;
+        if (player.transform.childCount > 2) {
+            rollCountdown = player.transform.GetChild(3).gameObject;
+        }
         SpriteRenderer countdownSprite = rollCountdown.GetComponent<SpriteRenderer>();
         BoardSpace currentSpace = infoObj.currentSpace;
         currentSpace?.RemovePlayer();
@@ -225,7 +228,6 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
             countdownSprite.sprite = diceSprites[roll - currentStep];
             infoObj.numCrossed = forward ? infoObj.numCrossed + 1 : infoObj.numCrossed - 1;
-
             moveObj.SetTargetAndMove(nextSpace.transform.position);
             nextSpace.AdjustPlayers();
             while (moveObj.GetMoveFlag())
@@ -234,7 +236,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                 yield return new WaitForSeconds(0.01f);
             }
             //maybe takeout the slight pause when youre going backwards
-            yield return new WaitForSeconds(0.05f);
+            //yield return new WaitForSeconds(0.025f);
             if (currentStep != roll)
             {
                 nextSpace.ResetPlayers(false);
@@ -264,8 +266,14 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                 break; 
             }
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f); 
         moveCameraObj.SetActive(false);
+        moveObj.RotateToIdentity();
+        yield return new WaitForSeconds(0.5f);//TODO look into the timing for rotate to identity and start slowdown!
+        if (player.GetComponent<Animator>())
+        {
+            moveObj.StartSlowDown();
+        }
         yield return new WaitForSeconds(2f);
         rollCountdown.SetActive(false);
         infoObj.currentSpace.AddPlayer(player);
