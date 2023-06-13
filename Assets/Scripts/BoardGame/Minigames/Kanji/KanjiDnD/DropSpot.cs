@@ -18,15 +18,12 @@ public class DropSpot : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         if (!eventData.pointerDrag || gameObject.GetComponent<DnDInfo>().onMeOnThem) { return; }
-        Debug.Log("Hey!");
         GameObject dragObj = eventData.pointerDrag;
         dragObj.transform.position = transform.position;
         //basically marks this dropspot as used!
         gameObject.GetComponent<DnDInfo>().onMeOnThem = dragObj.GetComponent<DnDInfo>();
         dragObj.GetComponent<DnDInfo>().onMeOnThem = gameObject.GetComponent<DnDInfo>();
-        Color temp = gameObject.GetComponent<Image>().color;
-        temp.a = 0f;
-        gameObject.GetComponent<Image>().color = temp;
         Dropped?.Invoke();
+        gameObject.SetActive(false);
     }
 }

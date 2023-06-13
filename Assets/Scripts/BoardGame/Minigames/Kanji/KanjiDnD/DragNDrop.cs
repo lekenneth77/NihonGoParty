@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
@@ -8,6 +9,7 @@ public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    public static bool allowDrag;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +27,12 @@ public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     {
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
-        Debug.Log("Begin!");
         GameObject dragObj = eventData.pointerDrag;
         if (dragObj.GetComponent<DnDInfo>().onMeOnThem)
         {
-            dragObj.GetComponent<DnDInfo>().onMeOnThem.onMeOnThem = null; //reset the square i was on!
+            DnDInfo dropper = dragObj.GetComponent<DnDInfo>().onMeOnThem;
+            dropper.gameObject.SetActive(true);
+            dropper.onMeOnThem = null; //reset the square i was on!
             dragObj.GetComponent<DnDInfo>().onMeOnThem = null;
         }
     }

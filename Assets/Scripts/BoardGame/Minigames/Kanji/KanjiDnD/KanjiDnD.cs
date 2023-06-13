@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class KanjiDnD : Minigame
 {
@@ -10,9 +11,11 @@ public class KanjiDnD : Minigame
     public HashSet<int> chosenProblems;
     public GameObject defDraggable;
     public GameObject defDropper;
+    public TextMeshProUGUI correctWord;
+    public GameObject[] UIObjects;
 
     public TextAsset textFile;
-    public Sprite[] kanjis;
+    private Sprite[] kanjis;
     private string[] problems;
 
     public Timer timer;
@@ -24,27 +27,16 @@ public class KanjiDnD : Minigame
     public override void Start()
     {
         base.Start();
-        DropSpot.Dropped += CheckAnswer;
         timer.TimeUp += TimeOut;
 
         kanjis = Resources.LoadAll<Sprite>("Minigames/Kanji/KanjiDnD/KanjiParts/");
         problems = textFile.text.Split("\n"[0]);
         chosenProblems = new HashSet<int>();
-
-        /*
-        List<int> test = new List<int>();
-        test.Add(10);
-        test.Add(11);
-        test.Add(12);
-        test.Add(13);
-        test.Add(14);
-        GenerateLeftItems(test, new List<float[]>());
-        */
-
-        //timer.ResetTimer();
-        //timer.StartTimer();
+        DropSpot.Dropped += CheckAnswer;
+        currentRound = 0;
+        GenerateProblem();
+        
     }
-
 
     public void CheckAnswer() { 
         foreach (DnDInfo sq in dropSpots) { 
@@ -56,24 +48,30 @@ public class KanjiDnD : Minigame
             DnDInfo squareOnMe = sq.onMeOnThem;
             if (sq.id != squareOnMe.id) {
                 Debug.Log("Wrong Answer!");
+                StartCoroutine("Incorrect");
                 //either you can make the correct ones stay or just tell them its wrong
-                break;
+                return;
             }
         }
         //all are correct!
+        DragNDrop.allowDrag = false;
         currentRound++;
+        Debug.Log(currentRound);
         if (totalRounds == currentRound) {
             StartCoroutine("HandleWin");
-        } else { 
-            
+        } else {
+            StartCoroutine("NextRound");
         }
     }
 
     private void GenerateProblem() {
         //clean up last problem
-        for (int i = 0; i < leftSide.childCount; i++) {
-            Destroy(leftSide.GetChild(0).gameObject);
-            Destroy(rightSide.GetChild(0).gameObject);
+        dropSpots.Clear();
+        foreach (Transform child in leftSide) {
+            Destroy(child.gameObject);
+        }
+        foreach(Transform child in rightSide) {
+            Destroy(child.gameObject);
         }
 
         int random = Random.Range(0, problems.Length);
@@ -83,45 +81,86 @@ public class KanjiDnD : Minigame
 
         string problem = problems[random];
         //parse string 
-        List<int> identifiers = new List<int>();
-        List<float[]> widthHeights = new List<float[]>();
-        List<float[]> XYpositions = new List<float[]>();
-        GenerateLeftItems(identifiers, widthHeights);
+        string[] parameters = problem.Split("_"[0]);
+        correctWord.text = parameters[0];
+        string[] ids = parameters[1].Split(","[0]);
+        string[] wh = parameters[2].Split(","[0]);
+        string[] xy = parameters[3].Split(","[0]);
+
+        GenerateLeftItems(ids, wh);
+        GenerateRightItems(ids, xy);
+
+        DragNDrop.allowDrag = true;
+        timer.ResetTimer();
+        timer.StartTimer();
     }
 
-    private void GenerateLeftItems(List<int> ids, List<float[]> widthHeights) {
-        for (int i = 0; i < ids.Count; i++) {
+    //its very possible to put these two functions together but i like them seperate
+    private void GenerateLeftItems(string[] ids, string[] widthHeights) {
+        for (int i = 0; i < ids.Length; i++) {
             float randomX = Random.Range(-800f, 0);
             float randomY = Random.Range(-400f, 400f);
-            int id = ids[i];
+            int id = int.Parse(ids[i]);
             GameObject newObj = Instantiate(defDraggable, Vector3.zero, Quaternion.identity);
             newObj.transform.SetParent(leftSide);
             newObj.transform.localPosition = new Vector3(randomX, randomY);
-
-            /*
-            Rect size = newObj.GetComponent<RectTransform>().rect;
-            size.width = widthHeights[i][0];
-            size.height = widthHeights[i][1];
-            */
+            newObj.GetComponent<RectTransform>().sizeDelta = new Vector2(float.Parse(widthHeights[i * 2]), float.Parse(widthHeights[(i * 2) + 1]));
 
             newObj.GetComponent<DnDInfo>().id = id;
             newObj.GetComponent<Image>().sprite = kanjis[id - 1];
-
         }
     }
 
-    private IEnumerator HandleWin() {
+    private void GenerateRightItems(string[] ids, string[] xyPositions) { 
+        for (int i = 0; i < ids.Length; i++) {
+            GameObject newObj = Instantiate(defDropper, Vector3.zero, Quaternion.identity);
+            newObj.transform.SetParent(rightSide);
+            newObj.transform.localPosition = new Vector3(float.Parse(xyPositions[i * 2]), float.Parse(xyPositions[(i * 2) + 1]));
+            newObj.GetComponent<DnDInfo>().id = int.Parse(ids[i]);
+            dropSpots.Add(newObj.GetComponent<DnDInfo>());
+        }
+    }
+
+    private IEnumerator NextRound() {
+        UIObjects[0].SetActive(true);
+        correctWord.gameObject.transform.parent.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        UIObjects[0].SetActive(false);
+        correctWord.gameObject.transform.parent.gameObject.SetActive(false);
+
+        GenerateProblem();
+    }
+
+    private IEnumerator Incorrect() {
+        DragNDrop.allowDrag = false;
+        UIObjects[1].SetActive(true);
         yield return new WaitForSeconds(2f);
+        DragNDrop.allowDrag = true;
+        UIObjects[1].SetActive(false);
+    }
+
+    private IEnumerator HandleWin() {
+        UIObjects[2].SetActive(true);
+        correctWord.gameObject.transform.parent.gameObject.SetActive(true);
+        timer.StopTimer();
+        yield return new WaitForSeconds(4f);
         EndGame(true);
     }
 
 
     public void TimeOut() {
+        DragNDrop.allowDrag = false;
         StartCoroutine("HandleTimeOut");
+
     }
 
     private IEnumerator HandleTimeOut() {
-        yield return new WaitForSeconds(2f);
+        UIObjects[3].SetActive(true);
+        correctWord.gameObject.transform.parent.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(4f);
         EndGame(false);
     }
 
