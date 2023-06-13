@@ -63,10 +63,6 @@ public abstract class BoardSpace : MonoBehaviour
     private IEnumerator HandleQuickRotation(GameObject p) {
         yield return new WaitForSeconds(1f); //TODO really jank just consider not rotating at all!
         p.GetComponent<MoveObject>().RotateToIdentity();
-        if (p.GetComponent<Animator>()) {
-            yield return new WaitForSeconds(0.5f); //LOLOL
-            p.GetComponent<MoveObject>().StartSlowDown();
-        }
     }
 
     public void ResetPlayers(bool transport)

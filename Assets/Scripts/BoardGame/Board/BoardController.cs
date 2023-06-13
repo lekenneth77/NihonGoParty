@@ -269,11 +269,6 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         yield return new WaitForSeconds(0.1f); 
         moveCameraObj.SetActive(false);
         moveObj.RotateToIdentity();
-        yield return new WaitForSeconds(0.5f);//TODO look into the timing for rotate to identity and start slowdown!
-        if (player.GetComponent<Animator>())
-        {
-            moveObj.StartSlowDown();
-        }
         yield return new WaitForSeconds(2f);
         rollCountdown.SetActive(false);
         infoObj.currentSpace.AddPlayer(player);

@@ -17,10 +17,6 @@ public class BlankSpace : BoardSpace
     {
         Debug.Log("I'm a blank guy");
         InvokeFinish();
-        //TODO uh find a way to do nothing on this square
-        //subscribe to the chosen minigame here like
-        //minigame.OnFinish += InvokeFinish();
-        //and then the board controller will subscribe to board space creating this chain!
     }
 
     
