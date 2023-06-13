@@ -1,13 +1,13 @@
-YookosoI CH4-7 Review
-あの　テニス　を　している　人　は　何人　です　か　。_テニス　を　している　あの　人　は　何人　です　か　。_Relative clause (the nationality of that person who is…)_5,10
-花見　が　したい　し　、　すし　が　食べたい　し　、　日本　へ　行って　みたい　ん　です　。_すし　が　食べたい　し　 、　花見　が　したい　し、日本　へ　行って　みたい　ん　です。_Because (listing reasons), I want to go to Japan (to find out how it is.)_5,10,17
+Y1 CH4-7 Review
+あの　テニス　を　している　人　は　何人(なにじん)　です　か　。_テニス　を　している　あの　人　は　何人(なにじん)　です　か　。_Relative clause (the nationality of that person who is…)_5,10
+花見　が　したい　し、　すし　が　食べたい　し、　日本　へ　行って　みたい　ん　です。_すし　が　食べたい　し、　花見　が　したい　し、日本　へ　行って　みたい　ん　です。_Because (listing reasons), I want to go to Japan (to find out how it is.)_4,8,14
 スポーツ　の　中　で　、　どれ　が　一番　好き　です　か　。_Comparing three or more._3,12
 ゆうちゃん　は　いぬ　が　好き　だ　と　言いました　。_Yu-chan said..._1,9
 私　は　くるま　が　ほしい　です　が、　母　は　タイ　へ　行きたがって　います　。_My desire and her desire_1,7,14
 日本　に　行く　時　に　パスポート　を　取りました　。_〜時 (temporal clause)_4,9
 私　の　しゅみ　は　スポーツ　を　見る　こと　です　。_My hobby is…_3,10
-たっちゃん　に　よる　と　、　たこやき　は　おいしい　そう　です　。_According to...._5,11
+たっちゃん　に　よる　と、　たこやき　は　おいしい　そう　です　。_According to...._4,10
 和食　を　作った　こと　が　あります　。_Experience_1,7
 トロント　の　方　が　シカゴ　より　雪　が　たくさん　ふります　。_トロント　の　方　が　シカゴ　より　たくさん　雪　が　ふります　。_ Comparing two cities (more snow in Toronto)_1,11
-先生　は　「　ねこ　が　好き　です　」　と　言いました　。_ Sensei said..._2,10
+先生　は　「　ねこ　が　好き　です　」　と　言いました　。_ Sensei said..._2,11
 シアトル　と　シカゴ　と　、　どちら　の　方　が　寒い　です　か　。_Comparing two cities_1,13

@@ -95,6 +95,7 @@ public class WordOrder : Minigame
         randomCategory.transform.gameObject.SetActive(true);
         TextAsset[] texts = Resources.LoadAll<TextAsset>("Minigames/Grammar/WordOrder/Texts/");
         txtfile = texts[Random.Range(0, texts.Length)];
+        max_rounds = txtfile.text.Split("\n"[0]).Length - 1;
         category_name = txtfile.text.Split("\n"[0])[0];
         randomCategory.text = category_name;
         yield return new WaitForSeconds(2f);
@@ -307,6 +308,7 @@ public class WordOrder : Minigame
                 if (cur_locked.Contains(j + 1)) {
                     continue;
                 }
+                if (!bitter_map[j]) { yield break; }
                 WordOrderCLickLetter letter = bitter_map[j].GetComponent<WordOrderCLickLetter>();
                 letter.set_disable(true);
                 Color tmp = bitter_map[j].GetComponent<Image>().color;

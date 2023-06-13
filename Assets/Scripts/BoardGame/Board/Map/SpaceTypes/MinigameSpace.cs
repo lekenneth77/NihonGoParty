@@ -57,7 +57,8 @@ public class MinigameSpace : BoardSpace
         Debug.Log("Minigame!");
         string chosenGame = gamesToChooseFrom[UnityEngine.Random.Range(0, gamesToChooseFrom.Length)];
         Minigame.singleplayer = !(category.ToUpper().Equals("DUEL") || category.ToUpper().Equals("MULTI"));
-        InvokeLoad(chosenGame, true);
+        //InvokeLoad(chosenGame, true);
+        InvokeLoad("HowToPlayTemp", true); //TODO once how to plays are made, put them in here!
     }
 
 }

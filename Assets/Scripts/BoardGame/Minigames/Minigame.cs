@@ -10,6 +10,7 @@ public abstract class Minigame : MonoBehaviour
 
     //duel/multiplayer if false
     public static bool singleplayer;
+    public static bool practice;
     public virtual void Start()
     {
         
@@ -22,9 +23,14 @@ public abstract class Minigame : MonoBehaviour
 
     public void EndGame(bool won)
     {
-        BoardController.wonMinigame = won;
-        BoardSpace.InvokeFinish();
-        SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
+        if (!practice) { 
+            BoardController.wonMinigame = won;
+            BoardSpace.InvokeUnload(1, true);
+        } else { 
+            practice = false;
+            HowToPlay.ResetScreen();
+            BoardSpace.InvokeUnload(2, false);
+        }
     }
 
     //maybe add a how to play loader here?

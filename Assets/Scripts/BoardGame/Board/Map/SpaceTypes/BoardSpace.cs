@@ -14,6 +14,8 @@ public abstract class BoardSpace : MonoBehaviour
 
     public static event Action<string, bool> TriggerLoad;
 
+    public static event Action<int, bool> TriggerUnload;
+
     public static void InvokeFinish()
     {
         ActionFinish?.Invoke();
@@ -22,6 +24,10 @@ public abstract class BoardSpace : MonoBehaviour
     public static void InvokeLoad(string sceneName, bool additive)
     {
         TriggerLoad?.Invoke(sceneName, additive);
+    }
+
+    public static void InvokeUnload(int sceneIndex, bool triggerBoard) {
+        TriggerUnload?.Invoke(sceneIndex, triggerBoard);
     }
 
     //all the stuff from the original spaceinfo class put into here!

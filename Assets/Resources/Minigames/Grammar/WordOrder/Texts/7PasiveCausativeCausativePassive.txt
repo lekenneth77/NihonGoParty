@@ -1,11 +1,11 @@
 Passi, Caus, Caus-Passi
+私　は　ねこ　に　ケーキ　を　食べられました　。_My cake was eaten by..._1,4,8
+いっぺいくん　を　お姉さん　は　いつも　なかせます　。_(Ippei’s）sister make Ippei to cry._2,3,7
+せんぱい　は　こうはい　に　カバン　を　持たせます　。_ Senpais make kohai to carry their bags._1,4,8
+先生　は　私たち　に　毎日　クイズ　を　受けさせます　。_先生　は　私たち　に　クイズ　を　毎日　受けさせます　。_Sensei makes us take..._2,4,9
+いちろうくんは　姉　に　いつも　なかせられます　。_いちろうくんは　いつも　姉　に　なかせられます　。_Ichiro is always made to cry by his sister._1,6
+せんぱい　に　こうはい　は　カバン　を　持たせられます　。_Kohai is forced to carry his Senpai’s bag._1,4,8
+先生　に　私たち　は　日本語　で　作文　を　書かせられます　。_先生　に　私たち　は　作文　を　日本語　で　書かせられます　。_We are forced to write Sakubun in Japanese._1,4,10
+上田さんは　小さい　時　に　両親　に　死なれました　。_上田さんは　両親　に　小さい　時　に　死なれました　。_Ueda-san’s parents died when Ueda-san was a child (and Ueda-san suffered.)_1,8
+アメリカ　で　は　どんな　飲み物　が　一番　よく　飲まれて　います　か　。What kind of drinks are consumed most often in America?_1,5,12
 私たち　は　毎日　クイズ　を　受けさせられます　。_私たち　は　クイズ　を　毎日　受けさせられます　。_We are forced to.._1,7
-先生　は　私たち　に　毎日　クイズ　を　受けさせます　。_先生　は　毎日　私たち　に　クイズ　を　受けさせます　。_先生　は　毎日　私たち　に　クイズ　を　受けさせます　。_Sensei makes us take..._2,9
-私　は　ねこ　に　ケーキ　を　食べられました　。_My cake was eaten by..._2,8
-いちろうくん　は　いつも　姉　に　なかせられます　。_Ichiro is always made to cry by his sister._2,7
-いっぺいくん　を　お姉さん　は　いつも　なかせます　。_いっぺいくん　を　いつも　お姉さん　は　なかせます　。_(Ippei’s）sister make Ippei to cry._2,7
-上田さん　は　小さい　時　に　両親　に　死なれました。_上田さん　は　両親　に　小さい　時　に　死なれました。_Sato’s parents died when Sato was a child (and Sato suffered.)_1,9
-アメリカ　で　は　どんな　飲み物　が　一番　よく　飲まれて　います　か。What kind of drinks are consumed most often in America?_1,12
-せんぱい　は　こうはい　に　カバン　を　持たせます　。_ Senpais make kohai to carry their bags._2,4,8
-せんぱい　に　こうはい　は　カバン　を　持たせられます 。_Kohai is forced to carry his Senpai’s bag._1,8
-先生　に　私たち　は　日本語　で　作文　を　書かせられます　。_先生　に　私たち　は　作文　を　日本語　で　書かせられます　。_We are forced to write Sakubun in Japanese._4,10

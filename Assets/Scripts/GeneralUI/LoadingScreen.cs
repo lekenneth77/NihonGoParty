@@ -11,6 +11,7 @@ public class LoadingScreen : MonoBehaviour
     void Start()
     {
         BoardSpace.TriggerLoad += LoadScene;
+        BoardSpace.TriggerUnload += UnloadScene;
     }
 
     public void LoadScene(string sceneName, bool additive)
@@ -34,6 +35,28 @@ public class LoadingScreen : MonoBehaviour
         }
         screen.SetActive(false);
 
+    }
+
+    public void UnloadScene(int index, bool triggerBoard) {
+        StartCoroutine(UnloadSceneAsync(index, triggerBoard));
+    }
+
+    IEnumerator UnloadSceneAsync(int index, bool triggerBoard) {
+        loadingBarFill.fillAmount = 0;
+        screen.SetActive(true);
+        AsyncOperation op = SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(index));
+        while (!op.isDone)
+        {
+            float progressValue = Mathf.Clamp01(op.progress / 0.9f);
+
+            loadingBarFill.fillAmount = progressValue;
+
+            yield return null;
+        }
+        screen.SetActive(false);
+        if (triggerBoard) {
+            BoardSpace.InvokeFinish();
+        }
     }
 
 }

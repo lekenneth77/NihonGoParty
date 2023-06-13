@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Kanji/KanjiCrossRotate/KanjiCrossRotate.unity
     guid: fc2846ecab99b5b4c8a41b06ac23c4e0
+  - enabled: 1
+    path: Assets/Scenes/Minigames/HowToPlayTemp.unity
+    guid: 94e8594a404e75b4a9b11410b98c85ca
   m_configObjects: {}
