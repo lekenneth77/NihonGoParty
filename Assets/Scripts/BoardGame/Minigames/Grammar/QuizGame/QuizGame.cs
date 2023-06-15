@@ -7,6 +7,8 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
 {
     public Timer timer;
     public Pedestal[] pedestals;
+    private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f, 6f, -15f), new Vector3(-3f, 6f, -15f), new Vector3(0, 6.5f, -17f)};
+    public GameObject fullViewCam;
     public GameObject[] playerCameras;
     public GameObject[] resultObjects;
     public int numPlayers;
@@ -19,6 +21,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
     private bool allowAnswer;
     private bool noMorePeople;
     private int numAnswered;
+    
 
     private Controls controls;
 
@@ -29,9 +32,16 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
 
         controls = new Controls();
         controls.QuizGame.AddCallbacks(this);
-        controls.QuizGame.Enable();
-
         timer.TimeUp += Timeout;
+
+        //numPlayers = multiplayer ? BoardController.numPlayers : 2;
+
+        for (int i = 0; i < numPlayers; i++) {
+            pedestals[i].gameObject.SetActive(true);
+        }
+        fullViewCam.transform.position = initialCameraPos[numPlayers - 2];
+
+        controls.QuizGame.Enable();
         StartCoroutine("SetupRound");
     }
 

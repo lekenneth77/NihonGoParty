@@ -9,12 +9,12 @@ public class MinigameSpace : BoardSpace
     //todo a class for each category? or a big switcharoo?
     //i like the big switcheraoo
     public string category;
-    private string[] KatakanaGames = {"KatakanaScramble"};
-    private string[] GrammarGames = { "WordOrder"};
-    private string[] KanjiGames = { "KanjiCrossRotate" };
-    private string[] VocabGames = { "TreeHop" };
-    private string[] DuelGames = { "KanjiCrossRotate" };
-    private string[] MultiplayerGames = { "TreeHop" };
+    private string[] KatakanaGames = {"KatakanaScramble"}; //katakana search
+    private string[] GrammarGames = { "WordOrder"}; //particle uhh smarticle, honor vs humble, give receive?
+    private string[] KanjiGames = { "KanjiCrossRotate" }; //kanji dnd
+    private string[] VocabGames = { "TreeHop" }; //some kind of trans versus intrans, english japanese match
+    private string[] DuelGames = { "KanjiCrossRotate", "QuizGame" };
+    private string[] MultiplayerGames = { "TreeHop", "QuizGame" };
 
 
     private string[] gamesToChooseFrom;
@@ -57,8 +57,9 @@ public class MinigameSpace : BoardSpace
         Debug.Log("Minigame!");
         string chosenGame = gamesToChooseFrom[UnityEngine.Random.Range(0, gamesToChooseFrom.Length)];
         Minigame.singleplayer = !(category.ToUpper().Equals("DUEL") || category.ToUpper().Equals("MULTI"));
-        //InvokeLoad(chosenGame, true);
-        InvokeLoad("HowToPlayTemp", true); //TODO once how to plays are made, put them in here!
+        if (chosenGame.Equals("QuizGame") && category.ToUpper().Equals("MULTI")) { QuizGame.multiplayer = true; };
+        InvokeLoad(chosenGame, true);
+        //InvokeLoad("HowToPlayTemp", true); //TODO once how to plays are made, put them in here!
     }
 
 }
