@@ -35,7 +35,6 @@ public class KanjiDnD : Minigame
         DropSpot.Dropped += CheckAnswer;
         currentRound = 0;
         GenerateProblem();
-        
     }
 
     public void CheckAnswer() { 

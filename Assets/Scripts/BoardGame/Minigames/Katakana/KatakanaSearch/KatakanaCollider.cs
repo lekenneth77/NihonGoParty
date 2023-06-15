@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class KatakanaCollider : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class KatakanaCollider : MonoBehaviour
 
     public void ClickedOn() {
         GotClicked?.Invoke(correctOne);
+        if (correctOne) {
+            transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
+        }
     }
 
 }
