@@ -540,6 +540,94 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""QuizGame"",
+            ""id"": ""3af318da-2d60-4908-b0c8-95a38168980d"",
+            ""actions"": [
+                {
+                    ""name"": ""A"",
+                    ""type"": ""Button"",
+                    ""id"": ""66fd120a-aade-4443-9124-38c424076b2c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""R"",
+                    ""type"": ""Button"",
+                    ""id"": ""19792282-6291-4d12-a20f-90f1744af776"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""H"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b86c727-ce94-4500-bbcc-2f0d7ce3a848"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1fd08d7-7382-4537-9bfe-f6abaa87872b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""50f81805-91e3-43d8-bd75-55c4f8460d45"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""A"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37547eed-965b-421b-acb1-789b44d9684c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31e802c3-7b25-4926-96f0-9f56031de409"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""H"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b171883-79fb-4c65-b079-3504acf568ee"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -586,6 +674,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_TreeHop_L = m_TreeHop.FindAction("L", throwIfNotFound: true);
         m_TreeHop_LeftAKey = m_TreeHop.FindAction("Left AKey", throwIfNotFound: true);
         m_TreeHop_RightAKey = m_TreeHop.FindAction("Right AKey", throwIfNotFound: true);
+        // QuizGame
+        m_QuizGame = asset.FindActionMap("QuizGame", throwIfNotFound: true);
+        m_QuizGame_A = m_QuizGame.FindAction("A", throwIfNotFound: true);
+        m_QuizGame_R = m_QuizGame.FindAction("R", throwIfNotFound: true);
+        m_QuizGame_H = m_QuizGame.FindAction("H", throwIfNotFound: true);
+        m_QuizGame_P = m_QuizGame.FindAction("P", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1015,6 +1109,76 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public TreeHopActions @TreeHop => new TreeHopActions(this);
+
+    // QuizGame
+    private readonly InputActionMap m_QuizGame;
+    private List<IQuizGameActions> m_QuizGameActionsCallbackInterfaces = new List<IQuizGameActions>();
+    private readonly InputAction m_QuizGame_A;
+    private readonly InputAction m_QuizGame_R;
+    private readonly InputAction m_QuizGame_H;
+    private readonly InputAction m_QuizGame_P;
+    public struct QuizGameActions
+    {
+        private @Controls m_Wrapper;
+        public QuizGameActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @A => m_Wrapper.m_QuizGame_A;
+        public InputAction @R => m_Wrapper.m_QuizGame_R;
+        public InputAction @H => m_Wrapper.m_QuizGame_H;
+        public InputAction @P => m_Wrapper.m_QuizGame_P;
+        public InputActionMap Get() { return m_Wrapper.m_QuizGame; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(QuizGameActions set) { return set.Get(); }
+        public void AddCallbacks(IQuizGameActions instance)
+        {
+            if (instance == null || m_Wrapper.m_QuizGameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_QuizGameActionsCallbackInterfaces.Add(instance);
+            @A.started += instance.OnA;
+            @A.performed += instance.OnA;
+            @A.canceled += instance.OnA;
+            @R.started += instance.OnR;
+            @R.performed += instance.OnR;
+            @R.canceled += instance.OnR;
+            @H.started += instance.OnH;
+            @H.performed += instance.OnH;
+            @H.canceled += instance.OnH;
+            @P.started += instance.OnP;
+            @P.performed += instance.OnP;
+            @P.canceled += instance.OnP;
+        }
+
+        private void UnregisterCallbacks(IQuizGameActions instance)
+        {
+            @A.started -= instance.OnA;
+            @A.performed -= instance.OnA;
+            @A.canceled -= instance.OnA;
+            @R.started -= instance.OnR;
+            @R.performed -= instance.OnR;
+            @R.canceled -= instance.OnR;
+            @H.started -= instance.OnH;
+            @H.performed -= instance.OnH;
+            @H.canceled -= instance.OnH;
+            @P.started -= instance.OnP;
+            @P.performed -= instance.OnP;
+            @P.canceled -= instance.OnP;
+        }
+
+        public void RemoveCallbacks(IQuizGameActions instance)
+        {
+            if (m_Wrapper.m_QuizGameActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IQuizGameActions instance)
+        {
+            foreach (var item in m_Wrapper.m_QuizGameActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_QuizGameActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public QuizGameActions @QuizGame => new QuizGameActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1059,5 +1223,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnL(InputAction.CallbackContext context);
         void OnLeftAKey(InputAction.CallbackContext context);
         void OnRightAKey(InputAction.CallbackContext context);
+    }
+    public interface IQuizGameActions
+    {
+        void OnA(InputAction.CallbackContext context);
+        void OnR(InputAction.CallbackContext context);
+        void OnH(InputAction.CallbackContext context);
+        void OnP(InputAction.CallbackContext context);
     }
 }
