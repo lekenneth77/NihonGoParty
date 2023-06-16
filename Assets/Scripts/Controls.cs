@@ -628,6 +628,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SpeedType"",
+            ""id"": ""3139ee81-2ae0-449a-a312-f306c322a724"",
+            ""actions"": [
+                {
+                    ""name"": ""Keyboard"",
+                    ""type"": ""Value"",
+                    ""id"": ""a35ea5b1-9cee-4718-a4ae-50e8c7341376"",
+                    ""expectedControlType"": ""Key"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""71225253-f351-4868-a151-08f5fde99f7b"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -680,6 +708,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_QuizGame_R = m_QuizGame.FindAction("R", throwIfNotFound: true);
         m_QuizGame_H = m_QuizGame.FindAction("H", throwIfNotFound: true);
         m_QuizGame_P = m_QuizGame.FindAction("P", throwIfNotFound: true);
+        // SpeedType
+        m_SpeedType = asset.FindActionMap("SpeedType", throwIfNotFound: true);
+        m_SpeedType_Keyboard = m_SpeedType.FindAction("Keyboard", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1179,6 +1210,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public QuizGameActions @QuizGame => new QuizGameActions(this);
+
+    // SpeedType
+    private readonly InputActionMap m_SpeedType;
+    private List<ISpeedTypeActions> m_SpeedTypeActionsCallbackInterfaces = new List<ISpeedTypeActions>();
+    private readonly InputAction m_SpeedType_Keyboard;
+    public struct SpeedTypeActions
+    {
+        private @Controls m_Wrapper;
+        public SpeedTypeActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Keyboard => m_Wrapper.m_SpeedType_Keyboard;
+        public InputActionMap Get() { return m_Wrapper.m_SpeedType; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SpeedTypeActions set) { return set.Get(); }
+        public void AddCallbacks(ISpeedTypeActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SpeedTypeActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SpeedTypeActionsCallbackInterfaces.Add(instance);
+            @Keyboard.started += instance.OnKeyboard;
+            @Keyboard.performed += instance.OnKeyboard;
+            @Keyboard.canceled += instance.OnKeyboard;
+        }
+
+        private void UnregisterCallbacks(ISpeedTypeActions instance)
+        {
+            @Keyboard.started -= instance.OnKeyboard;
+            @Keyboard.performed -= instance.OnKeyboard;
+            @Keyboard.canceled -= instance.OnKeyboard;
+        }
+
+        public void RemoveCallbacks(ISpeedTypeActions instance)
+        {
+            if (m_Wrapper.m_SpeedTypeActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISpeedTypeActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SpeedTypeActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SpeedTypeActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SpeedTypeActions @SpeedType => new SpeedTypeActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1230,5 +1307,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnR(InputAction.CallbackContext context);
         void OnH(InputAction.CallbackContext context);
         void OnP(InputAction.CallbackContext context);
+    }
+    public interface ISpeedTypeActions
+    {
+        void OnKeyboard(InputAction.CallbackContext context);
     }
 }

@@ -606,6 +606,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "SpeedType",
+            "id": "3139ee81-2ae0-449a-a312-f306c322a724",
+            "actions": [
+                {
+                    "name": "Keyboard",
+                    "type": "Value",
+                    "id": "a35ea5b1-9cee-4718-a4ae-50e8c7341376",
+                    "expectedControlType": "Key",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "71225253-f351-4868-a151-08f5fde99f7b",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Keyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
