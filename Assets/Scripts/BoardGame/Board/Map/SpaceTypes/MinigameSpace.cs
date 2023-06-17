@@ -9,11 +9,11 @@ public class MinigameSpace : BoardSpace
     //todo a class for each category? or a big switcharoo?
     //i like the big switcheraoo
     public string category;
-    private string[] KatakanaGames = {"KatakanaScramble", "KatakanaSearch"}; //katakana search
+    private string[] KatakanaGames = {"KatakanaScramble", "KatakanaSearch"}; //...katakana speed type, type as many characters?
     private string[] GrammarGames = { "WordOrder"}; //speed type particle uhh smarticle, honor vs humble, give receive?
     private string[] KanjiGames = { "KanjiCrossRotate" }; //kanji dnd
     private string[] VocabGames = { "TreeHop" }; //some kind of trans versus intrans, english japanese match
-    private string[] DuelGames = { "KanjiCrossRotate", "QuizGame" }; //speed type
+    private string[] DuelGames = { "KanjiCrossRotate", "QuizGame", "KataSpeedType"}; //katakana speed type
     private string[] MultiplayerGames = { "TreeHop", "QuizGame" };
 
 
