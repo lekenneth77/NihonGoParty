@@ -103,7 +103,7 @@ public class MoveObject : MonoBehaviour
             moveFlag = false;
         } else
         {
-            if (gameObject.GetComponent<Animator>()) { 
+            if (gameObject.GetComponent<Animator>()) {
                 gameObject.GetComponent<Animator>()?.SetFloat("IdleToWalk", 1f, 0.05f, Time.deltaTime);
             }
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, movementSpeed * Time.deltaTime);

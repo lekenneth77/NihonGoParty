@@ -74,9 +74,11 @@ public class KanjiDnD : Minigame
         }
 
         int random = Random.Range(0, problems.Length);
+        /*
         while(!chosenProblems.Add(random)) { 
             random = Random.Range(0, problems.Length);
         }
+        */
 
         string problem = problems[random];
         //parse string 

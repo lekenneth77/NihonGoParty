@@ -14,7 +14,7 @@ public class MinigameSpace : BoardSpace
     private string[] KanjiGames = { "KanjiCrossRotate" }; //kanji dnd
     private string[] VocabGames = { "TreeHop" }; //some kind of trans versus intrans, english japanese match
     private string[] DuelGames = { "KanjiCrossRotate", "QuizGame", "KataSpeedType"}; //katakana speed type
-    private string[] MultiplayerGames = { "TreeHop", "QuizGame" };
+    private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame" };
 
 
     private string[] gamesToChooseFrom;
