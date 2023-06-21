@@ -9,11 +9,11 @@ public class MinigameSpace : BoardSpace
     //todo a class for each category? or a big switcharoo?
     //i like the big switcheraoo
     public string category;
-    private string[] KatakanaGames = {"KatakanaScramble", "KatakanaSearch"}; //...katakana speed type, type as many characters?
-    private string[] GrammarGames = { "WordOrder"}; //speed type particle uhh smarticle, honor vs humble, give receive?
+    private string[] KatakanaGames = {"KatakanaScramble", "KatakanaSearch", "KataSpeedType"}; //...katakana speed type, type as many characters?
+    private string[] GrammarGames = { "WordOrder", "SpeedType"}; //speed type particle uhh smarticle, honor vs humble, give receive?
     private string[] KanjiGames = { "KanjiCrossRotate" }; //kanji dnd
     private string[] VocabGames = { "TreeHop" }; //some kind of trans versus intrans, english japanese match
-    private string[] DuelGames = { "KanjiCrossRotate", "QuizGame", "KataSpeedType"}; //katakana speed type
+    private string[] DuelGames = { "KanjiCrossRotate", "KataSpeedType"}; //katakana speed type
     private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame" };
 
 
@@ -57,7 +57,6 @@ public class MinigameSpace : BoardSpace
         Debug.Log("Minigame!");
         string chosenGame = gamesToChooseFrom[UnityEngine.Random.Range(0, gamesToChooseFrom.Length)];
         Minigame.singleplayer = !(category.ToUpper().Equals("DUEL") || category.ToUpper().Equals("MULTI"));
-        if (chosenGame.Equals("QuizGame") && category.ToUpper().Equals("MULTI")) { QuizGame.multiplayer = true; };
         InvokeLoad(chosenGame, true);
         //InvokeLoad("HowToPlayTemp", true); //TODO once how to plays are made, put them in here!
     }

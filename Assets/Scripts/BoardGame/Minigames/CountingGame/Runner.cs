@@ -17,7 +17,7 @@ public class Runner : MonoBehaviour
     private Vector3 finishPosition;
     void Start() {
         finish = true;
-        finishPosition = new Vector3(-38f, -0.5f, 0);
+        finishPosition = new Vector3(-45f, -0.5f, 0);
     }
 
     public void Run() {

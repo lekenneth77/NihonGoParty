@@ -38,4 +38,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Grammar/QuizGame/QuizGame.unity
     guid: ab698ec6aef8faf4a9ce60ebf22c0c7c
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Vocabulary/CountingGame.unity
+    guid: 71c54343650c57e4b8089c0472540bae
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Katakana/KataSpeedType/KataSpeedType.unity
+    guid: 01336668826aa9747ac6778233989d31
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Grammar/SpeedType/SpeedType.unity
+    guid: 125079d198d230645808d23f551214ec
   m_configObjects: {}

@@ -11,7 +11,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
     public GameObject[] leaderboard;
     public TextMeshProUGUI currentCounter;
     public GameObject fullViewCam;
-    private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f, 6f, -15f), new Vector3(-3f, 6f, -15f), new Vector3(0, 7f, -20f) };
+    private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f, 7f, -20f), new Vector3(-3f, 7f, -20f), new Vector3(0, 7f, -20f) };
     public GameObject nextRoundImage;
     public Transform[] spawnPoints;
     public Transform runnerFolder;
@@ -54,7 +54,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         controls = new Controls();
         controls.QuizGame.AddCallbacks(this);
 
-        //numPlayers = multiplayer ? BoardController.numPlayers : 2;
+        numPlayers = BoardController.numPlayers;
 
         for (int i = 0; i < numPlayers; i++)
         {

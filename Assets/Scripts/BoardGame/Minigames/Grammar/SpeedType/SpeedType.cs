@@ -12,9 +12,13 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
     public TextMeshProUGUI typing;
     public TextMeshProUGUI fullSentence;
     public TextMeshProUGUI yourSentence;
+    public GameObject[] UIObjects;
     public Timer timer;
     public TextMeshProUGUI liveText;
     public int totalLives;
+    public TextMeshProUGUI roundText;
+    public int totalRounds = 2;
+    private int rounds;
     private string[] sentences;
     private HashSet<int> chosenSentences;
 
@@ -32,12 +36,12 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         typeStack = new Stack<string>();
         chosenSentences = new HashSet<int>();
         sentences = textFile.text.Split("\n"[0]);
+        liveText.text = totalLives + "";
+        rounds = 0;
         controls = new Controls();
         controls.SpeedType.AddCallbacks(this);
         timer.TimeUp += Timeout;
-
         SetupGame();
-        controls.SpeedType.Enable();
     }
 
     private void SetupGame() {
@@ -45,9 +49,8 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         while (!chosenSentences.Add(random)) {
             random = Random.Range(0, sentences.Length);
         }
-        
 
-        string[] split = sentences[2].Split("_"[0]);
+        string[] split = sentences[1].Split("_"[0]);
         japnPieces = split[0].Split(" "[0]);
 
         string temp = "";
@@ -60,17 +63,16 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         englPieces = split[1].Split(" "[0]);
         centerText.fontSize = fontSizes[japnPieces[index].Length - 1];
         centerText.text = japnPieces[0];
+        roundText.text = "Rounds " + (rounds + 1) + " / " + totalRounds;
+        yourSentence.text = "";
+        //reset lives? ehh
         index = 0;
         timer.ResetTimer();
         timer.StartTimer();
+        controls.SpeedType.Enable();
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void OnKeyboard(InputAction.CallbackContext context)
     {
         if (!context.performed || Input.inputString == "" || Input.inputString == " ") { return; }
@@ -100,8 +102,9 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         if (typeStack.Count == 1)
         {
             typing.text = typeStack.Peek();
-        } 
+        }
 
+        Debug.Log(englPieces[index]);
         if (typeStack.Count == englPieces[index].Length)
         {
             //reached the count! 
@@ -119,10 +122,39 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
             } else {
                 yourSentence.text += "<color=\"blue\">X";
                 yourSentence.text += "<color=\"black\">";
+                totalLives--;
+                liveText.text = totalLives + "";
+                if (totalLives <= 0) {
+                    StartCoroutine("Failure");
+                }
             }
             MoveOnNext();
         } 
 
+    }
+
+    private IEnumerator Failure() {
+        controls.SpeedType.Disable();
+        timer.StopTimer();
+        UIObjects[1].SetActive(true);
+        yield return new WaitForSeconds(5f);
+        EndGame(false);
+    }
+
+    private IEnumerator SetupSetupGame() {
+        controls.SpeedType.Disable();
+        rounds++;
+        if (rounds == totalRounds) {
+            UIObjects[2].SetActive(true);
+            yield return new WaitForSeconds(5f);
+            EndGame(true);
+        } else
+        {
+            UIObjects[0].SetActive(true);
+            yield return new WaitForSeconds(3f);
+            UIObjects[0].SetActive(false);
+            SetupGame();
+        }
     }
 
     private void MoveOnNext() {
@@ -145,6 +177,7 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
             //Next Round!
             Debug.Log("Next Round!");
             timer.StopTimer();
+            StartCoroutine("SetupSetupGame");
         } else { 
             fullSentence.text = temp;
             centerText.fontSize = fontSizes[japnPieces[index].Length - 1];

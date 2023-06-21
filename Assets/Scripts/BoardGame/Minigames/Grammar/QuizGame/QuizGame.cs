@@ -13,9 +13,6 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
     public GameObject[] resultObjects;
     public int numPlayers;
 
-    //lol lazy lets make this the only game who is a duel and multiplayer! lololol
-    public static bool multiplayer;
-
     private int currentPlayerI;
     private int correctAnswerChoice;
     private bool allowAnswer;
@@ -34,7 +31,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         controls.QuizGame.AddCallbacks(this);
         timer.TimeUp += Timeout;
 
-        //numPlayers = multiplayer ? BoardController.numPlayers : 2;
+        numPlayers = BoardController.numPlayers;
 
         for (int i = 0; i < numPlayers; i++) {
             pedestals[i].gameObject.SetActive(true);
@@ -113,12 +110,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
     private IEnumerator FinishGame() {
         Debug.Log("Finish!");
         yield return new WaitForSeconds(2f);
-        if (multiplayer) {
-            EndMultiplayerGame(currentPlayerI);
-        } else {
-            //duel!
-            EndGame(currentPlayerI == 0);
-        }
+        EndMultiplayerGame(currentPlayerI);
     }
 
     private void LetThemAnswer(int playerI) {
