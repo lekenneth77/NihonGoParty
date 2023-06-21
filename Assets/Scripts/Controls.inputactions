@@ -634,6 +634,94 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "TunnelRunner",
+            "id": "90750029-46e2-401e-b835-29e65f1537a2",
+            "actions": [
+                {
+                    "name": "A",
+                    "type": "Button",
+                    "id": "d104656a-c9aa-4e1b-b663-33ba36a38eb2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "D",
+                    "type": "Button",
+                    "id": "056e0032-1e3d-469e-a79b-81649bb39ec5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Left Arrow Key",
+                    "type": "Button",
+                    "id": "a9b66fd3-a580-4870-9693-fe4e7bb93f83",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right Arrow Key",
+                    "type": "Button",
+                    "id": "5f62a08b-e4c5-4049-8842-618e7eae2a65",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e0652baf-8593-4e0f-9450-2c614de125c1",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c42f402-08df-43f2-95b4-9231d813d14f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "D",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3df86649-ace2-4ebf-96bd-a5056455964c",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left Arrow Key",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e948925-ac04-463d-9722-ff1b1eb9f8a8",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right Arrow Key",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

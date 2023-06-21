@@ -656,6 +656,94 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TunnelRunner"",
+            ""id"": ""90750029-46e2-401e-b835-29e65f1537a2"",
+            ""actions"": [
+                {
+                    ""name"": ""A"",
+                    ""type"": ""Button"",
+                    ""id"": ""d104656a-c9aa-4e1b-b663-33ba36a38eb2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""D"",
+                    ""type"": ""Button"",
+                    ""id"": ""056e0032-1e3d-469e-a79b-81649bb39ec5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Arrow Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9b66fd3-a580-4870-9693-fe4e7bb93f83"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right Arrow Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f62a08b-e4c5-4049-8842-618e7eae2a65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e0652baf-8593-4e0f-9450-2c614de125c1"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""A"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c42f402-08df-43f2-95b4-9231d813d14f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""D"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3df86649-ace2-4ebf-96bd-a5056455964c"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Arrow Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e948925-ac04-463d-9722-ff1b1eb9f8a8"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Arrow Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -711,6 +799,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // SpeedType
         m_SpeedType = asset.FindActionMap("SpeedType", throwIfNotFound: true);
         m_SpeedType_Keyboard = m_SpeedType.FindAction("Keyboard", throwIfNotFound: true);
+        // TunnelRunner
+        m_TunnelRunner = asset.FindActionMap("TunnelRunner", throwIfNotFound: true);
+        m_TunnelRunner_A = m_TunnelRunner.FindAction("A", throwIfNotFound: true);
+        m_TunnelRunner_D = m_TunnelRunner.FindAction("D", throwIfNotFound: true);
+        m_TunnelRunner_LeftArrowKey = m_TunnelRunner.FindAction("Left Arrow Key", throwIfNotFound: true);
+        m_TunnelRunner_RightArrowKey = m_TunnelRunner.FindAction("Right Arrow Key", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1256,6 +1350,76 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public SpeedTypeActions @SpeedType => new SpeedTypeActions(this);
+
+    // TunnelRunner
+    private readonly InputActionMap m_TunnelRunner;
+    private List<ITunnelRunnerActions> m_TunnelRunnerActionsCallbackInterfaces = new List<ITunnelRunnerActions>();
+    private readonly InputAction m_TunnelRunner_A;
+    private readonly InputAction m_TunnelRunner_D;
+    private readonly InputAction m_TunnelRunner_LeftArrowKey;
+    private readonly InputAction m_TunnelRunner_RightArrowKey;
+    public struct TunnelRunnerActions
+    {
+        private @Controls m_Wrapper;
+        public TunnelRunnerActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @A => m_Wrapper.m_TunnelRunner_A;
+        public InputAction @D => m_Wrapper.m_TunnelRunner_D;
+        public InputAction @LeftArrowKey => m_Wrapper.m_TunnelRunner_LeftArrowKey;
+        public InputAction @RightArrowKey => m_Wrapper.m_TunnelRunner_RightArrowKey;
+        public InputActionMap Get() { return m_Wrapper.m_TunnelRunner; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TunnelRunnerActions set) { return set.Get(); }
+        public void AddCallbacks(ITunnelRunnerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TunnelRunnerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TunnelRunnerActionsCallbackInterfaces.Add(instance);
+            @A.started += instance.OnA;
+            @A.performed += instance.OnA;
+            @A.canceled += instance.OnA;
+            @D.started += instance.OnD;
+            @D.performed += instance.OnD;
+            @D.canceled += instance.OnD;
+            @LeftArrowKey.started += instance.OnLeftArrowKey;
+            @LeftArrowKey.performed += instance.OnLeftArrowKey;
+            @LeftArrowKey.canceled += instance.OnLeftArrowKey;
+            @RightArrowKey.started += instance.OnRightArrowKey;
+            @RightArrowKey.performed += instance.OnRightArrowKey;
+            @RightArrowKey.canceled += instance.OnRightArrowKey;
+        }
+
+        private void UnregisterCallbacks(ITunnelRunnerActions instance)
+        {
+            @A.started -= instance.OnA;
+            @A.performed -= instance.OnA;
+            @A.canceled -= instance.OnA;
+            @D.started -= instance.OnD;
+            @D.performed -= instance.OnD;
+            @D.canceled -= instance.OnD;
+            @LeftArrowKey.started -= instance.OnLeftArrowKey;
+            @LeftArrowKey.performed -= instance.OnLeftArrowKey;
+            @LeftArrowKey.canceled -= instance.OnLeftArrowKey;
+            @RightArrowKey.started -= instance.OnRightArrowKey;
+            @RightArrowKey.performed -= instance.OnRightArrowKey;
+            @RightArrowKey.canceled -= instance.OnRightArrowKey;
+        }
+
+        public void RemoveCallbacks(ITunnelRunnerActions instance)
+        {
+            if (m_Wrapper.m_TunnelRunnerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITunnelRunnerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TunnelRunnerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TunnelRunnerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TunnelRunnerActions @TunnelRunner => new TunnelRunnerActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1311,5 +1475,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface ISpeedTypeActions
     {
         void OnKeyboard(InputAction.CallbackContext context);
+    }
+    public interface ITunnelRunnerActions
+    {
+        void OnA(InputAction.CallbackContext context);
+        void OnD(InputAction.CallbackContext context);
+        void OnLeftArrowKey(InputAction.CallbackContext context);
+        void OnRightArrowKey(InputAction.CallbackContext context);
     }
 }
