@@ -21,10 +21,22 @@ public class Runner : MonoBehaviour
     }
 
     public void Run() {
-        Debug.Log("hello");
         runner.ChangeSpeed(runSpeed);
         runner.SetTargetAndMove(finishPosition);
         finish = false;
+    }
+
+    public void ChangeText(string s) {
+        if (s.Length == 1) {
+            text.fontSize = 1;
+        } else if (s.Length == 2) {
+            text.fontSize = 0.75f;
+        } else if (s.Length == 3) {
+            text.fontSize = 0.45f;
+        } else {
+            text.fontSize = 0.3f;
+        }
+        text.text = s;
     }
 
     void Update() { 
