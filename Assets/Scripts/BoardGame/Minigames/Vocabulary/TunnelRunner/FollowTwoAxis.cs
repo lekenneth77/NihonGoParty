@@ -6,6 +6,7 @@ using UnityEngine;
 public class FollowTwoAxis : MonoBehaviour
 {
     public Transform follow;
+    //this function is actually stupid i don't need this im so tired please help
 
     // Update is called once per frame
     void Update()
