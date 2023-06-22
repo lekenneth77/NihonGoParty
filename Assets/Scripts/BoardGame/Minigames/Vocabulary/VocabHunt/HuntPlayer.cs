@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,15 +9,35 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
     // Start is called before the first frame update
     public GameObject exclamation;
     public StunStarSpin stars;
+    public Sprite normal;
+    public Sprite sad;
 
     public Vector2 moveVal;
     public float moveSpeed;
     private Controls controls;
+
+    public event Action<int> interacted;
+    private GameObject mostRecentInter;
     void Start()
     {
         controls = new Controls();
         controls.VocabHunt.AddCallbacks(this);
+    }
+
+    public void EnableControls() {
         controls.VocabHunt.Enable();
+    }
+
+    public void DisableControls() {
+        controls.VocabHunt.Disable();
+    }
+
+    public void SwapToSad() {
+        GetComponent<SpriteRenderer>().sprite = sad;
+    }
+
+    public void SwapToNormal() {
+        GetComponent<SpriteRenderer>().sprite = normal;
     }
 
     // Update is called once per frame
@@ -29,11 +50,14 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!collision.gameObject.GetComponent<VocabObject>()) { return; }
+        mostRecentInter = collision.gameObject;
         exclamation.SetActive(true);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        if (!collision.gameObject.GetComponent<VocabObject>()) { return; }
         exclamation.SetActive(false);
         
     }
@@ -43,12 +67,14 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
         //enter the banana
         collision.isTrigger = false;
         controls.VocabHunt.Disable();
+        GetComponent<Animator>().Play("Fall");
         StartCoroutine(Bananaed(collision.gameObject));
     }
 
     private IEnumerator Bananaed(GameObject obj) {
         stars.StartSpin();
         yield return new WaitForSeconds(stars.activeTime);
+        GetComponent<Animator>().Play("Idle");
         obj.SetActive(false);
         controls.VocabHunt.Enable();
     }
@@ -62,5 +88,6 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
     {
         if (!context.performed || !exclamation.activeInHierarchy) { return; }
         Debug.Log("hey!");
+        interacted?.Invoke(mostRecentInter.GetComponent<VocabObject>().id);
     }
 }
