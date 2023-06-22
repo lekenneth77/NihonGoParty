@@ -744,6 +744,153 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""VocabHunt"",
+            ""id"": ""b7912b3c-cb68-4536-b584-e11c883e4bde"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""1a03f39b-9daf-42ef-8644-48c311d071a6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""94ca05c1-401a-49b6-99f8-d6cf20ff7305"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""9f87e9e0-b571-4ef2-ba3a-1b2c502509c4"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""2c121dd7-1d8d-4e2a-b4e0-39ccf5045f03"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1c634d66-f44f-4224-a513-4093e4465010"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""0859c18a-320b-4087-bcfe-0578459235c7"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""50b60c6e-5935-4301-a4ba-d76449d2ae4c"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Arrow Keys"",
+                    ""id"": ""fc5324ec-3982-4daf-88a2-5c815c8c7ebc"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""88e1480a-5e8d-4819-bfd0-6dfa0a726b89"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0ca7b03e-569c-4350-a6eb-e111c2985bb7"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""11641e4a-93a8-40c6-b69d-7f8c82ad41a3"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""be003f42-c56f-4329-9c11-47d5b9a8e73d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a803a141-525d-4732-8eaf-36abeb69c529"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -805,6 +952,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_TunnelRunner_D = m_TunnelRunner.FindAction("D", throwIfNotFound: true);
         m_TunnelRunner_LeftArrowKey = m_TunnelRunner.FindAction("Left Arrow Key", throwIfNotFound: true);
         m_TunnelRunner_RightArrowKey = m_TunnelRunner.FindAction("Right Arrow Key", throwIfNotFound: true);
+        // VocabHunt
+        m_VocabHunt = asset.FindActionMap("VocabHunt", throwIfNotFound: true);
+        m_VocabHunt_Movement = m_VocabHunt.FindAction("Movement", throwIfNotFound: true);
+        m_VocabHunt_Interact = m_VocabHunt.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1420,6 +1571,60 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public TunnelRunnerActions @TunnelRunner => new TunnelRunnerActions(this);
+
+    // VocabHunt
+    private readonly InputActionMap m_VocabHunt;
+    private List<IVocabHuntActions> m_VocabHuntActionsCallbackInterfaces = new List<IVocabHuntActions>();
+    private readonly InputAction m_VocabHunt_Movement;
+    private readonly InputAction m_VocabHunt_Interact;
+    public struct VocabHuntActions
+    {
+        private @Controls m_Wrapper;
+        public VocabHuntActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_VocabHunt_Movement;
+        public InputAction @Interact => m_Wrapper.m_VocabHunt_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_VocabHunt; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(VocabHuntActions set) { return set.Get(); }
+        public void AddCallbacks(IVocabHuntActions instance)
+        {
+            if (instance == null || m_Wrapper.m_VocabHuntActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_VocabHuntActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+        }
+
+        private void UnregisterCallbacks(IVocabHuntActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+        }
+
+        public void RemoveCallbacks(IVocabHuntActions instance)
+        {
+            if (m_Wrapper.m_VocabHuntActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IVocabHuntActions instance)
+        {
+            foreach (var item in m_Wrapper.m_VocabHuntActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_VocabHuntActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public VocabHuntActions @VocabHunt => new VocabHuntActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1482,5 +1687,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnD(InputAction.CallbackContext context);
         void OnLeftArrowKey(InputAction.CallbackContext context);
         void OnRightArrowKey(InputAction.CallbackContext context);
+    }
+    public interface IVocabHuntActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Grammar/SpeedType/SpeedType.unity
     guid: 125079d198d230645808d23f551214ec
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Vocabulary/TunnelRunner.unity
+    guid: 00989e6a9f6e6b844baa67406af57fa9
   m_configObjects: {}
