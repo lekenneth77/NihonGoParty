@@ -7,7 +7,7 @@ public class FollowOneAxis : MonoBehaviour
 
     public Transform follow;
     public float speed = 2f;
-    private bool move;
+    public bool move;
     // Update is called once per frame
     void Update()
     {

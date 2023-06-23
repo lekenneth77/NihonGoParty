@@ -891,6 +891,56 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""KanjiFishing"",
+            ""id"": ""87f5826d-ad86-4260-8970-948578bf9925"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""161262af-1ee0-4e9b-97d9-fe23de9a3818"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""2ac51152-d6f7-4ae5-b58a-c422502e6a50"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""80147c8e-2ec7-4366-ba49-356b5daf6e2f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""c9f48f31-ad95-479e-a596-e2a36bbadce7"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -956,6 +1006,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_VocabHunt = asset.FindActionMap("VocabHunt", throwIfNotFound: true);
         m_VocabHunt_Movement = m_VocabHunt.FindAction("Movement", throwIfNotFound: true);
         m_VocabHunt_Interact = m_VocabHunt.FindAction("Interact", throwIfNotFound: true);
+        // KanjiFishing
+        m_KanjiFishing = asset.FindActionMap("KanjiFishing", throwIfNotFound: true);
+        m_KanjiFishing_Move = m_KanjiFishing.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1625,6 +1678,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public VocabHuntActions @VocabHunt => new VocabHuntActions(this);
+
+    // KanjiFishing
+    private readonly InputActionMap m_KanjiFishing;
+    private List<IKanjiFishingActions> m_KanjiFishingActionsCallbackInterfaces = new List<IKanjiFishingActions>();
+    private readonly InputAction m_KanjiFishing_Move;
+    public struct KanjiFishingActions
+    {
+        private @Controls m_Wrapper;
+        public KanjiFishingActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_KanjiFishing_Move;
+        public InputActionMap Get() { return m_Wrapper.m_KanjiFishing; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KanjiFishingActions set) { return set.Get(); }
+        public void AddCallbacks(IKanjiFishingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_KanjiFishingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_KanjiFishingActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+        }
+
+        private void UnregisterCallbacks(IKanjiFishingActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+        }
+
+        public void RemoveCallbacks(IKanjiFishingActions instance)
+        {
+            if (m_Wrapper.m_KanjiFishingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IKanjiFishingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_KanjiFishingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_KanjiFishingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public KanjiFishingActions @KanjiFishing => new KanjiFishingActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1692,5 +1791,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IKanjiFishingActions
+    {
+        void OnMove(InputAction.CallbackContext context);
     }
 }

@@ -869,6 +869,56 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "KanjiFishing",
+            "id": "87f5826d-ad86-4260-8970-948578bf9925",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "161262af-1ee0-4e9b-97d9-fe23de9a3818",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "2ac51152-d6f7-4ae5-b58a-c422502e6a50",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "80147c8e-2ec7-4366-ba49-356b5daf6e2f",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "c9f48f31-ad95-479e-a596-e2a36bbadce7",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
         }
     ],
     "controlSchemes": [

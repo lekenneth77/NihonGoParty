@@ -12,7 +12,7 @@ public class MinigameSpace : BoardSpace
     private string[] KatakanaGames = {"KatakanaScramble", "KatakanaSearch", "KataSpeedType"};
     private string[] GrammarGames = { "WordOrder", "SpeedType"};// particle uhh smarticle, honor vs humble, give receive?
     private string[] KanjiGames = { "KanjiCrossRotate" }; //kanji dnd
-    private string[] VocabGames = { "TreeHop", "TunnelRunner" };// english japanese match
+    private string[] VocabGames = { "TreeHop", "TunnelRunner", "VocabHunt" };
     private string[] DuelGames = { "KanjiCrossRotate", "KataSpeedType", "TunnelRunner"};
     private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame" };
 
