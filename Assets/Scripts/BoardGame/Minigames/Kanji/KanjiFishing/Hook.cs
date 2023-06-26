@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,48 +14,70 @@ public class Hook : MonoBehaviour, Controls.IKanjiFishingActions
     private Rigidbody2D rb;
     private Controls controls;
     Queue<GameObject> hookedUp;
+    public event Action<Queue<GameObject>> reachTop;
 
-
+    private Vector3 originalWP;
     // Start is called before the first frame update
     void Start()
     {
         controls = new Controls();
         controls.KanjiFishing.AddCallbacks(this);
-        controls.KanjiFishing.Enable();
-
         hookedUp = new Queue<GameObject>();
+        originalWP = fishWP.position;
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(0, gravity);
+        rb.velocity = Vector2.zero;
+        rb.Sleep();
     }
 
-    public void Setup() {
+    public void ResetAndStart() {
+        fishWP.position = originalWP;
         gravity = Mathf.Abs(gravity) * -1f;
-        moveSpeed = 2f;
-        transform.position = Vector3.zero;
+        transform.position = new Vector2(0, 3);
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(0, gravity);
+        rb.WakeUp();
+        controls.KanjiFishing.Enable();
+    }
+
+    public void HandleControls(bool enable) { 
+        if (enable) {
+            controls.KanjiFishing.Enable();
+        } else {
+            controls.KanjiFishing.Disable();
+
+        }
+    }
+
+    public void ClearQueue() { 
+        hookedUp.Clear(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(0, gravity);
-        transform.rotation = Quaternion.identity;
-        transform.Translate(new Vector2(moveVal * Time.deltaTime * moveSpeed, 0));
+        if (rb.IsAwake()) { 
+            rb.velocity = new Vector2(0, gravity);
+            transform.rotation = Quaternion.identity;
+            transform.Translate(new Vector2(moveVal * Time.deltaTime * moveSpeed, 0));
+        }
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-
         moveVal = context.ReadValue<float>();
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!collision.gameObject.GetComponent<Seafloor>()) { return; }
         if (collision.gameObject.GetComponent<Seafloor>().floor) {
             gravity = -gravity;
             rb.velocity = new Vector2(0, gravity);
-            moveSpeed = 4f;
         } else if (!collision.gameObject.GetComponent<Seafloor>().floor) {
-            Debug.Log("THEY'RE DONE!");
             rb.velocity = Vector2.zero;
+            rb.Sleep();
+            controls.KanjiFishing.Disable();
+            reachTop?.Invoke(hookedUp);
         }
     }
 
@@ -62,9 +85,9 @@ public class Hook : MonoBehaviour, Controls.IKanjiFishingActions
     {
         collision.isTrigger = false;
         collision.gameObject.transform.position = fishWP.position;
-        collision.gameObject.transform.localScale = new Vector2(100f, 100f);
+        collision.gameObject.transform.localScale = new Vector2(60f, 60f);
         collision.gameObject.transform.SetParent(fishWP.parent);
-        fishWP.position = new Vector2(fishWP.position.x, fishWP.position.y - 150f);
+        fishWP.position = new Vector2(fishWP.position.x, fishWP.position.y - 100f);
         collision.gameObject.GetComponent<Fish>().StopSwim();
         hookedUp.Enqueue(collision.gameObject);
     }

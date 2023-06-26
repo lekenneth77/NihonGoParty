@@ -32,6 +32,11 @@ public class Fish : MonoBehaviour
         ChangeRotation();
     }   
 
+    public void ChangeLetter(string s) {
+        letter = s;
+        transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = s;
+    }
+
     private void ChangeRotation() { 
         if (!left) {
             transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 270f);

@@ -1,0 +1,38 @@
+熱がある,ねつがある,have a fever
+熱いお茶,あついおちゃ,hot tea
+大学院,だいがくいん,grad school
+病院,びょういん,hospital
+心配事,しんぱいごと,worries / troubles
+四角い形,しかくいかたち,square/rectangular shape
+人間の体,にんげんのからだ,human body
+高速道路,こうそくどうろ,freeway
+工事中,こうじちゅう,under construction,
+電話番号,でんわばんごう,telephone number
+交差点,こうさてん,intersection
+大変だ,たいへんだ,there\s trouble
+自転車,じてんしゃ,bicycle
+動物園,どうぶつえん,zoo
+海外旅行,かいがいりょこう,Overseas travel
+地味な色,じみないろ,drab color
+郵便番号,ゆうびんばんごう,postal code
+留守番電話,るすばんでんわ,answering machine
+銀行員,ぎんこういん,bank employee
+御卒業,ごそつぎょう,your/their graduation
+結婚式,けっこんしき,marriage ceremony
+東京駅,とうきょうえき,Tokyo station
+国内旅行,こくないりょこう,domestic travel
+四番目,よんばんめ,Fourth
+社会学,しゃかいがく,Sociology
+東京,とうきょう,Tokyo
+食料品店,しょくりょうひんてん,grocery store
+洋品店,ようひんてん,clothing store
+百円引き,ひゃくえんびき,100 yen off
+貝料理,かいりょうり,shellfish cuisine
+洋風の家,ようふうのいえ,Western-like house
+食料品,しょくりょうひん,groceries
+南風,みなみかぜ,southerly wind
+東風,ひがしかぜ,easterly wind
+水曜日,すいようび,Wednesday
+金曜日,きんようび,Friday
+火曜日,かようび,Tuesday
+一日中,いちにちじゅう,all day
