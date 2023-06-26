@@ -11,6 +11,7 @@ public class KanjiDnD : Minigame
     public HashSet<int> chosenProblems;
     public GameObject defDraggable;
     public GameObject defDropper;
+    public Canvas canvas;
     public TextMeshProUGUI correctWord;
     public GameObject[] UIObjects;
 
@@ -85,10 +86,9 @@ public class KanjiDnD : Minigame
         string[] parameters = problem.Split("_"[0]);
         correctWord.text = parameters[0];
         string[] ids = parameters[1].Split(","[0]);
-        string[] wh = parameters[2].Split(","[0]);
-        string[] xy = parameters[3].Split(","[0]);
+        string[] xy = parameters[2].Split(","[0]);
 
-        GenerateLeftItems(ids, wh);
+        GenerateLeftItems(ids);
         GenerateRightItems(ids, xy);
 
         DragNDrop.allowDrag = true;
@@ -97,7 +97,7 @@ public class KanjiDnD : Minigame
     }
 
     //its very possible to put these two functions together but i like them seperate
-    private void GenerateLeftItems(string[] ids, string[] widthHeights) {
+    private void GenerateLeftItems(string[] ids) {
         for (int i = 0; i < ids.Length; i++) {
             float randomX = Random.Range(-800f, 0);
             float randomY = Random.Range(-400f, 400f);
@@ -105,10 +105,12 @@ public class KanjiDnD : Minigame
             GameObject newObj = Instantiate(defDraggable, Vector3.zero, Quaternion.identity);
             newObj.transform.SetParent(leftSide);
             newObj.transform.localPosition = new Vector3(randomX, randomY);
-            newObj.GetComponent<RectTransform>().sizeDelta = new Vector2(float.Parse(widthHeights[i * 2]), float.Parse(widthHeights[(i * 2) + 1]));
-
+            newObj.GetComponent<SpriteRenderer>().sprite = kanjis[id - 1];
+            newObj.AddComponent<RectTransform>().localScale = new Vector2(200f, 200f);
             newObj.GetComponent<DnDInfo>().id = id;
-            newObj.GetComponent<Image>().sprite = kanjis[id - 1];
+            newObj.AddComponent<DragNDrop>().SetCanvas(canvas);
+            newObj.AddComponent<Image>().sprite = kanjis[id - 1];
+            Destroy(newObj.GetComponent<SpriteRenderer>());
         }
     }
 

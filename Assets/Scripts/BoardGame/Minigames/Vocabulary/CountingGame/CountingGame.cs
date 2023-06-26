@@ -66,8 +66,8 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         correctOnes = new List<GameObject>();
         wrongOnes = new List<GameObject>();
 
-        correctCounts = new int[] { Random.Range(3, 7), Random.Range(5, 10), Random.Range(1, 10) };
-        wrongCounts = new int[] { Random.Range(4, 6), Random.Range(6, 8), Random.Range(8, 10) }; //due to jank, this will be multiplied by 2!
+        correctCounts = new int[] { Random.Range(3, 7), Random.Range(5, 9), Random.Range(1, 9) };
+        wrongCounts = new int[] { Random.Range(4, 6), Random.Range(6, 8), Random.Range(7, 9) }; //due to jank, this will be multiplied by 2!
         minSpeed = new float[] { 5f, 7f, 5f};
         maxSpeed = new float[] { 5f, 10f, 15f };
         minWaitTime = new float[] { 0.5f, 0.25f, 0.15f };
