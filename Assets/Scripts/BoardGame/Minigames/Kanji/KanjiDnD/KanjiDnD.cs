@@ -12,11 +12,14 @@ public class KanjiDnD : Minigame
     public GameObject defDraggable;
     public GameObject defDropper;
     public Canvas canvas;
+    public Image fullImg;
+    public TextMeshProUGUI hiragana;
     public TextMeshProUGUI correctWord;
     public GameObject[] UIObjects;
 
     public TextAsset textFile;
-    private Sprite[] kanjis;
+    private Sprite[] parts;
+    private Sprite[] fullKanjis;
     private string[] problems;
 
     public Timer timer;
@@ -30,7 +33,8 @@ public class KanjiDnD : Minigame
         base.Start();
         timer.TimeUp += TimeOut;
 
-        kanjis = Resources.LoadAll<Sprite>("Minigames/Kanji/KanjiDnD/KanjiParts/");
+        parts = Resources.LoadAll<Sprite>("Minigames/Kanji/KanjiDnD/KanjiParts/");
+        fullKanjis = Resources.LoadAll<Sprite>("Minigames/Kanji/KanjiDnD/FullImages/");
         problems = textFile.text.Split("\n"[0]);
         chosenProblems = new HashSet<int>();
         DropSpot.Dropped += CheckAnswer;
@@ -80,20 +84,23 @@ public class KanjiDnD : Minigame
             random = Random.Range(0, problems.Length);
         }
         */
-
+        random = problems.Length - 1;
+        random = 14;
+        fullImg.sprite = fullKanjis[random];
         string problem = problems[random];
         //parse string 
         string[] parameters = problem.Split("_"[0]);
         correctWord.text = parameters[0];
-        string[] ids = parameters[1].Split(","[0]);
-        string[] xy = parameters[2].Split(","[0]);
+        hiragana.text = parameters[1];
+        string[] ids = parameters[2].Split(","[0]);
+        string[] xy = parameters[3].Split(","[0]);
 
         GenerateLeftItems(ids);
         GenerateRightItems(ids, xy);
 
         DragNDrop.allowDrag = true;
         timer.ResetTimer();
-        timer.StartTimer();
+        //timer.StartTimer();
     }
 
     //its very possible to put these two functions together but i like them seperate
@@ -105,11 +112,11 @@ public class KanjiDnD : Minigame
             GameObject newObj = Instantiate(defDraggable, Vector3.zero, Quaternion.identity);
             newObj.transform.SetParent(leftSide);
             newObj.transform.localPosition = new Vector3(randomX, randomY);
-            newObj.GetComponent<SpriteRenderer>().sprite = kanjis[id - 1];
+            newObj.GetComponent<SpriteRenderer>().sprite = parts[id - 1];
             newObj.AddComponent<RectTransform>().localScale = new Vector2(200f, 200f);
             newObj.GetComponent<DnDInfo>().id = id;
             newObj.AddComponent<DragNDrop>().SetCanvas(canvas);
-            newObj.AddComponent<Image>().sprite = kanjis[id - 1];
+            newObj.AddComponent<Image>().sprite = parts[id - 1];
             Destroy(newObj.GetComponent<SpriteRenderer>());
         }
     }
