@@ -358,7 +358,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                 currentPlayer.GetComponent<PlayerInfo>().numMinigamesWon += 1;
                 StartCoroutine(MovePlayer(currentPlayer, minigameResult, true, false));
             } else {
-                StartCoroutine(MovePlayer(currentPlayer, minigameResult, false, false));
+                StartCoroutine(MovePlayer(currentPlayer, Mathf.Abs(minigameResult), false, false));
             }
         }
         else

@@ -14,7 +14,7 @@ public class MinigameSpace : BoardSpace
     private string[] KanjiGames = { "KanjiCrossRotate", "KanjiDnD", "KanjiFishing" }; //kanji dnd
     private string[] VocabGames = { "TreeHop", "TunnelRunner", "VocabHunt" };
     private string[] DuelGames = { "KanjiCrossRotate", "KataSpeedType", "TunnelRunner"};
-    private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame" }; //LocationGuesser
+    private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame", "LocationSeeker" }; //LocationGuesser
 
 
     private string[] gamesToChooseFrom;
@@ -57,7 +57,7 @@ public class MinigameSpace : BoardSpace
         Debug.Log("Minigame!");
         string chosenGame = gamesToChooseFrom[UnityEngine.Random.Range(0, gamesToChooseFrom.Length)];
         Minigame.singleplayer = !(category.ToUpper().Equals("DUEL") || category.ToUpper().Equals("MULTI"));
-
+        chosenGame = "KatakanaSearch";
         InvokeLoad(chosenGame, true);
         //InvokeLoad("HowToPlayTemp", true); //TODO once how to plays are made, put them in here!
     }

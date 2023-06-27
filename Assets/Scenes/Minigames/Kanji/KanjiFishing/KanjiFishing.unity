@@ -1087,7 +1087,7 @@ MonoBehaviour:
   followCam: {fileID: 1642850179}
   moveSpeed: 5
   moveVal: 0
-  gravity: -2
+  gravity: -3
 --- !u!1 &866922945
 GameObject:
   m_ObjectHideFlags: 0

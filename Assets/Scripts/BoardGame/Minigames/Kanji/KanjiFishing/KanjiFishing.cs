@@ -89,21 +89,36 @@ public class KanjiFishing : Minigame
 
     public void CheckAnswer(Queue<GameObject> q) {
         bool wrong = false;
-        foreach (GameObject obj in q) {
-            string letter = obj.GetComponent<Fish>().letter;
-            if (!theAnswer.Contains(letter)) {
+        string build = "";
+        foreach (GameObject obj in q) { 
+            build += obj.GetComponent<Fish>().letter;
+        }
+        for (int i = 0; i < theAnswer.Length; i++) { 
+            if (!build.Contains(theAnswer[i])) {
                 Debug.Log("Wrong!");
                 wrong = true;
                 break;
             }
         }
+        //im so fucking tired
+        for (int i = 0; i < build.Length; i++)
+        {
+            if (!theAnswer.Contains(build[i]))
+            {
+                Debug.Log("Wrong!");
+                wrong = true;
+                break;
+            }
+        }
+
         numRounds++;
         if (!wrong) {
             numCorrect++;
         }
-        if (numRounds == 3) {
+        if (numRounds == 2) {
             Debug.Log("Stop!");
-            EndGame(numCorrect - 1);
+            if (numCorrect == 0) { numCorrect = -1; }
+            EndGame(numCorrect);
             return;
         }
         if (wrong) {
