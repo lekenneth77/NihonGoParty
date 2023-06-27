@@ -11,10 +11,10 @@ public class MinigameSpace : BoardSpace
     public string category;
     private string[] KatakanaGames = {"KatakanaScramble", "KatakanaSearch", "KataSpeedType"};
     private string[] GrammarGames = { "WordOrder", "SpeedType"};// particle uhh smarticle, honor vs humble, give receive?
-    private string[] KanjiGames = { "KanjiCrossRotate" }; //kanji dnd
+    private string[] KanjiGames = { "KanjiCrossRotate", "KanjiDnD", "KanjiFishing" }; //kanji dnd
     private string[] VocabGames = { "TreeHop", "TunnelRunner", "VocabHunt" };
     private string[] DuelGames = { "KanjiCrossRotate", "KataSpeedType", "TunnelRunner"};
-    private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame" };
+    private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame" }; //LocationGuesser
 
 
     private string[] gamesToChooseFrom;
@@ -57,6 +57,7 @@ public class MinigameSpace : BoardSpace
         Debug.Log("Minigame!");
         string chosenGame = gamesToChooseFrom[UnityEngine.Random.Range(0, gamesToChooseFrom.Length)];
         Minigame.singleplayer = !(category.ToUpper().Equals("DUEL") || category.ToUpper().Equals("MULTI"));
+
         InvokeLoad(chosenGame, true);
         //InvokeLoad("HowToPlayTemp", true); //TODO once how to plays are made, put them in here!
     }

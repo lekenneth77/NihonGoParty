@@ -138,7 +138,7 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         timer.StopTimer();
         UIObjects[1].SetActive(true);
         yield return new WaitForSeconds(5f);
-        EndGame(false);
+        EndGame(-1);
     }
 
     private IEnumerator SetupSetupGame() {
@@ -147,7 +147,7 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         if (rounds == totalRounds) {
             UIObjects[2].SetActive(true);
             yield return new WaitForSeconds(5f);
-            EndGame(true);
+            EndGame(2);
         } else
         {
             UIObjects[0].SetActive(true);
@@ -187,6 +187,7 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
 
     public void Timeout() {
         Debug.Log("Times up!");
+        StartCoroutine("Failure");
     }
 
 }

@@ -14,7 +14,7 @@ public class KanjiDnD : Minigame
     public Canvas canvas;
     public Image fullImg;
     public TextMeshProUGUI hiragana;
-    public TextMeshProUGUI correctWord;
+    public GameObject answerCon;
     public GameObject[] UIObjects;
 
     public TextAsset textFile;
@@ -23,6 +23,7 @@ public class KanjiDnD : Minigame
     private string[] problems;
 
     public Timer timer;
+    public WinStars stars;
 
     public int totalRounds;
     private int currentRound;
@@ -60,6 +61,8 @@ public class KanjiDnD : Minigame
             }
         }
         //all are correct!
+        timer.StopTimer();
+        stars.Win();
         currentRound++;
         Debug.Log(currentRound);
         if (totalRounds == currentRound) {
@@ -80,17 +83,13 @@ public class KanjiDnD : Minigame
         }
 
         int random = Random.Range(0, problems.Length);
-        /*
         while(!chosenProblems.Add(random)) { 
             random = Random.Range(0, problems.Length);
         }
-        */
-        random = problems.Length - 1;
         fullImg.sprite = fullKanjis[random];
         string problem = problems[random];
         //parse string 
         string[] parameters = problem.Split("_"[0]);
-        correctWord.text = parameters[0];
         hiragana.text = parameters[1];
         string[] ids = parameters[2].Split(","[0]);
         string[] xy = parameters[3].Split(","[0]);
@@ -100,7 +99,7 @@ public class KanjiDnD : Minigame
 
         DragNDrop.allowDrag = true;
         timer.ResetTimer();
-        //timer.StartTimer();
+        timer.StartTimer();
     }
 
     //its very possible to put these two functions together but i like them seperate
@@ -133,12 +132,10 @@ public class KanjiDnD : Minigame
 
     private IEnumerator NextRound() {
         UIObjects[0].SetActive(true);
-        correctWord.gameObject.transform.parent.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(3f);
-
+        answerCon.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        answerCon.SetActive(false);
         UIObjects[0].SetActive(false);
-        correctWord.gameObject.transform.parent.gameObject.SetActive(false);
 
         GenerateProblem();
     }
@@ -146,17 +143,17 @@ public class KanjiDnD : Minigame
     private IEnumerator Incorrect() {
         DragNDrop.allowDrag = false;
         UIObjects[1].SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         DragNDrop.allowDrag = true;
         UIObjects[1].SetActive(false);
     }
 
     private IEnumerator HandleWin() {
         UIObjects[2].SetActive(true);
-        correctWord.gameObject.transform.parent.gameObject.SetActive(true);
         timer.StopTimer();
+        answerCon.SetActive(true);
         yield return new WaitForSeconds(4f);
-        EndGame(true);
+        FinalResult();
     }
 
 
@@ -168,10 +165,24 @@ public class KanjiDnD : Minigame
 
     private IEnumerator HandleTimeOut() {
         UIObjects[3].SetActive(true);
-        correctWord.gameObject.transform.parent.gameObject.SetActive(true);
-
+        answerCon.SetActive(true);
+        stars.Lose();
         yield return new WaitForSeconds(4f);
-        EndGame(false);
+        currentRound++;
+        Debug.Log(currentRound);
+        if (totalRounds == currentRound) {
+            FinalResult();
+        } else {
+            UIObjects[3].SetActive(false);
+            answerCon.SetActive(false);
+            GenerateProblem();
+        }
+    }
+
+    private void FinalResult() {
+        int result = stars.GetWins() - 1;
+        EndGame(result);
+
     }
 
 }

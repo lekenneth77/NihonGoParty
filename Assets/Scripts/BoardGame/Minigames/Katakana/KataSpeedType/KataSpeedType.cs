@@ -166,7 +166,8 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
         winnerText.text = playerOneWins >= playerTwoWins ? "Player One Wins!" : "Player Two Wins!";
         finishedText.SetActive(true);
         yield return new WaitForSeconds(10f);
-        EndGame(playerOneWins >= playerTwoWins);
+        int result = playerOneWins >= playerTwoWins ? 1 : 2;
+        EndGame(result);
     }
 
 

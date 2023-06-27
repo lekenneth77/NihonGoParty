@@ -103,7 +103,7 @@ public class KanjiFishing : Minigame
         }
         if (numRounds == 3) {
             Debug.Log("Stop!");
-            //EndGame(numCorrect);
+            EndGame(numCorrect - 1);
             return;
         }
         if (wrong) {

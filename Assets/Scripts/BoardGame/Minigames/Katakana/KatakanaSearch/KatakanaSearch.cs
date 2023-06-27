@@ -16,7 +16,7 @@ public class KatakanaSearch : Minigame
     public Transform instFolder;
     public Transform[] startingPositions;
     public Timer setupTimer;
-    public GameObject[] stars;
+    public WinStars stars;
     private int wins;
 
     //game
@@ -129,7 +129,7 @@ public class KatakanaSearch : Minigame
         gameTimer.StopTimer();
         flashlight.SetActive(false);
         yield return new WaitForSeconds(3f);
-        stars[wins].SetActive(true);
+        stars.Win();
         wins++;
         if (wins >= 3) {
             StartCoroutine("FinishGame");
@@ -149,13 +149,20 @@ public class KatakanaSearch : Minigame
     private IEnumerator FinishGame() {
         Debug.Log("They're done!");
         yield return new WaitForSeconds(5f);
-        EndGame(true);
+        int result = stars.GetWins();
+        EndGame(result - 1);
     }
 
     private IEnumerator HandleTimeout() {
         flashlight.SetActive(false);
+        stars.Lose();
         yield return new WaitForSeconds(5f);
-        EndGame(false);
+        wins++; //wins is the wrong variable name, it's more appropriate to call it rounds
+        if (wins >= 3) {
+            StartCoroutine("FinishGame");
+        } else {
+            SetupRound();
+        }
     }
     
 }

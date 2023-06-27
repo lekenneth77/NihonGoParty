@@ -74,7 +74,11 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 
         timer.StopTimer();
         congratImg.SetActive(true);
-        EndGame(true);
+        if (singleplayer) {
+            EndGame(2);
+        } else { 
+            EndGame(1);
+        }
     }
 
     public void P2NewCaveReached(Cave newCave, bool correct)
@@ -104,7 +108,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         Time.timeScale = 1;
         timer.StopTimer();
         congratImg.SetActive(true);
-        EndGame(false);
+        EndGame(2);
     }
 
     public void Timeout() {
@@ -114,7 +118,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     private IEnumerator TIMEOVER() {
         Debug.Log("TIME OUT");
         yield return new WaitForSeconds(3f);
-        EndGame(false);
+        EndGame(0);
     }
 
 

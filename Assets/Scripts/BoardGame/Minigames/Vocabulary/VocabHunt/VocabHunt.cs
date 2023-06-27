@@ -8,6 +8,7 @@ public class VocabHunt : Minigame
     public HuntPlayer player;
     public TextAsset textfile;
     public Timer timer;
+    public WinStars stars;
     public GameObject[] layouts;
     public TextMeshProUGUI findThisText;
     public Transform interactableParent;
@@ -34,6 +35,7 @@ public class VocabHunt : Minigame
         base.Start();
         objectNames = textfile.text.Split("\n"[0]);
         player.interacted += CheckAnswer;
+        timer.TimeUp += Timeout;
         SetupGame();
     }
 
@@ -70,8 +72,7 @@ public class VocabHunt : Minigame
         }
         chosenPositions.Clear();
         ChooseWord();
-        timer.ResetTimer();
-        timer.StartTimer();
+        
     }
 
     private void ChooseWord() {
@@ -82,12 +83,15 @@ public class VocabHunt : Minigame
         currWordIndex = chosenIndices[random];
         findThisText.text = "Find " + objectNames[currWordIndex];
         player.EnableControls();
+        timer.ResetTimer();
+        timer.StartTimer();
     }
 
     public void CheckAnswer(int id) {
         player.DisableControls();
         if (id == currWordIndex) {
             Debug.Log("Correct!");
+            stars.Win();
             numCorrect++;
             if (numCorrect >= maxRounds) {
                 timer.StopTimer();
@@ -115,7 +119,7 @@ public class VocabHunt : Minigame
         Debug.Log("Done!");
         finishImg.SetActive(true);
         yield return new WaitForSeconds(5f);
-        EndGame(true);
+        FinishThis();
     }
 
     public void Timeout() {
@@ -126,8 +130,23 @@ public class VocabHunt : Minigame
     private IEnumerator HandleTimeout() {
         Debug.Log("timeout");
         timeoutImg.SetActive(true);
-        yield return new WaitForSeconds(5f);
-        EndGame(false);
+        yield return new WaitForSeconds(3f);
+        timeoutImg.SetActive(false);
+        stars.Lose();
+        numCorrect++;
+        if (numCorrect >= maxRounds)
+        {
+            timer.StopTimer();
+            FinishThis();
+        }
+        else
+        {
+            ChooseWord();
+        }
+    }
+
+    private void FinishThis() {
+        EndGame(stars.GetWins() - 1);
     }
 
 

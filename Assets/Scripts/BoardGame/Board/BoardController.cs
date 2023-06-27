@@ -23,6 +23,10 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
     //minigame results information
     public static bool wonMinigame;
+    public static int minigameResult;
+    //singleplayer: int represents number of spaces the player will travel (<= 0 means loss)
+    //duel: 1 means player one, 2 means player two
+    //multiplayer: index of winner [0, numPlayers - 1]
 
     //duels
     public GameObject duelPopup;
@@ -32,7 +36,6 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
     //multiplayer
     private bool multiOn;
-    public static int multiWinIndex;
 
     //leaderboard
     public Leaderboard leaderboard;
@@ -342,7 +345,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             {
                 //TODO be more creative with this at some point...!!! maybe use the spinner?
                 multiOn = false;
-                StartCoroutine(MovePlayer(players[multiWinIndex], 4, true, false));
+                StartCoroutine(MovePlayer(players[minigameResult], 4, true, false));
                 return;
             }
             if (duelOn)
@@ -350,15 +353,12 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                 duelWinChoices.SetActive(true);
                 return;
             }
-            //check lose bool
-            if (wonMinigame)
-            {
+            //due to probably change, a result of 0 or less movement means they loss the minigame
+            if (minigameResult > 0) {
                 currentPlayer.GetComponent<PlayerInfo>().numMinigamesWon += 1;
-                StartCoroutine(MovePlayer(currentPlayer, 2, true, false));
-            }
-            else
-            {
-                StartCoroutine(MovePlayer(currentPlayer, 1, false, false));
+                StartCoroutine(MovePlayer(currentPlayer, minigameResult, true, false));
+            } else {
+                StartCoroutine(MovePlayer(currentPlayer, minigameResult, false, false));
             }
         }
         else
@@ -402,8 +402,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     public void DuelChoice(bool winnerForward)
     {
         duelWinChoices.SetActive(false);
-        GameObject winner = wonMinigame ? duelists[0] : duelists[1];
-        GameObject loser = wonMinigame ? duelists[1] : duelists[0];
+        //minigame result = 1 means player one wins
+        GameObject winner = minigameResult == 1 ? duelists[0] : duelists[1];
+        GameObject loser = minigameResult == 1 ? duelists[1] : duelists[0];
         winner.GetComponent<PlayerInfo>().numMinigamesWon += 1;
         duelOn = false;
         leaderboard.SetVisibility(true);

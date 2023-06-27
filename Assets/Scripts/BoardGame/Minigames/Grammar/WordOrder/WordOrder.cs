@@ -295,7 +295,7 @@ public class WordOrder : Minigame
         redo_button.interactable = false;
         giveup_button.interactable = false;
         yield return new WaitForSeconds(2f);
-        EndGame(false);
+        EndGame(-1);
     }
 
     private IEnumerator check_corr() {
@@ -499,6 +499,10 @@ public class WordOrder : Minigame
 
     void onclick_giveup() {
         StartCoroutine("Failure");
+    }
+
+    public void GoodEnd() {
+        EndGame(2);
     }
     
 }

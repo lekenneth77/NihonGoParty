@@ -25,6 +25,7 @@ public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!allowDrag) { return; }
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
         GameObject dragObj = eventData.pointerDrag;

@@ -218,17 +218,18 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         yield return null;
         if (duel)
         {
-            EndGame(playerOne == winner);
+            int result = playerOne == winner ? 1 : 2;
+            EndGame(result);
         } else
         {
-            EndGame(true);
+            EndGame(2); //do the wins later
         }
     }
 
     public IEnumerator Failure()
     {
         yield return null;
-        EndGame(false);
+        EndGame(0); //honestly im lazy
     }
 
     public void OnA(InputAction.CallbackContext context)

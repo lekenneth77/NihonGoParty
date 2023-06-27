@@ -134,13 +134,14 @@ GameObject:
   - component: {fileID: 5490417}
   - component: {fileID: 5490416}
   - component: {fileID: 5490418}
+  - component: {fileID: 5490419}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &5490416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +202,14 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!81 &5490419
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5490414}
+  m_Enabled: 1
 --- !u!1 &50883207
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,7 +1423,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1640008941}
   - component: {fileID: 1640008940}
-  - component: {fileID: 1640008939}
   - component: {fileID: 1640008942}
   - component: {fileID: 1640008943}
   m_Layer: 0
@@ -1424,14 +1432,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1640008939
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640008938}
-  m_Enabled: 1
 --- !u!20 &1640008940
 Camera:
   m_ObjectHideFlags: 0

@@ -198,7 +198,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
 
         yield return new WaitForSeconds(4f);
         if (singleplayer) {
-            EndGame(true);
+            EndGame(2);
         } else {
             EndMultiplayerGame(playerI);
         }
@@ -212,7 +212,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
 
     private IEnumerator OnTimeOut() {
         yield return new WaitForSeconds(2f);
-        EndGame(false);
+        EndGame(0);
     }
 
     public void OnA(InputAction.CallbackContext context)
