@@ -42,23 +42,24 @@ public class KanjiDnD : Minigame
         GenerateProblem();
     }
 
-    public void CheckAnswer() { 
+    public void CheckAnswer() {
         foreach (DnDInfo sq in dropSpots) { 
             if (!sq.onMeOnThem) { return; }
         }
         //all spots are filled!
 
+        DragNDrop.allowDrag = false;
         foreach(DnDInfo sq in dropSpots) {
             DnDInfo squareOnMe = sq.onMeOnThem;
             if (sq.id != squareOnMe.id) {
                 Debug.Log("Wrong Answer!");
                 StartCoroutine("Incorrect");
                 //either you can make the correct ones stay or just tell them its wrong
+                DragNDrop.allowDrag = true;
                 return;
             }
         }
         //all are correct!
-        DragNDrop.allowDrag = false;
         currentRound++;
         Debug.Log(currentRound);
         if (totalRounds == currentRound) {
@@ -85,7 +86,6 @@ public class KanjiDnD : Minigame
         }
         */
         random = problems.Length - 1;
-        random = 14;
         fullImg.sprite = fullKanjis[random];
         string problem = problems[random];
         //parse string 
