@@ -9,12 +9,6 @@ public class DropSpot : MonoBehaviour, IDropHandler
 {
     public static event Action Dropped;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void OnDrop(PointerEventData eventData)
     {
         if (!eventData.pointerDrag || gameObject.GetComponent<DnDInfo>().onMeOnThem) { return; }

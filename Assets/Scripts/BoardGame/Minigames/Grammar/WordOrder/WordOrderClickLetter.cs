@@ -58,7 +58,7 @@ public class WordOrderCLickLetter : MonoBehaviour
             }
             else
             {
-                new_pos = WordOrder.available_pos(this.gameObject, num_chars);
+                //new_pos = WordOrder.available_pos(this.gameObject, num_chars);
                 move_flag = true;
                 chosen = true;
             }
