@@ -29,20 +29,21 @@ public class WordOrder : Minigame
     private List<string> solutions;
     private int[] locked;
     Queue<GameObject> theFront;
-    private List<GameObject> clicks;
+
+    private WordOrderWord front;
+    private int numDropped;
     
     private string[] words;
-    private string sentence;
 
     // Start is called before the first frame update
     public override void Start() {
         base.Start();
-        clicks = new List<GameObject>();
         chosenProbs = new HashSet<int>();
         solutions = new List<string>();
         theFront = new Queue<GameObject>();
         nextPos = startingWP.position;
-        //WordOrderWord.gotClicked += HandleClick;
+        WordOrderDrop.drop += AnotherDrop;
+        WordOrderWord.remove += AnotherRemove;
         ChooseText();
         GetProblems();
     }
@@ -92,10 +93,11 @@ public class WordOrder : Minigame
         Debug.Log(words.Length);
         GenerateLocked(words);
         GenerateClickables(words);
+        WordOrderWord.mrWorldwideDrag = true;
     }
 
-  
 
+    //THIS GAME ASSUMES THAT EVERY PROBLEM HAS THE FIRST AND THE LAST ONE LOCKED AT LEAST
     private void GenerateLocked(string[] words) {
         WordOrderWord prev = null;
         for (int i = 0; i < locked.Length - 1; i++) {
@@ -109,10 +111,9 @@ public class WordOrder : Minigame
                 w.GetComponent<WordOrderWord>().prev = prev;
             }
             prev = w.GetComponent<WordOrderWord>();
-        }
-
-        if (locked[0] != 0) { 
-           //tbh might be easier to whip out like an invisible one or something
+            if (i == 0) {
+                front = w.GetComponent<WordOrderWord>();
+            }
         }
 
         GameObject word = MakeWord(words[locked[locked.Length - 1]], nextPos, toContainer);
@@ -142,6 +143,7 @@ public class WordOrder : Minigame
     private GameObject MakeWord(string s, Vector3 pos, Transform parent)
     {
         GameObject word = Instantiate(defClick, pos, Quaternion.identity, parent);
+        word.name = s;
         word.GetComponent<WordOrderWord>().ChangeWord(s);
         Vector2 temp = new Vector2(pos.x, pos.y);
         foreach (char c in s)
@@ -159,31 +161,53 @@ public class WordOrder : Minigame
     }
 
     private void AdjustNextWP(int length) {
+        //Double check if we need this
         nextPos = new Vector3(nextPos.x + (100f * length) + 50f, nextPos.y);
         if (nextPos.x >= 800) { //test number
+            Debug.Log("Hello?");
             nextPos = new Vector3(startingWP.position.x, startingWP.position.y - 100f);
         }
     }
 
+    public void AnotherDrop() {
+        numDropped++;
+        //check the answer
+        if (numDropped == words.Length - locked.Length) {
+            Debug.Log("Time to check!");
+            WordOrderWord.mrWorldwideDrag = false;
+            WordOrderWord next = front.next;
+            string theirWord = front.word;
+            while (next != null) {
+                theirWord += next.word;
+                next = next.next;
+            }
+            bool correct = true;
+            foreach (string solution in solutions) {
+                correct = true;
+                for (int i = 0; i < solution.Length; i++) { 
+                    if (!solution[i].Equals(theirWord[i])) {
+                        correct = false;
+                        break;
+                    }
+                }
+                if (correct) {
+                    //found a matching one
+                    break;
+                }
+            }
 
-
-    public void HandleClick(GameObject obj) {
-        clicks.Add(obj);
-        if (clicks.Count == words.Length) {
-            Debug.Log("No more.");
+            if (correct) {
+                Debug.Log("Correct!");
+            } else {
+                Debug.Log("Wrong!");
+            }
         }
     }
 
-
-
-    private IEnumerator LoadResources()
-    {
-        //inter_sprites = Resources.LoadAll<Sprite>("Minigames/Grammar/WordOrder/interactables/");
-        //seacreatures = Resources.LoadAll<Sprite>("Minigames/Grammar/WordOrder/seacreatures/");
-        //seacreature_img.sprite = seacreatures[Random.Range(0, seacreatures.Length)];
-        //TMP_FontAsset[] fonts = Resources.LoadAll<TMP_FontAsset>("SU3DJPFont/TextMeshProFont/Selected/");
-        //font = fonts[0];
-        yield break;
+    public void AnotherRemove() {
+        numDropped--;
     }
+
+    
 
 }

@@ -10,16 +10,18 @@ public class WordOrderWord : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 {
     private Vector3 originalPosition;
     private MoveObject moveObj;
-    public TextMeshProUGUI word;
+    public string word;
     public int length;
     public WordOrderWord next;
     public WordOrderWord prev;
-    //public static event Action<GameObject> gotClicked;
+    public static event Action remove;
+    public bool bbyRUDown;
 
     public Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     public bool allowDrag;
+    public static bool mrWorldwideDrag;
 
     // Start is called before the first frame update
     void Start() {
@@ -48,8 +50,9 @@ public class WordOrderWord : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         GetComponent<Button>().enabled = true;
     }
 
+
     public void ChangeWord(string s) {
-        word.text = s;
+        word = s;
         length = s.Length;
     }
 
@@ -57,17 +60,47 @@ public class WordOrderWord : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         transform.GetChild(length).gameObject.SetActive(drop);
     }
 
-
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!allowDrag) { return; }
+        if (!mrWorldwideDrag || !allowDrag) { return; }
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
-        GameObject dragObj = eventData.pointerDrag;
+
+        if (!bbyRUDown) { return; }
+        bbyRUDown = false;
+        prev.next = next;
+        next.prev = prev;
+
+        //adjust them
+        AdjustFront(this);
+
+        next = null; 
+        prev = null;
+        SetDrop(false);
+        remove?.Invoke();
+    }
+
+    public void AdjustFront(WordOrderWord obj) {
+
+        WordOrderWord next = obj.next;
+        while (next != null)
+        {
+            MoveWord(next.gameObject, next.prev.transform.position + new Vector3(next.prev.length * 100f + 50f, 0f));
+            next = next.next;
+        }
+    }
+
+    public void MoveWord(GameObject obj, Vector3 pos) { 
+        if (pos.x > 1400f) {
+            obj.transform.position = new Vector3(160f, pos.y - 100f);
+        } else { 
+            obj.transform.position = pos;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!mrWorldwideDrag || !allowDrag) { return; }
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 

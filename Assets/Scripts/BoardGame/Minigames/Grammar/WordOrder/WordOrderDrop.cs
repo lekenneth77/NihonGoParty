@@ -7,26 +7,26 @@ using UnityEngine.EventSystems;
 
 public class WordOrderDrop : MonoBehaviour, IDropHandler
 {
+    public static event Action drop;
+
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log(transform.position.x);
         GameObject dragObj = eventData.pointerDrag;
-        dragObj.transform.position = transform.position + new Vector3(75f, 0f);
-        dragObj.GetComponent<WordOrderWord>().SetDrop(true);
+        WordOrderWord newMid = dragObj.GetComponent<WordOrderWord>();
+        newMid.MoveWord(dragObj, transform.position + new Vector3(75f, 0f));
 
         //get this guys next
-        WordOrderWord next = transform.parent.GetComponent<WordOrderWord>().next;
-        transform.parent.GetComponent<WordOrderWord>().prev = dragObj.GetComponent<WordOrderWord>();
-        dragObj.GetComponent<WordOrderWord>().next = next;
-        dragObj.GetComponent<WordOrderWord>().prev = transform.parent.GetComponent<WordOrderWord>();
-        transform.parent.GetComponent<WordOrderWord>().next = dragObj.GetComponent<WordOrderWord>();
+        WordOrderWord thisOne = transform.parent.GetComponent<WordOrderWord>();
+        WordOrderWord next = thisOne.next;
+        next.prev = newMid;
+        thisOne.next = newMid;
+        newMid.next = next;
+        newMid.prev = thisOne;
 
+        newMid.bbyRUDown = true;
+        newMid.SetDrop(true);
 
-        next = dragObj.GetComponent<WordOrderWord>().next;
-        while (next != null) {
-            next.transform.position = next.transform.position + new Vector3(dragObj.GetComponent<WordOrderWord>().length * 100f + 50f, 0f);
-            next = next.next;
-        }
+        newMid.AdjustFront(newMid);
+        drop?.Invoke();
     }
-
 }
