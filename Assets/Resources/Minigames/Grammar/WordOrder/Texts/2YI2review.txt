@@ -1,5 +1,5 @@
 Y1 CH4-7 Review
-あの　テニス　を　している　人　は　何人(なにじん)　です　か　。_テニス　を　している　あの　人　は　何人(なにじん)　です　か　。_Relative clause (the nationality of that person who is…)_5,10
+あの　テニス　を　している　人　は　何人　です　か　。_テニス　を　している　あの　人　は　何人　です　か　。_Relative clause (the nationality of that person who is…)_5,10
 花見　が　したい　し、　すし　が　食べたい　し、　日本　へ　行って　みたい　ん　です。_すし　が　食べたい　し、　花見　が　したい　し、日本　へ　行って　みたい　ん　です。_Because (listing reasons), I want to go to Japan (to find out how it is.)_4,8,14
 スポーツ　の　中　で　、　どれ　が　一番　好き　です　か　。_Comparing three or more._3,12
 ゆうちゃん　は　いぬ　が　好き　だ　と　言いました　。_Yu-chan said..._1,9

@@ -15,23 +15,32 @@ public class WordOrder : Minigame
     public Transform toContainer;
     public Transform fromContainer;
     public static Vector3 nextPos;
+    public WordOrderWord root;
     public GameObject defClick;
     public GameObject defLetter;
     public GameObject defDrop;
+    public GameObject defLock;
+    public GameObject defNum;
 
+    public GameObject successImg, failureImg, incorrectImg;
+    public GameObject nextRoundButton;
+    public Button giveupButton;
     public TextMeshProUGUI category;
     public TextMeshProUGUI english;
+    public Timer timer;
+    public TextMeshProUGUI roundText;
 
+    public int totalRounds;
 
     //handle text functionality
     private string[] unparsedText;
     private HashSet<int> chosenProbs;
     private List<string> solutions;
     private int[] locked;
-    Queue<GameObject> theFront;
 
-    private WordOrderWord front;
     private int numDropped;
+    private int rounds;
+    private int wins;
     
     private string[] words;
 
@@ -40,33 +49,33 @@ public class WordOrder : Minigame
         base.Start();
         chosenProbs = new HashSet<int>();
         solutions = new List<string>();
-        theFront = new Queue<GameObject>();
         nextPos = startingWP.position;
         WordOrderDrop.drop += AnotherDrop;
         WordOrderWord.remove += AnotherRemove;
         ChooseText();
-        GetProblems();
+        GetProblem();
+        timer.ResetTimer();
     }
 
     private void ChooseText() {
         TextAsset[] texts = Resources.LoadAll<TextAsset>("Minigames/Grammar/WordOrder/Texts/");
         int random = Random.Range(0, texts.Length);
-        random = 0;
+        random = 4;
         unparsedText = texts[random].text.Split("\n"[0]);
-        //category.text = unparsedText[0];
+        category.text = unparsedText[0];
     }
 
-    private void GetProblems() {
+    private void GetProblem() {
         //Reset Structures
         solutions.Clear();
-        theFront.Clear();
+        root.gameObject.SetActive(true);
 
         //Choose a random problem
         int random = Random.Range(1, unparsedText.Length);
         while (!chosenProbs.Add(random)) {
             random = Random.Range(1, unparsedText.Length);
         }
-        random = 1;
+        random = 8;
 
         string[] parsedProb = unparsedText[random].Split("_"[0]);
 
@@ -83,45 +92,47 @@ public class WordOrder : Minigame
             solutions.Add(solution);
         }
         //english
-        //english.text = parsedProb[parsedProb.Length - 2];
+        english.text = parsedProb[parsedProb.Length - 2];
         //locked numbers
         string[] lockStr = parsedProb[parsedProb.Length - 1].Split(","[0]);
         locked = new int[lockStr.Length];
         for (int i = 0; i < lockStr.Length; i++) {
             locked[i] = int.Parse(lockStr[i]) - 1;
         }
-        Debug.Log(words.Length);
         GenerateLocked(words);
         GenerateClickables(words);
         WordOrderWord.mrWorldwideDrag = true;
+        timer.StartTimer();
+        giveupButton.enabled = true;
     }
 
 
-    //THIS GAME ASSUMES THAT EVERY PROBLEM HAS THE FIRST AND THE LAST ONE LOCKED AT LEAST
+    //THIS GAME ASSUMES THAT EVERY PROBLEM HAS THE FIRST AND THE LAST ONE LOCKED AT LEAST, not anymore
     private void GenerateLocked(string[] words) {
-        WordOrderWord prev = null;
-        for (int i = 0; i < locked.Length - 1; i++) {
+        WordOrderWord prev = root;
+        for (int i = 0; i < locked.Length; i++) {
             //gen word
-            GameObject w = MakeWord(words[locked[i]], nextPos, toContainer);
-            AdjustNextWP(words[locked[i]].Length);
+            string curWord = words[locked[i]];
+            GameObject w = MakeWord(curWord, nextPos, toContainer);
+            AdjustNextWP(curWord.Length);
             w.GetComponent<WordOrderWord>().allowDrag = false;
-            w.GetComponent<WordOrderWord>().SetDrop(true);
-            if (prev != null) {
-                prev.next = w.GetComponent<WordOrderWord>();
-                w.GetComponent<WordOrderWord>().prev = prev;
-            }
+            w.GetComponent<WordOrderWord>().SetDrop(locked[i] != this.words.Length - 1);
+
+            GameObject lockimg = Instantiate(defLock, Vector2.zero, Quaternion.identity, w.transform);
+            lockimg.transform.localPosition = new Vector2((100f * (curWord.Length - 1)) + 35f, -35f);
+
+            GameObject numtxt = Instantiate(defNum, Vector2.zero, Quaternion.identity, w.transform);
+            numtxt.transform.localPosition = new Vector2(100 * (curWord.Length - 1) / 2, 75f);
+            numtxt.GetComponent<TextMeshProUGUI>().text = locked[i] + 1 + "";
+
+            prev.next = w.GetComponent<WordOrderWord>();
+            w.GetComponent<WordOrderWord>().prev = prev;
             prev = w.GetComponent<WordOrderWord>();
-            if (i == 0) {
-                front = w.GetComponent<WordOrderWord>();
+            if (locked[i] == 0) {
+                root.gameObject.SetActive(false);
             }
         }
 
-        GameObject word = MakeWord(words[locked[locked.Length - 1]], nextPos, toContainer);
-        AdjustNextWP(words[locked[locked.Length - 1]].Length);
-        word.GetComponent<WordOrderWord>().allowDrag = false;
-        //word.GetComponent<WordOrderWord>().SetDrop(false); //this assumes the last locked is always the last character
-        prev.next = word.GetComponent<WordOrderWord>();
-        word.GetComponent<WordOrderWord>().prev = prev;
     }
 
     private void GenerateClickables(string[] words) {
@@ -156,16 +167,14 @@ public class WordOrder : Minigame
         temp.Set(temp.x - 25f, temp.y);
         Instantiate(defDrop, temp, Quaternion.identity, word.transform);
         word.GetComponent<WordOrderWord>().SetDrop(false);
-
         return word;
     }
 
     private void AdjustNextWP(int length) {
-        //Double check if we need this
         nextPos = new Vector3(nextPos.x + (100f * length) + 50f, nextPos.y);
-        if (nextPos.x >= 800) { //test number
+        if (nextPos.x > 1400) { //test number
             Debug.Log("Hello?");
-            nextPos = new Vector3(startingWP.position.x, startingWP.position.y - 100f);
+            nextPos = new Vector3(startingWP.position.x, startingWP.position.y - 175f);
         }
     }
 
@@ -175,12 +184,13 @@ public class WordOrder : Minigame
         if (numDropped == words.Length - locked.Length) {
             Debug.Log("Time to check!");
             WordOrderWord.mrWorldwideDrag = false;
-            WordOrderWord next = front.next;
-            string theirWord = front.word;
+            WordOrderWord next = root.next;
+            string theirWord = "";
             while (next != null) {
                 theirWord += next.word;
                 next = next.next;
             }
+            Debug.Log(theirWord);
             bool correct = true;
             foreach (string solution in solutions) {
                 correct = true;
@@ -198,6 +208,10 @@ public class WordOrder : Minigame
 
             if (correct) {
                 Debug.Log("Correct!");
+                timer.StopTimer();
+                wins++;
+                rounds++;
+                PostRound(false);
             } else {
                 Debug.Log("Wrong!");
             }
@@ -208,6 +222,22 @@ public class WordOrder : Minigame
         numDropped--;
     }
 
-    
+    public void PostRound(bool failure) {
+        giveupButton.enabled = false;
+        if (failure) {
+            failureImg.SetActive(true);
+        } else {
+            successImg.SetActive(true);
+        }
+        english.gameObject.SetActive(true);
+
+
+        if (rounds >= totalRounds) { 
+            //end screen button or something
+        } else { 
+            nextRoundButton.SetActive(true);
+        }
+    }
+
 
 }

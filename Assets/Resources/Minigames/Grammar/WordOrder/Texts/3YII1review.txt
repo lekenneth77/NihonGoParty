@@ -5,7 +5,7 @@ YII CH1-2 review
 おんせん　に　入った　後　で　、　つめたい　ジュース　を　飲む　と　おいしい　です　。_After…, if,,,[suggestion]_4,14
 この道　を　まっすぐ　行って　、　右　に　曲がる　と　、　郵便局　が　あります　。_if-then [direction]_1,5,10,14
 兄　は　いっしょ　に　ビデオゲーム　を　しろ　と　言う　が　、　かれは下手だ。_兄　は　ビデオゲーム　を　いっしょ　に　しろ　と　言う　が　、　かれは下手だ。_my brother says...[command],_1,11,12
-ここは　横断　歩道　な　ので　、　車　を　駐車　して　は　いけません　。_Because…, [prohibition]_1,6,13
+ここは　横断　歩道　な　ので　、　車　を　ちゅう車　して　は　いけません　。_Because…, [prohibition]_1,6,13
 海外　旅行　に　は　パスポート　を　持って　行かなければ　いけません　。_[obligation]_1,4,10
 すし　を　食べ　に　日本　に　行く　こと　に　した　。_[purpose]. ..decided to do..._1,11
 テスト　で　F　だった　人は　もっと　勉強　した　ほう　が　いい　です　よ　。_[advice to the person who made an F]_1,5,14

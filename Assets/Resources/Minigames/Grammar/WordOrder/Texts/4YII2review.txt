@@ -2,11 +2,11 @@ YII CH3-4 Review
 この　タブレット　は　買った　ばかり　で　、　まだ　使い方　が　わかりません　。_この　タブレット　は　買った　ばかり　で　、　使い方　が　まだ　わかりません　。_I just bought this tablet, so I don’t know how to use it yet._2,7,12
 ジョンさん　の　いぬ　は　昨日　病気　だった　らしい　です　。_I hear that..._1,10
 車の窓　を　開けよう　と　した　ん　です　が、　開かない　ん　です　よ　。_Attempted to open..., but it won’t open._1,8,13
-日本語　で　ビデオゲーム　を　する　ため　に　大学　で　日本語　を　勉強　する　こと　に　した　。_In order to play video games in Japanese, ...decided to do..._1,8,17
-日本では くつ　を　ぬがない　で　、　家　の　中　に　入って　は　いけません　。_In Japan, without taking off your shoes, you shouldn’t go into a house._1,6,14
+日本語　で　ビデオゲーム　を　する　ため　に　大学　で　日本語　を　勉強　する　こと　に　した　。_In order to play video games in Japanese, ...decided to do..._1,6,8,17
+日本では　くつ　を　ぬがない　で　、　家　の　中　に　入って　は　いけません　。_In Japan, without taking off your shoes, you shouldn’t go into a house._1,6,14
 赤い車　が　止まって　います。　その　横　に　スミスさん　の　車　が　止めて　あります。_赤い車　が　止まって　います。　スミスさん　の　車　が　その　横　に　止めて　あります。_A red car is parked. Besides (that car), Smith’s car is parked._1,4,13
 あの人　は　パンダ　の　よう　な　目　を　して　いて　、　かわいい　です　。_That person has eyes like panda and..._1,11,14
 ジョンさん　は　うれしそう　です　。　今日　の　テスト　は　やさしかった　よう　ですね　。_John looks happy. Today’s test seems…_1,5,8,13
-私の　娘　は　私　に　毎日　そうじ　を　させます　。_私の　娘　は　私　に　そうじ　を　毎日　させます　。_私の　娘　は　毎日　私　に　そうじ　を　させます　。_My daughter makes me do…_1,10
+私の　むすめ　は　私　に　毎日　そうじ　を　させます　。_私の　むすめ　は　私　に　そうじ　を　毎日　させます　。_私の　むすめ　は　毎日　私　に　そうじ　を　させます　。_My daughter makes me do…_1,10
 今日　は　日曜日　だ　から　、　だれも　学校　に　いない　はず　です　。_今日　は　日曜日　だ　から　、　学校　に　だれも　いない　はず　です　。_Because it’s Sunday, I assume..._1,6,13
-あの人　が　いい　人　で　も　、　一緒　に　旅行　を　したく　ない　です　。_あの人　が　いい　人　で　も　、　旅行　を　一緒　に　したく　ない　です　。_even if_1,7,15
+あの人　が　いい　人　で　も　、　いっしょ　に　旅行　を　したく　ない　です　。_あの人　が　いい　人　で　も　、　旅行　を　いっしょ　に　したく　ない　です　。_even if_1,7,15

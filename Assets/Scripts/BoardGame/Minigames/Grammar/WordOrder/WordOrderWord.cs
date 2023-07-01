@@ -91,8 +91,8 @@ public class WordOrderWord : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
 
     public void MoveWord(GameObject obj, Vector3 pos) { 
-        if (pos.x > 1400f) {
-            obj.transform.position = new Vector3(160f, pos.y - 100f);
+        if (pos.x > 1800f || pos.x + (100 * (obj.GetComponent<WordOrderWord>().length - 1)) > 1800f) {
+            obj.transform.position = new Vector3(160f, pos.y - 175f);
         } else { 
             obj.transform.position = pos;
         }
