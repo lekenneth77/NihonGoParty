@@ -53,10 +53,8 @@ public class KanjiDnD : Minigame
         foreach(DnDInfo sq in dropSpots) {
             DnDInfo squareOnMe = sq.onMeOnThem;
             if (sq.id != squareOnMe.id) {
-                Debug.Log("Wrong Answer!");
                 StartCoroutine("Incorrect");
                 //either you can make the correct ones stay or just tell them its wrong
-                DragNDrop.allowDrag = true;
                 return;
             }
         }
@@ -64,7 +62,6 @@ public class KanjiDnD : Minigame
         timer.StopTimer();
         stars.Win();
         currentRound++;
-        Debug.Log(currentRound);
         if (totalRounds == currentRound) {
             StartCoroutine("HandleWin");
         } else {
@@ -169,7 +166,6 @@ public class KanjiDnD : Minigame
         stars.Lose();
         yield return new WaitForSeconds(4f);
         currentRound++;
-        Debug.Log(currentRound);
         if (totalRounds == currentRound) {
             FinalResult();
         } else {

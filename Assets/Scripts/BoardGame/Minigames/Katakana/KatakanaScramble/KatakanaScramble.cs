@@ -37,7 +37,7 @@ public class KatakanaScramble : Minigame
     static int count_selected;
     int rounds_completed = 0;
     int max_rounds = 2;
-    float timeLimit = 5f;
+    float timeLimit = 45f;
     int num_hints = 100;
     static bool disable_hints;
     float secs_passed = 0f;
@@ -254,7 +254,10 @@ public class KatakanaScramble : Minigame
     }
  
     private IEnumerator check_corr() {
+        start = false;
         List<int> incorrect = new List<int>();
+        disable_hints = true;
+
         for (int i = 0; i < wp.Length; i++) {
             if (!bitter_map[i])
             {
@@ -309,9 +312,11 @@ public class KatakanaScramble : Minigame
                 bitter_map[i] = null;
                 count_selected--;
             }
-            disable_hints = true;
+            disable_hints = false;
             deal_card.Play();
+            start = true;
         }
+
     }
 
     private void next_round() {

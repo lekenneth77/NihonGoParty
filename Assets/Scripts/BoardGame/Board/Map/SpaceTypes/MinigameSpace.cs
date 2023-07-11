@@ -10,8 +10,8 @@ public class MinigameSpace : BoardSpace
     //i like the big switcheraoo
     public string category;
     private string[] KatakanaGames = {"KatakanaScramble", "KatakanaSearch", "KataSpeedType"};
-    private string[] GrammarGames = { "WordOrder", "SpeedType"};// particle uhh smarticle, honor vs humble, give receive?
-    private string[] KanjiGames = { "KanjiCrossRotate", "KanjiDnD", "KanjiFishing" }; //kanji dnd
+    private string[] GrammarGames = { "WordOrder2", "SpeedType"};// particle uhh smarticle, honor vs humble, give receive?
+    private string[] KanjiGames = { "KanjiCrossRotate", "KanjiDnD", "KanjiFishing" };
     private string[] VocabGames = { "TreeHop", "TunnelRunner", "VocabHunt" };
     private string[] DuelGames = { "KanjiCrossRotate", "KataSpeedType", "TunnelRunner"};
     private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame", "LocationSeeker" }; //LocationGuesser

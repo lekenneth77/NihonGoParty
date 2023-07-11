@@ -212,7 +212,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
 
     private IEnumerator OnTimeOut() {
         yield return new WaitForSeconds(2f);
-        EndGame(0);
+        EndGame(-1);
     }
 
     public void OnA(InputAction.CallbackContext context)

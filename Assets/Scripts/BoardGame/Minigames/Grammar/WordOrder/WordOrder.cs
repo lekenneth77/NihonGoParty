@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 using TMPro;
 
 public class WordOrder : Minigame
 {
-
-    private AudioSource deal_card, failure_sfx, success_sfx, buttonclick_sfx, kids_cheer;
-    private Sprite[] seacreatures;
-
     public Transform startingWP;
     public Transform toContainer;
     public Transform fromContainer;
@@ -25,10 +20,13 @@ public class WordOrder : Minigame
     public GameObject successImg, failureImg, incorrectImg;
     public GameObject nextRoundButton;
     public Button giveupButton;
+    public GameObject goToFinishButton;
     public TextMeshProUGUI category;
     public TextMeshProUGUI english;
+    public TextMeshProUGUI answer;
     public Timer timer;
     public TextMeshProUGUI roundText;
+    public TextMeshProUGUI finalText;
 
     public int totalRounds;
 
@@ -36,6 +34,7 @@ public class WordOrder : Minigame
     private string[] unparsedText;
     private HashSet<int> chosenProbs;
     private List<string> solutions;
+    private List<GameObject> generated;
     private int[] locked;
 
     private int numDropped;
@@ -46,36 +45,47 @@ public class WordOrder : Minigame
 
     // Start is called before the first frame update
     public override void Start() {
-        base.Start();
         chosenProbs = new HashSet<int>();
         solutions = new List<string>();
+        generated = new List<GameObject>();
         nextPos = startingWP.position;
         WordOrderDrop.drop += AnotherDrop;
         WordOrderWord.remove += AnotherRemove;
+        timer.TimeUp += Timeout;
+        StartCoroutine("Intro");
+    }
+
+    private IEnumerator Intro() {
+        timer.ResetTimer();
+        yield return new WaitForSeconds(1f);
         ChooseText();
         GetProblem();
-        timer.ResetTimer();
     }
 
     private void ChooseText() {
         TextAsset[] texts = Resources.LoadAll<TextAsset>("Minigames/Grammar/WordOrder/Texts/");
         int random = Random.Range(0, texts.Length);
-        random = 4;
         unparsedText = texts[random].text.Split("\n"[0]);
         category.text = unparsedText[0];
+        totalRounds = unparsedText.Length - 1;
     }
 
-    private void GetProblem() {
+    public void GetProblem() {
         //Reset Structures
         solutions.Clear();
         root.gameObject.SetActive(true);
+        nextPos = startingWP.position;
+        numDropped = 0;
+        foreach (GameObject obj in generated) {
+            Destroy(obj);
+        }
+        roundText.text = rounds + 1 + " / " + totalRounds;
 
         //Choose a random problem
         int random = Random.Range(1, unparsedText.Length);
         while (!chosenProbs.Add(random)) {
             random = Random.Range(1, unparsedText.Length);
         }
-        random = 8;
 
         string[] parsedProb = unparsedText[random].Split("_"[0]);
 
@@ -102,6 +112,7 @@ public class WordOrder : Minigame
         GenerateLocked(words);
         GenerateClickables(words);
         WordOrderWord.mrWorldwideDrag = true;
+        timer.ResetTimer();
         timer.StartTimer();
         giveupButton.enabled = true;
     }
@@ -167,13 +178,13 @@ public class WordOrder : Minigame
         temp.Set(temp.x - 25f, temp.y);
         Instantiate(defDrop, temp, Quaternion.identity, word.transform);
         word.GetComponent<WordOrderWord>().SetDrop(false);
+        generated.Add(word);
         return word;
     }
 
     private void AdjustNextWP(int length) {
         nextPos = new Vector3(nextPos.x + (100f * length) + 50f, nextPos.y);
         if (nextPos.x > 1400) { //test number
-            Debug.Log("Hello?");
             nextPos = new Vector3(startingWP.position.x, startingWP.position.y - 175f);
         }
     }
@@ -182,7 +193,6 @@ public class WordOrder : Minigame
         numDropped++;
         //check the answer
         if (numDropped == words.Length - locked.Length) {
-            Debug.Log("Time to check!");
             WordOrderWord.mrWorldwideDrag = false;
             WordOrderWord next = root.next;
             string theirWord = "";
@@ -190,7 +200,6 @@ public class WordOrder : Minigame
                 theirWord += next.word;
                 next = next.next;
             }
-            Debug.Log(theirWord);
             bool correct = true;
             foreach (string solution in solutions) {
                 correct = true;
@@ -201,19 +210,15 @@ public class WordOrder : Minigame
                     }
                 }
                 if (correct) {
-                    //found a matching one
                     break;
                 }
             }
 
             if (correct) {
-                Debug.Log("Correct!");
-                timer.StopTimer();
                 wins++;
-                rounds++;
                 PostRound(false);
             } else {
-                Debug.Log("Wrong!");
+                StartCoroutine("Wrong");
             }
         }
     }
@@ -224,19 +229,49 @@ public class WordOrder : Minigame
 
     public void PostRound(bool failure) {
         giveupButton.enabled = false;
+        root.gameObject.SetActive(false);
+        rounds++;
+        timer.StopTimer();
         if (failure) {
             failureImg.SetActive(true);
+            answer.text = solutions[0];
+            answer.gameObject.SetActive(true);
+            foreach(GameObject obj in generated) {
+                Destroy(obj);
+            }
         } else {
             successImg.SetActive(true);
         }
         english.gameObject.SetActive(true);
 
 
-        if (rounds >= totalRounds) { 
+        if (rounds >= totalRounds) {
             //end screen button or something
+            goToFinishButton.SetActive(true);
         } else { 
             nextRoundButton.SetActive(true);
         }
+    }
+
+    private IEnumerator Wrong() {
+        incorrectImg.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        incorrectImg.SetActive(false);
+        WordOrderWord.mrWorldwideDrag = true;
+    }
+
+    public void Timeout() {
+        WordOrderWord.mrWorldwideDrag = false;
+        PostRound(true);
+    }
+
+    public void SetupFinish() {
+        finalText.text = "You completed " + wins + " rounds out of " + totalRounds + " in " + timer.CurrentTime() + " seconds!";
+        finalText.transform.parent.gameObject.SetActive(true);
+    }
+
+    public void Finish() {
+        EndGame(wins - 1);
     }
 
 

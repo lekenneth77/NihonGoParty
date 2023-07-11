@@ -64,7 +64,6 @@ public class KatakanaSearch : Minigame
         chosenPositions.Add(position);
         mainHiragana.text = hiraganas[random] + "";
         CreateKatakana(random, startingPositions[position].localPosition).GetComponent<KatakanaCollider>().correctOne = true;
-        Debug.Log(katakanas[random]);
 
         for (int i = 0; i < 19; i++) {
             random = Random.Range(0, hiraganas.Length);
@@ -110,7 +109,6 @@ public class KatakanaSearch : Minigame
 
     public void GameTimeout() {
         noTouchy = true;
-        Debug.Log("Out of time!");
         StartCoroutine("HandleTimeout");
     }
 
@@ -147,7 +145,6 @@ public class KatakanaSearch : Minigame
     }
 
     private IEnumerator FinishGame() {
-        Debug.Log("They're done!");
         yield return new WaitForSeconds(5f);
         int result = stars.GetWins();
         EndGame(result - 1);

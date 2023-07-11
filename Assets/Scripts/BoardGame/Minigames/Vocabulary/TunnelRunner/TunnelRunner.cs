@@ -17,7 +17,6 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     // Start is called before the first frame update
     public override void Start()
     {
-        singleplayer = false;
         controls = new Controls();
         controls.TunnelRunner.AddCallbacks(this);
         Cave.chosenQ = new HashSet<int>();
@@ -49,7 +48,6 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 
 
     public void P1NewCaveReached(Cave newCave, bool correct) {
-        Debug.Log("Here we are!");
         p1Cave.endMove -= P1NewCaveReached;
         p1Cave.reachedFinish -= P1Done;
 
@@ -64,7 +62,6 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     }
 
     public void P1Done() {
-        Debug.Log("Nice!");
         Time.timeScale = 0;
         p2Cave.StopAllCoroutines();
         p2Cave.player.enabled = false;
@@ -83,7 +80,6 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 
     public void P2NewCaveReached(Cave newCave, bool correct)
     {
-        Debug.Log("Here we are!");
         p2Cave.endMove -= P2NewCaveReached;
         p2Cave.reachedFinish -= P2Done;
 
@@ -99,7 +95,6 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 
     public void P2Done()
     {
-        Debug.Log("Nice!");
         Time.timeScale = 0;
         p1Cave.StopAllCoroutines();
         p1Cave.player.enabled = false;
@@ -116,7 +111,6 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     }
 
     private IEnumerator TIMEOVER() {
-        Debug.Log("TIME OUT");
         yield return new WaitForSeconds(3f);
         EndGame(0);
     }

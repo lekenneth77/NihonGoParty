@@ -919,6 +919,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "f885183b-98ad-41af-865e-0ee28883461b",
+            "actions": [
+                {
+                    "name": "Slash",
+                    "type": "Button",
+                    "id": "44c4be22-e164-4913-8f38-af1b082b750a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "962673da-a2d8-4af4-9346-d17422a2d1cd",
+                    "path": "<Keyboard>/slash",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

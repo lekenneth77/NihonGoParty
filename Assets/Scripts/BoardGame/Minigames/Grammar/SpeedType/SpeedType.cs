@@ -50,7 +50,7 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
             random = Random.Range(0, sentences.Length);
         }
 
-        string[] split = sentences[1].Split("_"[0]);
+        string[] split = sentences[random].Split("_"[0]);
         japnPieces = split[0].Split(" "[0]);
 
         string temp = "";
@@ -61,10 +61,15 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         fullSentence.text = temp;
 
         englPieces = split[1].Split(" "[0]);
-        centerText.fontSize = fontSizes[japnPieces[index].Length - 1];
+        if (japnPieces[0].Length > 3) {
+            centerText.fontSize = 75;
+        } else { 
+            centerText.fontSize = fontSizes[japnPieces[0].Length - 1];
+        }
         centerText.text = japnPieces[0];
         roundText.text = "Rounds " + (rounds + 1) + " / " + totalRounds;
         yourSentence.text = "";
+        typing.text = "";
         //reset lives? ehh
         index = 0;
         timer.ResetTimer();
@@ -80,13 +85,11 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         if (Input.inputString == "\b") {
             if (typeStack.Count != 0)
             {
-                Debug.Log("Backspace!");
                 typeStack.Pop();
                 typing.text = typing.text.Substring(0, typeStack.Count);
             }
         } else
         {
-            Debug.Log(Input.inputString);
             if (Input.GetKeyDown("k")) {
                 typeStack.Push("k"); //WHAT HAPPENED TO MY K KEY
             } else { 
@@ -104,7 +107,6 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
             typing.text = typeStack.Peek();
         }
 
-        Debug.Log(englPieces[index]);
         if (typeStack.Count == englPieces[index].Length)
         {
             //reached the count! 
@@ -175,7 +177,6 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         }
         if (index >= japnPieces.Length) {
             //Next Round!
-            Debug.Log("Next Round!");
             timer.StopTimer();
             StartCoroutine("SetupSetupGame");
         } else { 
@@ -186,7 +187,6 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
     }
 
     public void Timeout() {
-        Debug.Log("Times up!");
         StartCoroutine("Failure");
     }
 

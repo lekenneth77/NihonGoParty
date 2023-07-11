@@ -97,7 +97,6 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         {
             if (chosen.Count == centerers.Count)
             {
-                Debug.Log("Ran out of crosses!");
                 chosen.Clear();
             }
             while (chosen.Contains(index))
@@ -176,11 +175,9 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     private void TimeOut()
     {
         //todo it's very possible that a duel someone can just cheese it w spam but whatever fix it later
-        Debug.Log("Times up!");
         if (!duel)
         {
             controls.Disable();
-            Debug.Log("Ah shit.");
             loss = true;
         }
         ShowAnswer();
@@ -199,16 +196,13 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         if (loss)
         {
             //TODO maybe feature like a failure at the end or something...
-            Debug.Log("Failure...");
             StartCoroutine("Failure");
         }
         else if (won) {
-            Debug.Log("Won!");
             StartCoroutine("Win");
         }
         else
         {
-            Debug.Log("Next Round!");
             StartCoroutine("RandomizeIt");
         }
     }

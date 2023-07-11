@@ -941,6 +941,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""f885183b-98ad-41af-865e-0ee28883461b"",
+            ""actions"": [
+                {
+                    ""name"": ""Slash"",
+                    ""type"": ""Button"",
+                    ""id"": ""44c4be22-e164-4913-8f38-af1b082b750a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""962673da-a2d8-4af4-9346-d17422a2d1cd"",
+                    ""path"": ""<Keyboard>/slash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1009,6 +1037,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // KanjiFishing
         m_KanjiFishing = asset.FindActionMap("KanjiFishing", throwIfNotFound: true);
         m_KanjiFishing_Move = m_KanjiFishing.FindAction("Move", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_Slash = m_Debug.FindAction("Slash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1724,6 +1755,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public KanjiFishingActions @KanjiFishing => new KanjiFishingActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
+    private readonly InputAction m_Debug_Slash;
+    public struct DebugActions
+    {
+        private @Controls m_Wrapper;
+        public DebugActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Slash => m_Wrapper.m_Debug_Slash;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void AddCallbacks(IDebugActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
+            @Slash.started += instance.OnSlash;
+            @Slash.performed += instance.OnSlash;
+            @Slash.canceled += instance.OnSlash;
+        }
+
+        private void UnregisterCallbacks(IDebugActions instance)
+        {
+            @Slash.started -= instance.OnSlash;
+            @Slash.performed -= instance.OnSlash;
+            @Slash.canceled -= instance.OnSlash;
+        }
+
+        public void RemoveCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDebugActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1795,5 +1872,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IKanjiFishingActions
     {
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnSlash(InputAction.CallbackContext context);
     }
 }

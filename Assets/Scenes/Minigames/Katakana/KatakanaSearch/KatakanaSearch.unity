@@ -1579,7 +1579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1079530178}
-  timeLimit: 10
+  timeLimit: 5
   countUp: 0
 --- !u!114 &840952689
 MonoBehaviour:

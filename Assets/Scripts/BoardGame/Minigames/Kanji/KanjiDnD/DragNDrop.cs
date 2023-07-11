@@ -40,6 +40,7 @@ public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!allowDrag) { return; }
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 

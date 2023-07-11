@@ -11,22 +11,26 @@ public abstract class Minigame : MonoBehaviour
     //duel/multiplayer if false
     public static bool singleplayer;
     public static bool practice;
+    public static bool debug;
     public virtual void Start()
     {
-        
     }
 
     public void EndMultiplayerGame(int winnerIndex) {
-        //BoardController.multiWinIndex = winnerIndex;
         EndGame(winnerIndex);
     }
 
     public void EndGame(int result)
     {
         if (!practice) {
-            //BoardController.wonMinigame = won;
+            Debug.Log("Final Results:" + result);
             BoardController.minigameResult = result;
-            BoardSpace.InvokeUnload(1, true);
+            if (debug) {
+                SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
+                LoadAllMinigames.ResetCanvas();
+            } else { 
+                BoardSpace.InvokeUnload(1, true);
+            }
         } else { 
             practice = false;
             HowToPlay.ResetScreen();
