@@ -22,7 +22,7 @@ public class Cave : MonoBehaviour
     public Transform[] outLeft;
     public GameObject defCave;
     public GameObject defFinish;
-    public int caveLimit;
+    public static int caveLimit;
 
     private List<Transform> movement;
 
@@ -39,6 +39,7 @@ public class Cave : MonoBehaviour
 
     public void GoLeft(int points) {
         if ((points + 1) == caveLimit && leftCorrect) {
+            TunnelRunner.StopThatTimer();
             SpawnFinish(true);
         } else { 
             SpawnCave(leftCorrect, true);
@@ -47,6 +48,7 @@ public class Cave : MonoBehaviour
 
     public void GoRight(int points) {
         if ((points + 1) == caveLimit && !leftCorrect) {
+            TunnelRunner.StopThatTimer();
             SpawnFinish(false);
         } else {
             SpawnCave(!leftCorrect, false);

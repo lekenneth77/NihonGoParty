@@ -1,26 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 {
+    //ui
     public Camera[] playerCams;
+    public GameObject congratImg;
+    public GameObject failureImg;
+    public PlayableDirector director;
+    public Timer timer;
+    public static Timer ductTapeTimer;
+    public Image whiteScreen;
+    public Transform finalWP;
+    public GameObject finalCam;
+
+    //games
     public Cave p1Cave;
     public Cave p2Cave;
     public TextAsset textFile;
-    public GameObject congratImg;
-    public Timer timer;
     private int p1Points;
     private int p2Points;
     private Controls controls;
+    public int caveLimit;
     // Start is called before the first frame update
     public override void Start()
     {
+        singleplayer = true;
+        ductTapeTimer = timer;
         controls = new Controls();
         controls.TunnelRunner.AddCallbacks(this);
         Cave.chosenQ = new HashSet<int>();
         Cave.questions = textFile.text.Split("\n"[0]);
+        director.stopped += StartGame;
+        p1Cave.ChangeText("", "", "", false);
+        director.Play();
+        Cave.caveLimit = caveLimit;
+    }
+
+    public void StartGame(PlayableDirector dir) {
         p1Cave.GetWords();
         if (singleplayer) {
             timer.ResetTimer();
@@ -39,9 +60,9 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
             p2Cave.endMove += P2NewCaveReached;
             p2Cave.reachedFinish += P2Done;
         }
-
         p1Cave.endMove += P1NewCaveReached;
         p1Cave.reachedFinish += P1Done;
+
         timer.StartTimer();
         controls.TunnelRunner.Enable();
     }
@@ -70,12 +91,53 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         Time.timeScale = 1;
 
         timer.StopTimer();
+        StartCoroutine(FinalCutscene(true));
+    }
+
+    private IEnumerator FinalCutscene(bool p1) {
+        Cave winner;
+        if (p1) {
+            winner = p1Cave;
+        } else {
+            winner = p2Cave;
+        }
+
+        for (int i = 0; i < 100; i++)
+        {
+            Color temp = whiteScreen.color;
+            temp.a += 0.01f;
+            whiteScreen.color = temp;
+            yield return new WaitForSeconds(0.01f);
+        }
+        finalCam.SetActive(true);
+        winner.player.gameObject.transform.position = finalWP.position;
+        winner.player.gameObject.transform.eulerAngles = new Vector3(0, 90f, 0);
+        yield return new WaitForSeconds(3f);
+        if (!singleplayer) { 
+            if (p1) {
+                playerCams[1].gameObject.SetActive(false);
+                playerCams[0].rect = new Rect(0, 0, 1f, 1);
+            } else {
+                playerCams[0].gameObject.SetActive(false);
+                playerCams[1].rect = new Rect(0, 0, 1f, 1);
+            }
+        }
+        whiteScreen.gameObject.SetActive(false);
+        winner.player.gameObject.GetComponent<Animator>().Play("victory");
         congratImg.SetActive(true);
+
+        yield return new WaitForSeconds(5f);
         if (singleplayer) {
             EndGame(2);
-        } else { 
-            EndGame(1);
+            yield break;
         }
+
+        if (p1) { 
+            EndGame(1);
+        } else {
+            EndGame(2);
+        }
+
     }
 
     public void P2NewCaveReached(Cave newCave, bool correct)
@@ -102,8 +164,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         controls.TunnelRunner.D.Disable();
         Time.timeScale = 1;
         timer.StopTimer();
-        congratImg.SetActive(true);
-        EndGame(2);
+        StartCoroutine(FinalCutscene(false));
     }
 
     public void Timeout() {
@@ -111,8 +172,21 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     }
 
     private IEnumerator TIMEOVER() {
-        yield return new WaitForSeconds(3f);
-        EndGame(0);
+        whiteScreen.color = Color.black; //LOL LAZY
+        for (int i = 0; i < 100; i++)
+        {
+            Color temp = whiteScreen.color;
+            temp.a += 0.01f;
+            whiteScreen.color = temp;
+            yield return new WaitForSeconds(0.01f);
+        }
+        failureImg.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        EndGame(-1);
+    }
+
+    public static void StopThatTimer() {
+        ductTapeTimer.StopTimer();
     }
 
 
