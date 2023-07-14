@@ -86,6 +86,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         numPlayers = 4;
         FinishController.tempResults = players;
         leaderboard.SetNumPlayers(numPlayers);
+        MinigameSpace.startedLoad += BeforeMinigameLoad;
         StartCoroutine("SetupOrder");
     }
 
@@ -323,12 +324,14 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     private void SpaceAction()
     {
         controls.Disable();
+        currentPlayer.GetComponent<PlayerInfo>().currentSpace.Action();
+    }
+
+    public void BeforeMinigameLoad() { 
         allAssets.SetActive(false);
-        foreach (GameObject player in players)
-        {
+        foreach (GameObject player in players) {
             player.SetActive(false);
         }
-        currentPlayer.GetComponent<PlayerInfo>().currentSpace.Action();
     }
 
     private void AfterSpaceAction()

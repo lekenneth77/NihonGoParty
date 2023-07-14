@@ -8,6 +8,8 @@ public class MapBuilder : MonoBehaviour
     public Transform waypointFolder;
     public Transform lineFolder;
 
+    public MinigameSelector selector;
+
     //templates
     public GameObject blankObj;
     public GameObject crossObj;
@@ -149,31 +151,37 @@ public class MapBuilder : MonoBehaviour
                 selected.GetComponent<SpriteRenderer>().color = Color.cyan;
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "KATAKANA";
+                ((MinigameSpace)changed).selector = selector;
                 break;
             case "grammar":
                 selected.GetComponent<SpriteRenderer>().color = Color.yellow;
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "GRAMMAR";
+                ((MinigameSpace)changed).selector = selector;
                 break;
             case "kanji":
                 selected.GetComponent<SpriteRenderer>().color = Color.gray;
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "KANJI";
+                ((MinigameSpace)changed).selector = selector;
                 break;
             case "vocab":
                 selected.GetComponent<SpriteRenderer>().color = Color.black;
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "VOCAB";
+                ((MinigameSpace)changed).selector = selector;
                 break;
             case "duel":
                 selected.GetComponent<SpriteRenderer>().color = Color.magenta;
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "DUEL";
+                ((MinigameSpace)changed).selector = selector;
                 break;
             case "multi":
                 selected.GetComponent<SpriteRenderer>().color = Color.clear;
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "MULTI";
+                ((MinigameSpace)changed).selector = selector;
                 break;
             case "blank":
                 selected.GetComponent<SpriteRenderer>().color = Color.white;

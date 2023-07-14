@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 public class KanjiFishing : Minigame
 {
@@ -11,7 +12,6 @@ public class KanjiFishing : Minigame
     public Transform fishParent;
     public Vector2 startingFishWP;
     public int numSpawns; //min = 10
-    public TextMeshProUGUI currentKanjiText;
     private Vector2[] waypoints;
     private string[] kanjis;
     private string hiraganas;
@@ -20,6 +20,17 @@ public class KanjiFishing : Minigame
     private int numCorrect = 0;
     private int numRounds = 0;
     private List<GameObject> fishies;
+
+    //ui
+    public TextMeshProUGUI currentKanjiText;
+    public TextMeshProUGUI chooseThisText;
+    public Timer timer;
+    public GameObject answerBox;
+    public TextMeshProUGUI answerKanji;
+    public TextMeshProUGUI answerSpelling;
+    public TextMeshProUGUI yourAnswer;
+    public Image correct;
+    public Image wrong;
 
     // Start is called before the first frame update
     public override void Start()
@@ -36,16 +47,29 @@ public class KanjiFishing : Minigame
             startingFishWP = new Vector2(startingFishWP.x, startingFishWP.y - 3f);
         }
         hook.reachTop += CheckAnswer;
-        StartCoroutine("temp");
+        timer.TimeUp += StartRound;
+        StartCoroutine("SetupRound");
     }
 
-    private IEnumerator temp() {
+    private IEnumerator SetupRound()
+    {
         yield return new WaitForSeconds(0.1f);
         defFish.GetComponent<Fish>().StopSwim();
-        SetupRound();
+        MakeFish();
+        chooseThisText.text = currentKanjiText.text;
+        timer.ResetTimer();
+        chooseThisText.transform.parent.gameObject.SetActive(true);
+        timer.StartTimer(); //
     }
 
-    private void SetupRound() {
+    public void StartRound() {
+        chooseThisText.transform.parent.gameObject.SetActive(false);
+        hook.ResetAndStart();
+    }
+
+
+
+    private void MakeFish() {
         hook.ClearQueue();
         foreach (GameObject obj in fishies) {
             Destroy(obj);
@@ -84,15 +108,25 @@ public class KanjiFishing : Minigame
             fishies.Add(fish);
         }
 
-        hook.ResetAndStart();
     }
 
     public void CheckAnswer(Queue<GameObject> q) {
         bool wrong = false;
         string build = "";
+        HashSet<string> chosen = new HashSet<string>();
         foreach (GameObject obj in q) { 
             build += obj.GetComponent<Fish>().letter;
+            chosen.Add(obj.GetComponent<Fish>().letter);
         }
+
+        yourAnswer.text = "";
+        foreach (string s in chosen) {
+            yourAnswer.text += s + " ";
+        }
+
+        answerKanji.text = currentKanjiText.text;
+        answerSpelling.text = theAnswer;
+
         for (int i = 0; i < theAnswer.Length; i++) { 
             if (!build.Contains(theAnswer[i])) {
                 Debug.Log("Wrong!");
@@ -131,15 +165,23 @@ public class KanjiFishing : Minigame
 
     //maybe change it so that the more you get correct, the more spaces you go forward?
     private IEnumerator HandleCorrect() {
+        correct.gameObject.SetActive(true);
+        answerBox.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        correct.gameObject.SetActive(false);
+        answerBox.SetActive(false);
 
-        yield return new WaitForSeconds(5f);
-        SetupRound();
+        StartCoroutine("SetupRound");
     }
 
     private IEnumerator HandleWrong() {
+        wrong.gameObject.SetActive(true);
+        answerBox.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        wrong.gameObject.SetActive(false);
+        answerBox.SetActive(false);
 
-        yield return new WaitForSeconds(5f);
-        SetupRound();
+        StartCoroutine("SetupRound");
     }
 
 

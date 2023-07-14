@@ -566,7 +566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &97053043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,7 +1320,7 @@ MonoBehaviour:
   p1Cave: {fileID: 1675333279}
   p2Cave: {fileID: 1597362322}
   textFile: {fileID: 4900000, guid: a5c787eff9c5c1a48a19f0592c9d2858, type: 3}
-  caveLimit: 1
+  caveLimit: 3
 --- !u!4 &617735716
 Transform:
   m_ObjectHideFlags: 0

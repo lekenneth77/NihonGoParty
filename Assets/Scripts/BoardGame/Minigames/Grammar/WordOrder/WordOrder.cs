@@ -67,7 +67,6 @@ public class WordOrder : Minigame
         int random = Random.Range(0, texts.Length);
         unparsedText = texts[random].text.Split("\n"[0]);
         category.text = unparsedText[0];
-        totalRounds = unparsedText.Length - 1;
     }
 
     public void GetProblem() {
@@ -273,6 +272,5 @@ public class WordOrder : Minigame
     public void Finish() {
         EndGame(wins - 1);
     }
-
 
 }
