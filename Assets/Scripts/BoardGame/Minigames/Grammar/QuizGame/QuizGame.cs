@@ -7,7 +7,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
 {
     public Timer timer;
     public Pedestal[] pedestals;
-    private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f, 6f, -15f), new Vector3(-3f, 6f, -15f), new Vector3(0, 6.5f, -17f)};
+    private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f * 0.45f, 6f * 0.45f, -15f * 0.45f), new Vector3(-3f * 0.45f, 6f * 0.45f, -15f * 0.45f), new Vector3(0, 6.5f * 0.45f, -17f * 0.45f)};
     public GameObject fullViewCam;
     public GameObject[] playerCameras;
     public GameObject[] resultObjects;

@@ -16,6 +16,7 @@ public class Cave : MonoBehaviour
     public TextMeshProUGUI topText;
     private bool leftCorrect;
 
+    public GameObject frontDarkness;
     public Transform[] enterRight;
     public Transform[] enterLeft;
     public Transform[] outRight;
@@ -91,6 +92,7 @@ public class Cave : MonoBehaviour
             //if they chose the wrong path, make them do the cave again!
             newCave.GetComponent<Cave>().ChangeText(leftText.text, rightText.text, topText.text, leftCorrect);
         }
+        frontDarkness.SetActive(false);
         movement.Clear();//just to make sure
         if (wentLeft) { 
             foreach(Transform t in outLeft) {

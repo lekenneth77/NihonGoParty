@@ -17,6 +17,8 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     public Image whiteScreen;
     public Transform finalWP;
     public GameObject finalCam;
+    public GameObject lighting;
+
 
     //games
     public Cave p1Cave;
@@ -29,7 +31,6 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     // Start is called before the first frame update
     public override void Start()
     {
-        singleplayer = true;
         ductTapeTimer = timer;
         controls = new Controls();
         controls.TunnelRunner.AddCallbacks(this);
@@ -109,6 +110,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
             whiteScreen.color = temp;
             yield return new WaitForSeconds(0.01f);
         }
+        lighting.SetActive(true);
         finalCam.SetActive(true);
         winner.player.gameObject.transform.position = finalWP.position;
         winner.player.gameObject.transform.eulerAngles = new Vector3(0, 90f, 0);

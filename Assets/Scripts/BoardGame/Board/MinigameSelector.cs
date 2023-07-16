@@ -44,6 +44,8 @@ public class MinigameSelector : MonoBehaviour
         float delayTime = 0.025f;
         int index = 0;
         float maxTime = UnityEngine.Random.Range(.4f, .6f);
+        maxTime = 0;
+        float waitTime = 0.1f;
         while (delayTime < maxTime) {
             GameObject prev = index == 0 ? threeMinigames[2] : threeMinigames[index - 1];
             prev.transform.localScale = Vector3.one;
@@ -58,7 +60,7 @@ public class MinigameSelector : MonoBehaviour
         }
         threeMinigames[index].GetComponent<Animator>().enabled = true;
         threeMinigames[index].GetComponent<Animator>().Play("ZoomInOut");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(waitTime);
         gotGame?.Invoke(chosen[index]);
         leaderboard.SetActive(true);
         threeMinigames[index].GetComponent<Animator>().enabled = false;

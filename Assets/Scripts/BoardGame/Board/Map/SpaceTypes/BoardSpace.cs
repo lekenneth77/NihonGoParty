@@ -74,6 +74,7 @@ public abstract class BoardSpace : MonoBehaviour
     public void ResetPlayers(bool transport)
     {
         int index = 0;
+        if (playersOnMe == null) { return; }
         foreach (GameObject p in playersOnMe)
         {
             Vector3 pos = index == 0 ? this.transform.position : extraSpaces[index - 1];

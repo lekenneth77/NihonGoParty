@@ -60,6 +60,7 @@ MonoBehaviour:
   leftText: {fileID: 8392622859967551539}
   rightText: {fileID: 8784885861758705717}
   topText: {fileID: 8392622858602047494}
+  frontDarkness: {fileID: 0}
   enterRight:
   - {fileID: 8392622860085293422}
   - {fileID: 8392622858547094478}
@@ -76,7 +77,6 @@ MonoBehaviour:
   - {fileID: 8392622858585738424}
   defCave: {fileID: 8392622858178028397}
   defFinish: {fileID: 0}
-  caveLimit: 3
 --- !u!1 &8392622858458119216
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e69fdc77fc4456c49b70f8a6b5ec8cae, type: 2}
+  - {fileID: 1280446133571650962, guid: 9dd7c62cbc09010448a1558e237a19b9, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -811,7 +811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8392622859984472782
 Transform:
   m_ObjectHideFlags: 0
@@ -1085,7 +1085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8392622860225326303
 Transform:
   m_ObjectHideFlags: 0

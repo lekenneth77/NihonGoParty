@@ -82,7 +82,10 @@ public class MinigameSpace : BoardSpace
     public void LoadGame(int i) {
         MinigameSelector.gotGame -= LoadGame;
         startedLoad?.Invoke();
-        InvokeLoad(gamesToChooseFrom[i], true);
+        string game = gamesToChooseFrom[i];
+        Minigame.singleplayer = true;
+        game = "TunnelRunner";
+        InvokeLoad(game, true);
     }
 
 

@@ -55,7 +55,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         controls.QuizGame.AddCallbacks(this);
 
         numPlayers = BoardController.numPlayers;
-
+        numPlayers = 4;
         for (int i = 0; i < numPlayers; i++)
         {
             pedestals[i].SetActive(true);

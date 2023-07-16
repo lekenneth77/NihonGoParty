@@ -22,7 +22,7 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
     private string[] sentences;
     private HashSet<int> chosenSentences;
 
-    private int[] fontSizes = new int[] { 400, 200, 100 };
+    private int[] fontSizes = new int[] { 400, 200, 125, 100, 80};
     private string[] japnPieces;
     private string[] englPieces;
     private int index;
@@ -61,8 +61,8 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
         fullSentence.text = temp;
 
         englPieces = split[1].Split(" "[0]);
-        if (japnPieces[0].Length > 3) {
-            centerText.fontSize = 75;
+        if (japnPieces[0].Length > fontSizes.Length) {
+            centerText.fontSize = 50;
         } else { 
             centerText.fontSize = fontSizes[japnPieces[0].Length - 1];
         }

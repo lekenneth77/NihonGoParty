@@ -64,6 +64,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //controls
     private Controls controls;
 
+    //lighting
+    public Light lighting;
+
 
     // Start is called before the first frame update
     void Start()
@@ -197,7 +200,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         PlayerInfo infoObj = player.GetComponent<PlayerInfo>();
         GameObject rollCountdown = player.transform.GetChild(0).gameObject;
         if (player.transform.childCount > 2) {
-            rollCountdown = player.transform.GetChild(3).gameObject;
+            rollCountdown = player.transform.GetChild(2).gameObject;
         }
         SpriteRenderer countdownSprite = rollCountdown.GetComponent<SpriteRenderer>();
         BoardSpace currentSpace = infoObj.currentSpace;
@@ -329,6 +332,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
     public void BeforeMinigameLoad() { 
         allAssets.SetActive(false);
+        lighting.gameObject.SetActive(false);
         foreach (GameObject player in players) {
             player.SetActive(false);
         }
@@ -336,6 +340,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
     private void AfterSpaceAction()
     {
+        lighting.gameObject.SetActive(true);
         allAssets.SetActive(true);
         foreach (GameObject player in players)
         {
