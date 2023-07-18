@@ -34,7 +34,7 @@ public class LoadingScreen : MonoBehaviour
             yield return null;
         }
         screen.SetActive(false);
-        SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
+        //SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
     }
 
     public void UnloadScene(int index, bool triggerBoard) {

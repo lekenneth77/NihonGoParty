@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class QuizGame : Minigame, Controls.IQuizGameActions
 {
+    public TextAsset txtfile;
     public Timer timer;
     public Pedestal[] pedestals;
     private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f * 0.45f, 6f * 0.45f, -15f * 0.45f), new Vector3(-3f * 0.45f, 6f * 0.45f, -15f * 0.45f), new Vector3(0, 6.5f * 0.45f, -17f * 0.45f)};
     public GameObject fullViewCam;
     public GameObject[] playerCameras;
     public GameObject[] resultObjects;
+    public TextMeshProUGUI question;
+    public TextMeshProUGUI[] answerChoices;
     public int numPlayers;
 
+    private string[] problems;
+    private HashSet<int> chosen;
     private int currentPlayerI;
     private int correctAnswerChoice;
     private bool allowAnswer;
@@ -32,12 +39,14 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         timer.TimeUp += Timeout;
 
         numPlayers = BoardController.numPlayers;
+        numPlayers = 4;
 
         for (int i = 0; i < numPlayers; i++) {
             pedestals[i].gameObject.SetActive(true);
         }
         fullViewCam.transform.position = initialCameraPos[numPlayers - 2];
-
+        problems = txtfile.text.Split("\n"[0]);
+        chosen = new HashSet<int>();
         controls.QuizGame.Enable();
         StartCoroutine("SetupRound");
     }
@@ -46,25 +55,52 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         foreach(Pedestal ped in pedestals) {
             ped.ResetPedestal();
         }
+        foreach (TextMeshProUGUI ac in answerChoices) {
+            ac.transform.parent.GetComponent<Button>().enabled = false;
+        }
+        allowAnswer = false;
         timer.gameObject.SetActive(false);
+        answerChoices[0].transform.parent.parent.gameObject.SetActive(false);
         playerCameras[currentPlayerI].SetActive(false);
         numAnswered = 0;
 
         //parse text here
-
+        int random = Random.Range(0, problems.Length);
+        while (!chosen.Add(random)) {
+            random = Random.Range(0, problems.Length);
+        }
+        Debug.Log(random);
+        string[] split = problems[random].Split("_"[0]);
+        question.text = split[0];
+        string[] answers = split[1].Split(","[0]);
+        correctAnswerChoice = Random.Range(0, 4);
+        Debug.Log(correctAnswerChoice);
+        answerChoices[correctAnswerChoice].text = answers[0];
+        HashSet<int> randomChoices = new HashSet<int>();
+        randomChoices.Add(correctAnswerChoice);
+        for (int i = 1; i < 4; i++) {
+            int r = Random.Range(0, 4);
+            while (!randomChoices.Add(r)) {
+                r = Random.Range(0, 4);
+            }
+            answerChoices[r].text = answers[i];
+        }
         //lol for now
-        correctAnswerChoice = Random.Range(1, 5);
         yield return new WaitForSeconds(2f);
+        answerChoices[0].transform.parent.parent.gameObject.SetActive(true);
         noMorePeople = false;
         Debug.Log("Round Start!");
     }
 
-    public void ChooseAnswer(int i) { 
+    public void ChooseAnswer(int i) {
         if (!allowAnswer) { Debug.Log("Lol denied"); return; }
         allowAnswer = false;
         timer.StopTimer();
+        foreach (TextMeshProUGUI ac in answerChoices) {
+            ac.transform.parent.GetComponent<Button>().enabled = false;
+        }
         numAnswered++;
-        if (i == correctAnswerChoice) {
+        if (i - 1 == correctAnswerChoice) {
             Debug.Log("Correct Answer!");
             StartCoroutine("CorrectAnswer");
         } else {
@@ -75,6 +111,9 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
 
     public void Timeout() {
         Debug.Log("Times up!");
+        foreach (TextMeshProUGUI ac in answerChoices) {
+            ac.transform.parent.GetComponent<Button>().enabled = false;
+        }
         StartCoroutine(WrongAnswer(resultObjects[2]));
     }
 
@@ -108,8 +147,8 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
     }
 
     private IEnumerator FinishGame() {
-        Debug.Log("Finish!");
-        yield return new WaitForSeconds(2f);
+        resultObjects[3].SetActive(true);
+        yield return new WaitForSeconds(5f);
         EndMultiplayerGame(currentPlayerI);
     }
 
@@ -126,6 +165,9 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         timer.ResetTimer();
         timer.gameObject.SetActive(true);
         timer.StartTimer();
+        foreach (TextMeshProUGUI ac in answerChoices) {
+            ac.transform.parent.GetComponent<Button>().enabled = true;
+        }
         allowAnswer = true;
     }
 
@@ -149,11 +191,9 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
 
     }
 
-    public void OnP(InputAction.CallbackContext context)
+    public void OnL(InputAction.CallbackContext context)
     {
         if (!context.performed || numPlayers < 4 || pedestals[3].unableToAnswer || noMorePeople) { return; }
         LetThemAnswer(3);
-
     }
-
 }

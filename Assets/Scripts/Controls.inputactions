@@ -551,7 +551,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "P",
+                    "name": "L",
                     "type": "Button",
                     "id": "b1fd08d7-7382-4537-9bfe-f6abaa87872b",
                     "expectedControlType": "Button",
@@ -597,11 +597,11 @@
                 {
                     "name": "",
                     "id": "1b171883-79fb-4c65-b079-3504acf568ee",
-                    "path": "<Keyboard>/p",
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "P",
+                    "action": "L",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -945,6 +945,56 @@
                     "action": "Slash",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "AppleDrop",
+            "id": "80c6fde7-9aae-401c-a4cd-c595b7ee6a46",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "5cbc1614-d640-4372-a040-42655fd0fdaa",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "81438a3e-1b43-4c3f-b5b0-e033692ffde8",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b22ca91c-22be-4bd7-b5f8-dc3edb294d89",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "b2765835-48dc-4bd4-95c3-d3b90283e88c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

@@ -247,12 +247,10 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         pedestals[2].transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = counts[2] + "";
     }
 
-    public void OnP(InputAction.CallbackContext context)
+    public void OnL(InputAction.CallbackContext context)
     {
         if (!context.performed || numPlayers < 4) { return; }
         counts[3]++;
         pedestals[3].transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = counts[3] + "";
     }
-
-
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 {
@@ -31,6 +32,9 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     // Start is called before the first frame update
     public override void Start()
     {
+        if (SceneManager.sceneCount > 1) {
+            SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
+        }
         ductTapeTimer = timer;
         controls = new Controls();
         controls.TunnelRunner.AddCallbacks(this);

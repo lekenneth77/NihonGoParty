@@ -44,8 +44,8 @@ public class MinigameSelector : MonoBehaviour
         float delayTime = 0.025f;
         int index = 0;
         float maxTime = UnityEngine.Random.Range(.4f, .6f);
-        maxTime = 0;
-        float waitTime = 0.1f;
+        //maxTime = 0;
+        float waitTime = 5f;
         while (delayTime < maxTime) {
             GameObject prev = index == 0 ? threeMinigames[2] : threeMinigames[index - 1];
             prev.transform.localScale = Vector3.one;

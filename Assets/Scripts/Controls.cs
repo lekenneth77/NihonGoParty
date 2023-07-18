@@ -573,7 +573,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""P"",
+                    ""name"": ""L"",
                     ""type"": ""Button"",
                     ""id"": ""b1fd08d7-7382-4537-9bfe-f6abaa87872b"",
                     ""expectedControlType"": ""Button"",
@@ -619,11 +619,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1b171883-79fb-4c65-b079-3504acf568ee"",
-                    ""path"": ""<Keyboard>/p"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""P"",
+                    ""action"": ""L"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -969,6 +969,56 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""AppleDrop"",
+            ""id"": ""80c6fde7-9aae-401c-a4cd-c595b7ee6a46"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""5cbc1614-d640-4372-a040-42655fd0fdaa"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""81438a3e-1b43-4c3f-b5b0-e033692ffde8"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b22ca91c-22be-4bd7-b5f8-dc3edb294d89"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b2765835-48dc-4bd4-95c3-d3b90283e88c"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1020,7 +1070,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_QuizGame_A = m_QuizGame.FindAction("A", throwIfNotFound: true);
         m_QuizGame_R = m_QuizGame.FindAction("R", throwIfNotFound: true);
         m_QuizGame_H = m_QuizGame.FindAction("H", throwIfNotFound: true);
-        m_QuizGame_P = m_QuizGame.FindAction("P", throwIfNotFound: true);
+        m_QuizGame_L = m_QuizGame.FindAction("L", throwIfNotFound: true);
         // SpeedType
         m_SpeedType = asset.FindActionMap("SpeedType", throwIfNotFound: true);
         m_SpeedType_Keyboard = m_SpeedType.FindAction("Keyboard", throwIfNotFound: true);
@@ -1040,6 +1090,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_Slash = m_Debug.FindAction("Slash", throwIfNotFound: true);
+        // AppleDrop
+        m_AppleDrop = asset.FindActionMap("AppleDrop", throwIfNotFound: true);
+        m_AppleDrop_Move = m_AppleDrop.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1476,7 +1529,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_QuizGame_A;
     private readonly InputAction m_QuizGame_R;
     private readonly InputAction m_QuizGame_H;
-    private readonly InputAction m_QuizGame_P;
+    private readonly InputAction m_QuizGame_L;
     public struct QuizGameActions
     {
         private @Controls m_Wrapper;
@@ -1484,7 +1537,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @A => m_Wrapper.m_QuizGame_A;
         public InputAction @R => m_Wrapper.m_QuizGame_R;
         public InputAction @H => m_Wrapper.m_QuizGame_H;
-        public InputAction @P => m_Wrapper.m_QuizGame_P;
+        public InputAction @L => m_Wrapper.m_QuizGame_L;
         public InputActionMap Get() { return m_Wrapper.m_QuizGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1503,9 +1556,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @H.started += instance.OnH;
             @H.performed += instance.OnH;
             @H.canceled += instance.OnH;
-            @P.started += instance.OnP;
-            @P.performed += instance.OnP;
-            @P.canceled += instance.OnP;
+            @L.started += instance.OnL;
+            @L.performed += instance.OnL;
+            @L.canceled += instance.OnL;
         }
 
         private void UnregisterCallbacks(IQuizGameActions instance)
@@ -1519,9 +1572,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @H.started -= instance.OnH;
             @H.performed -= instance.OnH;
             @H.canceled -= instance.OnH;
-            @P.started -= instance.OnP;
-            @P.performed -= instance.OnP;
-            @P.canceled -= instance.OnP;
+            @L.started -= instance.OnL;
+            @L.performed -= instance.OnL;
+            @L.canceled -= instance.OnL;
         }
 
         public void RemoveCallbacks(IQuizGameActions instance)
@@ -1801,6 +1854,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public DebugActions @Debug => new DebugActions(this);
+
+    // AppleDrop
+    private readonly InputActionMap m_AppleDrop;
+    private List<IAppleDropActions> m_AppleDropActionsCallbackInterfaces = new List<IAppleDropActions>();
+    private readonly InputAction m_AppleDrop_Move;
+    public struct AppleDropActions
+    {
+        private @Controls m_Wrapper;
+        public AppleDropActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_AppleDrop_Move;
+        public InputActionMap Get() { return m_Wrapper.m_AppleDrop; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(AppleDropActions set) { return set.Get(); }
+        public void AddCallbacks(IAppleDropActions instance)
+        {
+            if (instance == null || m_Wrapper.m_AppleDropActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_AppleDropActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+        }
+
+        private void UnregisterCallbacks(IAppleDropActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+        }
+
+        public void RemoveCallbacks(IAppleDropActions instance)
+        {
+            if (m_Wrapper.m_AppleDropActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IAppleDropActions instance)
+        {
+            foreach (var item in m_Wrapper.m_AppleDropActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_AppleDropActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public AppleDropActions @AppleDrop => new AppleDropActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1851,7 +1950,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnA(InputAction.CallbackContext context);
         void OnR(InputAction.CallbackContext context);
         void OnH(InputAction.CallbackContext context);
-        void OnP(InputAction.CallbackContext context);
+        void OnL(InputAction.CallbackContext context);
     }
     public interface ISpeedTypeActions
     {
@@ -1876,5 +1975,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IDebugActions
     {
         void OnSlash(InputAction.CallbackContext context);
+    }
+    public interface IAppleDropActions
+    {
+        void OnMove(InputAction.CallbackContext context);
     }
 }

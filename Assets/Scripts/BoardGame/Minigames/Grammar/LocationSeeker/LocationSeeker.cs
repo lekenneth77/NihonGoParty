@@ -163,8 +163,7 @@ public class LocationSeeker : Minigame, Controls.IQuizGameActions
         LetAnswer(2);
 
     }
-
-    public void OnP(InputAction.CallbackContext context)
+    public void OnL(InputAction.CallbackContext context)
     {
         if (!context.performed || cancelled[3] || nono || numPlayers < 4) { return; }
         LetAnswer(3);
@@ -181,4 +180,6 @@ public class LocationSeeker : Minigame, Controls.IQuizGameActions
         theAnswers.gameObject.SetActive(true);
         
     }
+
+    
 }
