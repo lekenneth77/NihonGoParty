@@ -13,14 +13,19 @@ public class AppleDrop : Minigame
     public TextAsset justKatakanaTxt;
     public TextAsset kataSolutionTxt;
     public Timer setupTimer;
+    public int totalRounds;
 
     public TextMeshProUGUI rowToFindTxt;
     private string katakanas;
     private string[] solutions;
     private string currentSolution;
+    private int currentCorrectSpawned;
     private HashSet<int> chosen;
+    private int wins = 0;
+    private int rounds;
 
     //results screen
+    private List<GameObject> resultings;
     private List<string> gottenApples; //pretty bad design but whatever im really tired
     private List<int> badOnes; //only used for result screen
     public TextMeshProUGUI resultRow;
@@ -30,7 +35,8 @@ public class AppleDrop : Minigame
     public Transform applesCollected;
     public Transform startingUIApple;
     public GameObject defUIApple;
-    //maybe make the game determined by if they collected more right than wrong? could cheese but eh
+    public GameObject exitButton;
+    //if you get at least 40% of spawned correct
 
     // Start is called before the first frame update
     public override void Start()
@@ -41,13 +47,23 @@ public class AppleDrop : Minigame
         katakanas = justKatakanaTxt.text;
         solutions = kataSolutionTxt.text.Split("\n"[0]);
         chosen = new HashSet<int>();
+        resultings = new List<GameObject>();
         SetupRound();
     }
 
-    private void SetupRound() {
+    public void SetupRound() {
+        if (rounds == totalRounds) {
+            EndGame(wins);
+            return;
+        }
+        foreach(GameObject obj in resultings) {
+            Destroy(obj);
+        }
+        resultings.Clear();
         gottenApples = new List<string>();
         badOnes = new List<int>();
         setupTimer.ResetTimer();
+        currentCorrectSpawned = 0;
 
         int random = Random.Range(0, solutions.Length);
         while (!chosen.Add(random)) {
@@ -75,13 +91,17 @@ public class AppleDrop : Minigame
             while (!initals.Add(randomSP)) {
                 randomSP = Random.Range(0, spawnPts.Length);
             }
-            CreateApple(spawnPts[randomSP], katakanas[Random.Range(0, katakanas.Length)] + "", 4f);
+            string s = katakanas[Random.Range(0, katakanas.Length)] + "";
+            if (currentSolution.Contains(s)) { currentCorrectSpawned++; }
+            CreateApple(spawnPts[randomSP], s, 4f);
             yield return new WaitForSeconds(0.25f);
         }
         yield return new WaitForSeconds(2.5f);
         for (int i = 0; i < Random.Range(20, 30); i++) {
-            for (int j = 0; j < Random.Range(1, 4); j++) { 
-                CreateApple(spawnPts[Random.Range(0, spawnPts.Length)], katakanas[Random.Range(0, katakanas.Length)] + "", 4f);
+            for (int j = 0; j < Random.Range(1, 4); j++) {
+                string s = katakanas[Random.Range(0, katakanas.Length)] + "";
+                if (currentSolution.Contains(s)) { currentCorrectSpawned++; }
+                CreateApple(spawnPts[Random.Range(0, spawnPts.Length)], s, 4f);
                 yield return new WaitForSeconds(0.25f);
             }
             yield return new WaitForSeconds(Random.Range(0.1f, 1.5f));
@@ -113,13 +133,13 @@ public class AppleDrop : Minigame
     private IEnumerator DisplayResult() {
         player.controls.AppleDrop.Disable();
         resultRow.text = rowToFindTxt.text;
+        exitButton.SetActive(false);
         numCollected.gameObject.SetActive(false);
         correct.gameObject.SetActive(false);
         wrong.gameObject.SetActive(false);
         numCollected.transform.parent.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         Vector3 position = startingUIApple.position;
-        List<GameObject> resultings = new List<GameObject>();
         foreach (string s in gottenApples) {
             resultings.Add(CreateUIApple(position, s));
 
@@ -141,6 +161,12 @@ public class AppleDrop : Minigame
         wrong.text = "Wrong: " + badOnes.Count;
         correct.gameObject.SetActive(true);
         wrong.gameObject.SetActive(true);
+        Debug.Log("Total Spawned: " + currentCorrectSpawned);
+        if ((gottenApples.Count - badOnes.Count) >= currentCorrectSpawned * 0.4f) {
+            wins++;
+        }
+        rounds++;
+        exitButton.SetActive(true);
     }
 
     private GameObject CreateUIApple(Vector3 pos, string s) {

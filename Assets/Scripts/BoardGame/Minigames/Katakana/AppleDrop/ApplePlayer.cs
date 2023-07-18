@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 
 public class ApplePlayer : MonoBehaviour, Controls.IAppleDropActions
 {
-    public float moveSpeed;
+    public GameObject model;
     public AppleLever lever;
-    private float moveVal;
-    public Controls controls;
+    public float moveSpeed;
     public bool alreadySlowed;
+    public Controls controls;
+    private float moveVal;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +43,9 @@ public class ApplePlayer : MonoBehaviour, Controls.IAppleDropActions
     public IEnumerator SlowDown() {
         alreadySlowed = true;
         moveSpeed -= 8f;
+        model.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
+        model.transform.GetChild(0).gameObject.SetActive(false);
         moveSpeed += 8f;
         alreadySlowed = false;
     }
