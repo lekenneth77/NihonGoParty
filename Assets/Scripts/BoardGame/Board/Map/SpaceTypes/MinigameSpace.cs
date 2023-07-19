@@ -11,14 +11,14 @@ public class MinigameSpace : BoardSpace
     public string category;
     public MinigameSelector selector;
     private string[] KatakanaGames = { "KatakanaScramble", "KatakanaSearch", "AppleDrop" };
-    private string[] GrammarGames = { "WordOrder2", "SpeedType" };// particles please
+    private string[] GrammarGames = { "WordOrder2", "SpeedType", "GiveReceive" };// particles please
     private string[] KanjiGames = { "KanjiCrossRotate", "KanjiDnD", "KanjiFishing" };
     private string[] VocabGames = { "TreeHop", "TunnelRunner", "VocabHunt" };
     private string[] DuelGames = { "KanjiCrossRotate", "KataSpeedType", "TunnelRunner" };
     private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame", "LocationSeeker" };
 
     private string[] KatakanaNames = { "Katakana Scramble", "Katakana Search", "AppleDrop"};
-    private string[] GrammarNames = { "Word Order", "Speed Type" };
+    private string[] GrammarNames = { "Word Order", "Speed Type", "Receive Punch Give" };
     private string[] KanjiNames = { "Kanji Cross Rotate", "Kanji Drag n Drop", "Kanji Fishing" };
     private string[] VocabNames = { "Tree Hop", "Tunnel Runner", "Vocabulary Hunt" };
     private string[] DuelNames = { "Kanji Cross Rotate", "Katakana Speed Type", "Tunnel Runner" };

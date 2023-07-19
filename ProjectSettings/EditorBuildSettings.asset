@@ -23,9 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Katakana/KatakanaScramble/KatakanaScramble.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/Minigames/Grammar/WordOrder/WordOrder.unity
-    guid: 6b8fae92d8024e94a8d040d78e10c893
   - enabled: 1
     path: Assets/Scenes/FinishScreen.unity
     guid: e992ad150e2d95b47a1f3ab8905c8281
@@ -68,4 +65,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Grammar/WordOrder/WordOrder2.unity
     guid: 97f1462422beec54fb33da18df490355
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Katakana/AppleDrop.unity
+    guid: f0d831a5d4906eb44a26c6dd972d11ec
+  - enabled: 1
+    path: Assets/Scenes/Maps/Bruh.unity
+    guid: a492da2d48eb4664199e90e6faf2d5c7
   m_configObjects: {}
