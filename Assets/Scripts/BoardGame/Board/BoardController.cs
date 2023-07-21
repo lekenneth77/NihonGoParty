@@ -43,10 +43,6 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //spinner
     public Spinner spinner;
 
-    //dices
-    //public GameObject mainDice;
-    //public GameObject[] startingDie;
-
     //camera
     public GameObject stillCameraObj, moveCameraObj, freeCameraObj;
     private CinemachineVirtualCamera stillCameraCom, moveCameraCom;
@@ -174,12 +170,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         Vector3 playerPosition = currentPlayer.transform.position;
         currentPlayer.GetComponent<PlayerInfo>().dice.gameObject.SetActive(true);
         currentPlayer.GetComponent<PlayerInfo>().dice.Reset();
-        /*
-        mainDice.SetActive(true);
-        mainDice.transform.position = new Vector3(playerPosition.x, playerPosition.y + 1.5f, playerPosition.z);
-        mainDice.GetComponent<Dice>().Reset();
         controls.Enable();
-        */
         stillCameraCom.LookAt = currentPlayer.transform;
         stillCameraCom.Follow = currentPlayer.transform;
         stillCameraCom.m_Lens.FieldOfView = STILL_FOV;
@@ -202,7 +193,6 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         moveCameraCom.m_Lens.FieldOfView = MOVE_FOV;
         moveCameraObj.SetActive(true);
         player.GetComponent<PlayerInfo>().dice.gameObject.SetActive(false);
-        //mainDice.SetActive(false);
         MoveObject moveObj = player.GetComponent<MoveObject>();
         PlayerInfo infoObj = player.GetComponent<PlayerInfo>();
         GameObject rollCountdown = player.transform.GetChild(player.transform.childCount - 1).gameObject;

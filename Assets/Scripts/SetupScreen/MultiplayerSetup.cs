@@ -54,7 +54,11 @@ public class MultiplayerSetup : MonoBehaviour
 
     public void ChooseYourCharacter(int charIndex)
     {
-        //TODO temporary lol used to check if something was selected
+        if (choseACharacter) {
+            characters[recentChosen].gameObject.transform.position = new Vector3(0, -1000, 0);
+            characters[recentChosen].Play("idle");
+        }
+
         characters[charIndex].gameObject.transform.position = playerChosens[currentChooser].transform.GetChild(0).position;
         characters[charIndex].Play("spin");
         recentChosen = charIndex;
