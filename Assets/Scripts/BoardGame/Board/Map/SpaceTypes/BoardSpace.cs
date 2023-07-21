@@ -81,7 +81,7 @@ public abstract class BoardSpace : MonoBehaviour
             if (transport)
             {
                 //TODO remove once you have actual models!
-                pos.y += 0.5f;
+                //pos.y += 0.5f;
                 p.transform.position = pos;
                 p.transform.rotation = Quaternion.identity;
             }

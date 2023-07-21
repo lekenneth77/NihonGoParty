@@ -14,7 +14,7 @@ public class Dice : MonoBehaviour, Controls.IDiceActions
     private Sprite[] sprites;
     private bool stopRoll, allowStart, allowEnd;
     public static event Action<int> OnDiceFinish;
-
+    public bool disable;
     private Controls controls;
 
     //TODO add the inputsystem so that you can make the dice start with the space key? maybe?
@@ -25,18 +25,21 @@ public class Dice : MonoBehaviour, Controls.IDiceActions
         controls = new Controls();
         controls.Dice.AddCallbacks(this);
         controls.Dice.Enable();
-
+        debug = BoardController.staticDebug;
         sprites = Resources.LoadAll<Sprite>("DiceSides/");
         Reset();
     }
 
     private void OnMouseDown()
     {
+        if (disable) { return; }
         HandleDice();
     }
 
     public void OnRoll(InputAction.CallbackContext context)
     {
+        if (!context.performed || disable) { return; }
+
         HandleDice();
     }
 

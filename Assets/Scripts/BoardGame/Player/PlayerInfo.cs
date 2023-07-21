@@ -12,6 +12,7 @@ public class PlayerInfo : MonoBehaviour
     public int numMinigamesWon; //maybe add a stats? is it neccessary?
     public int numHighRolls; //how many >= fours rolled
     public int numLowRolls; //how many <= threes rolled
+    public Dice dice;
 
     public Sprite sprite;
     void Start()
