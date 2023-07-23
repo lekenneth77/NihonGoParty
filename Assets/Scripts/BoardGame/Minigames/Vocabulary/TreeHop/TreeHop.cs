@@ -41,7 +41,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
             numPlayers = BoardController.numPlayers;
             timer.gameObject.transform.localPosition = new Vector3(0, 425, 0);
         }
-        //numPlayers = 4;
+        //numPlayers = 2;
         for (int i = 0; i < numPlayers; i++) {
             players[i].gameObject.SetActive(true);
             platformFolders[i].SetActive(true);

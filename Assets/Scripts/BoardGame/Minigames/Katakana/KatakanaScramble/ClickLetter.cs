@@ -54,6 +54,8 @@ public class ClickLetter : MonoBehaviour
     }
 
     public void OnMouseOver() {
+        return;
+        /*
         if (!move_flag && allow_hover) {
             if (chosen) {
                 KatakanaScramble.on_hover.transform.localPosition = original_pos;
@@ -63,6 +65,7 @@ public class ClickLetter : MonoBehaviour
                 KatakanaScramble.on_hover.SetActive(true);
             }
         }
+        */
     }
 
     private void OnMouseExit() {

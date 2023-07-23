@@ -149,16 +149,10 @@ public class KanjiFishing : Minigame
         if (!wrong) {
             numCorrect++;
         }
-        if (numRounds == 2) {
-            Debug.Log("Stop!");
-            if (numCorrect == 0) { numCorrect = -1; }
-            EndGame(numCorrect);
-            return;
-        }
+        
         if (wrong) {
             StartCoroutine("HandleWrong");
         } else {
-            Debug.Log("Correct!");
             StartCoroutine("HandleCorrect");
         }
     }
@@ -171,7 +165,12 @@ public class KanjiFishing : Minigame
         correct.gameObject.SetActive(false);
         answerBox.SetActive(false);
 
-        StartCoroutine("SetupRound");
+        if (numRounds == 2) {
+            if (numCorrect == 0) { numCorrect = -1; }
+            EndGame(numCorrect);
+        } else {
+            StartCoroutine("SetupRound");
+        }
     }
 
     private IEnumerator HandleWrong() {
@@ -181,7 +180,12 @@ public class KanjiFishing : Minigame
         wrong.gameObject.SetActive(false);
         answerBox.SetActive(false);
 
-        StartCoroutine("SetupRound");
+        if (numRounds == 2) {
+            if (numCorrect == 0) { numCorrect = -1; }
+            EndGame(numCorrect);
+        } else { 
+            StartCoroutine("SetupRound");
+        }
     }
 
 

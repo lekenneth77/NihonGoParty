@@ -52,9 +52,13 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
     }
 
     private IEnumerator StartTurn(GameObject turn) {
+
         turn.SetActive(true);
         yield return new WaitForSeconds(3f);
         turn.SetActive(false);
+        redX.SetActive(false);
+        loseTimer.gameObject.SetActive(false);
+        noTypey = false;
         gameTimer.ResetTimer();
         NextCharacter();
         gameTimer.StartTimer();
