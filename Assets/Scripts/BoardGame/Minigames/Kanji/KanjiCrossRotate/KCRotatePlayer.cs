@@ -16,8 +16,8 @@ public class KCRotatePlayer : MonoBehaviour
     public int wins;
 
 
-    private Vector3[] confirmPositions = new Vector3[] { new Vector3(0, 0, 0),
-                            new Vector3(-0.5f, -0.5f, 0), new Vector3(0, -1f, 0), new Vector3(0.5f, -0.5f, 0)};
+    private Vector3[] confirmPositions = new Vector3[] { new Vector3(0, 0.5f, 0),
+                            new Vector3(-0.5f, 0, 0), new Vector3(0, -0.5f, 0), new Vector3(0.5f, 0, 0)};
 
 
     public void RotateSphere(float direction)

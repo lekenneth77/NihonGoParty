@@ -12,8 +12,10 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     public GameObject allAssets;
 
     //waypoint information
-    public Transform[] waypoints; //todo just make it the root!
+    public BoardSpace root;
     public Transform[] startingWaypoints;
+    public GameObject wpFolder;
+    public GameObject wpLineFolder;
 
     //player and turn information
     public GameObject[] players;
@@ -160,10 +162,13 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     {
         //lol this is pretty jank and might be slow but it's kind of funny
         //TODO change this so that you only need to store the root of the map not all waypoints!
+        ResetSpaces(root);
+        /*
         foreach (Transform obj in waypoints)
         {
             obj.gameObject.GetComponent<BoardSpace>().ResetPlayers(true);
         }
+        */
 
         SetNextPlayer();
 
@@ -174,6 +179,16 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         stillCameraCom.LookAt = currentPlayer.transform;
         stillCameraCom.Follow = currentPlayer.transform;
         stillCameraCom.m_Lens.FieldOfView = STILL_FOV;
+    }
+
+    private void ResetSpaces(BoardSpace node) {
+        if (!node) { return; }
+        node.ResetPlayers(true);
+        ResetSpaces(node.nextWP);
+        if (node is CrossroadSpace) {
+            CrossroadSpace crossNode = (CrossroadSpace)node;
+            ResetSpaces(crossNode.alternateWP);
+        }
     }
 
 
@@ -222,7 +237,8 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                 nextSpace = forward ? currentSpace.chosenPath : currentSpace.prevWP;
             } else
             {
-                nextSpace = waypoints[0].GetComponent<BoardSpace>(); 
+                nextSpace = root;
+                //nextSpace = waypoints[0].GetComponent<BoardSpace>(); 
             }
             //handles going backwards onto a crossroad or going past the starting point
             if (nextSpace is CrossroadSpace && !forward || !nextSpace && !forward) { break; }
@@ -282,15 +298,19 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
                 if(((MinigameSpace)infoObj.currentSpace).category.ToUpper().Equals("DUEL")) {
                     //hanldes duels
-                    List<Sprite> spinnerSprites = new List<Sprite>();
-                    foreach (GameObject p in players)
-                    {
-                        if (p != player)
+                    if (numPlayers == 2) {
+                        ChooseDuelPlayers(0);
+                    } else { 
+                        List<Sprite> spinnerSprites = new List<Sprite>();
+                        foreach (GameObject p in players)
                         {
-                            spinnerSprites.Add(p.GetComponent<PlayerInfo>().sprite);
+                            if (p != player)
+                            {
+                                spinnerSprites.Add(p.GetComponent<PlayerInfo>().sprite);
+                            }
                         }
+                        spinner.TriggerSpin(spinnerSprites);
                     }
-                    spinner.TriggerSpin(spinnerSprites);
                 } else if (((MinigameSpace)infoObj.currentSpace).category.ToUpper().Equals("MULTI"))
                 {
                     //multiplayer games
@@ -324,9 +344,15 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         currentPlayer.GetComponent<PlayerInfo>().currentSpace.Action();
     }
 
-    public void BeforeMinigameLoad() { 
-        allAssets.SetActive(false);
-        lighting.gameObject.SetActive(false);
+    private void BoardVisibility(bool vis) {
+        allAssets.SetActive(vis);
+        wpFolder.SetActive(vis);
+        wpLineFolder.SetActive(vis);
+        lighting.gameObject.SetActive(vis);
+    }
+
+    public void BeforeMinigameLoad() {
+        BoardVisibility(false);
         foreach (GameObject player in players) {
             player.SetActive(false);
         }
@@ -334,8 +360,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
     private void AfterSpaceAction()
     {
-        lighting.gameObject.SetActive(true);
-        allAssets.SetActive(true);
+        BoardVisibility(true);
         foreach (GameObject player in players)
         {
             player.SetActive(true);

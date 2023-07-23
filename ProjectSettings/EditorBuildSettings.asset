@@ -71,4 +71,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/Bruh.unity
     guid: a492da2d48eb4664199e90e6faf2d5c7
+  - enabled: 1
+    path: Assets/Scenes/Maps/MapOne_Square.unity
+    guid: 1d3b71653c7b2904baa2793fe0605657
+  - enabled: 1
+    path: Assets/Scenes/Maps/Map Template.unity
+    guid: 65bd81f5a72631249baf647e52286d99
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Grammar/GIveReceive.unity
+    guid: 9eca047543f65a94f9be5ff33fc4ce44
   m_configObjects: {}

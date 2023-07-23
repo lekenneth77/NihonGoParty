@@ -18,7 +18,27 @@ public class MapBuilderEditor : Editor
         }
         if (GUILayout.Button("Build Katakana Space"))
         {
-
+            Selection.activeGameObject = builder.BuildMinigame(0);
+        }
+        if (GUILayout.Button("Build Grammar Space")) 
+        {
+            Selection.activeGameObject = builder.BuildMinigame(1);
+        }
+        if (GUILayout.Button("Build Kanji Space"))
+        {
+            Selection.activeGameObject = builder.BuildMinigame(2);
+        }
+        if (GUILayout.Button("Build Vocabulary Space"))
+        {
+            Selection.activeGameObject = builder.BuildMinigame(3);
+        }
+        if (GUILayout.Button("Build Duel Space"))
+        {
+            Selection.activeGameObject = builder.BuildMinigame(4);
+        }
+        if (GUILayout.Button("Build Multiplayer Space"))
+        {
+            Selection.activeGameObject = builder.BuildMinigame(5);
         }
         if (GUILayout.Button("Build Crossroad"))
         {

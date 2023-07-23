@@ -14,7 +14,8 @@ public class MapBuilder : MonoBehaviour
     public GameObject blankObj;
     public GameObject crossObj;
     public GameObject finishObj;
-    public GameObject katakanaObj;
+
+    public GameObject[] minigameObjs; //kata, gram, kanji, vocab, duel, multi
 
     //spawn position/rotation
     public Quaternion rotation;
@@ -57,12 +58,6 @@ public class MapBuilder : MonoBehaviour
         return newObj;
     }
 
-    public GameObject BuildKatakana()
-    {
-        GameObject newObj = BuildSpace(katakanaObj);
-        return newObj;
-    }
-
     public GameObject BuildCrossroad()
     {
         CrossroadSpace crossroad = BuildSpace(crossObj).GetComponent<CrossroadSpace>();
@@ -80,6 +75,11 @@ public class MapBuilder : MonoBehaviour
     public GameObject BuildFinishLine()
     {
         GameObject newObj = BuildSpace(finishObj);
+        return newObj;
+    }
+    
+    public GameObject BuildMinigame(int minigameIndex) {
+        GameObject newObj = BuildSpace(minigameObjs[minigameIndex]);
         return newObj;
     }
 
@@ -178,7 +178,7 @@ public class MapBuilder : MonoBehaviour
                 ((MinigameSpace)changed).selector = selector;
                 break;
             case "multi":
-                selected.GetComponent<SpriteRenderer>().color = Color.clear;
+                selected.GetComponent<SpriteRenderer>().color = new Color(238f / 255f, 141f / 255f, 0f);
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "MULTI";
                 ((MinigameSpace)changed).selector = selector;
