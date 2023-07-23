@@ -29,6 +29,7 @@ public class KatakanaSearch : Minigame
     private HashSet<int> chosenPositions;
     private string hiraganas;
     private string katakanas;
+    private KatakanaCollider correctOne;
 
     public override void Start()
     {
@@ -63,7 +64,8 @@ public class KatakanaSearch : Minigame
         int position = Random.Range(0, startingPositions.Length);
         chosenPositions.Add(position);
         mainHiragana.text = hiraganas[random] + "";
-        CreateKatakana(random, startingPositions[position].localPosition).GetComponent<KatakanaCollider>().correctOne = true;
+        correctOne = CreateKatakana(random, startingPositions[position].localPosition).GetComponent<KatakanaCollider>();
+        correctOne.correctOne = true;
 
         for (int i = 0; i < 19; i++) {
             random = Random.Range(0, hiraganas.Length);
@@ -105,6 +107,7 @@ public class KatakanaSearch : Minigame
         gameTimer.gameObject.SetActive(true);
         gameTimer.StartTimer();
         noTouchy = false;
+        KatakanaCollider.disable = false;
     }
 
     public void GameTimeout() {
@@ -124,6 +127,9 @@ public class KatakanaSearch : Minigame
 
     //as you can tell i am kind of getting tired of coding today
     private IEnumerator ThatsRight() {
+        KatakanaCollider.disable = true;
+        correctOne.nono = true;
+        correctOne.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.yellow;
         gameTimer.StopTimer();
         flashlight.SetActive(false);
         yield return new WaitForSeconds(3f);
@@ -140,9 +146,14 @@ public class KatakanaSearch : Minigame
         flashlight.SetActive(false);
         blackPanel.SetActive(true);
         yield return new WaitForSeconds(3f);
-        flashlight.SetActive(true);
-        blackPanel.SetActive(false);
-    }
+        if (KatakanaCollider.disable) { 
+            flashlight.SetActive(false);
+            blackPanel.SetActive(false);
+        } else {
+            flashlight.SetActive(true);
+            blackPanel.SetActive(false);
+        }
+    } 
 
     private IEnumerator FinishGame() {
         yield return new WaitForSeconds(5f);
@@ -151,7 +162,11 @@ public class KatakanaSearch : Minigame
     }
 
     private IEnumerator HandleTimeout() {
+        KatakanaCollider.disable = true;
+        blackPanel.SetActive(false);
         flashlight.SetActive(false);
+        correctOne.nono = true;
+        correctOne.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.yellow;
         stars.Lose();
         yield return new WaitForSeconds(5f);
         wins++; //wins is the wrong variable name, it's more appropriate to call it rounds
