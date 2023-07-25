@@ -84,6 +84,15 @@ public class MoveObject : MonoBehaviour
         rotateFirst = true;
         moveFlag = true;
     }
+    
+    //i hate myself
+    public void RotateToAngle(float x, float y, float z) {
+        timeCount = 0;
+        currentRotation = transform.rotation;
+        tgtRotation = Quaternion.Euler(x, y, z);
+        rotateFirst = true;
+        moveFlag = true;
+    }
 
     private void InitialRotate() {
         if (timeCount > (1f / rotationSpeed))

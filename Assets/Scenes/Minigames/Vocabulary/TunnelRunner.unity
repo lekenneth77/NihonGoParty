@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1807,7 +1807,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1280446133571650962, guid: 9dd7c62cbc09010448a1558e237a19b9, type: 3}
+  - {fileID: 1280446133571650962, guid: 31fea2cee46d0914090d53dc21d6d61f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2835,6 +2835,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 375268894}
     m_Modifications:
+    - target: {fileID: 7368208142063944583, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1280446133571650962, guid: 31fea2cee46d0914090d53dc21d6d61f, type: 3}
     - target: {fileID: 7368208142603021664, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
       propertyPath: m_Name
       value: Starting P2 Cave
@@ -3223,6 +3227,10 @@ PrefabInstance:
       propertyPath: frontDarkness
       value: 
       objectReference: {fileID: 1675333280}
+    - target: {fileID: 8392622858716892554, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1280446133571650962, guid: 31fea2cee46d0914090d53dc21d6d61f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
 --- !u!4 &1675333278 stripped
@@ -4335,6 +4343,10 @@ PrefabInstance:
       propertyPath: frontDarkness
       value: 
       objectReference: {fileID: 8392622859013094981}
+    - target: {fileID: 8392622858716892554, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1280446133571650962, guid: 31fea2cee46d0914090d53dc21d6d61f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
 --- !u!1 &8392622859013094981 stripped
@@ -4349,6 +4361,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2147156536}
     m_Modifications:
+    - target: {fileID: 7368208142063944583, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1280446133571650962, guid: 31fea2cee46d0914090d53dc21d6d61f, type: 3}
     - target: {fileID: 7368208142603021664, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
       propertyPath: m_Name
       value: Default P2 Cave
