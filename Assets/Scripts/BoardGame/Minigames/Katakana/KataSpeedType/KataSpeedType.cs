@@ -57,7 +57,7 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
         yield return new WaitForSeconds(3f);
         turn.SetActive(false);
         redX.SetActive(false);
-        loseTimer.gameObject.SetActive(false);
+        loseTimer.transform.parent.gameObject.SetActive(false);
         noTypey = false;
         gameTimer.ResetTimer();
         NextCharacter();
@@ -135,7 +135,7 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
             else
             {
                 loseTimer.ResetTimer();
-                loseTimer.gameObject.SetActive(true);
+                loseTimer.transform.parent.gameObject.SetActive(true);
                 loseTimer.StartTimer();
                 redX.SetActive(true);
                 noTypey = true;
@@ -146,7 +146,7 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
 
     public void NoMoreX() {
         redX.SetActive(false);
-        loseTimer.gameObject.SetActive(false);
+        loseTimer.transform.parent.gameObject.SetActive(false);
         noTypey = false;
     }
 

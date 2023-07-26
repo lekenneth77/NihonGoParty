@@ -9,6 +9,7 @@ public class KanjiFishing : Minigame
     public TextAsset hiraganaFile;
     public Hook hook;
     public GameObject defFish;
+    private Sprite[] fishSprites;
     public Transform fishParent;
     public Vector2 startingFishWP;
     public int numSpawns; //min = 10
@@ -20,6 +21,7 @@ public class KanjiFishing : Minigame
     private int numCorrect = 0;
     private int numRounds = 0;
     private List<GameObject> fishies;
+    
 
     //ui
     public TextMeshProUGUI currentKanjiText;
@@ -38,8 +40,10 @@ public class KanjiFishing : Minigame
         base.Start();
         kanjis = textFile.text.Split("\n"[0]);
         hiraganas = hiraganaFile.text;
+        fishSprites = Resources.LoadAll<Sprite>("Images/KanjiFishing/Fishes/");
         chosen = new HashSet<int>();
         fishies = new List<GameObject>();
+
         if (numSpawns < 10) { numSpawns = 10; }
         waypoints = new Vector2[numSpawns];
         for (int i = 0; i < numSpawns; i++) {
@@ -93,6 +97,7 @@ public class KanjiFishing : Minigame
 
             GameObject fish = Instantiate(defFish, waypoints[random], Quaternion.identity, fishParent);
             fish.GetComponent<Fish>().ChangeLetter(problem[1][i] + "");
+            fish.transform.GetChild(0).GetComponent<Image>().sprite = fishSprites[Random.Range(0, fishSprites.Length)];
             fishies.Add(fish);
         }
 
@@ -105,6 +110,7 @@ public class KanjiFishing : Minigame
             }
             GameObject fish = Instantiate(defFish, waypoints[random], Quaternion.identity, fishParent);
             fish.GetComponent<Fish>().ChangeLetter(hiraganas[Random.Range(0, 26)] + "");
+            fish.transform.GetChild(0).GetComponent<Image>().sprite = fishSprites[Random.Range(0, fishSprites.Length)];
             fishies.Add(fish);
         }
 

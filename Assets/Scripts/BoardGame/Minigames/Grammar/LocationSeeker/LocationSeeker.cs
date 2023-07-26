@@ -96,14 +96,14 @@ public class LocationSeeker : Minigame, Controls.IQuizGameActions
         roundText.transform.parent.gameObject.SetActive(false);
         nono = false;
         timer.ResetTimer();
-        timer.gameObject.SetActive(true);
+        timer.transform.parent.gameObject.SetActive(true);
         timer.StartTimer();
         controls.QuizGame.Enable();
 
     }
 
     public void Timeout() {
-        timer.gameObject.SetActive(false);
+        timer.transform.parent.gameObject.SetActive(false);
         helpText.SetActive(false);
         NextRound();
     }
@@ -173,7 +173,7 @@ public class LocationSeeker : Minigame, Controls.IQuizGameActions
         nono = true;
         controls.QuizGame.Disable();
         timer.StopTimer();
-        timer.gameObject.SetActive(false);
+        timer.transform.parent.gameObject.SetActive(false);
         helpText.SetActive(false);
         currentAnswerer = index;
         thePlayers[index].GetComponent<Animator>().Play("GoUp");

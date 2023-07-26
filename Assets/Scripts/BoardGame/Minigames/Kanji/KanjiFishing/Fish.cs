@@ -39,9 +39,9 @@ public class Fish : MonoBehaviour
 
     private void ChangeRotation() { 
         if (!left) {
-            transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 270f);
+            transform.GetChild(0).rotation = Quaternion.Euler(0, 180f, 0);
         } else {
-            transform.GetChild(0).rotation = Quaternion.Euler(0, 180f, 270f);
+            transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 

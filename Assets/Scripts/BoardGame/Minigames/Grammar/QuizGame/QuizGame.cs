@@ -59,7 +59,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
             ac.transform.parent.GetComponent<Button>().enabled = false;
         }
         allowAnswer = false;
-        timer.gameObject.SetActive(false);
+        timer.transform.parent.gameObject.SetActive(false);
         answerChoices[0].transform.parent.parent.gameObject.SetActive(false);
         playerCameras[currentPlayerI].SetActive(false);
         numAnswered = 0;
@@ -142,7 +142,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         } else { 
             playerCameras[currentPlayerI].SetActive(false);
             noMorePeople = false;
-            timer.gameObject.SetActive(false);
+            timer.transform.parent.gameObject.SetActive(false);
         }
     }
 
@@ -163,7 +163,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         yield return new WaitForSeconds(1f);
         playerCameras[currentPlayerI].SetActive(true);
         timer.ResetTimer();
-        timer.gameObject.SetActive(true);
+        timer.transform.parent.gameObject.SetActive(true);
         timer.StartTimer();
         foreach (TextMeshProUGUI ac in answerChoices) {
             ac.transform.parent.GetComponent<Button>().enabled = true;

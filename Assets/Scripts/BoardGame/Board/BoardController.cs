@@ -86,7 +86,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             numPlayers = 4;
         }
         
-        numPlayers = 2;
+        numPlayers = 3;
         FinishController.tempResults = players;
         leaderboard.SetNumPlayers(numPlayers);
         MinigameSpace.startedLoad += BeforeMinigameLoad;
