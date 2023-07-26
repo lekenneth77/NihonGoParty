@@ -26,6 +26,10 @@ public class JumpObject : MonoBehaviour
         triggerJump = true;
     }
 
+    private bool GetJump() {
+        return triggerJump;
+    }
+
     // Update is called once per frame
     void Update()
     {

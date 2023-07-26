@@ -9,17 +9,27 @@ public class WinStars : MonoBehaviour
     public Transform twoStars;
     public Transform threeX;
     public Transform twoX;
+
+    public GameObject[] threeSeperateStars; //HAHAHA DUCTTAPE!
+    public GameObject[] threeSeperateXs; 
+
     public bool three;
+    public bool seperate; //HAHAHAHAHAH
+
     private int round;
     private int wins;
     public void Win() {
         if (three && round >= 3) { return; }
         if (!three && round >= 2) { return; }
-        
-        if (three) {
-            threeStars.GetChild(round).gameObject.SetActive(true);
-        } else {
-            twoStars.GetChild(round).gameObject.SetActive(true);
+
+        if (seperate) {
+            threeSeperateStars[round].SetActive(true);
+        } else { 
+            if (three) {
+                threeStars.GetChild(round).gameObject.SetActive(true);
+            } else {
+                twoStars.GetChild(round).gameObject.SetActive(true);
+            }
         }
         wins++;
         round++;
@@ -29,10 +39,14 @@ public class WinStars : MonoBehaviour
         if (three && round >= 3) { return; }
         if (!three && round >= 2) { return; }
 
-        if (three) {
-            threeX.GetChild(round).gameObject.SetActive(true);
-        } else {
-            twoX.GetChild(round).gameObject.SetActive(true);
+        if (seperate) {
+            threeSeperateXs[round].SetActive(true);
+        } else { 
+            if (three) {
+                threeX.GetChild(round).gameObject.SetActive(true);
+            } else {
+                twoX.GetChild(round).gameObject.SetActive(true);
+            }
         }
         round++;
     }
