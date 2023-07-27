@@ -566,7 +566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &97053043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4347,6 +4347,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 1280446133571650962, guid: 31fea2cee46d0914090d53dc21d6d61f, type: 3}
+    - target: {fileID: 8392622860126943827, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
 --- !u!1 &8392622859013094981 stripped

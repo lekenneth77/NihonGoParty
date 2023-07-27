@@ -114,7 +114,7 @@ public class AppleDrop : Minigame
         GameObject appleObj = Instantiate(defApple, pos.position, Quaternion.identity, appleFolder);
         Apple app = appleObj.GetComponent<Apple>();
         app.text = s;
-        appleObj.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = s;
+        appleObj.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = s;
         float delay = Random.Range(1f, 4f);
         app.StartCoroutine(app.WaitThenFall(delay, spd)); //probably doesn't have to be app but whatever
     }

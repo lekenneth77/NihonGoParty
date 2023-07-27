@@ -36,7 +36,7 @@ public class RPGPlayerPhase : MonoBehaviour
             //first should be false because this is the second holy shit im so tired
             leftCircle.disable = true;
             rightCircle.disable = true;
-            arrow.transform.eulerAngles = left ? new Vector3(0, 0, 270f) : new Vector3(0, 0, 90f);
+            arrow.transform.eulerAngles = left ? new Vector3(0, 0, 180f) : new Vector3(0, 0, 0f);
             arrow.SetActive(true);
             phaseComplete?.Invoke(!giver);
         }

@@ -22,10 +22,12 @@ public class GiveReceive : Minigame
     public TextMeshProUGUI leftEnemyProb;
     public TextMeshProUGUI rightEnemyProb;
 
+
     private int playerHits; //terrible naming, this is how many times the player GOT hit
     private int enemyHits;
     private bool leftDodge;
     private int turn;
+    private bool leftHit;
     private Color[] hpColors = new Color[] { Color.green, new Color(238f / 255f, 141f / 255f, 0f) ,Color.red, Color.white};
     private string[] playerProblems;
     private HashSet<int> chosenPlayerProbs;
@@ -35,9 +37,9 @@ public class GiveReceive : Minigame
     private string[] highgroup;
     private string[][] allgroups = new string[3][];
 
-
-    public Image enemyPortrait;
-    public Image enemyHP;
+    public GameObject enemy;
+    private Image enemyPortrait;
+    private Image enemyHP;
     public Image playerHP;
     // Start is called before the first frame update
     public override void Start()
@@ -52,6 +54,9 @@ public class GiveReceive : Minigame
         allgroups[0] = ingroup;
         allgroups[1] = outgroup;
         allgroups[2] = highgroup;
+
+        enemyPortrait = enemy.GetComponent<Image>();
+        enemyHP = enemy.transform.GetChild(0).GetComponent<Image>();
 
         playerAttk.phaseComplete += AfterPunch;
     }
@@ -84,6 +89,7 @@ public class GiveReceive : Minigame
         string[] currentProb = playerProblems[random].Split("_"[0]);
         midTextBox.text = currentProb[0];
         random = Random.Range(0, 2);
+        leftHit = random == 0;
         playerAttk.leftCircle.giver = random == 0;
         playerAttk.rightCircle.giver = random == 1;
         if (random == 0) {
@@ -109,6 +115,7 @@ public class GiveReceive : Minigame
     private IEnumerator InflictDamage() {
         midTextBox.text = "";
         midTextBox.transform.parent.parent.gameObject.SetActive(true);
+        
         string dialogue = "Your punches land successfully!";
         int i = 0;
         while (i < dialogue.Length) {
@@ -118,7 +125,14 @@ public class GiveReceive : Minigame
             } 
             i++;
         }
+        yield return new WaitForSeconds(0.5f);
+        playerAttk.arrow.SetActive(false);
+        playerAttk.gameObject.SetActive(false);
+        string whichWay = "enemy_" + (leftHit ? "left" : "right");
+        enemy.GetComponent<Animator>().Play(whichWay);
         yield return new WaitForSeconds(1.5f);
+
+
         midTextBox.text = "";
         dialogue = "The enemy receives damage!";
         i = 0;

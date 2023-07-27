@@ -35,6 +35,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         if (SceneManager.sceneCount > 1) {
             SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
         }
+        singleplayer = true;
         ductTapeTimer = timer;
         controls = new Controls();
         controls.TunnelRunner.AddCallbacks(this);
