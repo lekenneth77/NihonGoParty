@@ -6,16 +6,23 @@ using TMPro;
 
 public class GiveReceive : Minigame
 {
+    //problems
     public TextAsset playerTxt;
     public TextAsset inGroupTxt;
     public TextAsset outGroupTxt;
     public TextAsset highOutGroupTxt;
+    private string[] playerProblems;
+    private HashSet<int> chosenPlayerProbs;
+    private string[] ingroup;
+    private string[] outgroup;
+    private string[] highgroup;
+    private string[][] allgroups = new string[3][];
 
     public GameObject cmdList;
     public TextMeshProUGUI midTextBox;
+    public RPGPlayerPhase playerAttk;
     public int maxRound = 5;
     public int maxHP = 3;
-    public RPGPlayerPhase playerAttk;
     public GameObject enemyAttk;
     public TextMeshProUGUI leftEnemyButton;
     public TextMeshProUGUI rightEnemyButton;
@@ -29,18 +36,15 @@ public class GiveReceive : Minigame
     private int turn;
     private bool leftHit;
     private Color[] hpColors = new Color[] { Color.green, new Color(238f / 255f, 141f / 255f, 0f) ,Color.red, Color.white};
-    private string[] playerProblems;
-    private HashSet<int> chosenPlayerProbs;
 
-    private string[] ingroup;
-    private string[] outgroup;
-    private string[] highgroup;
-    private string[][] allgroups = new string[3][];
-
-    public GameObject enemy;
-    private Image enemyPortrait;
-    private Image enemyHP;
+    //player
+    public GameObject player;
     public Image playerHP;
+
+    //enemy
+    public GameObject enemy;
+    private Image enemyHP;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -55,7 +59,6 @@ public class GiveReceive : Minigame
         allgroups[1] = outgroup;
         allgroups[2] = highgroup;
 
-        enemyPortrait = enemy.GetComponent<Image>();
         enemyHP = enemy.transform.GetChild(0).GetComponent<Image>();
 
         playerAttk.phaseComplete += AfterPunch;
@@ -145,6 +148,7 @@ public class GiveReceive : Minigame
             }
             i++;
         }
+        enemy.GetComponent<Animator>().Play("idle");
         enemyHits++;
         for (float j = 1f - (.34f * (enemyHits - 1)); j >= 1f - (.34f * enemyHits); j -= 0.01f) {
             enemyHP.fillAmount = j;
@@ -325,6 +329,10 @@ public class GiveReceive : Minigame
             }
             i++;
         }
+        yield return new WaitForSeconds(0.5f);
+        string whichWay = "player_" + (leftDodge ? "right" : "left");
+        player.GetComponent<Animator>().Play(whichWay);
+
         yield return new WaitForSeconds(1f);
         midTextBox.text = "";
 
@@ -337,6 +345,8 @@ public class GiveReceive : Minigame
             }
             i++;
         }
+        player.GetComponent<Animator>().Play("idle");
+
         playerHits++;
         for (float j = 1f - (.34f * (playerHits - 1)); j >= 1f - (.34f * playerHits); j -= 0.01f) {
             playerHP.fillAmount = j;
@@ -372,14 +382,8 @@ public class GiveReceive : Minigame
             }
             i++;
         }
-
-        for (int j = 100; j >= 0; j--) {
-            Color temp = enemyPortrait.color;
-            temp.a -= 0.01f;
-            enemyPortrait.color = temp;
-            yield return new WaitForSeconds(0.005f);
-        }
-        yield return new WaitForSeconds(0.5f);
+        enemy.GetComponent<Animator>().Play("enemy_die");
+        yield return new WaitForSeconds(1.2f);
         dialogue = "Congratulations! You gained 99 experience!";
         midTextBox.text = "";
         i = 0;
@@ -409,7 +413,9 @@ public class GiveReceive : Minigame
             }
             i++;
         }
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.5f);
+        player.GetComponent<Animator>().Play("player_die");
+        yield return new WaitForSeconds(12f);
         EndGame(enemyHits - 1);
     }
 
