@@ -10,6 +10,8 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
     public TextAsset txtfile;
     public Timer timer;
     public Pedestal[] pedestals;
+    public GameObject[] characters;
+    private float[] initialPlayerPosX = new float[] { -4.05f, -1.35f, 1.35f, 4.05f}; //should always be a size of 4
     private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f * 0.45f, 6f * 0.45f, -15f * 0.45f), new Vector3(-3f * 0.45f, 6f * 0.45f, -15f * 0.45f), new Vector3(0, 6.5f * 0.45f, -17f * 0.45f)};
     public GameObject fullViewCam;
     public GameObject[] playerCameras;
@@ -39,7 +41,21 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         timer.TimeUp += Timeout;
 
         numPlayers = BoardController.numPlayers;
-        numPlayers = 4;
+
+        if (BoardController.players == null) { 
+            //for debugging, you can play this game straight from only this scene
+            numPlayers = 4;
+            for (int i = 0; i < numPlayers; i++) {
+                characters[i].transform.position = new Vector3(initialPlayerPosX[i], 0, -1f);
+            }
+        } else {
+            //required to be played from a board game
+            GameObject[] players = BoardController.players;
+            for (int i = 0; i < numPlayers; i++) {
+                int characterI = players[i].GetComponent<PlayerInfo>().characterIndex;
+                characters[characterI].transform.position = new Vector3(initialPlayerPosX[i], 0, -1f);
+            }
+        }
 
         for (int i = 0; i < numPlayers; i++) {
             pedestals[i].gameObject.SetActive(true);

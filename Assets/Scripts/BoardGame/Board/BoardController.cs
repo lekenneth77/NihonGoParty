@@ -18,7 +18,8 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     public GameObject wpLineFolder;
 
     //player and turn information
-    public GameObject[] players;
+    public GameObject[] characters; //MUST match the same order as setup screen
+    public static GameObject[] players;
     public static int numPlayers;
     public static GameObject currentPlayer;
     private int currentPlayer_i; //index of current player
@@ -81,12 +82,28 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         moveCameraCom = moveCameraObj.GetComponent<CinemachineVirtualCamera>();
         staticDebug = debug;
 
-        if (debug)
-        {
+        if (debug) {
+            //skip deciding who goes first, go straight to immediate roll for movement
+            //also able to skip having to go through multiplayer setup
             numPlayers = 4;
+            players = new GameObject[numPlayers];
+            for (int i = 0; i < 4; i++) {
+                players[i] = characters[i];
+            }
+        } else {
+            //must have multiplayer setup to work without debug
+            int[] whatTheyChose = MultiplayerSetup.whatThePlayersChose;
+            players = new GameObject[numPlayers];
+            for (int i = 0; i < numPlayers; i++) {
+                players[i] = characters[whatTheyChose[i]];
+                players[i].GetComponent<PlayerInfo>().containerPosition = i;
+            }
         }
-        
-        numPlayers = 3;
+
+
+        //numPlayers = 4;
+
+
         FinishController.tempResults = players;
         leaderboard.SetNumPlayers(numPlayers);
         MinigameSpace.startedLoad += BeforeMinigameLoad;

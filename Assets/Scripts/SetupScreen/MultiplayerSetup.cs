@@ -7,17 +7,20 @@ using Cinemachine;
 
 public class MultiplayerSetup : MonoBehaviour
 {
+    //choose numplayers
     public GameObject chooseNumPlayersCon;
+
+    //choose character
     public GameObject chooseYourCharCon;
-
     public Animator[] characters;
-
     public GameObject[] playerChosens;
     private int currentChooser;
-
     //honestly only used for disabling the button once confirm
     public GameObject[] characterChoosers;
     private int recentChosen;
+
+    //for holding information to pass to the boardgame
+    public static int[] whatThePlayersChose; //indicies of the characters in the order the players have chosen
 
     //oh god save my sphere
     public RotateObject daSphere;
@@ -25,7 +28,6 @@ public class MultiplayerSetup : MonoBehaviour
     private int currentMapI;
 
     private bool choseACharacter;
-
 
     //cameras
     public GameObject numCharsCamera, chooseCharsCamera, mapCamera, mapZoomCamera;
@@ -48,6 +50,7 @@ public class MultiplayerSetup : MonoBehaviour
     {
         this.numPlayers = numPlayers;
         BoardController.numPlayers = numPlayers;
+        whatThePlayersChose = new int[numPlayers];
         chooseCharsCamera.SetActive(true);
         numCharsCamera.SetActive(false);
     }
@@ -62,6 +65,7 @@ public class MultiplayerSetup : MonoBehaviour
         characters[charIndex].gameObject.transform.position = playerChosens[currentChooser].transform.GetChild(0).position;
         characters[charIndex].Play("spin");
         recentChosen = charIndex;
+        whatThePlayersChose[currentChooser] = charIndex;
         choseACharacter = true;
     }
 
@@ -143,6 +147,7 @@ public class MultiplayerSetup : MonoBehaviour
     public void FinalSelectMap()
     {
         Debug.Log("Show time! " + currentMapI);
+        SceneManager.LoadSceneAsync("MapOne_Square");
         //TODO maybe do like a dramatic zoom in
     }
 

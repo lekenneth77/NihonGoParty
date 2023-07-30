@@ -13,8 +13,10 @@ public class PlayerInfo : MonoBehaviour
     public int numHighRolls; //how many >= fours rolled
     public int numLowRolls; //how many <= threes rolled
     public Dice dice;
-
     public Sprite sprite;
+    public int characterIndex; //THIS IS SPECIFIC TO EACH CHARACTER, ZERO INDEXED, JANK INDEED
+                            //in this order capy, chef, bevo, suit
+                               
     void Start()
     {
         numCrossed = 0;
