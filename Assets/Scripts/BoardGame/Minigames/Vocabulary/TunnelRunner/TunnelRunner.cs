@@ -8,18 +8,25 @@ using UnityEngine.SceneManagement;
 
 public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 {
-    //ui
+    //camera work and setup
     public Camera[] playerCams;
+    public GameObject[] characters;
+    private Vector3[] characterCamPos = new Vector3[] { new Vector3(0, 1.5f, -12f), new Vector3(0f, 3f, -12f), new Vector3(0f, 3f, -12f), new Vector3(0f, 2.75f, -12f) };
+    public PlayableDirector[] directors;
+    private Vector3[] spawnPts = new Vector3[] { new Vector3(0, 0, -9f), new Vector3(40f, 0, -9f) };
+    public Cave[] defaultCaves; //DUCTTAPEPPPP
+
+    //ui
     public GameObject congratImg;
     public GameObject failureImg;
-    public PlayableDirector director;
     public Timer timer;
     public static Timer ductTapeTimer;
+
+    //final screen
     public Image whiteScreen;
     public Transform finalWP;
     public GameObject finalCam;
     public GameObject lighting;
-
 
     //games
     public Cave p1Cave;
@@ -35,19 +42,48 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         if (SceneManager.sceneCount > 1) {
             SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
         }
-        singleplayer = true;
         ductTapeTimer = timer;
         controls = new Controls();
         controls.TunnelRunner.AddCallbacks(this);
         Cave.chosenQ = new HashSet<int>();
         Cave.questions = textFile.text.Split("\n"[0]);
-        director.stopped += StartGame;
-        p1Cave.ChangeText("", "", "", false);
-        director.Play();
+        
+        if (singleplayer) {
+            int characterI = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+            p1Cave.player = characters[characterI].GetComponent<MoveObject>();
+            p1Cave.followCam.transform.position = characterCamPos[characterI];
+            p1Cave.followCam.GetComponent<FollowTwoAxis>().follow = p1Cave.player.transform;
+            p1Cave.player.transform.position = spawnPts[0];
+            defaultCaves[0].player = p1Cave.player;
+            defaultCaves[0].followCam = p1Cave.followCam;
+            p1Cave.player.gameObject.SetActive(true);
+            p1Cave.ChangeText("", "", "", false);
+        } else { 
+            //get the duel model from board controller
+            for (int i = 0; i < 2; i++) {
+                int characterI = BoardController.duelists[i].GetComponent<PlayerInfo>().characterIndex;
+                Cave cave = i == 0 ? p1Cave : p2Cave;
+
+                cave.player = characters[characterI].GetComponent<MoveObject>();
+                cave.followCam.transform.position = characterCamPos[characterI];
+                cave.followCam.GetComponent<FollowTwoAxis>().follow = cave.player.transform;
+                cave.player.transform.position = spawnPts[i];
+                defaultCaves[i].player = cave.player;
+                defaultCaves[i].followCam = cave.followCam;
+                cave.player.gameObject.SetActive(true);
+                cave.ChangeText("", "", "", false);
+            }
+        }
+        int index = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        directors[index].stopped += StartGame;
+        directors[index].gameObject.SetActive(true);
+        directors[index].Play();
         Cave.caveLimit = caveLimit;
     }
 
     public void StartGame(PlayableDirector dir) {
+        int index = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        directors[index].gameObject.SetActive(false);
         p1Cave.GetWords();
         if (singleplayer) {
             timer.ResetTimer();
@@ -118,7 +154,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         lighting.SetActive(true);
         finalCam.SetActive(true);
         winner.player.gameObject.transform.position = finalWP.position;
-        winner.player.gameObject.transform.eulerAngles = new Vector3(0, 90f, 0);
+        winner.player.gameObject.transform.eulerAngles = new Vector3(0, 270f, 0);
         yield return new WaitForSeconds(3f);
         if (!singleplayer) { 
             if (p1) {
@@ -130,7 +166,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
             }
         }
         whiteScreen.gameObject.SetActive(false);
-        winner.player.gameObject.GetComponent<Animator>().Play("victory");
+        winner.player.transform.GetChild(0).GetComponent<Animator>()?.Play("victory");
         congratImg.SetActive(true);
 
         yield return new WaitForSeconds(5f);

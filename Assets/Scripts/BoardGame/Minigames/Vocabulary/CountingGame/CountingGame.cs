@@ -11,6 +11,9 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
     public GameObject[] leaderboard;
     public TextMeshProUGUI currentCounter;
     public GameObject fullViewCam;
+
+    public GameObject[] characters;
+    private float[] initialPlayerPosX = new float[] { -9f, -3f, 3f, 9f }; //should always be a size of 4
     private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f, 7f, -20f), new Vector3(-3f, 7f, -20f), new Vector3(0, 7f, -20f) };
     public GameObject nextRoundImage;
     public Transform[] spawnPoints;
@@ -54,8 +57,23 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         controls = new Controls();
         controls.QuizGame.AddCallbacks(this);
 
-        numPlayers = BoardController.numPlayers;
-        numPlayers = 4;
+         numPlayers = BoardController.numPlayers;
+        if (BoardController.players == null) { 
+            //for debugging, you can play this game straight from only this scene
+            numPlayers = 4;
+            for (int i = 0; i < numPlayers; i++) {
+                characters[i].transform.position = new Vector3(initialPlayerPosX[i], 0, -1f);
+            }
+        } else {
+            //required to be played from a board game
+            GameObject[] players = BoardController.players;
+            for (int i = 0; i < numPlayers; i++) {
+                int characterI = players[i].GetComponent<PlayerInfo>().characterIndex;
+                characters[characterI].transform.position = new Vector3(initialPlayerPosX[i], 0, -1f);
+            }
+        }
+
+
         for (int i = 0; i < numPlayers; i++)
         {
             pedestals[i].SetActive(true);

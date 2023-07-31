@@ -60,7 +60,7 @@ MonoBehaviour:
   leftText: {fileID: 8392622859967551539}
   rightText: {fileID: 8784885861758705717}
   topText: {fileID: 8392622858602047494}
-  frontDarkness: {fileID: 0}
+  frontDarkness: {fileID: 8392622858716892559}
   enterRight:
   - {fileID: 8392622860085293422}
   - {fileID: 8392622858547094478}
@@ -75,7 +75,7 @@ MonoBehaviour:
   outLeft:
   - {fileID: 8392622860043155170}
   - {fileID: 8392622858585738424}
-  defCave: {fileID: 8392622858178028397}
+  defCave: {fileID: 0}
   defFinish: {fileID: 0}
 --- !u!1 &8392622858458119216
 GameObject:
@@ -101,7 +101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8392622858458119216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -374,7 +374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1280446133571650962, guid: 9dd7c62cbc09010448a1558e237a19b9, type: 3}
+  - {fileID: 1280446133571650962, guid: 31fea2cee46d0914090d53dc21d6d61f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

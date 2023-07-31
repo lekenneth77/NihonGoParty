@@ -1308,7 +1308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 686065828}
   - component: {fileID: 686065830}
-  - component: {fileID: 686065829}
+  - component: {fileID: 686065831}
   m_Layer: 0
   m_Name: wp5
   m_TagString: Untagged
@@ -1331,22 +1331,6 @@ Transform:
   m_Father: {fileID: 954444187}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &686065829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686065827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecdb1a30c99193f4c9c9d6075e181dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeName: 
-  chosenPath: {fileID: 0}
-  nextWP: {fileID: 0}
-  prevWP: {fileID: 1549060702}
 --- !u!212 &686065830
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1389,7 +1373,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1399,6 +1383,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &686065831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686065827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeName: vocab
+  chosenPath: {fileID: 0}
+  nextWP: {fileID: 0}
+  prevWP: {fileID: 1549060702}
+  category: VOCAB
+  selector: {fileID: 29935722}
 --- !u!1 &746971840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1746,7 @@ PrefabInstance:
     - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
       propertyPath: prev
       value: 
-      objectReference: {fileID: 686065829}
+      objectReference: {fileID: 0}
     - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
       propertyPath: root
       value: 
@@ -1769,6 +1771,10 @@ PrefabInstance:
       propertyPath: lineFolder
       value: 
       objectReference: {fileID: 1193116272}
+    - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
+      propertyPath: changeToThis
+      value: vocab
+      objectReference: {fileID: 0}
     - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
       propertyPath: spawnPoint.x
       value: 12.79
@@ -1904,7 +1910,7 @@ PrefabInstance:
       objectReference: {fileID: 746971842}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: debug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: spinner
@@ -1973,19 +1979,19 @@ PrefabInstance:
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: characters.Array.data[0]
       value: 
-      objectReference: {fileID: 2126246848}
+      objectReference: {fileID: 1278334569}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: characters.Array.data[1]
       value: 
-      objectReference: {fileID: 996019091}
+      objectReference: {fileID: 2126246848}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: characters.Array.data[2]
       value: 
-      objectReference: {fileID: 1278334569}
+      objectReference: {fileID: 922721765}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: characters.Array.data[3]
       value: 
-      objectReference: {fileID: 922721765}
+      objectReference: {fileID: 996019091}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: startingWaypoints.Array.data[0]
       value: 
@@ -2261,7 +2267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: 
   chosenPath: {fileID: 0}
-  nextWP: {fileID: 686065829}
+  nextWP: {fileID: 686065831}
   prevWP: {fileID: 1350168930}
 --- !u!212 &1549060703
 SpriteRenderer:

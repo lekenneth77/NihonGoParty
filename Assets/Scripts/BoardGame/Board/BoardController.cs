@@ -34,7 +34,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //duels
     public GameObject duelPopup;
     public GameObject duelWinChoices;
-    private GameObject[] duelists = new GameObject[2];
+    public static GameObject[] duelists = new GameObject[2];
     private bool duelOn;
 
     //multiplayer

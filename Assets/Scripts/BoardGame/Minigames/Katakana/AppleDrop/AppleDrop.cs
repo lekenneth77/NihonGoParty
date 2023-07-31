@@ -5,6 +5,8 @@ using TMPro;
 
 public class AppleDrop : Minigame
 {
+    public GameObject[] characters;
+
     public ApplePlayer player;
     public AppleBasket basket;
     public GameObject defApple;
@@ -48,6 +50,13 @@ public class AppleDrop : Minigame
         solutions = kataSolutionTxt.text.Split("\n"[0]);
         chosen = new HashSet<int>();
         resultings = new List<GameObject>();
+
+        int characterI = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        characters[characterI].gameObject.SetActive(true);
+        player.model = characters[characterI];
+        if (characterI == 2) {
+            player.model.GetComponent<Animator>().Play("victory");
+        } 
         SetupRound();
     }
 
