@@ -147,7 +147,7 @@ public class MultiplayerSetup : MonoBehaviour
     public void FinalSelectMap()
     {
         Debug.Log("Show time! " + currentMapI);
-        SceneManager.LoadSceneAsync("MapOne_Square");
+        SceneManager.LoadSceneAsync("Map Template");
         //TODO maybe do like a dramatic zoom in
     }
 

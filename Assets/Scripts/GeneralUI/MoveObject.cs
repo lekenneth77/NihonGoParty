@@ -15,7 +15,7 @@ public class MoveObject : MonoBehaviour
     private bool rotateFirst;
     private Quaternion currentRotation;
     private Quaternion tgtRotation;
-    private float rotationSpeed = 6f;
+    private float rotationSpeed = 3f;
     private float timeCount = 0;
 
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class MoveObject : MonoBehaviour
 
         if (!moveFlag) {
             if (transform.GetChild(0).GetComponent<Animator>()) {
-                transform.GetChild(0).GetComponent<Animator>().SetFloat("IdleToWalk", 0f, 0.05f, Time.deltaTime);
+                transform.GetChild(0).GetComponent<Animator>().SetFloat("IdleToWalk", 0f, 0.01f, Time.deltaTime);
             }
             return; 
         }
@@ -50,8 +50,6 @@ public class MoveObject : MonoBehaviour
 
     public void SetTargetAndMove(Vector3 tgt)
     {
-        //TODO change once you have real models!
-        //tgt.y = tgt.y + 0.5f;
         target = tgt;
         if (rotateToo)
         {
@@ -95,9 +93,10 @@ public class MoveObject : MonoBehaviour
     }
 
     private void InitialRotate() {
-        if (timeCount > (1f / rotationSpeed))
+        if (timeCount >= (1f / rotationSpeed))
         {
             rotateFirst = false;
+            transform.rotation = tgtRotation;
             return;
         }
 

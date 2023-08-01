@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CrossroadArrow : MonoBehaviour
 {
     public bool altPath;
@@ -18,5 +17,13 @@ public class CrossroadArrow : MonoBehaviour
         Debug.Log("I chose alternate: " + altPath);
         altPathChosen = altPath;
         choseSomething = true;
+    }
+
+    private void OnMouseEnter() {
+        GetComponent<Animator>().Play("Big");
+    }
+
+    private void OnMouseExit() {
+        GetComponent<Animator>().Play("idle");
     }
 }

@@ -56,6 +56,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
     //misc sprites
     private Sprite[] diceSprites;
+    private Sprite[] numberSprites;
 
     //debug flag
     public bool debug;
@@ -78,6 +79,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         wonMinigame = false;
         freeCameraOn = false;
         diceSprites = Resources.LoadAll<Sprite>("DiceSides/");
+        numberSprites = Resources.LoadAll<Sprite>("Images/Numbers/");
         stillCameraCom = stillCameraObj.GetComponent<CinemachineVirtualCamera>();
         moveCameraCom = moveCameraObj.GetComponent<CinemachineVirtualCamera>();
         staticDebug = debug;
@@ -260,7 +262,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             //handles going backwards onto a crossroad or going past the starting point
             if (nextSpace is CrossroadSpace && !forward || !nextSpace && !forward) { break; }
 
-            countdownSprite.sprite = diceSprites[roll - currentStep];
+            countdownSprite.sprite = numberSprites[roll - currentStep];
             infoObj.numCrossed = forward ? infoObj.numCrossed + 1 : infoObj.numCrossed - 1;
             moveObj.SetTargetAndMove(nextSpace.transform.position);
             nextSpace.AdjustPlayers();

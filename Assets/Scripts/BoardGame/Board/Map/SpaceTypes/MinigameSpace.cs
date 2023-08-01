@@ -83,7 +83,6 @@ public class MinigameSpace : BoardSpace
         MinigameSelector.gotGame -= LoadGame;
         startedLoad?.Invoke();
         string game = gamesToChooseFrom[i];
-        game = "AppleDrop";
         InvokeLoad(game, true);
     }
 
