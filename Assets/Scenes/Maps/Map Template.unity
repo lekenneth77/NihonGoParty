@@ -1520,15 +1520,15 @@ PrefabInstance:
       objectReference: {fileID: 1717004514}
     - target: {fileID: 2798855060797247543, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000017173136
+      value: -0.00000001717313
       objectReference: {fileID: 0}
     - target: {fileID: 2798855060797247543, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000000010691602
+      value: -0.0000000010691604
       objectReference: {fileID: 0}
     - target: {fileID: 2798855060797247543, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.062137425
+      value: -0.062137447
       objectReference: {fileID: 0}
     - target: {fileID: 2798855060846335579, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_Name
@@ -1677,6 +1677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chef Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7560867314404374454, guid: 9e38dd38cf8eab84080a7b0d5c0f7aee, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c56d110b804ac6f4aa8649fc68235464, type: 3}
     - target: {fileID: 7560867314404374455, guid: 9e38dd38cf8eab84080a7b0d5c0f7aee, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2545,7 +2549,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613254798}
-  m_LocalRotation: {x: -0.0000000010691602, y: 0.9980676, z: -0.062137425, w: -0.000000017173136}
+  m_LocalRotation: {x: -0.0000000010691604, y: 0.9980676, z: -0.062137447, w: -0.00000001717313}
   m_LocalPosition: {x: 5, y: 2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3099,6 +3103,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9098422620718635885, guid: ca5129172ba8ca541bf6eb33aa9dae1b, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ada65d999570ccc40abdf762ae856b66, type: 3}
     - target: {fileID: 9098422620718635887, guid: ca5129172ba8ca541bf6eb33aa9dae1b, type: 3}
       propertyPath: m_Name
       value: Business Man

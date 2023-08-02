@@ -14,6 +14,7 @@ public abstract class Minigame : MonoBehaviour
     public static bool debug;
     public virtual void Start()
     {
+        
     }
 
     public void EndMultiplayerGame(int winnerIndex) {
