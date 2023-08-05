@@ -8,11 +8,15 @@ public class TitleScreen : MonoBehaviour
 {
     public Image[] startingScreens;
     public Image fadeoutScreen;
+    public static bool skipStart; //eventually use this so that you don't have to watch the beginning screens
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("DoScreens");
+        
+        if (skipStart) { 
+            StartCoroutine("DoScreens");
+        }
     }
 
     public IEnumerator DoScreens() {

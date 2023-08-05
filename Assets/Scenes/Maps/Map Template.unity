@@ -441,7 +441,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -478,11 +478,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeName: duel
+  typeName: vocab
   chosenPath: {fileID: 0}
   nextWP: {fileID: 1350168930}
   prevWP: {fileID: 562293836}
-  category: DUEL
+  category: VOCAB
   selector: {fileID: 29935722}
 --- !u!1 &341299541
 GameObject:
@@ -1520,11 +1520,11 @@ PrefabInstance:
       objectReference: {fileID: 1717004514}
     - target: {fileID: 2798855060797247543, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000017173132
+      value: -0.000000017173132
       objectReference: {fileID: 0}
     - target: {fileID: 2798855060797247543, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000000010691606
+      value: -0.0000000010691606
       objectReference: {fileID: 0}
     - target: {fileID: 2798855060797247543, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1777,7 +1777,7 @@ PrefabInstance:
       objectReference: {fileID: 1193116272}
     - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
       propertyPath: changeToThis
-      value: duel
+      value: vocab
       objectReference: {fileID: 0}
     - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
       propertyPath: spawnPoint.x
@@ -1983,11 +1983,11 @@ PrefabInstance:
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: characters.Array.data[0]
       value: 
-      objectReference: {fileID: 996019091}
+      objectReference: {fileID: 2126246848}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: characters.Array.data[1]
       value: 
-      objectReference: {fileID: 922721765}
+      objectReference: {fileID: 996019091}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: characters.Array.data[2]
       value: 
@@ -1995,7 +1995,7 @@ PrefabInstance:
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: characters.Array.data[3]
       value: 
-      objectReference: {fileID: 2126246848}
+      objectReference: {fileID: 922721765}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: startingWaypoints.Array.data[0]
       value: 
@@ -2549,7 +2549,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613254798}
-  m_LocalRotation: {x: 0.0000000010691606, y: 0.9980676, z: -0.062137455, w: 0.000000017173132}
+  m_LocalRotation: {x: -0.0000000010691606, y: 0.9980676, z: -0.062137455, w: -0.000000017173132}
   m_LocalPosition: {x: 5, y: 2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2866,7 +2866,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Load_Pause Canvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2737262777788525341, guid: e9bede8bca23c2c4aa625eda0cbdb912, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737262777788525341, guid: e9bede8bca23c2c4aa625eda0cbdb912, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737262777788525341, guid: e9bede8bca23c2c4aa625eda0cbdb912, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2737262777788525338, guid: e9bede8bca23c2c4aa625eda0cbdb912, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e9bede8bca23c2c4aa625eda0cbdb912, type: 3}
 --- !u!114 &2000578893 stripped
 MonoBehaviour:

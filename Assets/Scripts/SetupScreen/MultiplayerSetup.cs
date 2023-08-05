@@ -51,6 +51,31 @@ public class MultiplayerSetup : MonoBehaviour
         this.numPlayers = numPlayers;
         BoardController.numPlayers = numPlayers;
         whatThePlayersChose = new int[numPlayers];
+
+        for (int i = 0; i < 4; i++) {
+            if (i < numPlayers) { 
+                playerChosens[i].SetActive(true);
+            } else {
+                playerChosens[i].SetActive(false);
+            }
+        }
+
+        //reset character choosers
+        choseACharacter = false;
+        recentChosen = -1;
+        currentChooser = 0;
+        for (int i = 0; i < characters.Length; i++) {
+            characters[i].gameObject.transform.position = new Vector3(200f * i, -3000, 0);
+            characters[i].Play("idle");
+        }
+
+        foreach (GameObject obj in characterChoosers) {
+            obj.GetComponent<Button>().enabled = true;
+            Color temp = obj.GetComponent<Image>().color;
+            temp.a = 1f;
+            obj.GetComponent<Image>().color = temp;
+        }
+
         chooseCharsCamera.SetActive(true);
         numCharsCamera.SetActive(false);
     }
@@ -58,7 +83,7 @@ public class MultiplayerSetup : MonoBehaviour
     public void ChooseYourCharacter(int charIndex)
     {
         if (choseACharacter) {
-            characters[recentChosen].gameObject.transform.position = new Vector3(0, -1000, 0);
+            characters[recentChosen].gameObject.transform.position = new Vector3(0, -3000, 0);
             characters[recentChosen].Play("idle");
         }
 
@@ -95,7 +120,7 @@ public class MultiplayerSetup : MonoBehaviour
             }
             mapCamera.SetActive(true);
             chooseCharsCamera.SetActive(false);
-            //Load board game! or actually make a choose map screen? TODO
+            choseACharacter = true;
         }
         else
         {
@@ -144,12 +169,17 @@ public class MultiplayerSetup : MonoBehaviour
         brain.m_DefaultBlend.m_Time = 1f; // 0 Time equals a cut
     }
 
-    public void FinalSelectMap()
-    {
+    public void FinalSelectMap() {
         Debug.Log("Show time! " + currentMapI);
         SceneManager.LoadSceneAsync("Map Template");
         //TODO maybe do like a dramatic zoom in
     }
 
+
+    public void GoToTitleScreen() {
+        //set up a flag 
+        TitleScreen.skipStart = true;
+        SceneManager.LoadSceneAsync("TitleScreen");
+    }
 
 }
