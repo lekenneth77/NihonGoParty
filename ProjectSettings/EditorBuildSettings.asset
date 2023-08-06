@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/AllMinigames.unity
     guid: 06f2a8c92c587734288bbb4da186f481
   - enabled: 1
-    path: Assets/Scenes/Minigames/Vocabulary/TreeHop.unity
+    path: Assets/Scenes/Minigames/Vocabulary/TreeHop/TreeHop.unity
     guid: b0a8012a747c57f4b862eed582259aae
   - enabled: 1
     path: Assets/Scenes/Title Screen.unity
@@ -39,7 +39,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/Grammar/QuizGame/QuizGame.unity
     guid: ab698ec6aef8faf4a9ce60ebf22c0c7c
   - enabled: 1
-    path: Assets/Scenes/Minigames/Vocabulary/CountingGame.unity
+    path: Assets/Scenes/Minigames/Vocabulary/CountingGame/CountingGame.unity
     guid: 71c54343650c57e4b8089c0472540bae
   - enabled: 1
     path: Assets/Scenes/Minigames/Katakana/KataSpeedType/KataSpeedType.unity
@@ -48,10 +48,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/Grammar/SpeedType/SpeedType.unity
     guid: 125079d198d230645808d23f551214ec
   - enabled: 1
-    path: Assets/Scenes/Minigames/Vocabulary/TunnelRunner.unity
+    path: Assets/Scenes/Minigames/Vocabulary/TunnelRunner/TunnelRunner.unity
     guid: 00989e6a9f6e6b844baa67406af57fa9
   - enabled: 1
-    path: Assets/Scenes/Minigames/Vocabulary/VocabHunt.unity
+    path: Assets/Scenes/Minigames/Vocabulary/VocabHunt/VocabHunt.unity
     guid: 9ba5267b04f4cc84a9955b8bd92e098b
   - enabled: 1
     path: Assets/Scenes/Minigames/Kanji/KanjiDnD/KanjiDnD.unity
@@ -66,7 +66,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/Grammar/WordOrder/WordOrder2.unity
     guid: 97f1462422beec54fb33da18df490355
   - enabled: 1
-    path: Assets/Scenes/Minigames/Katakana/AppleDrop.unity
+    path: Assets/Scenes/Minigames/Katakana/AppleDrop/AppleDrop.unity
     guid: f0d831a5d4906eb44a26c6dd972d11ec
   - enabled: 1
     path: Assets/Scenes/Maps/Bruh.unity
@@ -78,6 +78,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Maps/Map Template.unity
     guid: 65bd81f5a72631249baf647e52286d99
   - enabled: 1
-    path: Assets/Scenes/Minigames/Grammar/GIveReceive.unity
+    path: Assets/Scenes/Minigames/Grammar/GiveReceivePunch/GIveReceive.unity
     guid: 9eca047543f65a94f9be5ff33fc4ce44
   m_configObjects: {}
