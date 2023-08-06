@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Playables;
 
 public class FinishController : MonoBehaviour
 {
     public static GameObject[] tempResults;
     public PlayerInfo[] playerInfos;
+    public PlayableDirector[] introCutscenes;
+    public GameObject goToResults;
     public Transform[] platformSpawns;
     private int numPlayers;
-
+    public Animator[] backlines;
+    public ParticleSystem confetti;
 
     public GameObject[] statBoards;
     public Image[] tabColors;
@@ -23,10 +27,15 @@ public class FinishController : MonoBehaviour
     public GameObject[] highRolls;
 
     private int maxWins, maxLowRoll, maxHighRoll;
+    private Sprite[] rankingSprites;
+    private Sprite[] characterSprites;
 
     // Start is called before the first frame update
     void Start()
     {
+        rankingSprites = Resources.LoadAll<Sprite>("Images/RankingSprites/");
+        characterSprites = Resources.LoadAll<Sprite>("Images/CharacterPortraits/");
+
         numPlayers = tempResults.Length;
         playerInfos = new PlayerInfo[numPlayers];
         for (int i = 0; i < numPlayers; i++)
@@ -36,18 +45,22 @@ public class FinishController : MonoBehaviour
             tempResults[i].transform.localScale = new Vector3(2f, 2f, 2f);
             tempResults[i].transform.eulerAngles = new Vector3(0, 180f, 0);
             tempResults[i].SetActive(true);
-            //Destroy(tempResults[i]); //use the models later for the position standings
         }
-
-
         
         currentTabIndex = 0;
 
         //setup results tab and get maxes and set appropriate numbers for other two tabs
         for (int i = 0; i < numPlayers; i++)
         {
-            resultRanks[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = playerInfos[i].currentRanking + "";
+            //resultRanks[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = playerInfos[i].currentRanking + "";
+            PlayerInfo info = playerInfos[i];
+            resultRanks[i].GetComponent<Image>().sprite = characterSprites[info.characterIndex];
+            resultRanks[i].transform.GetChild(0).GetComponent<Image>().sprite = rankingSprites[info.currentRanking - 1];
             resultRanks[i].SetActive(true);
+
+            minigameWins[i].GetComponent<Image>().sprite = characterSprites[info.characterIndex];
+            lowRolls[i].GetComponent<Image>().sprite = characterSprites[info.characterIndex];
+            highRolls[i].GetComponent<Image>().sprite = characterSprites[info.characterIndex];
 
             maxWins = playerInfos[i].numMinigamesWon > maxWins ? playerInfos[i].numMinigamesWon : maxWins;
             maxLowRoll = playerInfos[i].numLowRolls > maxLowRoll ? playerInfos[i].numLowRolls : maxLowRoll;
@@ -58,7 +71,31 @@ public class FinishController : MonoBehaviour
             highRolls[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = playerInfos[i].numHighRolls + "";
         }
 
-        //todo choose which cutscene to trigger
+        PlayableDirector director = introCutscenes[numPlayers - 2];
+        director.stopped += AfterCutscene;
+        director.Play();
+    }
+
+    public void AfterCutscene(PlayableDirector unused) {
+        StartCoroutine("Celebration");
+    }
+
+    private IEnumerator Celebration() {
+        //handle victory/lose animation 
+        //handle confetti particles
+        confetti.Play();
+        StartCoroutine("Hops");
+        yield return new WaitForSeconds(10f);
+        goToResults.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        confetti.Stop();
+    }
+
+    private IEnumerator Hops() { 
+         for (int i = 0; i < 4; i++) {
+            backlines[Random.Range(0, backlines.Length)].Play("hop");
+            yield return new WaitForSeconds(Random.Range(0.15f, 0.4f));
+        }
     }
 
     private void OnDestroy()

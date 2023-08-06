@@ -108,6 +108,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
         FinishController.tempResults = players;
         leaderboard.SetNumPlayers(numPlayers);
+        leaderboard.SetPortraits(players);
         MinigameSpace.startedLoad += BeforeMinigameLoad;
         StartCoroutine("SetupOrder");
     }
