@@ -54,8 +54,8 @@ public class FinishController : MonoBehaviour
         {
             //resultRanks[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = playerInfos[i].currentRanking + "";
             PlayerInfo info = playerInfos[i];
-            resultRanks[i].GetComponent<Image>().sprite = characterSprites[info.characterIndex];
-            resultRanks[i].transform.GetChild(0).GetComponent<Image>().sprite = rankingSprites[info.currentRanking - 1];
+            resultRanks[i].transform.GetChild(0).GetComponent<Image>().sprite = characterSprites[info.characterIndex];
+            resultRanks[i].transform.GetChild(1).GetComponent<Image>().sprite = rankingSprites[info.currentRanking - 1];
             resultRanks[i].SetActive(true);
 
             minigameWins[i].GetComponent<Image>().sprite = characterSprites[info.characterIndex];
