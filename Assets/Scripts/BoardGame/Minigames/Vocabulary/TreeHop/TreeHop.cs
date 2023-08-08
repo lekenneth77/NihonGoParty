@@ -10,6 +10,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
 {
     // Start is called before the first frame update
     public TreeTrunk[] players;
+    public JumpObject[] characterModels;
     public GameObject[] platformFolders; //literally just to enable at the start
     public Timer timer;
     public TextMeshProUGUI categoryText;
@@ -19,7 +20,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     public PlayableDirector[] directors;
 
     public Camera[] playerCameras;
-    private float[] zCameraPositions = new float[] { -4f, -4.5f, -6f, -7f };
+    private float[] zCameraPositions = new float[] { -4.5f, -5f, -6.5f, -7.5f };
     private float[] yCameraPositions = new float[] { -.94f, -.94f, -.9f, -.87f };
 
     private Controls controls;
@@ -33,16 +34,26 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
         timer.TimeUp += TimeOut;
 
         GetWords();
-        //singleplayer = true;
+
         if (singleplayer) {
             numPlayers = 1;
             timer.gameObject.transform.localPosition = new Vector3(775, 425, 0);
         } else { //multiplayer!
-            numPlayers = BoardController.numPlayers;
+            if (BoardController.players == null) {
+                numPlayers = 4;
+            } else { 
+                numPlayers = BoardController.numPlayers;
+                GameObject[] p = BoardController.players;
+                for (int i = 0; i < numPlayers; i++) {
+                    int charIndex = p[i].GetComponent<PlayerInfo>().characterIndex;
+                    players[i].jumper = characterModels[charIndex];
+                }
+            }
             timer.gameObject.transform.localPosition = new Vector3(0, 425, 0);
         }
         //numPlayers = 2;
         for (int i = 0; i < numPlayers; i++) {
+            players[i].jumper.gameObject.SetActive(true);
             players[i].gameObject.SetActive(true);
             platformFolders[i].SetActive(true);
         }
@@ -137,7 +148,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
             StartCoroutine(DisableEnable(playerI, 2f, true));
         } else if (result == 0) {
             //success jump
-            StartCoroutine(DisableEnable(playerI, 2.5f, false));
+            StartCoroutine(DisableEnable(playerI, 1.75f, false));
         } else {
             //reached finish
             controls.Disable();
@@ -147,6 +158,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
 
     private IEnumerator DisableEnable(int playerI, float disableTime, bool showStars)
     {
+
         if (playerI == 0) {
             controls.TreeHop.A.Disable();
             controls.TreeHop.D.Disable();
@@ -166,7 +178,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
             players[playerI].stars.StartSpin();
         }
         yield return new WaitForSeconds(disableTime);
-
+        players[playerI].jumper.GetComponent<Animator>().Play("idle");
         if (playerI == 0) {
             controls.TreeHop.A.Enable();
             controls.TreeHop.D.Enable();
@@ -189,9 +201,10 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
         yield return new WaitForSeconds(2f);
         for (int i = 0; i < numPlayers; i++) { 
             if (i == playerI) {
-                players[playerI].jumper.gameObject.GetComponent<Animator>().Play("victory");
+                players[playerI].jumper.gameObject.transform.eulerAngles = new Vector3(0f, 180f, 0f);
+                players[playerI].jumper.transform.GetChild(0).GetComponent<Animator>().Play("victory");
             } else {
-                players[i].jumper.gameObject.GetComponent<Animator>().Play("lose");
+                players[i].jumper.transform.GetChild(0).GetComponent<Animator>().Play("lose");
             }
         }
         finishImage.SetActive(true);
@@ -211,7 +224,8 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     }
 
     private IEnumerator OnTimeOut() {
-        yield return new WaitForSeconds(2f);
+        players[0].jumper.transform.GetChild(0).GetComponent<Animator>().Play("lose");
+        yield return new WaitForSeconds(5f);
         EndGame(-1);
     }
 

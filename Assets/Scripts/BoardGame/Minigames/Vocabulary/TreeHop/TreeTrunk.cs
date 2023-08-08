@@ -11,6 +11,8 @@ public class TreeTrunk : MonoBehaviour
     public GameObject platform;
     public StunStarSpin stars;
 
+    
+
     public Transform nextLeftPlatform;
     public Transform nextRightPlatform;
     public Transform tippyTop;
@@ -28,6 +30,10 @@ public class TreeTrunk : MonoBehaviour
     private bool onLeft;
     // Start is called before the first frame update
     void Start() {
+        jumper.transform.position = new Vector3(transform.position.x + 1f, 0f, 0f);
+        stars = jumper.transform.GetChild(1).GetComponent<StunStarSpin>();
+        treeCamera.follow = jumper.transform;
+
         currentDepth = 0;
         distanceBetween = 2f;
         maxDepth = 15;
@@ -62,6 +68,11 @@ public class TreeTrunk : MonoBehaviour
             //correct!
             Vector3 nextPlatform = left ? nextLeftPlatform.position : nextRightPlatform.position;
             jumper.SetupAndJump(nextPlatform + new Vector3(0, 0.55f, 0), 1f, 2f);
+            if (!((left && onLeft) || (!left && !onLeft))) {
+                //jump to other side
+                string jumpAnim = left ? "left" : "right";
+                jumper.GetComponent<Animator>().Play(jumpAnim);
+            }
 
             onLeft = left;
             currentDepth++;
@@ -87,6 +98,8 @@ public class TreeTrunk : MonoBehaviour
                 float dist = left ? -distanceBetween : distanceBetween;
                 jumper.SetupAndJump(new Vector3(jumper.gameObject.transform.position.x + dist, jumper.gameObject.transform.position.y, jumper.gameObject.transform.position.z), 1f, 1.5f);
                 onLeft = left;
+                string jumpAnim = left ? "left" : "right";
+                jumper.GetComponent<Animator>().Play(jumpAnim);
             }
 
             return -1;
@@ -100,7 +113,9 @@ public class TreeTrunk : MonoBehaviour
 
     private void CreateNextPlatforms()
     {
-        StartCoroutine("MoveCamera");
+        treeCamera.target = new Vector3(treeCamera.transform.position.x, treeCamera.transform.position.y + 3f, treeCamera.transform.position.z);
+        treeCamera.MoveCamera();
+        //StartCoroutine("MoveCamera");
         //create both new platforms
         GameObject newLeft = Instantiate(platform, nextLeftPlatform.position + new Vector3(0, 3f, 0), Quaternion.identity);
         GameObject newRight = Instantiate(platform, nextRightPlatform.position + new Vector3(0, 3f, 0), Quaternion.identity);
@@ -132,9 +147,16 @@ public class TreeTrunk : MonoBehaviour
 
     private IEnumerator MoveCamera()
     {
+
+        treeCamera.target = new Vector3(treeCamera.transform.position.x, treeCamera.transform.position.y + 3f, treeCamera.transform.position.z);
+        treeCamera.MoveCamera();
         //based on jumpers duration
         yield return new WaitForSeconds(1f);
+        treeCamera.target = new Vector3(treeCamera.transform.position.x, treeCamera.transform.position.y, -3f);
         treeCamera.MoveCamera();
+        yield return new WaitForSeconds(2.5f);
+        tippyTop.transform.GetChild(0).gameObject.SetActive(false);
+
     }
-   
+
 }

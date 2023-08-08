@@ -6,6 +6,8 @@ public class FollowOneAxis : MonoBehaviour
 {
 
     public Transform follow;
+    public Vector3 target;
+    public bool followFollow; //i hate myself
     public float speed = 2f;
     public bool move;
     // Update is called once per frame
@@ -16,10 +18,8 @@ public class FollowOneAxis : MonoBehaviour
     }
 
     private void Move() {
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, 
-                new Vector3(gameObject.transform.position.x, follow.position.y + 1f, gameObject.transform.position.z), Time.deltaTime * speed);
-        if (Mathf.Abs(gameObject.transform.position.y - (follow.position.y + 1f)) <= 0.01f)
-        {
+        transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
+        if (Mathf.Abs(gameObject.transform.position.y - target.y) <= 0.01f) {
             move = false;
         }
     }

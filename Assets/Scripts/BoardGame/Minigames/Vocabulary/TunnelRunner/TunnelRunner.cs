@@ -155,6 +155,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         finalCam.SetActive(true);
         winner.player.gameObject.transform.position = finalWP.position;
         winner.player.gameObject.transform.eulerAngles = new Vector3(0, 270f, 0);
+        winner.player.transform.GetChild(1).gameObject.SetActive(false);
         yield return new WaitForSeconds(3f);
         if (!singleplayer) { 
             if (p1) {
@@ -216,13 +217,18 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 
     private IEnumerator TIMEOVER() {
         whiteScreen.color = Color.black; //LOL LAZY
+        Color temp = whiteScreen.color;
+        temp.a = 0;
+        whiteScreen.color = temp;
+
         for (int i = 0; i < 100; i++)
         {
-            Color temp = whiteScreen.color;
+            temp = whiteScreen.color;
             temp.a += 0.01f;
             whiteScreen.color = temp;
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.02f);
         }
+        yield return new WaitForSeconds(1f);
         failureImg.SetActive(true);
         yield return new WaitForSeconds(5f);
         EndGame(-1);

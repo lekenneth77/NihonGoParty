@@ -1333,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 1099781421}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: spinner
@@ -1907,15 +1907,15 @@ PrefabInstance:
       objectReference: {fileID: 831418427}
     - target: {fileID: 2798855060797247543, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000001717313
+      value: 0.0000000021481275
       objectReference: {fileID: 0}
     - target: {fileID: 2798855060797247543, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000000010691604
+      value: 1.0713917e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2798855060797247543, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.062137447
+      value: -0.0498137
       objectReference: {fileID: 0}
     - target: {fileID: 2798855060846335579, guid: 7b1db633dea4b824f8676724cac319d4, type: 3}
       propertyPath: m_Name
@@ -3896,7 +3896,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 5000
+  far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -3922,8 +3922,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841039176}
-  m_LocalRotation: {x: 0.0000000010691604, y: 0.9980676, z: -0.062137447, w: 0.00000001717313}
-  m_LocalPosition: {x: 5, y: 2, z: -1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -900}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

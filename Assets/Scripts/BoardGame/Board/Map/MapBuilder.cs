@@ -114,13 +114,13 @@ public class MapBuilder : MonoBehaviour
         GameObject line = new GameObject();
         line.name = "Line";
         line.transform.parent = lineFolder;
-        line.transform.position = start;
+        line.transform.position = new Vector3(start.x, start.y - 0.1f, start.z);
         line.AddComponent<LineRenderer>();
         LineRenderer renderer = line.GetComponent<LineRenderer>();
         renderer.sharedMaterial = new Material(Shader.Find("UI/Default"));
         renderer.sharedMaterial.SetColor("_Color", Color.white);
-        renderer.startWidth = 0.1f;
-        renderer.endWidth = 0.1f;
+        renderer.startWidth = 0.3f;
+        renderer.endWidth = 0.3f;
         renderer.SetPosition(0, start);
         renderer.SetPosition(1, end);
     }
