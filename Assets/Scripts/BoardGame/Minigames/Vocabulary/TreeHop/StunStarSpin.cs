@@ -6,13 +6,15 @@ public class StunStarSpin : MonoBehaviour
 {
     public float speed = 1.5f;
     public float activeTime = 2f;
-
+    public bool keepGoing;
     public bool trigger = false;
 
     public void StartSpin() {
         gameObject.SetActive(true);
         trigger = true;
-        StartCoroutine("EndSpin");
+        if (!keepGoing) { 
+            StartCoroutine("EndSpin");
+        }
     }
 
     private IEnumerator EndSpin() {

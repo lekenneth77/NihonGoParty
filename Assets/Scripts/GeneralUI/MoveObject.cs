@@ -48,6 +48,10 @@ public class MoveObject : MonoBehaviour
         moveFlag = true;
     }
 
+    public void StopMove() {
+        moveFlag = false;
+    }
+
     public void SetTargetAndMove(Vector3 tgt)
     {
         target = tgt;

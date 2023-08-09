@@ -23,10 +23,10 @@ AnimatorStateMachine:
     m_Position: {x: 260, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8639315060566050339}
-    m_Position: {x: 340, y: 190, z: 0}
+    m_Position: {x: 290, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5716272107596517053}
-    m_Position: {x: 560, y: -60, z: 0}
+    m_Position: {x: 370, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7824861222654341959}
     m_Position: {x: 530, y: 260, z: 0}
@@ -47,7 +47,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: coolwalk
+  m_Name: just_walk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
