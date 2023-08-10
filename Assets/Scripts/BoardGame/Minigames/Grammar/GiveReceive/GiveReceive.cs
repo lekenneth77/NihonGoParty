@@ -40,6 +40,7 @@ public class GiveReceive : Minigame
     //player
     public GameObject player;
     public Image playerHP;
+    private Sprite[] characterPortraits;
 
     //enemy
     public GameObject enemy;
@@ -51,6 +52,13 @@ public class GiveReceive : Minigame
         base.Start();
         chosenPlayerProbs = new HashSet<int>();
         playerProblems = playerTxt.text.Split("\n"[0]);
+        characterPortraits = Resources.LoadAll<Sprite>("Images/CharacterPortraits/");
+
+
+        if (BoardController.players != null) {
+            player.transform.GetChild(0).GetComponent<Image>().sprite = characterPortraits[BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex];
+        }
+
 
         ingroup = inGroupTxt.text.Split("\n"[0]);
         outgroup = outGroupTxt.text.Split("\n"[0]);

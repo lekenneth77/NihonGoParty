@@ -54,7 +54,7 @@ public class EeveeGame : Minigame, Controls.IQuizGameActions
                 portraits[i].transform.parent.gameObject.SetActive(true);
             }
         } else {
-            GameObject[] p = BoardController.players;
+            GameObject[] p = BoardController.originalOrderPlayers;
             for (int i = 0; i < numPlayers; i++) {
                 int charIndex = p[i].GetComponent<PlayerInfo>().characterIndex;
                 characterModels[charIndex].myWP = wps[i];

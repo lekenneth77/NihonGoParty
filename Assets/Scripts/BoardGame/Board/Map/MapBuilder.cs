@@ -16,6 +16,7 @@ public class MapBuilder : MonoBehaviour
     public GameObject finishObj;
 
     public GameObject[] minigameObjs; //kata, gram, kanji, vocab, duel, multi
+    public Sprite[] spaceArts;
 
     //spawn position/rotation
     public Quaternion rotation;
@@ -148,47 +149,63 @@ public class MapBuilder : MonoBehaviour
         switch(changeToThis.ToLower())
         {
             case "katakana":
-                selected.GetComponent<SpriteRenderer>().color = Color.cyan;
+                selected.GetComponent<SpriteRenderer>().color = Color.white;
+                selected.GetComponent<SpriteRenderer>().sprite = spaceArts[0];
+                selected.transform.eulerAngles = new Vector3(270f, 0f, 0f);
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "KATAKANA";
                 ((MinigameSpace)changed).selector = selector;
                 break;
             case "grammar":
-                selected.GetComponent<SpriteRenderer>().color = Color.yellow;
+                selected.GetComponent<SpriteRenderer>().color = Color.white;
+                selected.GetComponent<SpriteRenderer>().sprite = spaceArts[1];
+                selected.transform.eulerAngles = new Vector3(270f, 0f, 0f);
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "GRAMMAR";
                 ((MinigameSpace)changed).selector = selector;
                 break;
             case "kanji":
-                selected.GetComponent<SpriteRenderer>().color = Color.gray;
+                selected.GetComponent<SpriteRenderer>().color = Color.white;
+                selected.GetComponent<SpriteRenderer>().sprite = spaceArts[2];
+                selected.transform.eulerAngles = new Vector3(270f, 0f, 0f);
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "KANJI";
                 ((MinigameSpace)changed).selector = selector;
                 break;
             case "vocab":
-                selected.GetComponent<SpriteRenderer>().color = Color.black;
+                selected.GetComponent<SpriteRenderer>().color = Color.white;
+                selected.GetComponent<SpriteRenderer>().sprite = spaceArts[3];
+                selected.transform.eulerAngles = new Vector3(270f, 0f, 0f);
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "VOCAB";
                 ((MinigameSpace)changed).selector = selector;
                 break;
             case "duel":
-                selected.GetComponent<SpriteRenderer>().color = Color.magenta;
+                selected.GetComponent<SpriteRenderer>().color = Color.white;
+                selected.GetComponent<SpriteRenderer>().sprite = spaceArts[4];
+                selected.transform.eulerAngles = new Vector3(270f, 0f, 0f);
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "DUEL";
                 ((MinigameSpace)changed).selector = selector;
                 break;
             case "multi":
-                selected.GetComponent<SpriteRenderer>().color = new Color(238f / 255f, 141f / 255f, 0f);
+                selected.GetComponent<SpriteRenderer>().color = Color.white;
+                selected.GetComponent<SpriteRenderer>().sprite = spaceArts[5];
+                selected.transform.eulerAngles = new Vector3(270f, 0f, 0f);
                 changed = selected.AddComponent<MinigameSpace>();
                 ((MinigameSpace)changed).category = "MULTI";
                 ((MinigameSpace)changed).selector = selector;
                 break;
             case "blank":
                 selected.GetComponent<SpriteRenderer>().color = Color.white;
+                selected.GetComponent<SpriteRenderer>().sprite = spaceArts[6];
+                selected.transform.eulerAngles = new Vector3(270f, 0f, 0f);
                 changed = selected.AddComponent<BlankSpace>();
                 break;
             case "finish":
-                selected.GetComponent<SpriteRenderer>().color = Color.red;
+                selected.GetComponent<SpriteRenderer>().color = Color.white;
+                selected.GetComponent<SpriteRenderer>().sprite = spaceArts[7];
+                selected.transform.eulerAngles = new Vector3(270f, 0f, 0f);
                 changed = selected.AddComponent<FinishSpace>();
                 break;
             default:

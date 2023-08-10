@@ -20,6 +20,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //player and turn information
     public GameObject[] characters; //MUST match the same order as setup screen
     public static GameObject[] players;
+    public static GameObject[] originalOrderPlayers;
     public static int numPlayers;
     public static GameObject currentPlayer;
     private int currentPlayer_i; //index of current player
@@ -46,6 +47,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //spinner
     public Spinner spinner;
 
+    //intro
+    public BoardGameIntro introSeq;
+
     //camera
     public GameObject stillCameraObj, moveCameraObj, freeCameraObj;
     private CinemachineVirtualCamera stillCameraCom, moveCameraCom;
@@ -55,7 +59,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     private bool freeCameraOn;
 
     //misc sprites
-    private Sprite[] diceSprites;
+    public Sprite[] diceSprites;
     private Sprite[] numberSprites;
 
     //debug flag
@@ -89,15 +93,19 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             //also able to skip having to go through multiplayer setup
             numPlayers = 4;
             players = new GameObject[numPlayers];
+            originalOrderPlayers = new GameObject[numPlayers];
             for (int i = 0; i < 4; i++) {
                 players[i] = characters[i];
+                originalOrderPlayers[i] = characters[i];
             }
         } else {
             //must have multiplayer setup to work without debug
             int[] whatTheyChose = MultiplayerSetup.whatThePlayersChose;
             players = new GameObject[numPlayers];
+            originalOrderPlayers = new GameObject[numPlayers];
             for (int i = 0; i < numPlayers; i++) {
                 players[i] = characters[whatTheyChose[i]];
+                originalOrderPlayers[i] = characters[whatTheyChose[i]];
                 players[i].GetComponent<PlayerInfo>().containerPosition = i;
             }
         }
@@ -110,65 +118,28 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         leaderboard.SetNumPlayers(numPlayers);
         leaderboard.SetPortraits(players);
         MinigameSpace.startedLoad += BeforeMinigameLoad;
-        StartCoroutine("SetupOrder");
+
+        introSeq.LetsStart();
+        /*
+        if (debug) { 
+            StartRound();
+        } else {
+            introSeq.LetsStart();
+        }
+        */
     }
 
     //Called once at the start
-    private IEnumerator SetupOrder()
+    public void StartRound()
     {
-        for (int i = 0; i < numPlayers; i++)
-        {
-            players[i].transform.position = startingWaypoints[i].position;
-            DontDestroyOnLoad(players[i]);
-        }
-
-        if (!debug)
-        {
-            SortedList playerOrder = new SortedList();
-            List<int> illegalNums = new List<int>();
-            //get the dice rolls
+        if (debug) { 
             for (int i = 0; i < numPlayers; i++)
             {
-                Dice currentDice = players[i].GetComponent<PlayerInfo>().dice;
-                currentDice.gameObject.SetActive(true);
-                currentDice.Reset();
-
-                while (!currentDice.GetStopRoll())
-                {
-                    //poll for the dice to finish.
-                    yield return new WaitForSeconds(0.01f);
-                }
-                currentDice.SetAllowStart(false); //statics are literally bum i hate it
-                int roll = currentDice.GetRoll();
-                if (illegalNums.IndexOf(roll) != -1) //no more rerolls
-                {
-                    Debug.Log("Duplicate!");
-                    while (illegalNums.IndexOf(roll) != -1)
-                    {
-                        roll = UnityEngine.Random.Range(0, 6) + 1;
-                    }
-                    currentDice.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = diceSprites[roll - 1];
-                }
-                playerOrder.Add(roll, players[i]);
-                illegalNums.Add(roll);
-                yield return new WaitForSeconds(0.5f);
+                players[i].transform.position = startingWaypoints[i].position;
+                DontDestroyOnLoad(players[i]);
             }
-
-            yield return new WaitForSeconds(2f);
-
-            //setup the correct order
-            GameObject[] temp = new GameObject[numPlayers];
-            for (int i = 0; i < numPlayers; i++)
-            {
-                players[i].GetComponent<PlayerInfo>().dice.gameObject.SetActive(false);
-                temp[i] = (UnityEngine.GameObject)playerOrder.GetByIndex(numPlayers - (i + 1));
-            }
-
-            players = temp;
+            leaderboard.SetVisibility(true);
         }
-
-        leaderboard.SetRankings(players);
-        leaderboard.SetVisibility(true);
 
         currentPlayer_i = -1;
         Dice.OnDiceFinish += SubscribeMovePlayer;

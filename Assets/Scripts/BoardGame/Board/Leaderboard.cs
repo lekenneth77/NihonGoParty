@@ -17,10 +17,10 @@ public class Leaderboard : MonoBehaviour
     {
         //TODO change the sprites to the real rank sprites!
         rankingSprites = Resources.LoadAll<Sprite>("Images/RankingSprites/");
-        characterPortraits = Resources.LoadAll<Sprite>("Images/CharacterPortraits/");
     }
 
-    public void SetPortraits(GameObject[] players) { 
+    public void SetPortraits(GameObject[] players) {
+        characterPortraits = Resources.LoadAll<Sprite>("Images/CharacterPortraits/");
         for (int i = 0; i < numPlayers; i++) {
             int portraitIndex = players[i].GetComponent<PlayerInfo>().characterIndex;
             leaderboard[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = characterPortraits[portraitIndex];
@@ -68,10 +68,10 @@ public class Leaderboard : MonoBehaviour
         {
             PlayerInfo info = players[i].GetComponent<PlayerInfo>();
             info.currentRanking = i + 1;
-            if (!boardController.debug) //taking this out causes errors so idk
-            {
+            //if (!boardController.debug) //taking this out causes errors so idk
+            //{
                 leaderboard[info.containerPosition].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = rankingSprites[i];
-            }
+            //}
         }
     }
 

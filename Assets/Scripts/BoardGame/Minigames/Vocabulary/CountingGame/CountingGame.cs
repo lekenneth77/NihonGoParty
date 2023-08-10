@@ -66,7 +66,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
             }
         } else {
             //required to be played from a board game
-            GameObject[] players = BoardController.players;
+            GameObject[] players = BoardController.originalOrderPlayers;
             for (int i = 0; i < numPlayers; i++) {
                 int characterI = players[i].GetComponent<PlayerInfo>().characterIndex;
                 characters[characterI].transform.position = new Vector3(initialPlayerPosX[i], 0, -1f);

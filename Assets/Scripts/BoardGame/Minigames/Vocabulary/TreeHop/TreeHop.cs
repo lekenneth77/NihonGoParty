@@ -40,10 +40,12 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
             timer.gameObject.transform.localPosition = new Vector3(775, 425, 0);
         } else { //multiplayer!
             if (BoardController.players == null) {
+                Debug.Log("hello?");
                 numPlayers = 4;
-            } else { 
+            } else {
+                Debug.Log("nah?");
                 numPlayers = BoardController.numPlayers;
-                GameObject[] p = BoardController.players;
+                GameObject[] p = BoardController.originalOrderPlayers;
                 for (int i = 0; i < numPlayers; i++) {
                     int charIndex = p[i].GetComponent<PlayerInfo>().characterIndex;
                     players[i].jumper = characterModels[charIndex];
