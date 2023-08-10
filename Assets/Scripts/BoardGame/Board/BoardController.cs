@@ -24,6 +24,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     public static int numPlayers;
     public static GameObject currentPlayer;
     private int currentPlayer_i; //index of current player
+    public GameObject beforeRollOptions;
 
     //minigame results information
     public static bool wonMinigame;
@@ -33,6 +34,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //multiplayer: index of winner [0, numPlayers - 1]
 
     //duels
+    public GameObject duelImg;
     public GameObject duelPopup;
     public GameObject duelWinChoices;
     public static GameObject[] duelists = new GameObject[2];
@@ -119,14 +121,14 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         leaderboard.SetPortraits(players);
         MinigameSpace.startedLoad += BeforeMinigameLoad;
 
-        introSeq.LetsStart();
-        /*
+        //introSeq.LetsStart();
+        ///*
         if (debug) { 
             StartRound();
         } else {
             introSeq.LetsStart();
         }
-        */
+        //*/
     }
 
     //Called once at the start
@@ -163,7 +165,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
         SetNextPlayer();
 
-        Vector3 playerPosition = currentPlayer.transform.position;
+        Vector3 playerPos = currentPlayer.transform.position;
+        freeCameraObj.transform.position = new Vector3(playerPos.x, 5, playerPos.z);
+        beforeRollOptions.SetActive(true);
         currentPlayer.GetComponent<PlayerInfo>().dice.gameObject.SetActive(true);
         currentPlayer.GetComponent<PlayerInfo>().dice.Reset();
         controls.Enable();
@@ -186,6 +190,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     //Event called after the dice is finished. Starts the coroutine in the actual MovePlayer function.
     private void SubscribeMovePlayer(int roll)
     {
+        beforeRollOptions.SetActive(false);
         StartCoroutine(MovePlayer(currentPlayer, roll, true, true));
     }
 
@@ -291,16 +296,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
                     //hanldes duels
                     if (numPlayers == 2) {
                         ChooseDuelPlayers(0);
-                    } else { 
-                        List<Sprite> spinnerSprites = new List<Sprite>();
-                        foreach (GameObject p in players)
-                        {
-                            if (p != player)
-                            {
-                                spinnerSprites.Add(p.GetComponent<PlayerInfo>().sprite);
-                            }
-                        }
-                        spinner.TriggerSpin(spinnerSprites);
+                    } else {
+                        StartCoroutine(DuelImgBeforeSpin(player));
+                        //spinner.TriggerSpin(spinnerSprites);
                     }
                 } else if (((MinigameSpace)infoObj.currentSpace).category.ToUpper().Equals("MULTI"))
                 {
@@ -320,6 +318,23 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         } else {
             SetupNextTurn();
         }
+    }
+
+    private IEnumerator DuelImgBeforeSpin(GameObject player) {
+        List<Sprite> spinnerSprites = new List<Sprite>();
+        foreach (GameObject p in players)
+        {
+            if (p != player)
+            {
+                spinnerSprites.Add(p.GetComponent<PlayerInfo>().sprite);
+            }
+        }
+        duelImg.gameObject.SetActive(true);
+        duelImg.GetComponent<Animator>().Play("appear");
+        yield return new WaitForSeconds(3f);
+        duelImg.gameObject.SetActive(false);
+        spinner.TriggerSpin(spinnerSprites);
+
     }
 
     //Set the current player to be the next player.
@@ -444,7 +459,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         }
         if (!freeCameraOn)
         {
+            
             freeCameraObj.SetActive(true);
+
         } else
         {
             freeCameraObj.SetActive(false);
