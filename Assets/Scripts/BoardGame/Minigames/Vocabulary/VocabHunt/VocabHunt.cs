@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Cinemachine;
 
 public class VocabHunt : Minigame
 {
     public HuntPlayer player;
+    public HuntPlayer[] characters;
+    public CinemachineVirtualCamera followCam;
     public TextAsset textfile;
     public Timer timer;
     public WinStars stars;
@@ -36,6 +39,18 @@ public class VocabHunt : Minigame
         objectNames = textfile.text.Split("\n"[0]);
         player.interacted += CheckAnswer;
         timer.TimeUp += Timeout;
+
+        int charIndex = 0;
+        if (BoardController.players != null) {
+            charIndex = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        } 
+        for (int i = 0; i < characters.Length; i++) { 
+            if (i != charIndex) {
+                characters[i].gameObject.SetActive(false);
+            }
+        }
+        player = characters[charIndex];
+        followCam.Follow = player.transform;
         SetupGame();
     }
 
@@ -81,7 +96,7 @@ public class VocabHunt : Minigame
             random = Random.Range(0, chosenIndices.Count);
         }
         currWordIndex = chosenIndices[random];
-        findThisText.text = "Find " + objectNames[currWordIndex];
+        findThisText.text = objectNames[currWordIndex];
         player.EnableControls();
         timer.ResetTimer();
         timer.StartTimer();
@@ -108,9 +123,7 @@ public class VocabHunt : Minigame
 
     private IEnumerator HandleWrong() {
         wrongImg.SetActive(true);
-        player.SwapToSad();
         yield return new WaitForSeconds(3f);
-        player.SwapToNormal();
         wrongImg.SetActive(false);
         player.EnableControls();
     }

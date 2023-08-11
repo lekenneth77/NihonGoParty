@@ -1352,7 +1352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1691299640046613109, guid: 63d4f7eddbfddb14882f5432cb58fb3b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1000
+      value: 1100
       objectReference: {fileID: 0}
     - target: {fileID: 1691299640046613109, guid: 63d4f7eddbfddb14882f5432cb58fb3b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1458,8 +1458,8 @@ PrefabInstance:
 
         Player One: A Key
 
-        Player
-        Two: R Key
+        Player Two:
+        R Key
 
         Player Three: H Key
 
