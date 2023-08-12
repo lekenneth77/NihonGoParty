@@ -87,7 +87,6 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (!context.performed || !exclamation.activeInHierarchy) { return; }
-        Debug.Log("hey!");
         interacted?.Invoke(mostRecentInter.GetComponent<VocabObject>().id);
     }
 }

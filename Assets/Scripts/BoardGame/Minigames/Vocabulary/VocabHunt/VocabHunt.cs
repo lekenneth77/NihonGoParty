@@ -37,7 +37,6 @@ public class VocabHunt : Minigame
     {
         base.Start();
         objectNames = textfile.text.Split("\n"[0]);
-        player.interacted += CheckAnswer;
         timer.TimeUp += Timeout;
 
         int charIndex = 0;
@@ -51,6 +50,8 @@ public class VocabHunt : Minigame
         }
         player = characters[charIndex];
         followCam.Follow = player.transform;
+        player.interacted += CheckAnswer;
+
         SetupGame();
     }
 

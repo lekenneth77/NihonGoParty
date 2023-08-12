@@ -11,7 +11,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     //camera work and setup
     public Camera[] playerCams;
     public GameObject[] characters;
-    private Vector3[] characterCamPos = new Vector3[] { new Vector3(0, 1.5f, -12f), new Vector3(0f, 3f, -12f), new Vector3(0f, 3f, -12f), new Vector3(0f, 2.75f, -12f) };
+    private Vector3[] characterCamPos = new Vector3[] { new Vector3(0, 1.5f, -12f), new Vector3(0f, 3f, -12f), new Vector3(0f, 3f, -12f), new Vector3(0f, 2.75f, -12f), new Vector3(0f, 3f, -12f) };
     public PlayableDirector[] directors;
     private Vector3[] spawnPts = new Vector3[] { new Vector3(0, 0, -9f), new Vector3(40f, 0, -9f) };
     public Cave[] defaultCaves; //DUCTTAPEPPPP
@@ -47,9 +47,15 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         controls.TunnelRunner.AddCallbacks(this);
         Cave.chosenQ = new HashSet<int>();
         Cave.questions = textFile.text.Split("\n"[0]);
+
+        //singleplayer = true;
+
         
         if (singleplayer) {
-            int characterI = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+            int characterI = 4;
+            if (BoardController.players != null) { 
+                characterI = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+            }
             p1Cave.player = characters[characterI].GetComponent<MoveObject>();
             p1Cave.followCam.transform.position = characterCamPos[characterI];
             p1Cave.followCam.GetComponent<FollowTwoAxis>().follow = p1Cave.player.transform;
@@ -74,7 +80,10 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
                 cave.ChangeText("", "", "", false);
             }
         }
-        int index = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        int index = 4; 
+        if (BoardController.players != null) { 
+            index = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        }
         directors[index].stopped += StartGame;
         directors[index].gameObject.SetActive(true);
         directors[index].Play();
@@ -82,7 +91,10 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     }
 
     public void StartGame(PlayableDirector dir) {
-        int index = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        int index = 4; 
+        if (BoardController.players != null) { 
+            index = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        }
         directors[index].gameObject.SetActive(false);
         p1Cave.GetWords();
         if (singleplayer) {
