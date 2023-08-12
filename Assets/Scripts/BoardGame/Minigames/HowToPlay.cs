@@ -39,18 +39,30 @@ public class HowToPlay : MonoBehaviour
 
     public void StartGame() {
         Minigame.practice = false; //just to make sure
-        BoardSpace.InvokeLoad(myGame, true);
-        SceneManager.UnloadSceneAsync("HowToPlayTemp");
+        if (Minigame.debug) {
+            SceneManager.LoadSceneAsync(myGame, LoadSceneMode.Additive);
+        } else { 
+            BoardSpace.InvokeLoad(myGame, true);
+        }
+        SceneManager.UnloadSceneAsync("HTP" + myGame);
     }
 
     public void PracticeGame() {
         Minigame.practice = true;
-        BoardSpace.InvokeLoad(myGame, true);
+        if (Minigame.debug) {
+            SceneManager.LoadSceneAsync(myGame, LoadSceneMode.Additive);
+        } else { 
+            BoardSpace.InvokeLoad(myGame, true);
+        }
     }
 
     public void EndPracticeGame() {
         Minigame.practice = false;
-        BoardSpace.InvokeUnload(2, false);
+        if (Minigame.debug) {
+            SceneManager.UnloadSceneAsync(2);
+        } else {
+            BoardSpace.InvokeUnload(2, false);
+        }
         //maybe add the loading screen here? SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(2));
     }
 

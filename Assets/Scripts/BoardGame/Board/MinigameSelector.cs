@@ -8,8 +8,9 @@ using TMPro;
 public class MinigameSelector : MonoBehaviour
 {
     public GameObject leaderboard;
-    public TextMeshProUGUI categoryText;
     public GameObject[] threeMinigames;
+    public Image categoryImg;
+    public Sprite[] categories;
     private static List<int> chosen;
     public static event Action<int> gotGame;
 
@@ -20,7 +21,7 @@ public class MinigameSelector : MonoBehaviour
     {
     }
 
-     public void ChangeText(string[] names, string category) {
+     public void ChangeText(string[] names, int categoryIndex) {
         chosen = new List<int>();
         for (int i = 0; i < 3; i++) {
             int random = UnityEngine.Random.Range(0, names.Length);
@@ -30,7 +31,7 @@ public class MinigameSelector : MonoBehaviour
             chosen.Add(random);
             threeMinigames[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = names[random];            
         }
-        categoryText.text = category;
+        categoryImg.sprite = categories[categoryIndex];
     }
 
     private void OnEnable() {

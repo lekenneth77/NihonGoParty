@@ -8,11 +8,13 @@ using TMPro;
 
 public class LoadAllMinigames : MonoBehaviour, Controls.IDebugActions
 {
-    public TMP_InputField input;
     public int numPlayers;
     private Controls controls;
     public GameObject canva;
     public static GameObject canvas;
+
+    private bool htpOn;
+    public GameObject htpStar;
     void Start() {
         canvas = canva;
         controls = new Controls();
@@ -25,38 +27,40 @@ public class LoadAllMinigames : MonoBehaviour, Controls.IDebugActions
         canvas.SetActive(true);
     }
 
+    public void TurnOnOffHTP() {
+        htpOn = !htpOn;
+        htpStar.SetActive(htpOn);
+    }
+
     public void LoadSingleplayer(string game) {
-        if (input.text == "") {
-            numPlayers = 4;
-        } else { 
-            numPlayers = int.Parse(input.text);
-        }
+        numPlayers = 4;
         BoardController.numPlayers = numPlayers;
         Minigame.singleplayer = true;
+        if (htpOn) {
+            game = "HTP" + game;
+        }
         SceneManager.LoadSceneAsync(game, LoadSceneMode.Additive);
         canvas.SetActive(false);
     }
 
     public void LoadDuel(string game) {
-        if (input.text == "") {
-            numPlayers = 4;
-        } else { 
-            numPlayers = int.Parse(input.text);
-        }
+        numPlayers = 4;
         BoardController.numPlayers = numPlayers;
         Minigame.singleplayer = false;
+        if (htpOn) {
+            game = "HTP" + game;
+        }
         SceneManager.LoadSceneAsync(game, LoadSceneMode.Additive);
         canvas.SetActive(false);
     }
 
     public void LoadMultiplayer(string game) {
-        if (input.text == "") {
-            numPlayers = 4;
-        } else { 
-            numPlayers = int.Parse(input.text);
-        }
+        numPlayers = 4;
         BoardController.numPlayers = numPlayers;
         Minigame.singleplayer = false;
+        if (htpOn) {
+            game = "HTP" + game;
+        }
         SceneManager.LoadSceneAsync(game, LoadSceneMode.Additive);
         canvas.SetActive(false);
     }

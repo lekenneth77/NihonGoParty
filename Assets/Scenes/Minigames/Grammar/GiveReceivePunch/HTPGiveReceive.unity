@@ -967,7 +967,7 @@ MonoBehaviour:
   htpCanvas: {fileID: 1569533512}
   quitPracticeCanvas: {fileID: 1219376072}
   currentTabIndex: 0
-  myGame: GiveReceivePunch
+  myGame: GiveReceive
 --- !u!4 &1220082152
 Transform:
   m_ObjectHideFlags: 0

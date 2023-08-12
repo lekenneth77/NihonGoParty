@@ -10,6 +10,7 @@ public class MinigameSpace : BoardSpace
     //i like the big switcheraoo
     public string category;
     public MinigameSelector selector;
+    private int categoryIndex;
     private string[] KatakanaGames = { "KatakanaScramble", "KatakanaSearch", "AppleDrop" };
     private string[] GrammarGames = { "WordOrder2", "SpeedType", "GiveReceive" };// particles please
     private string[] KanjiGames = { "KanjiCrossRotate", "KanjiDnD", "KanjiFishing" };
@@ -17,12 +18,14 @@ public class MinigameSpace : BoardSpace
     private string[] DuelGames = { "KanjiCrossRotate", "KataSpeedType", "TunnelRunner" };
     private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame", "LocationSeeker" };
 
-    private string[] KatakanaNames = { "Katakana Scramble", "Katakana Search", "AppleDrop"};
+    private string[] KatakanaNames = { "Katakana Scramble", "Katakana Search", "Go Ringo Go"};
     private string[] GrammarNames = { "Word Order", "Speed Type", "Receive Punch Give" };
-    private string[] KanjiNames = { "Kanji Cross Rotate", "Kanji Drag n Drop", "Kanji Fishing" };
-    private string[] VocabNames = { "Tree Hop", "Tunnel Runner", "Vocabulary Hunt" };
-    private string[] DuelNames = { "Kanji Cross Rotate", "Katakana Speed Type", "Tunnel Runner" };
-    private string[] MultiplayerNames = { "Tree Hop", "Quiz Game", "Counting Game", "Location Seeker" };
+    private string[] KanjiNames = { "Kanji Cross Rotate", "Kanji Bakery", "Hook Them" };
+    private string[] VocabNames = { "Head in the Clouds", "Tunnel Runner", "Made in Paint" };
+    private string[] DuelNames = { "Kanji Cross Rotate", "Type Fight", "Tunnel Runner" };
+    private string[] MultiplayerNames = { "Head in the Clouds", "Quiz Show", "Capy Count" };
+
+
 
     private string[] gamesToChooseFrom;
     private string[] namesToChooseFrom;
@@ -39,26 +42,32 @@ public class MinigameSpace : BoardSpace
         switch (category.ToUpper())
         {
             case "KATAKANA":
+                categoryIndex = 2;
                 gamesToChooseFrom = KatakanaGames;
                 namesToChooseFrom = KatakanaNames;
                 break;
             case "GRAMMAR":
+                categoryIndex = 0;
                 gamesToChooseFrom = GrammarGames;
                 namesToChooseFrom = GrammarNames;
                 break;
             case "KANJI":
+                categoryIndex = 1;
                 gamesToChooseFrom = KanjiGames;
                 namesToChooseFrom = KanjiNames;
                 break;
             case "VOCAB":
+                categoryIndex = 3;
                 gamesToChooseFrom = VocabGames;
                 namesToChooseFrom = VocabNames;
                 break;
             case "DUEL":
+                categoryIndex = 4;
                 gamesToChooseFrom = DuelGames;
                 namesToChooseFrom = DuelNames;
                 break;
             case "MULTI":
+                categoryIndex = 5;
                 gamesToChooseFrom = MultiplayerGames;
                 namesToChooseFrom = MultiplayerNames;
                 break;
@@ -74,7 +83,7 @@ public class MinigameSpace : BoardSpace
         Debug.Log("Minigame!");
         Minigame.singleplayer = !(category.ToUpper().Equals("DUEL") || category.ToUpper().Equals("MULTI"));
         MinigameSelector.gotGame += LoadGame;
-        selector.ChangeText(namesToChooseFrom, category);
+        selector.ChangeText(namesToChooseFrom, categoryIndex);
         selector.gameObject.SetActive(true);
         
     }

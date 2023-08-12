@@ -51,7 +51,10 @@ public class AppleDrop : Minigame
         chosen = new HashSet<int>();
         resultings = new List<GameObject>();
 
-        int characterI = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        int characterI = 0;
+        if (BoardController.players != null) { 
+            characterI = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+        }
         characters[characterI].gameObject.SetActive(true);
         player.model = characters[characterI];
         if (characterI == 2) {
@@ -156,7 +159,7 @@ public class AppleDrop : Minigame
             if (position.x > 1580f) {
                 position = new Vector3(startingUIApple.position.x, position.y - 125f, position.z);
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
 
         yield return new WaitForSeconds(2f);

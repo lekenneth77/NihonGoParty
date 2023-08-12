@@ -39,7 +39,9 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     // Start is called before the first frame update
     public override void Start()
     {
-        if (SceneManager.sceneCount > 1) {
+        if (SceneManager.sceneCount > 2) {
+            SceneManager.SetActiveScene(SceneManager.GetSceneAt(2));
+        } else if (SceneManager.sceneCount > 1) {
             SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
         }
         ductTapeTimer = timer;
@@ -52,7 +54,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 
         
         if (singleplayer) {
-            int characterI = 4;
+            int characterI = 0;
             if (BoardController.players != null) { 
                 characterI = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
             }
@@ -67,7 +69,10 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         } else { 
             //get the duel model from board controller
             for (int i = 0; i < 2; i++) {
-                int characterI = BoardController.duelists[i].GetComponent<PlayerInfo>().characterIndex;
+                int characterI = i;
+                if (BoardController.players != null) { 
+                    characterI = BoardController.duelists[i].GetComponent<PlayerInfo>().characterIndex;
+                }
                 Cave cave = i == 0 ? p1Cave : p2Cave;
 
                 cave.player = characters[characterI].GetComponent<MoveObject>();
@@ -80,7 +85,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
                 cave.ChangeText("", "", "", false);
             }
         }
-        int index = 4; 
+        int index = 0; 
         if (BoardController.players != null) { 
             index = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
         }
@@ -91,7 +96,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     }
 
     public void StartGame(PlayableDirector dir) {
-        int index = 4; 
+        int index = 0; 
         if (BoardController.players != null) { 
             index = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
         }
