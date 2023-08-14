@@ -36,14 +36,16 @@ public class KatakanaScramble : Minigame
     List<GameObject> interactables;
     static int count_selected;
     int rounds_completed = 0;
-    int max_rounds = 2;
+    int max_rounds = 4;
     float timeLimit = 45f;
-    int num_hints = 100;
+    int num_hints = 10;
     static bool disable_hints;
     float secs_passed = 0f;
     bool start = false;
     string cur_word;
     string cur_engl;
+
+    private static int numLocked;
 
     static bool check_flag;
 
@@ -136,22 +138,21 @@ public class KatakanaScramble : Minigame
         yield return new WaitForSeconds(0.5f);
         //set wps
         wp = new Vector3[cur_word.Length];
+        bitter_map = new GameObject[wp.Length];
+
         int from_back = cur_word.Length - 1;
         int y_multiplier = 0;
         int x_multiplier = 0;
-        int first_card_i = -1;
+        //int first_card_i = -1;
+        
+
         for (int i = 0; i < cur_word.Length; i++) {
             if (i % MAX_WORDS_ROW == 0) {
                 y_multiplier++;
                 x_multiplier = 0;
             }
+
             wp[i] = new Vector3(-800 + (INTER_WIDTH * 6 * x_multiplier), 800 - y_multiplier * (INTER_WIDTH * 6), 1);
-            if (interactables[i].GetComponent<ClickLetter>().get_correct_pos_i() == 0) {
-                interactables[i].GetComponent<ClickLetter>().set_new_pos(wp[0]);
-                interactables[i].GetComponent<ClickLetter>().set_move_flag(true);
-                interactables[i].GetComponent<ClickLetter>().set_disable(true);
-                first_card_i = i;
-            }
 
             interactables[from_back].GetComponent<ClickLetter>().set_move_flag(true);
             from_back--;
@@ -163,13 +164,36 @@ public class KatakanaScramble : Minigame
             x_multiplier++;
         }
 
+        numLocked = (cur_word.Length / 2) - 1;
+        HashSet<int> chosen = new HashSet<int>();
+        //generate locked
+        for (int j = 0; j < numLocked; j++) {
+            int thisOne = Random.Range(0, cur_word.Length);
+            if (chosen.Count == 0) {
+                thisOne = 0;
+            } 
+            while (!chosen.Add(thisOne)) {
+                thisOne = Random.Range(0, cur_word.Length);
+            }
+
+            for (int i = 0; i < interactables.Count; i++) { 
+                if (interactables[i].GetComponent<ClickLetter>().get_correct_pos_i() == thisOne)
+                {
+                    interactables[i].GetComponent<ClickLetter>().set_new_pos(wp[thisOne]);
+                    interactables[i].GetComponent<ClickLetter>().set_move_flag(true);
+                    interactables[i].GetComponent<ClickLetter>().set_disable(true);
+                    bitter_map[thisOne] = interactables[i];
+                }
+            }
+        }
+        yield return new WaitForSeconds(0.3f);
+
         secs_passed = timeLimit;
         timer_text.text = secs_passed.ToString("0.00");
         round_counter.text = (rounds_completed + 1).ToString() + "/" + max_rounds.ToString();
         count_selected = 0;
         check_flag = false;
-        bitter_map = new GameObject[wp.Length];
-        bitter_map[0] = interactables[first_card_i];
+        //bitter_map[0] = interactables[first_card_i];
         disable_hints = false;
         hint_button.interactable = true;
         start = true;
@@ -180,7 +204,7 @@ public class KatakanaScramble : Minigame
             if (bitter_map[i] == null) {
                 bitter_map[i] = that;
                 count_selected++;
-                if (count_selected >= wp.Length - 1) {
+                if (count_selected >= wp.Length - numLocked) {
                     disable_hints = true;
                     check_flag = true;
                 }
@@ -470,7 +494,7 @@ public class KatakanaScramble : Minigame
             int rand = Random.Range(0, interactables.Count);
             found = auto_correct(interactables[rand]);
         }
-        if (count_selected >= wp.Length - 1) {
+        if (count_selected >= wp.Length - numLocked) {
             check_flag = true;
         }
     }

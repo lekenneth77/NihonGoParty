@@ -124,6 +124,7 @@ public class WordOrder : Minigame
             //gen word
             string curWord = words[locked[i]];
             GameObject w = MakeWord(curWord, nextPos, toContainer);
+            w.transform.localPosition = new Vector3(-800f + (100f * lenCount) + 50f * i, 150f - (175f * ycounter), 0);
             AdjustNextWP(curWord.Length);
             w.GetComponent<WordOrderWord>().allowDrag = false;
             w.GetComponent<WordOrderWord>().SetDrop(locked[i] != this.words.Length - 1);
@@ -141,6 +142,7 @@ public class WordOrder : Minigame
             if (locked[i] == 0) {
                 root.gameObject.SetActive(false);
             }
+            lenCount += words[locked[i]].Length;
         }
 
     }
@@ -156,26 +158,33 @@ public class WordOrder : Minigame
                 random = Random.Range(0, words.Length);
             }
             string word = words[random];
-            Vector3 pos = new Vector3(Random.Range(100f, 1300f), Random.Range(100, 400f));
-            MakeWord(word, pos, fromContainer);
+            GameObject w = MakeWord(word, Vector3.zero, toContainer);
+            float xCoord = Random.Range(-825f, 200f - (100f * (w.GetComponent<WordOrderWord>().length - 3)));
+            w.transform.localPosition = new Vector3(xCoord, Random.Range(-675f, -375f));
         }
     }
 
+
+    private int lenCount = 0;
+    private int ycounter = 0;
     private GameObject MakeWord(string s, Vector3 pos, Transform parent)
     {
-        GameObject word = Instantiate(defClick, pos, Quaternion.identity, parent);
+        GameObject word = Instantiate(defClick, startingWP.position, Quaternion.identity, parent);
         word.name = s;
         word.GetComponent<WordOrderWord>().ChangeWord(s);
-        Vector2 temp = new Vector2(pos.x, pos.y);
+        Vector3 temp = new Vector3(pos.x, pos.y, 0);
+        Vector3 localPos = Vector3.zero;
         foreach (char c in s)
         {
             GameObject letter = Instantiate(defLetter, temp, Quaternion.identity, word.transform);
             letter.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = c + "";
-            temp.Set(temp.x + 100f, temp.y);
+            letter.transform.localPosition = localPos;
+            localPos.Set(localPos.x + 100f, 0, 0);
         }
         //add dropper
-        temp.Set(temp.x - 25f, temp.y);
-        Instantiate(defDrop, temp, Quaternion.identity, word.transform);
+        localPos.Set(localPos.x - 25f, 0, 0);
+        GameObject dropper = Instantiate(defDrop, temp, Quaternion.identity, word.transform);
+        dropper.transform.localPosition = localPos;
         word.GetComponent<WordOrderWord>().SetDrop(false);
         generated.Add(word);
         return word;
@@ -184,6 +193,7 @@ public class WordOrder : Minigame
     private void AdjustNextWP(int length) {
         nextPos = new Vector3(nextPos.x + (100f * length) + 50f, nextPos.y);
         if (nextPos.x > 1400) { //test number
+            ycounter++;
             nextPos = new Vector3(startingWP.position.x, startingWP.position.y - 175f);
         }
     }

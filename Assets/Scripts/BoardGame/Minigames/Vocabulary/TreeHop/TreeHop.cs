@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class TreeHop : Minigame, Controls.ITreeHopActions
 {
@@ -29,6 +30,11 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     {
         base.Start();
 
+        if (SceneManager.sceneCount > 2) {
+            SceneManager.SetActiveScene(SceneManager.GetSceneAt(2));
+        } else if (SceneManager.sceneCount > 1) {
+            SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
+        }
         controls = new Controls();
         controls.TreeHop.AddCallbacks(this);
         timer.TimeUp += TimeOut;
@@ -179,6 +185,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
             players[playerI].stars.StartSpin();
         }
         yield return new WaitForSeconds(disableTime);
+        players[playerI].jumper.GetComponent<Animator>().enabled = true;
         players[playerI].jumper.GetComponent<Animator>().Play("idle");
         if (playerI == 0) {
             controls.TreeHop.A.Enable();

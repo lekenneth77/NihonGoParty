@@ -4131,6 +4131,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7368208142782719499, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
+    - target: {fileID: 7368208142782719499, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1756495071460396668, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
 --- !u!4 &1597362321 stripped
@@ -4709,6 +4717,14 @@ PrefabInstance:
       propertyPath: caveFolder
       value: 
       objectReference: {fileID: 69790470}
+    - target: {fileID: 8392622858602047494, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
+    - target: {fileID: 8392622858602047494, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1756495071460396668, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
 --- !u!4 &1675333278 stripped
@@ -6184,7 +6200,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 5000
+  far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -6210,8 +6226,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103765317}
-  m_LocalRotation: {x: 1.0713917e-10, y: 0.99875855, z: -0.0498137, w: 0.0000000021481275}
-  m_LocalPosition: {x: 5, y: 2, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8869667, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21395,6 +21411,14 @@ PrefabInstance:
       propertyPath: frontDarkness
       value: 
       objectReference: {fileID: 8392622859013094981}
+    - target: {fileID: 8392622858602047494, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
+    - target: {fileID: 8392622858602047494, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1756495071460396668, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
     - target: {fileID: 8392622858716892554, guid: 77342ed18df8d8b4e93b18d3e74a32ab, type: 3}
       propertyPath: m_CastShadows
       value: 1
@@ -22025,6 +22049,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7368208142782719499, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
+    - target: {fileID: 7368208142782719499, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1756495071460396668, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2be1bce735551fa49add1b237fd8193b, type: 3}
 --- !u!1 &8743298710864872587

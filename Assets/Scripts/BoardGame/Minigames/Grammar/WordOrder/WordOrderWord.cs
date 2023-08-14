@@ -85,16 +85,16 @@ public class WordOrderWord : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         WordOrderWord next = obj.next;
         while (next != null)
         {
-            MoveWord(next.gameObject, next.prev.transform.position + new Vector3(next.prev.length * 100f + 50f, 0f));
+            MoveWord(next.gameObject, next.prev.transform.localPosition + new Vector3(next.prev.length * 100f + 50f, 0f));
             next = next.next;
         }
     }
 
     public void MoveWord(GameObject obj, Vector3 pos) { 
-        if (pos.x > 1800f || pos.x + (100 * (obj.GetComponent<WordOrderWord>().length - 1)) > 1800f) {
-            obj.transform.position = new Vector3(160f, pos.y - 175f);
+        if (pos.x > 750f || pos.x + (100 * (obj.GetComponent<WordOrderWord>().length - 1)) > 750f) {
+            obj.transform.localPosition = new Vector3(-800f, pos.y - 175f);
         } else { 
-            obj.transform.position = pos;
+            obj.transform.localPosition = new Vector3(pos.x, pos.y, 0);
         }
     }
 

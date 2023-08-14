@@ -40,7 +40,10 @@ public class GiveReceive : Minigame
     //player
     public GameObject player;
     public Image playerHP;
+    public TextMeshProUGUI playerName;
+    public TextMeshProUGUI cmdPlayerName;
     private Sprite[] characterPortraits;
+    private string[] charNames = new string[] { "カピバラ", "チェフ", "ベボ", "サラリマン", "ケンド" };
 
     //enemy
     public GameObject enemy;
@@ -56,7 +59,10 @@ public class GiveReceive : Minigame
 
 
         if (BoardController.players != null) {
-            player.transform.GetChild(0).GetComponent<Image>().sprite = characterPortraits[BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex];
+            int charIndex = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+            player.transform.GetChild(0).GetComponent<Image>().sprite = characterPortraits[charIndex];
+            playerName.text = charNames[charIndex];
+            cmdPlayerName.text = charNames[charIndex];
         }
 
 

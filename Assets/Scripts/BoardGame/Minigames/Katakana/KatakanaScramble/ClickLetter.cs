@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ClickLetter : MonoBehaviour
+
+public class ClickLetter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // Start is called before the first frame update
     public AudioSource deal_card;
@@ -53,24 +55,6 @@ public class ClickLetter : MonoBehaviour
         }
     }
 
-    public void OnMouseOver() {
-        return;
-        /*
-        if (!move_flag && allow_hover) {
-            if (chosen) {
-                KatakanaScramble.on_hover.transform.localPosition = original_pos;
-                KatakanaScramble.on_hover.SetActive(true);
-            } else {
-                KatakanaScramble.on_hover.transform.localPosition = KatakanaScramble.hover_avail_pos();
-                KatakanaScramble.on_hover.SetActive(true);
-            }
-        }
-        */
-    }
-
-    private void OnMouseExit() {
-        KatakanaScramble.on_hover.SetActive(false);
-    }
 
     public void set_disable(bool val) {
         allow_hover = !val;
@@ -110,5 +94,23 @@ public class ClickLetter : MonoBehaviour
             move_flag = false;
         }
 
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!move_flag && allow_hover) {
+            if (chosen) {
+                KatakanaScramble.on_hover.transform.localPosition = original_pos;
+                KatakanaScramble.on_hover.SetActive(true);
+            } else {
+                KatakanaScramble.on_hover.transform.localPosition = KatakanaScramble.hover_avail_pos();
+                KatakanaScramble.on_hover.SetActive(true);
+            }
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        KatakanaScramble.on_hover.SetActive(false);
     }
 }
