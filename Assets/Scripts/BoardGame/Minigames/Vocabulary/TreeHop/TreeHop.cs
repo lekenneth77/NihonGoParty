@@ -21,8 +21,8 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     public PlayableDirector[] directors;
 
     public Camera[] playerCameras;
-    private float[] zCameraPositions = new float[] { -4.5f, -5f, -6.5f, -7.5f };
-    private float[] yCameraPositions = new float[] { -.94f, -.94f, -.9f, -.87f };
+    private float[] zCameraPositions = new float[] { -3.5f, -4.5f, -6.5f, -7f };
+    private float[] yCameraPositions = new float[] { 1f, 1f, 1f, 2.5f };
 
     private Controls controls;
 
@@ -40,13 +40,19 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
         timer.TimeUp += TimeOut;
 
         GetWords();
-
+        //singleplayer = true;
         if (singleplayer) {
             numPlayers = 1;
             timer.gameObject.transform.localPosition = new Vector3(775, 425, 0);
+            if (BoardController.players != null) {
+                players[0].jumper = characterModels[BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex];
+            }
+
+
         } else { //multiplayer!
             if (BoardController.players == null) {
                 numPlayers = 4;
+                numPlayers = 2;
                 players[0].jumper = characterModels[0];
             } else {
                 numPlayers = BoardController.numPlayers;

@@ -2434,8 +2434,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ~
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
-  m_sharedMaterial: {fileID: 1756495071460396668, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5d9fd4cc1d3d4e64d8f49020f6f51b36, type: 2}
+  m_sharedMaterial: {fileID: 21746434789624154, guid: 5d9fd4cc1d3d4e64d8f49020f6f51b36, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5305,7 +5305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5681645477315808355, guid: 2aade36eb05fdaa41a454fb7d380e09f, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5681645477315808355, guid: 2aade36eb05fdaa41a454fb7d380e09f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12311,7 +12311,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1693181399}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1664305228
 GameObject:
@@ -12476,10 +12476,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4979511833000157310}
+  - {fileID: 1657547672}
   - {fileID: 1850533736}
   - {fileID: 744568869}
   - {fileID: 1866929453}
-  - {fileID: 1657547672}
   - {fileID: 433945923}
   - {fileID: 1453559811}
   m_Father: {fileID: 0}
@@ -14115,7 +14115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5681645477315808355, guid: 2aade36eb05fdaa41a454fb7d380e09f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5681645477315808355, guid: 2aade36eb05fdaa41a454fb7d380e09f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14216,7 +14216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5681645477315808355, guid: 2aade36eb05fdaa41a454fb7d380e09f, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5681645477315808355, guid: 2aade36eb05fdaa41a454fb7d380e09f, type: 3}
       propertyPath: m_LocalPosition.x

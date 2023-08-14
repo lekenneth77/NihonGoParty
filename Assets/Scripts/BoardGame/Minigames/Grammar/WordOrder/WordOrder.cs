@@ -74,6 +74,8 @@ public class WordOrder : Minigame
         solutions.Clear();
         root.gameObject.SetActive(true);
         nextPos = startingWP.position;
+        lenCount = 0;
+        ycounter = 0;
         numDropped = 0;
         foreach (GameObject obj in generated) {
             Destroy(obj);
@@ -264,6 +266,7 @@ public class WordOrder : Minigame
 
     private IEnumerator Wrong() {
         incorrectImg.SetActive(true);
+        WordOrderWord.mrWorldwideDrag = false;
         yield return new WaitForSeconds(5f);
         incorrectImg.SetActive(false);
         WordOrderWord.mrWorldwideDrag = true;
@@ -275,7 +278,7 @@ public class WordOrder : Minigame
     }
 
     public void SetupFinish() {
-        finalText.text = "You completed " + wins + " rounds out of " + totalRounds + " in " + timer.CurrentTime() + " seconds!";
+        finalText.text = "You completed " + totalRounds + " in " + timer.CurrentTime() + " seconds!";
         finalText.transform.parent.gameObject.SetActive(true);
     }
 

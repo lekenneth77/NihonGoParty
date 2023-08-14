@@ -122,7 +122,7 @@ public class SpeedType : Minigame, Controls.ISpeedTypeActions
             if (correct) {
                 yourSentence.text += japnPieces[index];
             } else {
-                yourSentence.text += "<color=\"blue\">X";
+                yourSentence.text += "<color=\"yellow\">X";
                 yourSentence.text += "<color=\"black\">";
                 totalLives--;
                 liveText.text = totalLives + "";

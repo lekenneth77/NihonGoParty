@@ -11,6 +11,7 @@ public class WordOrderDrop : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+        if (!WordOrderWord.mrWorldwideDrag) { return; }
         GameObject dragObj = eventData.pointerDrag;
         WordOrderWord newMid = dragObj.GetComponent<WordOrderWord>();
         WordOrderWord thisOne = transform.parent.GetComponent<WordOrderWord>();
