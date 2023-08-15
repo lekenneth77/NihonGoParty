@@ -16,6 +16,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
     private float[] initialPlayerPosX = new float[] { -9f, -3f, 3f, 9f }; //should always be a size of 4
     private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f, 7f, -20f), new Vector3(-3f, 7f, -20f), new Vector3(0, 7f, -20f) };
     public GameObject nextRoundImage;
+    public GameObject[] correctIncorrect;
     public Transform[] spawnPoints;
     public Transform runnerFolder;
 
@@ -63,6 +64,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
             numPlayers = 4;
             for (int i = 0; i < numPlayers; i++) {
                 characters[i].transform.position = new Vector3(initialPlayerPosX[i], 0, -1f);
+                characters[i].SetActive(true);
             }
         } else {
             //required to be played from a board game
@@ -70,6 +72,8 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
             for (int i = 0; i < numPlayers; i++) {
                 int characterI = players[i].GetComponent<PlayerInfo>().characterIndex;
                 characters[characterI].transform.position = new Vector3(initialPlayerPosX[i], 0, -1f);
+                characters[characterI].SetActive(true);
+
             }
         }
 
@@ -112,6 +116,8 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         if (disableImg) { 
             yield return new WaitForSeconds(5f);
             //choose new counter category
+            correctIncorrect[0].SetActive(false);
+            correctIncorrect[1].SetActive(false);
             nextRoundImage.SetActive(false);
         }
 
@@ -184,6 +190,8 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
 
     private IEnumerator Finish() {
         yield return new WaitForSeconds(5f);
+        correctIncorrect[0].SetActive(false);
+        correctIncorrect[1].SetActive(false);
         nextRoundImage.SetActive(false);
         int max = -1;
         int gamer = 0;
@@ -209,10 +217,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
     public void SomeoneGotToEnd() {
         totalNumber--;
         if (totalNumber <= 0) {
-            Debug.Log("We're done!");
             controls.QuizGame.Disable();
-            nextRoundImage.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "The correct count was " + correctNumber + "!";
-            nextRoundImage.SetActive(true);
             //count points
             //TODO handle ties later make the game work first, always could just use a spinner LOL
             int min = 1000;
@@ -227,7 +232,11 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
                     min_index = i;
                 }
             }
-
+            int whichOne = min == -1 ? 0 : 1;
+            correctIncorrect[whichOne].SetActive(true);
+            
+            nextRoundImage.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "The correct count was " + correctNumber + "!";
+            nextRoundImage.SetActive(true);
             if (min < 1000 && min != -1) {
                 points[min_index]++;
                 leaderboard[min_index].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = points[min_index] + "";

@@ -227,6 +227,7 @@ public class KatakanaScramble : Minigame
     }
 
     public static Vector3 hover_avail_pos() {
+        if (wp == null) { return new Vector3(); }
         for (int i = 0; i < wp.Length; i++) {
             if (bitter_map[i] == null) {
                 return wp[i];
