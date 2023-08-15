@@ -96,7 +96,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             numPlayers = 4;
             players = new GameObject[numPlayers];
             originalOrderPlayers = new GameObject[numPlayers];
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < numPlayers; i++) {
                 players[i] = characters[i];
                 originalOrderPlayers[i] = characters[i];
             }
@@ -239,7 +239,9 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             //handles going backwards onto a crossroad or going past the starting point
             if (nextSpace is CrossroadSpace && !forward || !nextSpace && !forward) { break; }
 
-            countdownSprite.sprite = numberSprites[roll - currentStep];
+            if (!debug) { 
+                countdownSprite.sprite = numberSprites[roll - currentStep];
+            }
             infoObj.numCrossed = forward ? infoObj.numCrossed + 1 : infoObj.numCrossed - 1;
             moveObj.SetTargetAndMove(nextSpace.transform.position);
             nextSpace.AdjustPlayers();

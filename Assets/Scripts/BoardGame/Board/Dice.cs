@@ -63,7 +63,9 @@ public class Dice : MonoBehaviour, Controls.IDiceActions
         if (debug)
         {
             roll = debugRoll;
-            spriteRenderer.sprite = sprites[roll - 1];
+            if (roll < 6) { 
+                spriteRenderer.sprite = sprites[roll - 1];
+            } 
             EndRoll();
         }
         while (!stopRoll)
