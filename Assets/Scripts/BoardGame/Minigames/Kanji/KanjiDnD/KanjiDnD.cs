@@ -154,7 +154,6 @@ public class KanjiDnD : Minigame
         move.SetTargetAndMove(exitPt.position);
 
         //handle next round!
-        yield return new WaitForSeconds(1f);
         if (totalRounds == currentRound) {
             outro.Play();
         } else {
@@ -172,7 +171,7 @@ public class KanjiDnD : Minigame
         move.SetTargetAndMove(exitPt.position);
 
         //handle next round!
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
         if (totalRounds == currentRound) {
             outro.Play();
         } else {

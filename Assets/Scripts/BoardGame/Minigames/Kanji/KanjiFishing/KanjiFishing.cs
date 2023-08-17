@@ -21,6 +21,7 @@ public class KanjiFishing : Minigame
     private int numCorrect = 0;
     private int numRounds = 0;
     private List<GameObject> fishies;
+    public GameObject finish;
     
 
     //ui
@@ -173,6 +174,8 @@ public class KanjiFishing : Minigame
 
         if (numRounds == 2) {
             if (numCorrect == 0) { numCorrect = -1; }
+            finish.SetActive(true);
+            yield return new WaitForSeconds(5f);
             EndGame(numCorrect);
         } else {
             StartCoroutine("SetupRound");
@@ -188,6 +191,8 @@ public class KanjiFishing : Minigame
 
         if (numRounds == 2) {
             if (numCorrect == 0) { numCorrect = -1; }
+            finish.SetActive(true);
+            yield return new WaitForSeconds(5f);
             EndGame(numCorrect);
         } else { 
             StartCoroutine("SetupRound");

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
@@ -13,13 +14,19 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     public Timer timer;
     public GameObject subtractTimerText;
     public KCSolutionPopup solution;
+    public GameObject success;
+    public GameObject failure;
+    public GameObject nice;
+    public int maxRounds;
+    public int round;
+    public Image[] pImages;
+    private Sprite[] charPortraits;
 
     private List<string> centerers;
     private List<string> rotators;
     private List<int> chosen;
 
     private bool duel;
-    private bool loss; //only applies to single player
     private bool won;
     private KCRotatePlayer winner; //only applies to duels
 
@@ -32,25 +39,38 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         controls = new Controls();
         controls.KanjiCrossRotate.AddCallbacks(this);
         controls.Disable();
+        charPortraits = Resources.LoadAll<Sprite>("Images/CharacterPortraits/");
 
         timer.TimeUp += TimeOut;
-        //duel = true;
-        loss = false;
         won = false;
         duel = !singleplayer; //jank renaming
-        
         if (duel)
         {
             timer.gameObject.transform.localPosition = new Vector3(0, 425, 0);
+            timer.countUp = true;
+            timer.timeLimit = 0f;
+            timer.ResetTimer();
             playerTwoCamera.gameObject.SetActive(true);
             twoPlayerContainer.SetActive(true);
             playerOneCamera.rect = new Rect(0, 0, 0.5f, 1);
+            if (BoardController.players != null) {
+                GameObject[] duelists = BoardController.duelists;
+                for (int i = 0; i < 2; i++) {
+                    int charIndex = duelists[i].GetComponent<PlayerInfo>().characterIndex;
+                    pImages[i].sprite = charPortraits[charIndex];
+                }
+            }
         } else
         {
             timer.gameObject.transform.localPosition = new Vector3(750, 375, 0);
+            timer.ResetTimer();
             playerTwoCamera.gameObject.SetActive(false);
             twoPlayerContainer.SetActive(false);
             playerOneCamera.rect = new Rect(0, 0, 1, 1);
+            if (BoardController.players != null) {
+                int charIndex = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
+                pImages[0].sprite = charPortraits[charIndex];
+            }
         }
         GetCrosses();
         StartCoroutine("RandomizeIt");
@@ -128,36 +148,36 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
             playerTwo.sphere.damping = 4;
             playerTwo.SetRotatingText(rotators[index]);
         }
+        gotIt = false;
         controls.Enable();
         timer.ResetTimer();
         timer.StartTimer();
         
     }
 
+    private bool gotIt = false;
     private IEnumerator Confirm(KCRotatePlayer player)
     {
+        if (gotIt) { yield break; }
         player.ChangeSpeed(0.25f);
         player.ConfirmBoxes();
-        
+        if (gotIt) { yield break; }
         yield return new WaitForSeconds(1.5f);
         if (player.currentRotation == 0 || Mathf.Abs(player.currentRotation) <= Mathf.Epsilon)
         {
             timer.StopTimer();
+            gotIt = true;
             won = player.Win();
             winner = player;
             yield return new WaitForSeconds(1f);
+            controls.KanjiCrossRotate.Disable();
+            nice.gameObject.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            nice.gameObject.SetActive(false);
             ShowAnswer();
         }
         else
         {
-            if (!duel)
-            {
-                timer.StopTimer();
-                timer.ChangeTime(timer.CurrentTime() - 30f);
-                subtractTimerText.GetComponent<FadeInOutObject>().InitiateFade();
-                subtractTimerText.GetComponent<MoveObject>().TriggerMove();
-            }
-            
             player.ChangeSpeed(1.5f);
             player.GoHomeBoxes();
             yield return new WaitForSeconds(0.5f);
@@ -166,10 +186,6 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
                 controls.Enable();
             }
             timer.StartTimer();
-            if (!duel)
-            {
-                subtractTimerText.transform.localPosition = subtractTimerText.GetComponent<MoveObject>().originalPosition;
-            }
         }
     }
     private void TimeOut()
@@ -178,9 +194,8 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         if (!duel)
         {
             controls.Disable();
-            loss = true;
         }
-        ShowAnswer();
+        StartCoroutine("Failure");
 
     }
 
@@ -193,15 +208,12 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
 
     public void CloseAnswer()
     {
-        if (loss)
-        {
-            //TODO maybe feature like a failure at the end or something...
-            StartCoroutine("Failure");
-        }
-        else if (won) {
+        round++;
+         if (won) {
             StartCoroutine("Win");
-        }
-        else
+        } else if (round == maxRounds) {
+            StartCoroutine("Win");
+        } else
         {
             StartCoroutine("RandomizeIt");
         }
@@ -216,14 +228,18 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
             EndGame(result);
         } else
         {
-            EndGame(2); //do the wins later
+            success.SetActive(true);
+            yield return new WaitForSeconds(5f);
+            EndGame(playerOne.wins - 1); //do the wins later
         }
     }
 
     public IEnumerator Failure()
     {
-        yield return null;
-        EndGame(0); //honestly im lazy
+        failure.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        failure.SetActive(false);
+        ShowAnswer();
     }
 
     public void OnA(InputAction.CallbackContext context)
@@ -240,7 +256,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     public void OnW(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
-        controls.Disable();
+        //controls.Disable();
         StartCoroutine(Confirm(playerOne));
     }
 
@@ -259,7 +275,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     public void OnUpKey(InputAction.CallbackContext context)
     {
         if (!duel || !context.performed) { return; }
-        controls.Disable();
+        //controls.Disable();
         StartCoroutine(Confirm(playerTwo));
     }
 

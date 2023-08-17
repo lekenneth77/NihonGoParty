@@ -17,6 +17,7 @@ public class KatakanaSearch : Minigame
     public Transform[] startingPositions;
     public Timer setupTimer;
     public WinStars stars;
+    public GameObject finish;
     private int wins;
 
     //game
@@ -129,7 +130,7 @@ public class KatakanaSearch : Minigame
     private IEnumerator ThatsRight() {
         KatakanaCollider.disable = true;
         correctOne.nono = true;
-        correctOne.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.yellow;
+        correctOne.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.red;
         gameTimer.StopTimer();
         flashlight.SetActive(false);
         yield return new WaitForSeconds(3f);
@@ -156,6 +157,7 @@ public class KatakanaSearch : Minigame
     } 
 
     private IEnumerator FinishGame() {
+        finish.SetActive(true);
         yield return new WaitForSeconds(5f);
         int result = stars.GetWins();
         EndGame(result - 1);
@@ -166,7 +168,7 @@ public class KatakanaSearch : Minigame
         blackPanel.SetActive(false);
         flashlight.SetActive(false);
         correctOne.nono = true;
-        correctOne.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.yellow;
+        correctOne.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.red;
         stars.Lose();
         yield return new WaitForSeconds(5f);
         wins++; //wins is the wrong variable name, it's more appropriate to call it rounds

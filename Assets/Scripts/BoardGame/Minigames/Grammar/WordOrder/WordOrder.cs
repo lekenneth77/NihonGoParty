@@ -258,6 +258,7 @@ public class WordOrder : Minigame
 
         if (rounds >= totalRounds) {
             //end screen button or something
+
             goToFinishButton.SetActive(true);
         } else { 
             nextRoundButton.SetActive(true);

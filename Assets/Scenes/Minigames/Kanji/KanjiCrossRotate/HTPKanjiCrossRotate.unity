@@ -690,7 +690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1691299640046613109, guid: 63d4f7eddbfddb14882f5432cb58fb3b, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1691299640046613109, guid: 63d4f7eddbfddb14882f5432cb58fb3b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1307,14 +1307,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6102903, g: 0.8679245, b: 0.6018156, a: 1}
+  m_Color: {r: 0.7855889, g: 0.9339623, b: 0.7797704, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 36460baeb668e2e4f994af1d36d5529e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df3f55308b08f59408dc37625bdcf571, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

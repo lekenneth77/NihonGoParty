@@ -31,7 +31,7 @@ public class KatakanaCollider : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (disable) { return; }
         GotClicked?.Invoke(correctOne);
         if (correctOne) {
-            transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
+            transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.red;
         }
     }
 

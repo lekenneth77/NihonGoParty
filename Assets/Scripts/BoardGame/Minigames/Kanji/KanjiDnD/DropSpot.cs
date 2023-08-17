@@ -11,7 +11,7 @@ public class DropSpot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (!eventData.pointerDrag || gameObject.GetComponent<DnDInfo>().onMeOnThem) { return; }
+        if (!eventData.pointerDrag || gameObject.GetComponent<DnDInfo>().onMeOnThem || !DragNDrop.allowDrag) { return; }
         GameObject dragObj = eventData.pointerDrag;
         dragObj.transform.position = transform.position;
         //basically marks this dropspot as used!
