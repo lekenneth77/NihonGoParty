@@ -17,6 +17,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
     private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f, 7f, -20f), new Vector3(-3f, 7f, -20f), new Vector3(0, 7f, -20f) };
     public GameObject nextRoundImage;
     public GameObject[] correctIncorrect;
+    public GameObject finished;
     public Transform[] spawnPoints;
     public Transform runnerFolder;
 
@@ -202,6 +203,9 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
                 gamer = i;
             }
         }
+        finished.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        finished.SetActive(false);
         Debug.Log("Winner Index: " + gamer);
         EndMultiplayerGame(gamer);
     }

@@ -6,6 +6,7 @@ public class EeveeCircle : MonoBehaviour
 {
     // Start is called before the first frame update
     public float spinSpeed;
+    public bool bruh;
     void Start()
     {
         
@@ -14,6 +15,8 @@ public class EeveeCircle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0, 0, spinSpeed);
+        if (bruh) { transform.Rotate(0, -spinSpeed, 0); } else { 
+            transform.Rotate(0, 0, spinSpeed);
+        }
     }
 }

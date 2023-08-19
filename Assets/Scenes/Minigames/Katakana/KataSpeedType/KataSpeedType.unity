@@ -327,7 +327,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: c4f2b71e10b570747927084f4f9cebd7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1797,7 +1797,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3c43cf40e08154e48b17c1004f824934, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e81c0720f46007145a095491da2b3e44, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1950,7 +1950,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3c43cf40e08154e48b17c1004f824934, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e81c0720f46007145a095491da2b3e44, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

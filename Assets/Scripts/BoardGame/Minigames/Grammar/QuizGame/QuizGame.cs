@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -13,12 +14,15 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
     public GameObject[] characters;
     private float[] initialPlayerPosX = new float[] { -4.05f, -1.35f, 1.35f, 4.05f}; //should always be a size of 4
     private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f * 0.45f, 6f * 0.45f, -15f * 0.45f), new Vector3(-3f * 0.45f, 6f * 0.45f, -15f * 0.45f), new Vector3(0, 6.5f * 0.45f, -17f * 0.45f)};
+    public GameObject miloCam;
     public GameObject fullViewCam;
+    public GameObject milo;
     public GameObject[] playerCameras;
     public GameObject[] resultObjects;
     public TextMeshProUGUI question;
     public TextMeshProUGUI[] answerChoices;
     public int numPlayers;
+    public PlayableDirector intro;
 
     private string[] problems;
     private HashSet<int> chosen;
@@ -57,6 +61,11 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
             }
         }
 
+        timer.transform.parent.gameObject.SetActive(false);
+        answerChoices[0].transform.parent.parent.gameObject.SetActive(false);
+        playerCameras[currentPlayerI].SetActive(false);
+        question.transform.parent.gameObject.SetActive(false);
+
         for (int i = 0; i < numPlayers; i++) {
             pedestals[i].gameObject.SetActive(true);
         }
@@ -64,6 +73,44 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         problems = txtfile.text.Split("\n"[0]);
         chosen = new HashSet<int>();
         controls.QuizGame.Enable();
+        intro.stopped += AfterIntro;
+        intro.Play();
+
+    }
+
+    public void AfterIntro(PlayableDirector dir) {
+        StartCoroutine("MiloTalk");
+    }
+
+    private IEnumerator MiloTalk() {
+        //maybe do a character introduction?
+        yield return new WaitForSeconds(1f);
+        question.text = "";
+        question.transform.parent.gameObject.SetActive(true);
+        question.fontSize = 75f;
+        string dialogue = "Welcome to Quiz Show!";
+        int j = 0;
+        while (j < dialogue.Length) {
+            question.text += dialogue[j];
+            if (dialogue[j] != ' ') {
+                yield return new WaitForSeconds(0.025f);
+            } 
+            j++;
+        }
+        yield return new WaitForSeconds(1.5f);
+        question.text = "";
+        dialogue = "Let's get started!";
+        j = 0;
+        while (j < dialogue.Length)
+        {
+            question.text += dialogue[j];
+            if (dialogue[j] != ' ')
+            {
+                yield return new WaitForSeconds(0.025f);
+            }
+            j++;
+        }
+        yield return new WaitForSeconds(1.5f);
         StartCoroutine("SetupRound");
     }
 
@@ -79,6 +126,8 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         answerChoices[0].transform.parent.parent.gameObject.SetActive(false);
         playerCameras[currentPlayerI].SetActive(false);
         numAnswered = 0;
+        miloCam.SetActive(true);
+        question.fontSize = 50f;
 
         //parse text here
         int random = Random.Range(0, problems.Length);
@@ -87,7 +136,17 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         }
         Debug.Log(random);
         string[] split = problems[random].Split("_"[0]);
-        question.text = split[0];
+        question.text = "";
+        string dialogue = split[0];
+        int j = 0;
+        while (j < dialogue.Length) {
+            question.text += dialogue[j];
+            if (dialogue[j] != ' ') {
+                yield return new WaitForSeconds(0.025f);
+            } 
+            j++;
+        }
+
         string[] answers = split[1].Split(","[0]);
         correctAnswerChoice = Random.Range(0, 4);
         Debug.Log(correctAnswerChoice);
@@ -103,6 +162,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         }
         //lol for now
         yield return new WaitForSeconds(2f);
+        miloCam.SetActive(false);
         answerChoices[0].transform.parent.parent.gameObject.SetActive(true);
         noMorePeople = false;
         Debug.Log("Round Start!");

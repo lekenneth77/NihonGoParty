@@ -11,6 +11,7 @@ public class BoardGameIntro : MonoBehaviour
     public GameObject milo;
     public TextMeshProUGUI miloTxt;
     public PlayableDirector mapCutscene;
+
     private int numPlayers;
     private GameObject[] players;
     private Leaderboard lb;

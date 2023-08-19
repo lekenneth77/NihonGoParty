@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
 
@@ -14,6 +15,7 @@ public class Cave : MonoBehaviour
     public TextMeshProUGUI leftText;
     public TextMeshProUGUI rightText;
     public TextMeshProUGUI topText;
+    public Image topImg;
     private bool leftCorrect;
 
     public GameObject frontDarkness;
@@ -23,6 +25,7 @@ public class Cave : MonoBehaviour
     public Transform[] outLeft;
     public GameObject defCave;
     public GameObject defFinish;
+    public Sprite[] transIntransImgs;
     public static int caveLimit;
 
     private List<Transform> movement;
@@ -92,7 +95,7 @@ public class Cave : MonoBehaviour
             //if they chose the wrong path, make them do the cave again!
             newCave.GetComponent<Cave>().ChangeText(leftText.text, rightText.text, topText.text, leftCorrect);
         }
-        frontDarkness.SetActive(false);
+        //frontDarkness.SetActive(false);
         movement.Clear();//just to make sure
         if (wentLeft) { 
             foreach(Transform t in outLeft) {
@@ -169,6 +172,11 @@ public class Cave : MonoBehaviour
         leftText.text = left;
         rightText.text = right;
         topText.text = top;
+        if (top == "Transitive") {
+            topImg.sprite = transIntransImgs[0];
+        } else {
+            topImg.sprite = transIntransImgs[1];
+        }
         leftCorrect = leftCorr;
     }
 }

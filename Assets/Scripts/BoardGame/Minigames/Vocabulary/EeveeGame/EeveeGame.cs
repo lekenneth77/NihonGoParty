@@ -14,10 +14,14 @@ public class EeveeGame : Minigame, Controls.IQuizGameActions
     public TextMeshProUGUI middleTxt;
     public EeveeCircle rotator;
     public WinStars[] winners;
+    public GameObject finish;
+    public GameObject fail;
 
     //ui
     public TextMeshProUGUI categoryText;
     public Image[] portraits;
+    public Image food;
+    public Sprite[] foodItems;
     private Sprite[] charPortraits;
 
     private EeveePlayer[] players = new EeveePlayer[4];
@@ -67,7 +71,7 @@ public class EeveeGame : Minigame, Controls.IQuizGameActions
                 players[1].myWP = wps[2];
             }
         }
-
+        
         ResetRound();
 
     }
@@ -76,12 +80,13 @@ public class EeveeGame : Minigame, Controls.IQuizGameActions
         float initialRotY = 0;
         for (int i = 0; i < numPlayers; i++) {
             rotator.transform.eulerAngles = new Vector3(90f, 0f, 0f);
-            players[i].transform.SetParent(playerFolder);
             players[i].rotate = false;
-            players[i].transform.eulerAngles = new Vector3(0, initialRotY, 0f);
             players[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
-            initialRotY -= 90f;
-            if (numPlayers == 2) { initialRotY -= 90f; }
+            players[i].transform.SetParent(playerFolder);
+            players[i].transform.eulerAngles = new Vector3(0f, -initialRotY, 0f);
+            players[i].transform.localScale = Vector3.one;
+            initialRotY += 90f;
+            if (numPlayers == 2) { initialRotY += 90f; }
             players[i].gameObject.SetActive(true);
             players[i].transform.position = players[i].myWP.position;
             players[i].transform.GetChild(0).GetComponent<Animator>().Play("just_walk");
@@ -93,6 +98,7 @@ public class EeveeGame : Minigame, Controls.IQuizGameActions
         numGotItWrong = 0;
         middleTxt.text = "";
         ChooseProblem();
+       
         StartCoroutine("HandleRound"); //round loop
 
     }
@@ -154,11 +160,14 @@ public class EeveeGame : Minigame, Controls.IQuizGameActions
             //grab from the right pile
             string s = correct ? correctWords[Random.Range(0, correctWords.Count)] : wrongOnes[Random.Range(0, wrongOnes.Count)];
             middleTxt.text = s;
+            food.sprite = foodItems[Random.Range(0, foodItems.Length)];
+            food.gameObject.SetActive(true);
 
             //how long the word appears in the middle
             yield return new WaitForSeconds(Random.Range(2f, 4f));
             if (!someoneGotItRight) { 
                 middleTxt.text = "";
+                food.gameObject.SetActive(false);
             }
             itsWrong = true;
             EeveePlayer.wrong = itsWrong;
@@ -169,7 +178,9 @@ public class EeveeGame : Minigame, Controls.IQuizGameActions
         }
 
         if (numGotItWrong == numPlayers) {
+            fail.SetActive(true);
             yield return new WaitForSeconds(3f);
+            fail.SetActive(false);
             ResetRound();
         }
     }
@@ -182,7 +193,8 @@ public class EeveeGame : Minigame, Controls.IQuizGameActions
         winners[i].Win();
         if (winners[i].GetWins() == 3) {
             Debug.Log("Done!");
-            yield return new WaitForSeconds(3f);
+            finish.SetActive(true);
+            yield return new WaitForSeconds(5f);
             EndMultiplayerGame(i);
         } else { 
             ResetRound();

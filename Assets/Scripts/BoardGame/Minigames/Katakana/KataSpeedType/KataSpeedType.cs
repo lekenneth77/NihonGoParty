@@ -84,6 +84,8 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
             playerIcons[1].transform.parent.GetComponent<Image>().color = new Color(0, 194f / 255f, 1f);
             playerIcons[0].transform.parent.GetComponent<Image>().color = Color.white;
         }
+        typeStack.Clear();
+        typing.text = "";
         loseTimer.gameObject.SetActive(false);
         noTypey = false;
         gameTimer.ResetTimer();
@@ -153,9 +155,11 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
             {
                 if (playerOneTurn) { 
                     playerOneWins++;
+                    p1WinText.text = playerOneWins + "";
                     its345AM.Play("p1");
                 } else {
                     playerTwoWins++;
+                    p2WinText.text = playerTwoWins + "";
                     its345AM.Play("p2");
                 }
                 NextCharacter();

@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Multiplayer Setup.unity
     guid: b9ec803b3af11c44fb96c7ad8e941eb8
   - enabled: 1
-    path: Assets/Scenes/Minigames/Kanji/Katakana/KatakanaScramble/KatakanaScramble.unity
+    path: Assets/Scenes/Minigames/Katakana/KatakanaScramble/KatakanaScramble.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/FinishScreen.unity
@@ -33,7 +33,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/HowToPlayTemp.unity
     guid: 94e8594a404e75b4a9b11410b98c85ca
   - enabled: 1
-    path: Assets/Scenes/Minigames/Kanji/Katakana/KatakanaSearch/KatakanaSearch.unity
+    path: Assets/Scenes/Minigames/Katakana/KatakanaSearch/KatakanaSearch.unity
     guid: f8a6c8b58b3f938489c31ef9c054eeea
   - enabled: 1
     path: Assets/Scenes/Minigames/Grammar/QuizGame/QuizGame.unity
@@ -42,7 +42,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/Vocabulary/CountingGame/CountingGame.unity
     guid: 71c54343650c57e4b8089c0472540bae
   - enabled: 1
-    path: Assets/Scenes/Minigames/Kanji/Katakana/KataSpeedType/KataSpeedType.unity
+    path: Assets/Scenes/Minigames/Katakana/KataSpeedType/KataSpeedType.unity
     guid: 01336668826aa9747ac6778233989d31
   - enabled: 1
     path: Assets/Scenes/Minigames/Grammar/SpeedType/SpeedType.unity
@@ -66,7 +66,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/Grammar/WordOrder/WordOrder2.unity
     guid: 97f1462422beec54fb33da18df490355
   - enabled: 1
-    path: Assets/Scenes/Minigames/Kanji/Katakana/AppleDrop/AppleDrop.unity
+    path: Assets/Scenes/Minigames/Katakana/AppleDrop/AppleDrop.unity
     guid: f0d831a5d4906eb44a26c6dd972d11ec
   - enabled: 1
     path: Assets/Scenes/Maps/Bruh.unity
@@ -105,16 +105,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/Kanji/KanjiFishing/HTPKanjiFishing.unity
     guid: a5b9fda1c8f64194884e3efdcaf9309c
   - enabled: 1
-    path: Assets/Scenes/Minigames/Kanji/Katakana/AppleDrop/HTPAppleDrop.unity
+    path: Assets/Scenes/Minigames/Katakana/AppleDrop/HTPAppleDrop.unity
     guid: 0792c7190acdc664c948704e5c4f96fe
   - enabled: 1
-    path: Assets/Scenes/Minigames/Kanji/Katakana/KatakanaScramble/HTPKatakanaScramble.unity
+    path: Assets/Scenes/Minigames/Katakana/KatakanaScramble/HTPKatakanaScramble.unity
     guid: 9277a033612961d42b05289969ad9fe3
   - enabled: 1
-    path: Assets/Scenes/Minigames/Kanji/Katakana/KatakanaSearch/HTPKatakanaSearch.unity
+    path: Assets/Scenes/Minigames/Katakana/KatakanaSearch/HTPKatakanaSearch.unity
     guid: 0a66efcb02152884a9e34f63e68cd098
   - enabled: 1
-    path: Assets/Scenes/Minigames/Kanji/Katakana/KataSpeedType/HTPKataSpeedType.unity
+    path: Assets/Scenes/Minigames/Katakana/KataSpeedType/HTPKataSpeedType.unity
     guid: 377f0815084b72d4680c234ef483a91a
   - enabled: 1
     path: Assets/Scenes/Minigames/Vocabulary/CountingGame/HTPCountingGame.unity

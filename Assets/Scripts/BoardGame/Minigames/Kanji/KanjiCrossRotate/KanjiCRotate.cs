@@ -257,6 +257,9 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     {
         if (!context.performed) { return; }
         //controls.Disable();
+        controls.KanjiCrossRotate.A.Disable();
+        controls.KanjiCrossRotate.D.Disable();
+        controls.KanjiCrossRotate.W.Disable();
         StartCoroutine(Confirm(playerOne));
     }
 
@@ -275,7 +278,9 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     public void OnUpKey(InputAction.CallbackContext context)
     {
         if (!duel || !context.performed) { return; }
-        //controls.Disable();
+        controls.KanjiCrossRotate.LeftKey.Disable();
+        controls.KanjiCrossRotate.RightKey.Disable();
+        controls.KanjiCrossRotate.UpKey.Disable();
         StartCoroutine(Confirm(playerTwo));
     }
 

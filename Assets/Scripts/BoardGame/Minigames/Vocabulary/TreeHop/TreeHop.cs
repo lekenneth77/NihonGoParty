@@ -16,6 +16,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     public Timer timer;
     public TextMeshProUGUI categoryText;
     public GameObject finishImage;
+    public GameObject failImage;
     private int numPlayers;
 
     public PlayableDirector[] directors;
@@ -52,7 +53,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
         } else { //multiplayer!
             if (BoardController.players == null) {
                 numPlayers = 4;
-                numPlayers = 2;
+                //numPlayers = 2;
                 players[0].jumper = characterModels[0];
             } else {
                 numPlayers = BoardController.numPlayers;
@@ -239,6 +240,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
 
     private IEnumerator OnTimeOut() {
         players[0].jumper.transform.GetChild(0).GetComponent<Animator>().Play("lose");
+        failImage.SetActive(true);
         yield return new WaitForSeconds(5f);
         EndGame(-1);
     }
