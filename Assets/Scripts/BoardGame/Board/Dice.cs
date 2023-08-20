@@ -14,6 +14,7 @@ public class Dice : MonoBehaviour, Controls.IDiceActions
     private Sprite[] sprites;
     private bool stopRoll, allowStart, allowEnd;
     public static event Action<int> OnDiceFinish;
+    public event Action clickedOnce;
     public bool disable;
     private Controls controls;
 
@@ -33,13 +34,14 @@ public class Dice : MonoBehaviour, Controls.IDiceActions
     private void OnMouseDown()
     {
         if (disable) { return; }
+        clickedOnce?.Invoke();
         HandleDice();
     }
 
     public void OnRoll(InputAction.CallbackContext context)
     {
         if (!context.performed || disable) { return; }
-
+        clickedOnce?.Invoke();
         HandleDice();
     }
 

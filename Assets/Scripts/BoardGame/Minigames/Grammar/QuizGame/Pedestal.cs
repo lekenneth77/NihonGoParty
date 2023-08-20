@@ -19,7 +19,7 @@ public class Pedestal : MonoBehaviour
     public bool Win() {
         stars[wins].SetActive(true);
         wins++;
-        return wins >= 2;
+        return wins >= 3;
     }
 
     public void Answered() {

@@ -51,6 +51,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
     //intro
     public BoardGameIntro introSeq;
+    
 
     //camera
     public GameObject stillCameraObj, moveCameraObj, freeCameraObj;
@@ -120,6 +121,11 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         leaderboard.SetNumPlayers(numPlayers);
         leaderboard.SetPortraits(players);
         MinigameSpace.startedLoad += BeforeMinigameLoad;
+
+        for (int i = 0; i < numPlayers; i++) {
+            players[i].SetActive(true);
+        }
+
 
         //introSeq.LetsStart();
         ///*

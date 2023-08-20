@@ -11,6 +11,8 @@ public class BoardGameIntro : MonoBehaviour
     public GameObject milo;
     public TextMeshProUGUI miloTxt;
     public PlayableDirector mapCutscene;
+    public GameObject[] quickDiceTutorial;
+
 
     private int numPlayers;
     private GameObject[] players;
@@ -128,10 +130,16 @@ public class BoardGameIntro : MonoBehaviour
         for (int i = 0; i < numPlayers; i++) { 
             players[i].GetComponent<MoveObject>().RotateToIdentity();
             yield return new WaitForSeconds(0.5f);
+            if (i == 1) {
+                players[0].GetComponent<PlayerInfo>().dice.clickedOnce -= ShowAgain;
+            }
             Dice currentDice = players[i].GetComponent<PlayerInfo>().dice;
             currentDice.gameObject.SetActive(true);
             currentDice.Reset();
-
+            if (i == 0) {
+                currentDice.clickedOnce += ShowAgain;
+                quickDiceTutorial[0].SetActive(true);
+            }
             while (!currentDice.GetStopRoll())
             {
                 //poll for the dice to finish.
@@ -151,6 +159,8 @@ public class BoardGameIntro : MonoBehaviour
             playerOrder.Add(roll, players[i]);
             illegalNums.Add(roll);
             yield return new WaitForSeconds(0.5f);
+            quickDiceTutorial[0].SetActive(false);
+            quickDiceTutorial[1].SetActive(false);
         }
 
         GameObject[] temp = new GameObject[numPlayers];
@@ -222,6 +232,10 @@ public class BoardGameIntro : MonoBehaviour
         miloTxt.transform.parent.gameObject.SetActive(false);
 
         mapCutscene.Play();
+    }
+
+    public void ShowAgain() {
+        quickDiceTutorial[1].SetActive(true);
     }
 
 }

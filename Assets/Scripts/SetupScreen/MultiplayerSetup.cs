@@ -171,7 +171,7 @@ public class MultiplayerSetup : MonoBehaviour
 
     public void FinalSelectMap() {
         Debug.Log("Show time! " + currentMapI);
-        SceneManager.LoadSceneAsync("Map Template");
+        SceneManager.LoadSceneAsync("MapSquare");
         //TODO maybe do like a dramatic zoom in
     }
 
@@ -180,6 +180,10 @@ public class MultiplayerSetup : MonoBehaviour
         //set up a flag 
         TitleScreen.skipStart = true;
         SceneManager.LoadSceneAsync("TitleScreen");
+    }
+
+    public void GoToDebugger() {
+        SceneManager.LoadSceneAsync("AllMinigames");
     }
 
 }

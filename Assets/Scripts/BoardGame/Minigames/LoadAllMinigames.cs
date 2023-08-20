@@ -72,4 +72,9 @@ public class LoadAllMinigames : MonoBehaviour, Controls.IDebugActions
         SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
         canvas.SetActive(true);
     }
+
+    public void LoadCharacterSelect() {
+        Minigame.debug = false;
+        SceneManager.LoadSceneAsync("Multiplayer Setup");
+    }
 }

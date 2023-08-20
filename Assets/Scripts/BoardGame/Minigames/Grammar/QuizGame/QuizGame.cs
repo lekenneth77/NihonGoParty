@@ -223,7 +223,14 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
     }
 
     private IEnumerator FinishGame() {
+        yield return new WaitForSeconds(1f);
+        timer.transform.parent.gameObject.SetActive(false);
+        answerChoices[0].transform.parent.parent.gameObject.SetActive(false);
+        playerCameras[currentPlayerI].SetActive(false);
+        question.transform.parent.gameObject.SetActive(false);
         resultObjects[3].SetActive(true);
+        miloCam.SetActive(true);
+        milo.GetComponent<Animator>().Play("miloQuizAway");
         yield return new WaitForSeconds(5f);
         EndMultiplayerGame(currentPlayerI);
     }

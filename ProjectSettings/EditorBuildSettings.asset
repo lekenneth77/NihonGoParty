@@ -71,7 +71,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/Bruh.unity
     guid: a492da2d48eb4664199e90e6faf2d5c7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Maps/MapOne_Square.unity
     guid: 1d3b71653c7b2904baa2793fe0605657
   - enabled: 1
@@ -131,4 +131,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Vocabulary/VocabHunt/HTPVocabHunt.unity
     guid: 176f2c8bd9ca1f24e9da0238439a02c9
+  - enabled: 1
+    path: Assets/Scenes/Maps/MapSquare.unity
+    guid: 357d6d6467690cc4987a0b2dd4f5d1b6
   m_configObjects: {}
