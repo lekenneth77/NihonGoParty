@@ -1298,7 +1298,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea8317e2993b17e40a9f53765b8cb921, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40a23092e7621fa4681c10781e8edea0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1333,13 +1333,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 919402703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecdb1a30c99193f4c9c9d6075e181dd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeName: blank
+  typeName: duel
   chosenPath: {fileID: 0}
   nextWP: {fileID: 1554754252}
   prevWP: {fileID: 1832337186}
+  category: DUEL
+  selector: {fileID: 29935722}
 --- !u!1 &922721765 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9098422620718635887, guid: ca5129172ba8ca541bf6eb33aa9dae1b, type: 3}
@@ -1554,7 +1556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560867314547708428, guid: 9e38dd38cf8eab84080a7b0d5c0f7aee, type: 3}
       propertyPath: debugRoll
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7560867314741826372, guid: 9e38dd38cf8eab84080a7b0d5c0f7aee, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform
@@ -1616,7 +1618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
       propertyPath: changeToThis
-      value: blank
+      value: finish
       objectReference: {fileID: 0}
     - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
       propertyPath: spawnPoint.x
@@ -1897,7 +1899,7 @@ PrefabInstance:
       objectReference: {fileID: 1728194545}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: duelImg
@@ -2130,6 +2132,7 @@ MonoBehaviour:
   milo: {fileID: 119500795}
   miloTxt: {fileID: 1936889752}
   mapCutscene: {fileID: 1309833807}
+  quickDiceTutorial: []
 --- !u!1 &1084838153 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3549116796204282744, guid: 296b025c10c6fb246b07b1bbde7e9da9, type: 3}
@@ -2209,7 +2212,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea8317e2993b17e40a9f53765b8cb921, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b2121ec280171b498c9c39c4947c8bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2229,10 +2232,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1166401799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecdb1a30c99193f4c9c9d6075e181dd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e772ec3781afee45b7e7e1a06509e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeName: blank
+  typeName: finish
   chosenPath: {fileID: 0}
   nextWP: {fileID: 0}
   prevWP: {fileID: 0}
@@ -3190,9 +3193,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.3
   far clip plane: 5000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3217,8 +3220,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613254798}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.25, y: 3.25, z: -10}
+  m_LocalRotation: {x: 0, y: 0.9991446, z: -0.041352943, w: 1e-45}
+  m_LocalPosition: {x: 5, y: 2.5, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3835,7 +3838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3042227715830296273, guid: b96080fb9d569184a9c1983303836f27, type: 3}
       propertyPath: debugRoll
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3042227715830296287, guid: b96080fb9d569184a9c1983303836f27, type: 3}
       propertyPath: m_IsActive
@@ -3901,7 +3904,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2102922005471856823, guid: 117fd486d051b0c4e874284e8f0ba553, type: 3}
       propertyPath: debugRoll
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2102922005656520669, guid: 117fd486d051b0c4e874284e8f0ba553, type: 3}
       propertyPath: m_RootOrder
@@ -4018,7 +4021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9098422622304297873, guid: ca5129172ba8ca541bf6eb33aa9dae1b, type: 3}
       propertyPath: debugRoll
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9098422622461300640, guid: ca5129172ba8ca541bf6eb33aa9dae1b, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform

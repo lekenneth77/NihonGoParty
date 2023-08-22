@@ -1019,6 +1019,96 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""ConjBlaster"",
+            ""id"": ""6c7ffb6e-5fc8-45f7-b35a-9dd34e44e0d9"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""e8512d0b-7f18-4d8a-be8f-864d8ce3fc7f"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Blast"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c5ce80b-937d-4c0d-a713-22ed1973610a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Swap"",
+                    ""type"": ""Button"",
+                    ""id"": ""6cfda39d-e261-4ef6-a439-05b99ffa6f10"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""3b670dec-5a05-4eb8-9857-86ef723b3ff1"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""9cdce9cf-df7c-41fe-beae-8ebf74f64065"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""09239f80-c17a-4de0-a1df-c4ae25b90c6b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab3b2e84-2760-409a-8102-0f00bcf4410c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Blast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbb41ea4-4a5f-4b5f-b2df-662687834653"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1093,6 +1183,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // AppleDrop
         m_AppleDrop = asset.FindActionMap("AppleDrop", throwIfNotFound: true);
         m_AppleDrop_Move = m_AppleDrop.FindAction("Move", throwIfNotFound: true);
+        // ConjBlaster
+        m_ConjBlaster = asset.FindActionMap("ConjBlaster", throwIfNotFound: true);
+        m_ConjBlaster_Move = m_ConjBlaster.FindAction("Move", throwIfNotFound: true);
+        m_ConjBlaster_Blast = m_ConjBlaster.FindAction("Blast", throwIfNotFound: true);
+        m_ConjBlaster_Swap = m_ConjBlaster.FindAction("Swap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1900,6 +1995,68 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public AppleDropActions @AppleDrop => new AppleDropActions(this);
+
+    // ConjBlaster
+    private readonly InputActionMap m_ConjBlaster;
+    private List<IConjBlasterActions> m_ConjBlasterActionsCallbackInterfaces = new List<IConjBlasterActions>();
+    private readonly InputAction m_ConjBlaster_Move;
+    private readonly InputAction m_ConjBlaster_Blast;
+    private readonly InputAction m_ConjBlaster_Swap;
+    public struct ConjBlasterActions
+    {
+        private @Controls m_Wrapper;
+        public ConjBlasterActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_ConjBlaster_Move;
+        public InputAction @Blast => m_Wrapper.m_ConjBlaster_Blast;
+        public InputAction @Swap => m_Wrapper.m_ConjBlaster_Swap;
+        public InputActionMap Get() { return m_Wrapper.m_ConjBlaster; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ConjBlasterActions set) { return set.Get(); }
+        public void AddCallbacks(IConjBlasterActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ConjBlasterActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ConjBlasterActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Blast.started += instance.OnBlast;
+            @Blast.performed += instance.OnBlast;
+            @Blast.canceled += instance.OnBlast;
+            @Swap.started += instance.OnSwap;
+            @Swap.performed += instance.OnSwap;
+            @Swap.canceled += instance.OnSwap;
+        }
+
+        private void UnregisterCallbacks(IConjBlasterActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Blast.started -= instance.OnBlast;
+            @Blast.performed -= instance.OnBlast;
+            @Blast.canceled -= instance.OnBlast;
+            @Swap.started -= instance.OnSwap;
+            @Swap.performed -= instance.OnSwap;
+            @Swap.canceled -= instance.OnSwap;
+        }
+
+        public void RemoveCallbacks(IConjBlasterActions instance)
+        {
+            if (m_Wrapper.m_ConjBlasterActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IConjBlasterActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ConjBlasterActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ConjBlasterActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ConjBlasterActions @ConjBlaster => new ConjBlasterActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1979,5 +2136,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IAppleDropActions
     {
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IConjBlasterActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnBlast(InputAction.CallbackContext context);
+        void OnSwap(InputAction.CallbackContext context);
     }
 }

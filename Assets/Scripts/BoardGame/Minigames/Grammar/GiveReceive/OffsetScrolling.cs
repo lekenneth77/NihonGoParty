@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OffsetScrolling : MonoBehaviour {
     public float scrollSpeed = .2f;
-
+    public bool horizontal;
     private MeshRenderer rend;
     
 
@@ -13,6 +13,10 @@ public class OffsetScrolling : MonoBehaviour {
     }
 
     void Update () {
-        rend.material.mainTextureOffset = new Vector2(-(Time.time * scrollSpeed) / 2f, (Time.time * scrollSpeed) / 2f);
+        if (horizontal) {
+            rend.material.mainTextureOffset = new Vector2((Time.time * scrollSpeed), 0f);
+        } else { 
+            rend.material.mainTextureOffset = new Vector2(-(Time.time * scrollSpeed) / 2f, (Time.time * scrollSpeed) / 2f);
+        }
     }
 }
