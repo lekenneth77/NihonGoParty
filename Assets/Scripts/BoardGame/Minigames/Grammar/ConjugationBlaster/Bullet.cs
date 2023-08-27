@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
     }
 
     public void StopBullet() {
+        rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
         rotate = false;
     }

@@ -35,6 +35,9 @@ public class MultiplayerSetup : MonoBehaviour
     //overlay canvas
     public GameObject overlayCanvas;
 
+    //loading screen
+    public LoadingScreen screen;
+
     private int numPlayers;
     private Sprite[] charSprites;
 
@@ -171,7 +174,8 @@ public class MultiplayerSetup : MonoBehaviour
 
     public void FinalSelectMap() {
         Debug.Log("Show time! " + currentMapI);
-        SceneManager.LoadSceneAsync("MapSquare");
+        screen.LoadScene("MapSquare", false);
+        //SceneManager.LoadSceneAsync("MapSquare");
         //TODO maybe do like a dramatic zoom in
     }
 

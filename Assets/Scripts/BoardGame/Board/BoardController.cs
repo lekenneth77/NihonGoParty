@@ -148,7 +148,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             }
             leaderboard.SetVisibility(true);
         }
-
+        introSeq.milo.SetActive(false);
         currentPlayer_i = -1;
         Dice.OnDiceFinish += SubscribeMovePlayer;
         BoardSpace.ActionFinish += AfterSpaceAction;

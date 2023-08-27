@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class BlasterPlayer : Minigame, Controls.IConjBlasterActions
 {
+    public TextAsset[] texts;
     public float moveSpeed;
     public Blaster blaster;
     public float cooldownTime;
@@ -20,7 +21,8 @@ public class BlasterPlayer : Minigame, Controls.IConjBlasterActions
     public GameObject failure;
     public bool loss;
 
-    private string[] forms = new string[] { "A", "B", "C" };
+    public List<string>[] words = new List<string>[3];
+    private string[] forms = new string[3];
     private int formIndex;
     private float moveVal;
     private bool cooldown;
@@ -36,14 +38,37 @@ public class BlasterPlayer : Minigame, Controls.IConjBlasterActions
         controls = new Controls();
         controls.ConjBlaster.AddCallbacks(this);
         controls.ConjBlaster.Enable();
+        ChooseTexts();
+        currForm.text = forms[formIndex];
         StartCoroutine("Round");
     }
 
-    private IEnumerator Round() {
+    private void ChooseTexts() {
+        HashSet<int> chosen = new HashSet<int>();
+        for (int i = 0; i < 3; i++) {
+            int index = Random.Range(0, texts.Length);
+            while (!chosen.Add(index)) {
+                index = Random.Range(0, texts.Length);
+            }
 
-        for (int i = 0; i < Random.Range(30, 45); i++) {
+            string[] textfile = texts[index].text.Split("\n"[0]);
+            forms[i] = textfile[0];
+            words[i] = new List<string>();
+            for (int j = 1; j < textfile.Length; j++) {
+                words[i].Add(textfile[j]);
+            }
+
+        }
+    }
+
+    private IEnumerator Round() {
+        yield return new WaitForSeconds(3f);
+        for (int i = 0; i < Random.Range(50, 65); i++) {
             int whichType = Random.Range(0, 3);
-            blasterEnemy.GetComponent<BlasterEnemy>().Spawn(whichType, forms[whichType]);
+            List<string> curList = words[whichType];
+            string word = curList[Random.Range(0, curList.Count)];
+
+            blasterEnemy.GetComponent<BlasterEnemy>().Spawn(whichType, word);
             yield return new WaitForSeconds(Random.Range(1.5f, 3f));
         }
         yield return new WaitForSeconds(5f);

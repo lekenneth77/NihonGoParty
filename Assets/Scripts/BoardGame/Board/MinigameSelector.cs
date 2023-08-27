@@ -62,11 +62,11 @@ public class MinigameSelector : MonoBehaviour
         threeMinigames[index].GetComponent<Animator>().enabled = true;
         threeMinigames[index].GetComponent<Animator>().Play("ZoomInOut");
         yield return new WaitForSeconds(waitTime);
-        gotGame?.Invoke(chosen[index]);
         leaderboard.SetActive(true);
         threeMinigames[index].GetComponent<Animator>().enabled = false;
         threeMinigames[index].transform.localScale = Vector3.one;
         gameObject.SetActive(false);
+        gotGame?.Invoke(chosen[index]);
     }
    
 }

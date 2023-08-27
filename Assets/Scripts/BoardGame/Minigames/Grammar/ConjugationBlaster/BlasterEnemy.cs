@@ -18,6 +18,7 @@ public class BlasterEnemy : MonoBehaviour
     }
 
     public void StopEnemy() {
+        rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
     }
 

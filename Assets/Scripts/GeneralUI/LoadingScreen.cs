@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class LoadingScreen : MonoBehaviour
 {
+    private Sprite[] loadingImages;
     public GameObject screen;
     public Image loadingBarFill;
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
+        loadingImages = Resources.LoadAll<Sprite>("Images/loadingScreens/");
         BoardSpace.TriggerLoad += LoadScene;
         BoardSpace.TriggerUnload += UnloadScene;
     }
@@ -22,9 +25,11 @@ public class LoadingScreen : MonoBehaviour
     IEnumerator LoadSceneAsync(string sceneName, bool additive)
     {
         loadingBarFill.fillAmount = 0;
+        screen.GetComponent<Image>().sprite = loadingImages[Random.Range(0, loadingImages.Length)];
         screen.SetActive(true);
         LoadSceneMode mode = additive ? LoadSceneMode.Additive : LoadSceneMode.Single;
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, mode);
+        op.completed += Bruh;
         while (!op.isDone)
         {
             float progressValue = Mathf.Clamp01(op.progress / 0.9f);
@@ -33,8 +38,12 @@ public class LoadingScreen : MonoBehaviour
 
             yield return null;
         }
-        screen.SetActive(false);
         //SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
+    }
+
+    public void Bruh(AsyncOperation op) {
+        screen.SetActive(false);
+
     }
 
     public void UnloadScene(int index, bool triggerBoard) {
