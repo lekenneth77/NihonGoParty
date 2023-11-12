@@ -13,7 +13,6 @@ public class TitleScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         if (skipStart) { 
             StartCoroutine("DoScreens");
         }
@@ -50,12 +49,25 @@ public class TitleScreen : MonoBehaviour
         fadeoutScreen.gameObject.SetActive(false);
     }
 
-    public void LoadCredits() { 
+    public void LoadCredits() {
+        //Color col = fadeoutScreen.color;
+        //col.a = 0f;
+        //fadeoutScreen.color = col;
 
+        //fadeoutScreen.gameObject.SetActive(true);
+        //while (fadeoutScreen.color.a < 1f)
+        //{
+        //    Color tmp = fadeoutScreen.color;
+        //    float fadeAmt = tmp.a + (1 * Time.deltaTime);
+        //    tmp.a = fadeAmt;
+        //    fadeoutScreen.color = tmp;
+        //    yield return null;
+        //}
+        SceneManager.LoadSceneAsync("Credits");
     }
 
-    public void StartPlay() { 
-
+    public void StartPlay() {
+        SceneManager.LoadSceneAsync("Multiplayer Setup");
     }
 
 }

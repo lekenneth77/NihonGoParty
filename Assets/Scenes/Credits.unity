@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -166,7 +166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2731.0098}
+  m_AnchoredPosition: {x: 0, y: 3037.3086}
   m_SizeDelta: {x: 0, y: 10709.456}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &78725192
@@ -1444,10 +1444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Sound Effects
-
-
-    Music'
+  m_text: In Development
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
   m_sharedMaterial: {fileID: 1756495071460396668, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
@@ -1719,10 +1716,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Kenneth Le
-
-
-    Somewhere'
+  m_text: Kenneth Le
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
   m_sharedMaterial: {fileID: 1756495071460396668, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
@@ -3062,7 +3056,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 372212842}
   m_HandleRect: {fileID: 372212841}
   m_Direction: 2
-  m_Value: 0.71639
+  m_Value: 0.6845815
   m_Size: 0.100845456
   m_NumberOfSteps: 0
   m_OnValueChanged:

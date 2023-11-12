@@ -183,7 +183,7 @@ public class MultiplayerSetup : MonoBehaviour
     public void GoToTitleScreen() {
         //set up a flag 
         TitleScreen.skipStart = true;
-        SceneManager.LoadSceneAsync("TitleScreen");
+        SceneManager.LoadSceneAsync("Title Screen");
     }
 
     public void GoToDebugger() {

@@ -5,6 +5,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 {
@@ -457,6 +458,10 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             //TODO might be a bug if the loser is on the starting platform!
             StartCoroutine(MovePlayer(loser, 3, false, false));
         }
+    }
+
+    public void GoBackToTitle() {
+        SceneManager.LoadSceneAsync("Title Screen");
     }
 
     public void OnToggleFreelook(InputAction.CallbackContext context)
