@@ -18,6 +18,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     public GameObject finishImage;
     public GameObject failImage;
     private int numPlayers;
+    public GameObject Instructions;
 
     public PlayableDirector[] directors;
 
@@ -49,7 +50,6 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
                 players[0].jumper = characterModels[BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex];
             }
 
-
         } else { //multiplayer!
             if (BoardController.players == null) {
                 numPlayers = 4;
@@ -80,6 +80,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     public void SetupCameras(PlayableDirector dir) { 
         if (numPlayers == 1) {
             timer.gameObject.SetActive(true);
+            Instructions.SetActive(true);
             playerCameras[0].rect = new Rect(0, 0, 1, 1);
         } else if (numPlayers == 2) {
             playerCameras[0].rect = new Rect(0, 0, 0.5f, 1);

@@ -18,7 +18,6 @@
 留守番電話,るすばんでんわ,answering machine
 銀行員,ぎんこういん,bank employee
 御卒業,ごそつぎょう,your/their graduation
-結婚式,けっこんしき,marriage ceremony
 東京駅,とうきょうえき,Tokyo station
 国内旅行,こくないりょこう,domestic travel
 四番目,よんばんめ,Fourth

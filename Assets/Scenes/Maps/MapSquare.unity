@@ -407,7 +407,7 @@ PrefabInstance:
       objectReference: {fileID: 653114086}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: duelImg
@@ -1261,6 +1261,8 @@ PlayableDirector:
     value: {fileID: 595746822}
   - key: {fileID: 132106611648259776, guid: 49e80fb17bd6f5a4a920dd455069a605, type: 2}
     value: {fileID: 595746821}
+  - key: {fileID: -7047223949422641482, guid: 49e80fb17bd6f5a4a920dd455069a605, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &284136397
@@ -3133,7 +3135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: vocab
   chosenPath: {fileID: 0}
-  nextWP: {fileID: 0}
+  nextWP: {fileID: 673898103}
   prevWP: {fileID: 290816484}
   category: VOCAB
   selector: {fileID: 1902019110}
@@ -4522,7 +4524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
       propertyPath: changeToThis
-      value: grammar
+      value: MULTI
       objectReference: {fileID: 0}
     - target: {fileID: 949367468555996489, guid: a268a0c8693ec814eb090cb56ea427f4, type: 3}
       propertyPath: spawnPoint.x
@@ -5778,7 +5780,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9fa78b0e0050b824b9fd01ca6a06f6c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40a23092e7621fa4681c10781e8edea0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5816,11 +5818,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14544eb0226c7a04fb10cd3211037b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeName: grammar
+  typeName: duel
   chosenPath: {fileID: 0}
   nextWP: {fileID: 19378924}
   prevWP: {fileID: 847296538}
-  category: GRAMMAR
+  category: DUEL
   selector: {fileID: 1902019110}
 --- !u!1001 &1957539717
 PrefabInstance:
@@ -6210,9 +6212,45 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5509060324045803743, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9433808
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324045803743, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.59371144
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324045803743, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.7212
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324045803743, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324045803743, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.37538
+      objectReference: {fileID: 0}
     - target: {fileID: 5509060324080163721, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324189017521, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.0206125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324189017521, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.83375573
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324189017521, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.68026
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324189017521, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.21901
       objectReference: {fileID: 0}
     - target: {fileID: 5509060324189017527, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
       propertyPath: m_CastShadows
@@ -6277,6 +6315,22 @@ PrefabInstance:
     - target: {fileID: 5509060324637289552, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324637289554, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1040237
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324637289554, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4759513
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324637289554, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.91886
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509060324637289554, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.93273
       objectReference: {fileID: 0}
     - target: {fileID: 5509060324935992885, guid: a3fd088d3e2e755469acd2a163578804, type: 3}
       propertyPath: m_IsActive

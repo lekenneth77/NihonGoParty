@@ -36,7 +36,7 @@ public class KatakanaScramble : Minigame
     List<GameObject> interactables;
     static int count_selected;
     int rounds_completed = 0;
-    int max_rounds = 4;
+    int max_rounds = 2;
     float timeLimit = 45f;
     int num_hints = 10;
     static bool disable_hints;

@@ -3509,7 +3509,7 @@ MonoBehaviour:
   timer: {fileID: 865531026}
   roundText: {fileID: 1551594637}
   finalText: {fileID: 1214117898}
-  totalRounds: 3
+  totalRounds: 2
 --- !u!4 &1901063811
 Transform:
   m_ObjectHideFlags: 0

@@ -17,6 +17,8 @@ public class AppleDrop : Minigame
     public Timer setupTimer;
     public int totalRounds;
 
+    public GameObject InstructionsBox;
+
     public TextMeshProUGUI rowToFindTxt;
     private string katakanas;
     private string[] solutions;
@@ -85,11 +87,14 @@ public class AppleDrop : Minigame
         rowToFindTxt.text = splitted[0] + "-row";
         currentSolution = splitted[1];
         rowToFindTxt.transform.parent.gameObject.SetActive(true);
+        InstructionsBox.SetActive(false);
+        InstructionsBox.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = splitted[0] + "-row";
         setupTimer.StartTimer();
     }
 
     public void StartRound() {
         rowToFindTxt.transform.parent.gameObject.SetActive(false);
+        InstructionsBox.SetActive(true);
         player.controls.AppleDrop.Enable();
         StartCoroutine("GenerateApples");
     }
@@ -109,7 +114,7 @@ public class AppleDrop : Minigame
             yield return new WaitForSeconds(0.25f);
         }
         yield return new WaitForSeconds(2.5f);
-        for (int i = 0; i < Random.Range(20, 30); i++) {
+        for (int i = 0; i < Random.Range(10, 15); i++) {
             for (int j = 0; j < Random.Range(1, 4); j++) {
                 string s = katakanas[Random.Range(0, katakanas.Length)] + "";
                 if (currentSolution.Contains(s)) { currentCorrectSpawned++; }
@@ -119,6 +124,7 @@ public class AppleDrop : Minigame
             yield return new WaitForSeconds(Random.Range(0.1f, 1.5f));
         }
         yield return new WaitForSeconds(5f);
+        InstructionsBox.SetActive(false);
         StartCoroutine(DisplayResult());
     }
 
@@ -159,7 +165,7 @@ public class AppleDrop : Minigame
             if (position.x > 1580f) {
                 position = new Vector3(startingUIApple.position.x, position.y - 125f, position.z);
             }
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.15f);
         }
 
         yield return new WaitForSeconds(2f);

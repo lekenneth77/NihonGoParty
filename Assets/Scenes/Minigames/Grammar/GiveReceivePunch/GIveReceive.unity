@@ -1755,6 +1755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.2
+  horizontal: 0
 --- !u!1 &863255936
 GameObject:
   m_ObjectHideFlags: 0
@@ -5681,8 +5682,8 @@ MonoBehaviour:
   cmdList: {fileID: 1618719084}
   midTextBox: {fileID: 2019206771}
   playerAttk: {fileID: 1201366541}
-  maxRound: 5
-  maxHP: 3
+  maxRound: 4
+  maxHP: 2
   enemyAttk: {fileID: 27519458}
   leftEnemyButton: {fileID: 613743246}
   rightEnemyButton: {fileID: 576838540}

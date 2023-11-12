@@ -135,15 +135,16 @@ public class MultiplayerSetup : MonoBehaviour
 
     public void RotateSphere(bool left)
     {
-        int direction = left ? -1 : 1;
-        if (left)
-        {
-            currentMapI = (currentMapI - 1) < 0 ? numMaps - 1: currentMapI - 1;
-        } else
-        {
-            currentMapI = (currentMapI + 1) >= numMaps ? 0 : currentMapI + 1;
-        }
-        daSphere.Rotate(180f, "y");
+        return;
+        //int direction = left ? -1 : 1;
+        //if (left)
+        //{
+        //    currentMapI = (currentMapI - 1) < 0 ? numMaps - 1: currentMapI - 1;
+        //} else
+        //{
+        //    currentMapI = (currentMapI + 1) >= numMaps ? 0 : currentMapI + 1;
+        //}
+        //daSphere.Rotate(180f, "y");
     } 
 
     public void ZoomInSphere()

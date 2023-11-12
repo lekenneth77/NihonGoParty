@@ -164,7 +164,7 @@ public class GiveReceive : Minigame
         }
         enemy.GetComponent<Animator>().Play("idle");
         enemyHits++;
-        for (float j = 1f - (.34f * (enemyHits - 1)); j >= 1f - (.34f * enemyHits); j -= 0.01f) {
+        for (float j = 1f - (.5f * (enemyHits - 1)); j >= 1f - (.5f * enemyHits); j -= 0.01f) {
             enemyHP.fillAmount = j;
             yield return new WaitForSeconds(0.01f);
         }
@@ -362,7 +362,7 @@ public class GiveReceive : Minigame
         player.GetComponent<Animator>().Play("idle");
 
         playerHits++;
-        for (float j = 1f - (.34f * (playerHits - 1)); j >= 1f - (.34f * playerHits); j -= 0.01f) {
+        for (float j = 1f - (.5f * (playerHits - 1)); j >= 1f - (.5f * playerHits); j -= 0.01f) {
             playerHP.fillAmount = j;
             yield return new WaitForSeconds(0.01f);
         }

@@ -21,6 +21,8 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     public GameObject failureImg;
     public Timer timer;
     public static Timer ductTapeTimer;
+    public GameObject instructionsP1;
+    public GameObject instructionsP2;
 
     //final screen
     public Image whiteScreen;
@@ -52,7 +54,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
 
         //singleplayer = true;
 
-        
+
         if (singleplayer) {
             int characterI = 0;
             if (BoardController.players != null) { 
@@ -107,6 +109,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
             timer.gameObject.SetActive(true);
             timer.TimeUp += Timeout;
             p1Cave.gameObject.SetActive(true);
+            instructionsP1.SetActive(true);
         } else {
             playerCams[0].rect = new Rect(0, 0, 0.5f, 1);
             playerCams[1].rect = new Rect(0.5f, 0, 0.5f, 1);
@@ -118,6 +121,8 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
             p2Cave.followCam.gameObject.SetActive(true);
             p2Cave.endMove += P2NewCaveReached;
             p2Cave.reachedFinish += P2Done;
+            instructionsP1.SetActive(true);
+            instructionsP2.SetActive(true);
         }
         p1Cave.endMove += P1NewCaveReached;
         p1Cave.reachedFinish += P1Done;
@@ -154,6 +159,7 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
     }
 
     private IEnumerator FinalCutscene(bool p1) {
+
         Cave winner;
         if (p1) {
             winner = p1Cave;
@@ -170,6 +176,8 @@ public class TunnelRunner : Minigame, Controls.ITunnelRunnerActions
         }
         lighting.SetActive(true);
         finalCam.SetActive(true);
+        instructionsP1.SetActive(false);
+        instructionsP2.SetActive(false);
         winner.player.gameObject.transform.position = finalWP.position;
         winner.player.gameObject.transform.eulerAngles = new Vector3(0, 270f, 0);
         winner.player.transform.GetChild(1).gameObject.SetActive(false);
