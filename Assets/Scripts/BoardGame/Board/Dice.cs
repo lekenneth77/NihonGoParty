@@ -74,11 +74,10 @@ public class Dice : MonoBehaviour, Controls.IDiceActions
         {
             roll = UnityEngine.Random.Range(0, 6) + 1;
             spriteRenderer.sprite = sprites[roll - 1];
-            tillAllowEnd += Time.deltaTime;
+            tillAllowEnd += Time.fixedDeltaTime;
             allowEnd = tillAllowEnd > 0.1f;
             yield return new WaitForSeconds(0.075f);
         }
-
     }
 
     private void EndRoll()
