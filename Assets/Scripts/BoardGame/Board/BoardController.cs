@@ -461,6 +461,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
     }
 
     public void GoBackToTitle() {
+        TitleScreen.skipStart = true;
         SceneManager.LoadSceneAsync("Title Screen");
     }
 

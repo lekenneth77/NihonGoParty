@@ -168,14 +168,14 @@ public class KanjiFishing : Minigame
     private IEnumerator HandleCorrect() {
         correct.gameObject.SetActive(true);
         answerBox.SetActive(true);
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7f);
         correct.gameObject.SetActive(false);
         answerBox.SetActive(false);
 
         if (numRounds == 2) {
             if (numCorrect == 0) { numCorrect = -1; }
             finish.SetActive(true);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
             EndGame(numCorrect);
         } else {
             StartCoroutine("SetupRound");
@@ -185,14 +185,14 @@ public class KanjiFishing : Minigame
     private IEnumerator HandleWrong() {
         wrong.gameObject.SetActive(true);
         answerBox.SetActive(true);
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7f);
         wrong.gameObject.SetActive(false);
         answerBox.SetActive(false);
 
         if (numRounds == 2) {
             if (numCorrect == 0) { numCorrect = -1; }
             finish.SetActive(true);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
             EndGame(numCorrect);
         } else { 
             StartCoroutine("SetupRound");

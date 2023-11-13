@@ -13,7 +13,9 @@ public class TitleScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (skipStart) { 
+        if (skipStart) {
+            fadeoutScreen.gameObject.SetActive(false);
+        } else {
             StartCoroutine("DoScreens");
         }
     }
@@ -26,15 +28,15 @@ public class TitleScreen : MonoBehaviour
                 Color col = img.color;
                 col.a = i;
                 img.color = col;
-                yield return new WaitForSeconds(0.025f);
+                yield return new WaitForSeconds(0.01f);
             }
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             for (float i = 1f; i >= 0f; i -= 0.01f) { 
                 Color col = img.color;
                 col.a = i;
                 img.color = col;
-                yield return new WaitForSeconds(0.025f);
+                yield return new WaitForSeconds(0.01f);
             }
             img.gameObject.SetActive(false);
         }
@@ -44,7 +46,7 @@ public class TitleScreen : MonoBehaviour
                 Color col = fadeoutScreen.color;
                 col.a = i;
                 fadeoutScreen.color = col;
-                yield return new WaitForSeconds(0.025f);
+                yield return new WaitForSeconds(0.015f);
         }
         fadeoutScreen.gameObject.SetActive(false);
     }
@@ -63,10 +65,13 @@ public class TitleScreen : MonoBehaviour
         //    fadeoutScreen.color = tmp;
         //    yield return null;
         //}
+        skipStart = true;
         SceneManager.LoadSceneAsync("Credits");
     }
 
+
     public void StartPlay() {
+        skipStart = true;
         SceneManager.LoadSceneAsync("Multiplayer Setup");
     }
 

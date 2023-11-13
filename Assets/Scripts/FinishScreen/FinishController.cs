@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class FinishController : MonoBehaviour
 {
@@ -78,6 +79,11 @@ public class FinishController : MonoBehaviour
 
     public void AfterCutscene(PlayableDirector unused) {
         StartCoroutine("Celebration");
+    }
+
+    public void GoToTitle() {
+        TitleScreen.skipStart = true;
+        SceneManager.LoadSceneAsync("Title Screen");
     }
 
     private IEnumerator Celebration() {
