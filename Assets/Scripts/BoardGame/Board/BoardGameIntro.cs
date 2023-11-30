@@ -168,6 +168,7 @@ public class BoardGameIntro : MonoBehaviour
         {
             //players[i].GetComponent<PlayerInfo>().dice.gameObject.SetActive(false);
             temp[i] = (UnityEngine.GameObject)playerOrder.GetByIndex(numPlayers - (i + 1));
+            temp[i].GetComponent<PlayerInfo>().currentOrder = i;
         }
 
         lb.SetRankings(temp);

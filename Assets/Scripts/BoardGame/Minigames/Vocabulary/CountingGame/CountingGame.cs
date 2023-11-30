@@ -207,7 +207,8 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         yield return new WaitForSeconds(5f);
         finished.SetActive(false);
         Debug.Log("Winner Index: " + gamer);
-        EndMultiplayerGame(gamer);
+        EndMultiplayerGame(BoardController.originalOrderPlayers[gamer].GetComponent<PlayerInfo>().currentOrder);
+        //EndMultiplayerGame(gamer);
     }
 
     public GameObject CreateRunner(float runSpeed, string text) {
