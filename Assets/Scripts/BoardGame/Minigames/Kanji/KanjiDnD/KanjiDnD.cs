@@ -195,8 +195,9 @@ public class KanjiDnD : Minigame
         }
         yield return new WaitForSeconds(0.75f);
         resultDialogue.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        exit.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        FinalResult();
+        //exit.SetActive(true);
     }
 
     public void CheckAnswer() {

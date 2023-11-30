@@ -4446,7 +4446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3042227715830296273, guid: b96080fb9d569184a9c1983303836f27, type: 3}
       propertyPath: debugRoll
-      value: 30
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3042227715830296275, guid: b96080fb9d569184a9c1983303836f27, type: 3}
       propertyPath: m_CastShadows

@@ -18,6 +18,7 @@ public class TitleScreen : MonoBehaviour
         } else {
             StartCoroutine("DoScreens");
         }
+        Time.timeScale = 1f;
     }
 
     public IEnumerator DoScreens() {
