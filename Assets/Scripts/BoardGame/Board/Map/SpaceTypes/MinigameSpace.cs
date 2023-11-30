@@ -12,14 +12,14 @@ public class MinigameSpace : BoardSpace
     public MinigameSelector selector;
     private int categoryIndex;
     private string[] KatakanaGames = { "KatakanaScramble", "KatakanaSearch", "AppleDrop" };
-    private string[] GrammarGames = { "WordOrder2", "SpeedType", "GiveReceive", "ConjugationBlaster" };// particles please
+    private string[] GrammarGames = { "WordOrder2", "GiveReceive", "ConjugationBlaster" };// particles please
     private string[] KanjiGames = { "KanjiCrossRotate", "KanjiDnD", "KanjiFishing" };
     private string[] VocabGames = { "TreeHop", "TunnelRunner", "VocabHunt" };
     private string[] DuelGames = { "KanjiCrossRotate", "KataSpeedType", "TunnelRunner" };
     private string[] MultiplayerGames = { "TreeHop", "QuizGame", "CountingGame", "LocationSeeker", "EeveeGame" };
 
     private string[] KatakanaNames = { "Katakana Scramble", "Katakana Search", "Go Ringo Go"};
-    private string[] GrammarNames = { "Word Order", "Speed Type", "Receive Punch Give", "Space Protector" };
+    private string[] GrammarNames = { "Word Order", "Receive Punch Give", "Space Protector" };
     private string[] KanjiNames = { "Kanji Cross Rotate", "Kanji Bakery", "Hook Them" };
     private string[] VocabNames = { "Head in the Clouds", "Tunnel Runner", "Made in Paint" };
     private string[] DuelNames = { "Kanji Cross Rotate", "Type Fight", "Tunnel Runner" };
@@ -93,7 +93,7 @@ public class MinigameSpace : BoardSpace
         startedLoad?.Invoke();
         string game = gamesToChooseFrom[i];
         //Minigame.singleplayer = false;
-        game = "KatakanaScramble";
+        game = "KanjiCrossRotate";
         InvokeLoad("HTP" + game, true);
     }
 

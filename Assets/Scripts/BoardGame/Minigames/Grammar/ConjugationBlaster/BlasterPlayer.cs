@@ -63,7 +63,7 @@ public class BlasterPlayer : Minigame, Controls.IConjBlasterActions
 
     private IEnumerator Round() {
         yield return new WaitForSeconds(3f);
-        for (int i = 0; i < Random.Range(50, 65); i++) {
+        for (int i = 0; i < Random.Range(12, 20); i++) {
             int whichType = Random.Range(0, 3);
             List<string> curList = words[whichType];
             string word = curList[Random.Range(0, curList.Count)];
