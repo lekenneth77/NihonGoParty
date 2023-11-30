@@ -149,7 +149,7 @@ public class BoardGameIntro : MonoBehaviour
             int roll = currentDice.GetRoll();
             if (illegalNums.IndexOf(roll) != -1) //no more rerolls
             {
-                Debug.Log("Duplicate!");
+                //Debug.Log("Duplicate!");
                 while (illegalNums.IndexOf(roll) != -1)
                 {
                     roll = UnityEngine.Random.Range(0, 6) + 1;
