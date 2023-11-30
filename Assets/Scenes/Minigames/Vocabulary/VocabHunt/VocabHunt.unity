@@ -3141,7 +3141,7 @@ Transform:
   m_GameObject: {fileID: 695121042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 198624151}
@@ -5339,7 +5339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1152584275
 Transform:
   m_ObjectHideFlags: 0
@@ -5347,7 +5347,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152584274}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5356,7 +5356,7 @@ Transform:
   - {fileID: 572022147}
   m_Father: {fileID: 2084449312}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1152584276
 Animator:
   serializedVersion: 5
@@ -7929,6 +7929,12 @@ MonoBehaviour:
   - {fileID: 1152584279}
   - {fileID: 2037321382}
   - {fileID: 1939935778}
+  charSprites:
+  - {fileID: 21300000, guid: 826bdd69f8afc1e4b801b485a38ec8ba, type: 3}
+  - {fileID: 21300000, guid: edd85dd0b760399488fe52f7b9d3d021, type: 3}
+  - {fileID: 21300000, guid: a0cb02a5e70c833428f957ee0fe73075, type: 3}
+  - {fileID: 21300000, guid: 6adb27885d3ed484bbac9250c941d489, type: 3}
+  - {fileID: 21300000, guid: 5125c183be24d82429d98ddb4baeae0d, type: 3}
   followCam: {fileID: 451346846}
   textfile: {fileID: 4900000, guid: 7e3b58b1cae37184f883adebdb8b77e4, type: 3}
   timer: {fileID: 1647595435}
@@ -8050,7 +8056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1782242311
 Transform:
   m_ObjectHideFlags: 0
@@ -8058,7 +8064,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782242310}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8067,7 +8073,7 @@ Transform:
   - {fileID: 1924869886}
   m_Father: {fileID: 2084449312}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1782242312
 Animator:
   serializedVersion: 5
@@ -9076,7 +9082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1939935774
 Transform:
   m_ObjectHideFlags: 0
@@ -9084,7 +9090,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939935773}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9093,7 +9099,7 @@ Transform:
   - {fileID: 1268454001}
   m_Father: {fileID: 2084449312}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1939935775
 Animator:
   serializedVersion: 5
@@ -9544,7 +9550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2037321378
 Transform:
   m_ObjectHideFlags: 0
@@ -9552,7 +9558,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037321377}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9561,7 +9567,7 @@ Transform:
   - {fileID: 1116937419}
   m_Father: {fileID: 2084449312}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2037321379
 Animator:
   serializedVersion: 5

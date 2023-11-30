@@ -46,6 +46,9 @@ public class VocabHunt : Minigame
         for (int i = 0; i < characters.Length; i++) { 
             if (i != charIndex) {
                 characters[i].gameObject.SetActive(false);
+            } else
+            {
+                characters[i].gameObject.SetActive(true);
             }
         }
         player = characters[charIndex];

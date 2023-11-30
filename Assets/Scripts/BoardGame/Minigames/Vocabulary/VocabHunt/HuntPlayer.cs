@@ -25,7 +25,13 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
     }
 
     public void EnableControls() {
-        controls.VocabHunt.Enable();
+        if (controls != null) { 
+            controls.VocabHunt.Enable();
+        } else {
+            controls = new Controls();
+            controls.VocabHunt.AddCallbacks(this);
+            controls.VocabHunt.Enable();
+        }
     }
 
     public void DisableControls() {
@@ -67,6 +73,7 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
         //enter the banana
         collision.isTrigger = false;
         controls.VocabHunt.Disable();
+        controls.Disable();
         GetComponent<Animator>().Play("Fall");
         StartCoroutine(Bananaed(collision.gameObject));
     }
@@ -77,6 +84,7 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
         GetComponent<Animator>().Play("Idle");
         obj.SetActive(false);
         controls.VocabHunt.Enable();
+        controls.Enable();
     }
 
     public void OnMovement(InputAction.CallbackContext context)
