@@ -93,7 +93,7 @@ public class MinigameSpace : BoardSpace
         startedLoad?.Invoke();
         string game = gamesToChooseFrom[i];
         //Minigame.singleplayer = false;
-        //game = "CountingGame";
+        game = "KatakanaScramble";
         InvokeLoad("HTP" + game, true);
     }
 

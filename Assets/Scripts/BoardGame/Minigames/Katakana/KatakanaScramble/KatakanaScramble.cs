@@ -366,7 +366,7 @@ public class KatakanaScramble : Minigame
         correct_img.SetActive(false);
         failure_img.SetActive(false);
         GameObject.Find("RoundContainer").SetActive(false);
-        congrats_con.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "You did it! ";
+        congrats_con.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "You did it! ";
         congrats_con.SetActive(true);
     }
     
