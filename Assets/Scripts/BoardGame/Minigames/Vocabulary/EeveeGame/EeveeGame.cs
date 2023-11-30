@@ -195,7 +195,7 @@ public class EeveeGame : Minigame, Controls.IQuizGameActions
             Debug.Log("Done!");
             finish.SetActive(true);
             yield return new WaitForSeconds(5f);
-            EndMultiplayerGame(i);
+            EndMultiplayerGame(BoardController.originalOrderPlayers[i].GetComponent<PlayerInfo>().currentOrder);
         } else { 
             ResetRound();
         }

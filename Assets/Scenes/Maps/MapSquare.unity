@@ -407,7 +407,7 @@ PrefabInstance:
       objectReference: {fileID: 653114086}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380778433534921531, guid: 99dbf26bcd2afdc40b1ef13eb993259f, type: 3}
       propertyPath: duelImg
@@ -2967,7 +2967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2102922005471856823, guid: 117fd486d051b0c4e874284e8f0ba553, type: 3}
       propertyPath: debugRoll
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2102922005656520667, guid: 117fd486d051b0c4e874284e8f0ba553, type: 3}
       propertyPath: movementSpeed
@@ -4522,7 +4522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3042227715830296273, guid: b96080fb9d569184a9c1983303836f27, type: 3}
       propertyPath: debugRoll
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3042227715830296275, guid: b96080fb9d569184a9c1983303836f27, type: 3}
       propertyPath: m_CastShadows

@@ -232,7 +232,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         miloCam.SetActive(true);
         milo.GetComponent<Animator>().Play("miloQuizAway");
         yield return new WaitForSeconds(5f);
-        EndMultiplayerGame(currentPlayerI);
+        EndMultiplayerGame(BoardController.originalOrderPlayers[currentPlayerI].GetComponent<PlayerInfo>().currentOrder);
     }
 
     private void LetThemAnswer(int playerI) {

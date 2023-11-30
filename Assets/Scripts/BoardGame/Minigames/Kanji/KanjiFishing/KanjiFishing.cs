@@ -87,7 +87,7 @@ public class KanjiFishing : Minigame
         string[] problem = kanjis[random].Split(",");
         currentKanjiText.text = problem[0];
         theAnswer = problem[1];
-        Debug.Log(problem[0] + " " + problem[1]);
+        //Debug.Log(problem[0] + " " + problem[1]);
         HashSet<int> randomPositions = new HashSet<int>();
         //correct spawns
         for (int i = 0; i < problem[1].Length; i++) {
@@ -136,7 +136,7 @@ public class KanjiFishing : Minigame
 
         for (int i = 0; i < theAnswer.Length; i++) { 
             if (!build.Contains(theAnswer[i])) {
-                Debug.Log("Wrong!");
+                //Debug.Log("Wrong!");
                 wrong = true;
                 break;
             }
@@ -146,7 +146,7 @@ public class KanjiFishing : Minigame
         {
             if (!theAnswer.Contains(build[i]))
             {
-                Debug.Log("Wrong!");
+                //Debug.Log("Wrong!");
                 wrong = true;
                 break;
             }
