@@ -19,7 +19,11 @@ public class TitleScreen : MonoBehaviour
             StartCoroutine("DoScreens");
         }
         Time.timeScale = 1f;
-    }
+
+        BoardController.numPlayers = 0;
+        BoardController.wonMinigame = false;
+        BoardController.minigameResult = 0;
+}
 
     public IEnumerator DoScreens() {
         yield return new WaitForSeconds(2f);

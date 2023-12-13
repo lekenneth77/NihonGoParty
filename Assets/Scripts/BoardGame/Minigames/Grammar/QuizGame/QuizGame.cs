@@ -58,6 +58,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
             for (int i = 0; i < numPlayers; i++) {
                 int characterI = players[i].GetComponent<PlayerInfo>().characterIndex;
                 characters[characterI].transform.position = new Vector3(initialPlayerPosX[i], 0, -1f);
+                characters[characterI].SetActive(true);
             }
         }
 
@@ -232,7 +233,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         miloCam.SetActive(true);
         milo.GetComponent<Animator>().Play("miloQuizAway");
         yield return new WaitForSeconds(5f);
-        EndMultiplayerGame(BoardController.originalOrderPlayers[currentPlayerI].GetComponent<PlayerInfo>().currentOrder);
+        EndMultiplayerGame(currentPlayerI);
     }
 
     private void LetThemAnswer(int playerI) {

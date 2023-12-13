@@ -387,7 +387,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             {
                 //TODO be more creative with this at some point...!!! maybe use the spinner?
                 multiOn = false;
-                StartCoroutine(MovePlayer(players[minigameResult], 4, true, false));
+                StartCoroutine(MovePlayer(originalOrderPlayers[minigameResult], 4, true, false));
                 return;
             }
             if (duelOn)
