@@ -6,15 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class LoadingScreen : MonoBehaviour
 {
+    public static LoadingScreen Instance;
     private Sprite[] loadingImages;
     public GameObject screen;
     public Image loadingBarFill;
-    void Start()
+
+
+    void Awake()
     {
+        if (Instance != null && Instance != this)  {
+            Destroy(this);
+            return;
+        } else  { 
+            Instance = this;
+        }
+
         DontDestroyOnLoad(gameObject);
         loadingImages = Resources.LoadAll<Sprite>("Images/loadingScreens/");
         BoardSpace.TriggerLoad += LoadScene;
         BoardSpace.TriggerUnload += UnloadScene;
+    }
+
+    private void OnDestroy() {
+        BoardSpace.TriggerLoad -= LoadScene;
+        BoardSpace.TriggerUnload -= UnloadScene;
     }
 
     public void LoadScene(string sceneName, bool additive)
@@ -51,6 +66,9 @@ public class LoadingScreen : MonoBehaviour
     }
 
     IEnumerator UnloadSceneAsync(int index, bool triggerBoard) {
+        if (SceneManager.sceneCount <= index) {
+            yield break;
+        }
         loadingBarFill.fillAmount = 0;
         screen.SetActive(true);
         AsyncOperation op = SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(index));

@@ -24,7 +24,6 @@ public abstract class Minigame : MonoBehaviour
     public void EndGame(int result)
     {
         if (!practice) {
-            Debug.Log("Final Results:" + result);
             BoardController.minigameResult = result;
             if (debug) {
                 SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));

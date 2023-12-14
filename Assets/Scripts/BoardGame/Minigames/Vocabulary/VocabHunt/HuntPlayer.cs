@@ -24,6 +24,11 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
         controls.VocabHunt.AddCallbacks(this);
     }
 
+    private void OnDestroy()
+    {
+ 
+    }
+
     public void EnableControls() {
         if (controls != null) { 
             controls.VocabHunt.Enable();
@@ -36,6 +41,10 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
 
     public void DisableControls() {
         controls.VocabHunt.Disable();
+    }
+
+    public void DisposeControls() {
+        controls.Dispose();
     }
 
     public void SwapToSad() {
@@ -94,7 +103,10 @@ public class HuntPlayer : MonoBehaviour, Controls.IVocabHuntActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (!gameObject) { return; }
         if (!context.performed || !exclamation.activeInHierarchy) { return; }
-        interacted?.Invoke(mostRecentInter.GetComponent<VocabObject>().id);
+        if (mostRecentInter && mostRecentInter.GetComponent<VocabObject>()) { 
+            interacted?.Invoke(mostRecentInter.GetComponent<VocabObject>().id);
+        }
     }
 }

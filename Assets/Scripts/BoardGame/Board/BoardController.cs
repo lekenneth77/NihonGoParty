@@ -114,9 +114,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             }
         }
 
-
         //numPlayers = 4;
-
 
         FinishController.tempResults = players;
         leaderboard.SetNumPlayers(numPlayers);
@@ -136,6 +134,15 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
             introSeq.LetsStart();
         }
         //*/
+    }
+
+    private void OnDestroy()
+    {
+        controls.Dispose();
+        Dice.OnDiceFinish -= SubscribeMovePlayer;
+        BoardSpace.ActionFinish -= AfterSpaceAction;
+        spinner.OnSpinFinish -= ChooseDuelPlayers;
+        MinigameSpace.startedLoad -= BeforeMinigameLoad;
     }
 
     //Called once at the start
@@ -218,6 +225,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         BoardSpace currentSpace = infoObj.currentSpace;
         currentSpace?.RemovePlayer();
         rollCountdown.SetActive(true);
+        bool endGame = false;
 
         if (forward)
         {
@@ -285,6 +293,7 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
 
             infoObj.currentSpace = nextSpace; //nextWP if forward, prevWP if backwards.
             if (nextSpace is FinishSpace) {
+                endGame = true;
                 break; 
             }
         }
@@ -294,6 +303,11 @@ public class BoardController : MonoBehaviour, Controls.IBoardControllerActions
         yield return new WaitForSeconds(2f);
         rollCountdown.SetActive(false);
         infoObj.currentSpace.AddPlayer(player);
+
+        if (endGame) {
+            SpaceAction();
+            yield break ;
+        }
 
         //don't think you need the second conditional???
         if (triggerAction || infoObj.currentSpace is FinishSpace)

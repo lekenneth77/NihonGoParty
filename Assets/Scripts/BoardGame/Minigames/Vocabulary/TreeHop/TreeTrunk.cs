@@ -78,7 +78,6 @@ public class TreeTrunk : MonoBehaviour
             currentDepth++;
             if (currentDepth == maxDepth)
             {
-                Debug.Log("Finished!");
                 StartCoroutine("MoveCamera");
                 return 1;
             } else

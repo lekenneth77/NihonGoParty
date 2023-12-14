@@ -135,7 +135,6 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         while (!chosen.Add(random)) {
             random = Random.Range(0, problems.Length);
         }
-        Debug.Log(random);
         string[] split = problems[random].Split("_"[0]);
         question.text = "";
         string dialogue = split[0];
@@ -150,7 +149,6 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
 
         string[] answers = split[1].Split(","[0]);
         correctAnswerChoice = Random.Range(0, 4);
-        Debug.Log(correctAnswerChoice);
         answerChoices[correctAnswerChoice].text = answers[0];
         HashSet<int> randomChoices = new HashSet<int>();
         randomChoices.Add(correctAnswerChoice);
@@ -170,7 +168,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
     }
 
     public void ChooseAnswer(int i) {
-        if (!allowAnswer) { Debug.Log("Lol denied"); return; }
+        if (!allowAnswer) { return; }
         allowAnswer = false;
         timer.StopTimer();
         foreach (TextMeshProUGUI ac in answerChoices) {
@@ -178,16 +176,13 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         }
         numAnswered++;
         if (i - 1 == correctAnswerChoice) {
-            Debug.Log("Correct Answer!");
             StartCoroutine("CorrectAnswer");
         } else {
-            Debug.Log("Wrong Answer!");
             StartCoroutine(WrongAnswer(resultObjects[1]));
         }
     }
 
     public void Timeout() {
-        Debug.Log("Times up!");
         foreach (TextMeshProUGUI ac in answerChoices) {
             ac.transform.parent.GetComponent<Button>().enabled = false;
         }

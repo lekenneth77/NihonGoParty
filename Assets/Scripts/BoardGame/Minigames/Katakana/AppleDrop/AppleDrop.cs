@@ -179,7 +179,6 @@ public class AppleDrop : Minigame
         wrong.text = "Wrong: " + badOnes.Count;
         correct.gameObject.SetActive(true);
         wrong.gameObject.SetActive(true);
-        Debug.Log("Total Spawned: " + currentCorrectSpawned);
         if ((gottenApples.Count - badOnes.Count) >= currentCorrectSpawned * 0.4f) {
             wins++;
         }

@@ -58,6 +58,13 @@ public class VocabHunt : Minigame
         SetupGame();
     }
 
+    private void OnDestroy()
+    {
+        timer.TimeUp -= Timeout;
+        player.interacted -= CheckAnswer;
+        player.DisposeControls();
+    }
+
     private void SetupGame() {
         chosenIndices = new List<int>();
         chosenPositions = new HashSet<int>();
@@ -109,7 +116,6 @@ public class VocabHunt : Minigame
     public void CheckAnswer(int id) {
         player.DisableControls();
         if (id == currWordIndex) {
-            Debug.Log("Correct!");
             stars.Win();
             numCorrect++;
             if (numCorrect >= maxRounds) {
@@ -119,7 +125,6 @@ public class VocabHunt : Minigame
                 ChooseWord();
             }
         } else {
-            Debug.Log("False!");
             StartCoroutine("HandleWrong");
         }
 
@@ -133,7 +138,6 @@ public class VocabHunt : Minigame
     }
 
     private IEnumerator HandleFinish() {
-        Debug.Log("Done!");
         finishImg.SetActive(true);
         yield return new WaitForSeconds(5f);
         FinishThis();
@@ -145,7 +149,6 @@ public class VocabHunt : Minigame
     }
 
     private IEnumerator HandleTimeout() {
-        Debug.Log("timeout");
         timeoutImg.SetActive(true);
         yield return new WaitForSeconds(3f);
         timeoutImg.SetActive(false);

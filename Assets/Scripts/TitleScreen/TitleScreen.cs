@@ -20,10 +20,14 @@ public class TitleScreen : MonoBehaviour
         }
         Time.timeScale = 1f;
 
+        if (LoadingScreen.Instance) {
+            Destroy(LoadingScreen.Instance.gameObject);
+        }
+
         BoardController.numPlayers = 0;
         BoardController.wonMinigame = false;
         BoardController.minigameResult = 0;
-}
+    }
 
     public IEnumerator DoScreens() {
         yield return new WaitForSeconds(2f);

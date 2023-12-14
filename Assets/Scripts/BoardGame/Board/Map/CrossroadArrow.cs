@@ -14,7 +14,6 @@ public class CrossroadArrow : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("I chose alternate: " + altPath);
         altPathChosen = altPath;
         choseSomething = true;
     }

@@ -112,14 +112,12 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
         {
             if (typeStack.Count != 0)
             {
-                Debug.Log("Backspace!");
                 typeStack.Pop();
                 typing.text = typing.text.Substring(0, typeStack.Count);
             }
         }
         else
         {
-            Debug.Log(Input.inputString);
             if (Input.GetKeyDown("k"))
             {
                 typeStack.Push("k"); //WHAT HAPPENED TO MY K KEY
@@ -182,7 +180,6 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
 
     public void Timeout()
     {
-        Debug.Log("Times up!");
         loseTimer.StopTimer();
         controls.SpeedType.Disable();
         centerText.text = "";

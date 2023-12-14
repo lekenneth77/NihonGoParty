@@ -9179,8 +9179,8 @@ MonoBehaviour:
   - {fileID: 878098540}
   characters:
   - {fileID: 919132148157248569}
-  - {fileID: 7773514506414941673}
   - {fileID: 7465117073230793142}
+  - {fileID: 7773514506414941673}
   - {fileID: 919132149120468811}
   - {fileID: 1404540770}
   miloCam: {fileID: 1245590272}

@@ -43,6 +43,13 @@ public class BlasterPlayer : Minigame, Controls.IConjBlasterActions
         StartCoroutine("Round");
     }
 
+    private void OnDestroy()
+    {
+        Bullet.boom -= HandleBoom;
+        KillEnemy.enemyEnter -= LoseLife;
+        controls.Dispose();
+    }
+
     private void ChooseTexts() {
         HashSet<int> chosen = new HashSet<int>();
         for (int i = 0; i < 3; i++) {

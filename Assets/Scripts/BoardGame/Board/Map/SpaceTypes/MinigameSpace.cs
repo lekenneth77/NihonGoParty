@@ -80,7 +80,6 @@ public class MinigameSpace : BoardSpace
     }
     public override void Action()
     {
-        Debug.Log("Minigame!");
         Minigame.singleplayer = !(category.ToUpper().Equals("DUEL") || category.ToUpper().Equals("MULTI"));
         MinigameSelector.gotGame += LoadGame;
         selector.ChangeText(namesToChooseFrom, categoryIndex);
@@ -93,7 +92,7 @@ public class MinigameSpace : BoardSpace
         startedLoad?.Invoke();
         string game = gamesToChooseFrom[i];
         //Minigame.singleplayer = false;
-        //game = "EeveeGame";
+        //game = "VocabHunt";
         InvokeLoad("HTP" + game, true);
     }
 

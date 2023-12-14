@@ -20,7 +20,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     public int maxRounds;
     public int round;
     public Sprite[] pImages;
-    private Sprite[] charPortraits;
+    public Image[] pIcons;
 
     private List<string> centerers;
     private List<string> rotators;
@@ -39,7 +39,6 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         controls = new Controls();
         controls.KanjiCrossRotate.AddCallbacks(this);
         controls.Disable();
-        charPortraits = Resources.LoadAll<Sprite>("Images/CharacterPortraits/");
 
         timer.TimeUp += TimeOut;
         won = false;
@@ -57,7 +56,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
                 GameObject[] duelists = BoardController.duelists;
                 for (int i = 0; i < 2; i++) {
                     int charIndex = duelists[i].GetComponent<PlayerInfo>().characterIndex;
-                    pImages[i] = charPortraits[charIndex];
+                    pIcons[i].sprite = pImages[charIndex];
                 }
             }
         } else
@@ -69,7 +68,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
             playerOneCamera.rect = new Rect(0, 0, 1, 1);
             if (BoardController.players != null) {
                 int charIndex = BoardController.currentPlayer.GetComponent<PlayerInfo>().characterIndex;
-                pImages[0] = charPortraits[charIndex];
+                pIcons[0].sprite = pImages[charIndex];
             }
         }
         GetCrosses();

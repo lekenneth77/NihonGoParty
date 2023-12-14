@@ -32,17 +32,11 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     {
         base.Start();
 
-        //if (SceneManager.sceneCount > 2) {
-        //    SceneManager.SetActiveScene(SceneManager.GetSceneAt(2));
-        //} else if (SceneManager.sceneCount > 1) {
-        //    SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
-        //}
         controls = new Controls();
         controls.TreeHop.AddCallbacks(this);
         timer.TimeUp += TimeOut;
 
         GetWords();
-        singleplayer = true;
         if (singleplayer) {
             numPlayers = 1;
             timer.gameObject.transform.localPosition = new Vector3(775, 425, 0);
@@ -112,6 +106,11 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
         timer.ResetTimer();
         timer.gameObject.SetActive(true);
         timer.StartTimer();
+    }
+
+    private void OnDestroy()
+    {
+        controls.Dispose();
     }
 
     private void GetWords() {

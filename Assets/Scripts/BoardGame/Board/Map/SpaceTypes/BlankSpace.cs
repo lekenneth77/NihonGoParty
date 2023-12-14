@@ -15,7 +15,6 @@ public class BlankSpace : BoardSpace
 
     public override void Action()
     {
-        Debug.Log("I'm a blank guy");
         InvokeFinish();
     }
 
