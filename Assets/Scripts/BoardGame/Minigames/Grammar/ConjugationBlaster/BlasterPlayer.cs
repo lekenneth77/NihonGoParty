@@ -69,14 +69,14 @@ public class BlasterPlayer : Minigame, Controls.IConjBlasterActions
     }
 
     private IEnumerator Round() {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         for (int i = 0; i < Random.Range(12, 20); i++) {
             int whichType = Random.Range(0, 3);
             List<string> curList = words[whichType];
             string word = curList[Random.Range(0, curList.Count)];
 
             blasterEnemy.GetComponent<BlasterEnemy>().Spawn(whichType, word);
-            yield return new WaitForSeconds(Random.Range(1.5f, 3f));
+            yield return new WaitForSeconds(Random.Range(2f, 3.5f));
         }
         yield return new WaitForSeconds(5f);
         if (loss) { yield break; }
