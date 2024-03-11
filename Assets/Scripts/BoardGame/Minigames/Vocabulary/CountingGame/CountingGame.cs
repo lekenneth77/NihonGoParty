@@ -21,7 +21,6 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
     public Transform[] spawnPoints;
     public Transform runnerFolder;
 
-
     public GameObject defRunner;
 
     private int[] counts = new int[4];
@@ -31,8 +30,9 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
     private int totalNumber;
     private List<GameObject> correctOnes;
     private List<GameObject> wrongOnes;
+    public TextAsset[] counters;
 
-    private TextAsset[] counters;
+    //private TextAsset[] counters;
     private HashSet<int> chosens;
     private HashSet<int> wrongChosens;
 
@@ -51,9 +51,6 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
     public override void Start()
     {
         base.Start();
-
-        counters = Resources.LoadAll<TextAsset>("Minigames/Vocabulary/CountingGame/Texts/");
-
         chosens = new HashSet<int>();
         wrongChosens = new HashSet<int>();
         controls = new Controls();
@@ -78,7 +75,6 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
             }
         }
 
-
         for (int i = 0; i < numPlayers; i++)
         {
             pedestals[i].SetActive(true);
@@ -89,12 +85,12 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         correctOnes = new List<GameObject>();
         wrongOnes = new List<GameObject>();
 
-        correctCounts = new int[] { Random.Range(3, 7), Random.Range(5, 9), Random.Range(1, 9) };
-        wrongCounts = new int[] { Random.Range(4, 6), Random.Range(6, 8), Random.Range(7, 9) }; //due to jank, this will be multiplied by 2!
-        minSpeed = new float[] { 5f, 7f, 5f};
-        maxSpeed = new float[] { 5f, 10f, 15f };
+        correctCounts = new int[] { Random.Range(3, 7), Random.Range(5, 9), Random.Range(3, 7) };
+        wrongCounts = new int[] { Random.Range(4, 6), Random.Range(6, 8), Random.Range(4, 7) }; //due to jank, this will be multiplied by 2!
+        minSpeed = new float[] { 5f, 7f, 7f};
+        maxSpeed = new float[] { 5f, 10f, 12f };
         minWaitTime = new float[] { 0.5f, 0.25f, 0.15f };
-        maxWaitTime = new float[] { 2f, 1f, 0.5f };
+        maxWaitTime = new float[] { 2f, 1f, 0.8f };
 
         Runner.ReachedEnd += SomeoneGotToEnd;
 
@@ -107,12 +103,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         wrongOnes.Clear(); //just to make sure
         correctOnes.Clear();
         wrongChosens.Clear();
-
-
-        for (int i = 0; i < numPlayers; i++) {
-            counts[i] = 0;
-            pedestals[i].transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = counts[i] + "";
-        }
+        
 
         if (disableImg) { 
             yield return new WaitForSeconds(5f);
@@ -120,6 +111,12 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
             correctIncorrect[0].SetActive(false);
             correctIncorrect[1].SetActive(false);
             nextRoundImage.SetActive(false);
+        }
+
+        //reset counts back to 0
+        for (int i = 0; i < numPlayers; i++) {
+            counts[i] = 0;
+            pedestals[i].transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = counts[i] + "";
         }
 
         int index = Random.Range(0, counters.Length);
@@ -133,7 +130,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         GetRunners(wrongOnes, numWrong, -1, minS, maxS);
         GetRunners(wrongOnes, numWrong, -1, minS, maxS);
 
-        Debug.Log(correctNumber + " " + (numWrong * 2));
+        //Debug.Log(correctNumber + " " + (numWrong * 2));
         totalNumber = correctNumber + (numWrong * 2);
         yield return new WaitForSeconds(1f); //TODO ADD A STARTING SOMETHING ONCE DONE REMOVE THIS
         controls.QuizGame.Enable();
@@ -184,13 +181,15 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         for (int i = 0; i < count; i++)
         {
             int random = Random.Range(1, splitted.Length);
-            if (wrongChosens.Count == 0) { Debug.Log(splitted[random]); }
+            //if (wrongChosens.Count == 0) { 
+            //    Debug.Log(splitted[random]);
+            //}
             list.Add(CreateRunner(Random.Range(minS, maxS), splitted[random]));
         }
     }
 
     private IEnumerator Finish() {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         correctIncorrect[0].SetActive(false);
         correctIncorrect[1].SetActive(false);
         nextRoundImage.SetActive(false);
@@ -204,11 +203,10 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
             }
         }
         finished.SetActive(true);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         finished.SetActive(false);
         Debug.Log("Winner Index: " + gamer);
         EndMultiplayerGame(gamer);
-        //EndMultiplayerGame(gamer);
     }
 
     public GameObject CreateRunner(float runSpeed, string text) {
@@ -227,7 +225,7 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
             //TODO handle ties later make the game work first, always could just use a spinner LOL
             int min = 1000;
             int min_index = -1;
-            for (int i = 0; i < counts.Length; i++) { 
+            for (int i = 0; i < numPlayers; i++) { 
                 if (counts[i] == correctNumber) {
                     points[i]++;
                     leaderboard[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = points[i] + "";
