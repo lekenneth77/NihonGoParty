@@ -157,11 +157,12 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     private bool gotIt = false;
     private IEnumerator Confirm(KCRotatePlayer player)
     {
-        if (gotIt) { yield break; }
+        if (gotIt || failure.activeInHierarchy) { yield break; }
         player.ChangeSpeed(0.25f);
         player.ConfirmBoxes();
-        if (gotIt) { yield break; }
+        if (gotIt || failure.activeInHierarchy) { yield break; }
         yield return new WaitForSeconds(1.5f);
+        if (gotIt || failure.activeInHierarchy) { yield break; }
         if (player.currentRotation == 0 || Mathf.Abs(player.currentRotation) <= Mathf.Epsilon)
         {
             timer.StopTimer();
@@ -189,6 +190,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     }
     private void TimeOut()
     {
+        if (gotIt) { return; }
         //todo it's very possible that a duel someone can just cheese it w spam but whatever fix it later
         if (!duel)
         {
