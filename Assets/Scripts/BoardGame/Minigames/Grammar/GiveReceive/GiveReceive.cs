@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.XR.OpenVR;
 
 public class GiveReceive : Minigame
 {
@@ -76,6 +77,7 @@ public class GiveReceive : Minigame
         enemyHP = enemy.transform.GetChild(0).GetComponent<Image>();
 
         playerAttk.phaseComplete += AfterPunch;
+        HandlePunch();
     }
 
     public void HandlePunch() {
@@ -92,11 +94,11 @@ public class GiveReceive : Minigame
         while (i < dialogue.Length) {
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ') {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             } 
             i++;
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         midTextBox.text = "";
         //read the text file setup the punchies
         int random = Random.Range(0, playerProblems.Length);
@@ -138,7 +140,7 @@ public class GiveReceive : Minigame
         while (i < dialogue.Length) {
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ') {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             } 
             i++;
         }
@@ -147,7 +149,7 @@ public class GiveReceive : Minigame
         playerAttk.gameObject.SetActive(false);
         string whichWay = "enemy_" + (leftHit ? "left" : "right");
         enemy.GetComponent<Animator>().Play(whichWay);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.25f);
 
 
         midTextBox.text = "";
@@ -158,7 +160,7 @@ public class GiveReceive : Minigame
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ')
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
@@ -191,7 +193,7 @@ public class GiveReceive : Minigame
         while (i < dialogue.Length) {
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ') {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             } 
             i++;
         }
@@ -206,27 +208,14 @@ public class GiveReceive : Minigame
     private IEnumerator EnemyPhase() {
         midTextBox.text = "";
         midTextBox.transform.parent.parent.gameObject.SetActive(true);
-        string dialogue = "The enemy is charging up!";
+        string dialogue = "Choose the correct term to dodge the enemy's attack!";
         int i = 0;
         while (i < dialogue.Length)
         {
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ')
             {
-                yield return new WaitForSeconds(0.05f);
-            }
-            i++;
-        }
-        yield return new WaitForSeconds(1f);
-        midTextBox.text = "";
-        dialogue = "Choose the correct term to evade!";
-        i = 0;
-        while (i < dialogue.Length)
-        {
-            midTextBox.text += dialogue[i];
-            if (dialogue[i] != ' ')
-            {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
@@ -327,8 +316,9 @@ public class GiveReceive : Minigame
         turn++;
         if (turn == maxRound) {
             StartCoroutine("Fedup");
-        } else { 
-            cmdList.SetActive(true);
+        } else {
+            HandlePunch();
+            //cmdList.SetActive(true);
         }
     }
 
@@ -339,7 +329,7 @@ public class GiveReceive : Minigame
         while (i < dialogue.Length) {
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ') {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
@@ -355,7 +345,7 @@ public class GiveReceive : Minigame
         while (i < dialogue.Length) {
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ') {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
@@ -377,8 +367,9 @@ public class GiveReceive : Minigame
             turn++;
             if (turn == maxRound) {
                 StartCoroutine("Fedup");
-            } else { 
-                cmdList.SetActive(true);
+            } else {
+                //cmdList.SetActive(true);
+                HandlePunch();
             }
         }
     }
@@ -392,12 +383,12 @@ public class GiveReceive : Minigame
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ')
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
         enemy.GetComponent<Animator>().Play("enemy_die");
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1f);
         dialogue = "Congratulations! You gained 99 experience!";
         midTextBox.text = "";
         i = 0;
@@ -406,7 +397,7 @@ public class GiveReceive : Minigame
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ')
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
@@ -415,7 +406,7 @@ public class GiveReceive : Minigame
     }
 
     private IEnumerator Death() {
-        string dialogue = "You have received death and give them 50G!";
+        string dialogue = "You have received death and give them all your money!";
         midTextBox.text = "";
         int i = 0;
         while (i < dialogue.Length)
@@ -423,11 +414,11 @@ public class GiveReceive : Minigame
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ')
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         player.GetComponent<Animator>().Play("player_die");
         yield return new WaitForSeconds(12f);
         EndGame(enemyHits - 1);
@@ -441,7 +432,7 @@ public class GiveReceive : Minigame
         while (i < dialogue.Length) {
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ') {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
@@ -453,7 +444,7 @@ public class GiveReceive : Minigame
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ')
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
@@ -464,13 +455,13 @@ public class GiveReceive : Minigame
         }
 
         yield return new WaitForSeconds(1f);
-        dialogue = "You lose 50G and your life!";
+        dialogue = "You lose your money and your life!";
         midTextBox.text = "";
         i = 0;
         while (i < dialogue.Length) {
             midTextBox.text += dialogue[i];
             if (dialogue[i] != ' ') {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
             i++;
         }
