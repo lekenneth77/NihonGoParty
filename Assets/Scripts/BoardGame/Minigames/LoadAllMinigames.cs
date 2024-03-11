@@ -68,13 +68,12 @@ public class LoadAllMinigames : MonoBehaviour, Controls.IDebugActions
     public void OnSlash(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
-        Debug.Log("Slash!");
         SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
         canvas.SetActive(true);
     }
 
-    public void LoadCharacterSelect() {
+    public void LoadTitleScreen() {
         Minigame.debug = false;
-        SceneManager.LoadSceneAsync("Multiplayer Setup");
+        SceneManager.LoadSceneAsync("Title Screen");
     }
 }

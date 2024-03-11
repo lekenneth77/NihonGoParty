@@ -22,10 +22,10 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
     public Image p1TurnIcon;
     public Image p2TurnIcon;
     public Image winnerIcon;
-    public Animator its345AM;
+    //public Animator its345AM;
 
+    public Sprite[] CharPortraits; //character portraits
     private Sprite[] duelistIcons = new Sprite[2];
-    private Sprite[] charPortraits;
 
     private string katakana;
     private string[] roman;
@@ -44,7 +44,6 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
     public override void Start()
     {
         base.Start();
-        charPortraits = Resources.LoadAll<Sprite>("Images/CharacterPortraits/");
 
         typeStack = new Stack<string>();
         string[] split = textFile.text.Split("_"[0]);
@@ -61,12 +60,13 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
             GameObject[] duelists = BoardController.duelists;
             for (int i = 0; i < 2; i++) {
                 int charIndex = duelists[i].GetComponent<PlayerInfo>().characterIndex;
-                duelistIcons[i] = charPortraits[charIndex];
+                duelistIcons[i] = CharPortraits[charIndex];
             }
         } else {
-            duelistIcons[0] = charPortraits[0];
-            duelistIcons[1] = charPortraits[1];
+            duelistIcons[0] = CharPortraits[1];
+            duelistIcons[1] = CharPortraits[2];
         }
+
         playerIcons[0].sprite = duelistIcons[0];
         playerIcons[1].sprite = duelistIcons[1]; 
         StartCoroutine(StartTurn(playerOnePlays));
@@ -100,7 +100,7 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
         while (currentI == prevI) { 
             currentI = Random.Range(0, katakana.Length);
         }
-        its345AM.Play("idle");
+        //its345AM.Play("idle");
         centerText.text = katakana[currentI] + "";
     }
 
@@ -141,7 +141,6 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
         if (typeStack.Count == roman[currentI].Length)
         {
             //check how many
-            string word = roman[currentI];
             bool correct = true;
             for (int i = roman[currentI].Length - 1; i >= 0; i--)
             {
@@ -154,11 +153,11 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
                 if (playerOneTurn) { 
                     playerOneWins++;
                     p1WinText.text = playerOneWins + "";
-                    its345AM.Play("p1");
+                    //its345AM.Play("p1");
                 } else {
                     playerTwoWins++;
                     p2WinText.text = playerTwoWins + "";
-                    its345AM.Play("p2");
+                    //its345AM.Play("p2");
                 }
                 NextCharacter();
             }

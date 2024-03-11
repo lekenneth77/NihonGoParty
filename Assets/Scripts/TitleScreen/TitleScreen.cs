@@ -13,11 +13,11 @@ public class TitleScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (skipStart) {
-            fadeoutScreen.gameObject.SetActive(false);
-        } else {
-            StartCoroutine("DoScreens");
-        }
+        //if (skipStart) {
+        //} else {
+        //    StartCoroutine("DoScreens");
+        //}
+        fadeoutScreen.gameObject.SetActive(false);
         Time.timeScale = 1f;
 
         if (LoadingScreen.Instance) {
@@ -82,6 +82,11 @@ public class TitleScreen : MonoBehaviour
     public void StartPlay() {
         skipStart = true;
         SceneManager.LoadSceneAsync("Multiplayer Setup");
+    }
+
+    public void GoToAllMinigames() {
+        skipStart = true;
+        SceneManager.LoadSceneAsync("AllMinigames");
     }
 
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -311,6 +311,7 @@ Transform:
   - {fileID: 1316331138}
   - {fileID: 1375126448}
   - {fileID: 202014197}
+  - {fileID: 2143384469}
   m_Father: {fileID: 2134314610}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1112,7 +1113,12 @@ MonoBehaviour:
   p1TurnIcon: {fileID: 2055271977}
   p2TurnIcon: {fileID: 9378280}
   winnerIcon: {fileID: 792769227}
-  its345AM: {fileID: 153397661}
+  CharPortraits:
+  - {fileID: 21300000, guid: b7651a73f3a0a904e9cf727bae933e08, type: 3}
+  - {fileID: 21300000, guid: c56d110b804ac6f4aa8649fc68235464, type: 3}
+  - {fileID: 21300000, guid: 3194400aa21650448b006e6aeb18001b, type: 3}
+  - {fileID: 21300000, guid: ada65d999570ccc40abdf762ae856b66, type: 3}
+  - {fileID: 21300000, guid: e354a982bb2bbf842b5aa9f4b476bbc2, type: 3}
 --- !u!1 &774234658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,7 +1153,7 @@ RectTransform:
   m_Children:
   - {fileID: 1639142635}
   m_Father: {fileID: 2134314610}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1328,7 +1334,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2134314610}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1481,7 +1487,7 @@ RectTransform:
   - {fileID: 462894620}
   - {fileID: 472409374}
   m_Father: {fileID: 2134314610}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3091,7 +3097,6 @@ RectTransform:
   - {fileID: 1777357086}
   - {fileID: 1700377138}
   - {fileID: 153397660}
-  - {fileID: 2143384469}
   - {fileID: 799438665}
   - {fileID: 877171861}
   - {fileID: 774234659}
@@ -3194,8 +3199,8 @@ RectTransform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2134314610}
-  m_RootOrder: 3
+  m_Father: {fileID: 153397660}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
