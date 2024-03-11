@@ -68,12 +68,16 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
         }
 
         playerIcons[0].sprite = duelistIcons[0];
-        playerIcons[1].sprite = duelistIcons[1]; 
+        playerIcons[1].sprite = duelistIcons[1];
+        p1TurnIcon.sprite = duelistIcons[0];
+        p2TurnIcon.sprite = duelistIcons[1];
+
         StartCoroutine(StartTurn(playerOnePlays));
     }
 
     private IEnumerator StartTurn(GameObject turn) {
-
+        loseTimer.gameObject.SetActive(false);
+        typing.text = "";
         turn.SetActive(true);
         yield return new WaitForSeconds(3f);
         turn.SetActive(false);
@@ -101,6 +105,7 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
             currentI = Random.Range(0, katakana.Length);
         }
         //its345AM.Play("idle");
+        typing.text = "";
         centerText.text = katakana[currentI] + "";
     }
 
@@ -174,6 +179,7 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
 
     public void NoMoreX() {
         loseTimer.gameObject.SetActive(false);
+        typing.text = "";
         noTypey = false;
     }
 
@@ -184,6 +190,7 @@ public class KataSpeedType : Minigame, Controls.ISpeedTypeActions
         centerText.text = "";
         if (playerOneTurn) {
             playerOneTurn = false;
+           
             StartCoroutine(StartTurn(playerTwoPlays));
         } else {
             //End game!;
