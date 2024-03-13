@@ -31,6 +31,7 @@ public class WordOrder : Minigame
     public int totalRounds;
 
     //handle text functionality
+    public TextAsset[] texts;
     private string[] unparsedText;
     private HashSet<int> chosenProbs;
     private List<string> solutions;
@@ -52,18 +53,12 @@ public class WordOrder : Minigame
         WordOrderDrop.drop += AnotherDrop;
         WordOrderWord.remove += AnotherRemove;
         timer.TimeUp += Timeout;
-        StartCoroutine("Intro");
-    }
-
-    private IEnumerator Intro() {
         timer.ResetTimer();
-        yield return new WaitForSeconds(1f);
         ChooseText();
         GetProblem();
     }
 
     private void ChooseText() {
-        TextAsset[] texts = Resources.LoadAll<TextAsset>("Minigames/Grammar/WordOrder/Texts/");
         int random = Random.Range(0, texts.Length);
         unparsedText = texts[random].text.Split("\n"[0]);
         category.text = unparsedText[0];

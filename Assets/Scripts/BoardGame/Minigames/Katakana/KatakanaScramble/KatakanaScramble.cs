@@ -7,7 +7,7 @@ using TMPro;
 
 public class KatakanaScramble : Minigame
 {
-    public AudioSource deal_card, failure_sfx, success_sfx, buttonclick_sfx, kids_cheer;
+    //public AudioSource deal_card, failure_sfx, success_sfx, buttonclick_sfx, kids_cheer;
 
     public GameObject roundStartContainer;
     public TextMeshProUGUI randomCategory;
@@ -159,7 +159,7 @@ public class KatakanaScramble : Minigame
             if (from_back != -1) {
                 interactables[from_back].transform.GetChild(0).gameObject.SetActive(true);
             }
-            deal_card.Play();
+            //deal_card.Play();
             yield return new WaitForSeconds(0.3f);
             x_multiplier++;
         }
@@ -263,7 +263,7 @@ public class KatakanaScramble : Minigame
     private IEnumerator Failure()
     {
         hint_button.interactable = false;
-        failure_sfx.Play();
+        //failure_sfx.Play();
         foreach (GameObject letter in interactables)
         {
             letter.GetComponent<ClickLetter>().set_disable(true);
@@ -311,7 +311,7 @@ public class KatakanaScramble : Minigame
             correct_correct_img.SetActive(true);
             failure_img.SetActive(false);
             hint_button.interactable = false;
-            success_sfx.Play();
+            //success_sfx.Play();
             if (rounds_completed < words.Count) {
                 rounds_completed++;
                 if (rounds_completed >= max_rounds) {
@@ -322,7 +322,7 @@ public class KatakanaScramble : Minigame
                 }
             } 
         } else {
-            failure_sfx.Play();
+            //failure_sfx.Play();
             incorrect_img.SetActive(true);
             yield return new WaitForSeconds(3f);
             incorrect_img.SetActive(false);
@@ -338,14 +338,14 @@ public class KatakanaScramble : Minigame
                 count_selected--;
             }
             disable_hints = false;
-            deal_card.Play();
+            //deal_card.Play();
             start = true;
         }
 
     }
 
     private void next_round() {
-        buttonclick_sfx.Play();
+        //buttonclick_sfx.Play();
         if (rounds_completed != words.Count) {
             foreach (GameObject inter in interactables) {
                 Destroy(inter);
@@ -358,7 +358,7 @@ public class KatakanaScramble : Minigame
     }
 
     private void display_finish() {
-        kids_cheer.Play();
+        //kids_cheer.Play();
         
         foreach (GameObject inter in interactables) {
                 Destroy(inter);
@@ -445,7 +445,7 @@ public class KatakanaScramble : Minigame
             click.set_new_pos(vec_pos);
             click.set_orig_pos(vec_pos);
             click.set_correct_pos(word_index);
-            click.deal_card = deal_card;
+            //click.deal_card = deal_card;
             inter.AddComponent<BoxCollider>();
             inter.GetComponent<Button>().onClick.AddListener(click.OnMouseDown);            
 
@@ -455,16 +455,16 @@ public class KatakanaScramble : Minigame
     }
 
     void setup_music() {
-        deal_card = audio_src_comp("DealCard");
-        success_sfx = audio_src_comp("Nice");
-        failure_sfx = audio_src_comp("Failure");
-        buttonclick_sfx = audio_src_comp("ButtonClick");
-        kids_cheer = audio_src_comp("KidsCheer");
+        //deal_card = audio_src_comp("DealCard");
+        //success_sfx = audio_src_comp("Nice");
+        //failure_sfx = audio_src_comp("Failure");
+        //buttonclick_sfx = audio_src_comp("ButtonClick");
+        //kids_cheer = audio_src_comp("KidsCheer");
     }    
     
-    AudioSource audio_src_comp(string gameobj_name) {
-        return GameObject.Find(gameobj_name).GetComponent<AudioSource>();
-    }
+    //AudioSource audio_src_comp(string gameobj_name) {
+    //    return GameObject.Find(gameobj_name).GetComponent<AudioSource>();
+    //}
 
     //returns true if provided gameobject has not been selected and already in it's correct position.
     bool auto_correct(GameObject inter) {
@@ -506,7 +506,7 @@ public class KatakanaScramble : Minigame
 
     IEnumerator giveup() {
         start = false;
-        failure_sfx.Play();
+        //failure_sfx.Play();
         foreach(GameObject letter in interactables) {
             letter.GetComponent<ClickLetter>().set_disable(true);
         }

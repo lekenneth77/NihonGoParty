@@ -4096,7 +4096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1041704198}
-  timeLimit: 60
+  timeLimit: 45
   countUp: 0
 --- !u!114 &1312663007
 MonoBehaviour:
@@ -4669,7 +4669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f42531f18125b4faf026d5f0c42684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 10
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
   rotateToo: 1
@@ -11898,7 +11898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f42531f18125b4faf026d5f0c42684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 10
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
   rotateToo: 1
@@ -12445,7 +12445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f42531f18125b4faf026d5f0c42684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 10
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
   rotateToo: 1
@@ -13075,7 +13075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f42531f18125b4faf026d5f0c42684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 10
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
   rotateToo: 1
@@ -20442,7 +20442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f42531f18125b4faf026d5f0c42684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 10
   target: {x: 0, y: 0, z: 0}
   originalPosition: {x: 0, y: 0, z: 0}
   rotateToo: 1

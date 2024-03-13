@@ -1,11 +1,11 @@
 YII CH5-6 Review
-万が一　これ　が　おいしくて　も　、　私　は　ぜったい　に　食べません　。_Even if...,_1,2,12
-日本　で　よく　飲まれて　いる　飲み物　は　カルピコ　です　。_[passive] – popular drink in Japan – Calpico_1,6,10
-クラス　の　前　で　日本語　で　話　を　させられました　が、　はずかしかった　です　。_I was forced to give a talk in front of class, and I was embarrassed._1,4,10,13
+万が一　これ　が　おいしくて　も　、　私　は　ぜったい　に　食べません　。_Even if...,_1,2,4,7,12
+日本　で　よく　飲まれて　いる　飲み物　は　カルピコ　です　。_[passive] – popular drink in Japan – Calpico_1,4,6,8,10
+クラス　の　前　で　日本語　で　話　を　させられました　が、　はずかしかった　です　。_I was forced to give a talk in front of class, and I was embarrassed._1,4,5,10,13
 社長　が　毎日　コーヒー　を　召し上がる　ので、　私　は　10時　に　コーヒー　を　お入れいたします　。_社長　が　毎日　コーヒー　を　召し上がる　ので、　私　は　コーヒー　を　10時　に　お入れいたします　。_My boss has coffee every day, so I prepare coffee at 10 always._1,3,7,15
 水原先生　は　私　に　日本語　の　まんが　を　くださいました　。私　は　それ　を　すず木くん　に　あげました　。_水原先生　は　私　に　日本語　の　まんが　を　くださいました　。私　は　鈴木くん　に　それ　を　あげました　。_Mizuhara-sennsei gave me Japanese Manga books, and I gave them to Suzuki-kun._1,3,6,10,17
-私　は　弟　に　私　が　一番　好き　な　ビデオゲーム　を　取られました　。_I had my favorite video game taken by my brother._1,3,5,13
-吉田さん　は　日本語　だけで　なく　、　かんこく語　も　話せます　。_Yoshida-san can speak not only...but also ..._3,6,10
-21さい　に　なって　、　お酒　が　飲める　よう　に　なった　ので　、　ワイン　を　少し　飲む　よう　に　なった　。_I became able to drink alcohol when I turned 21 so I started to drink wine._1,4,12,15,20
+私　は　弟　に　私　が　一番　好き　な　ビデオゲーム　を　取られました　。_I had my favorite video game taken by my brother._1,3,5,8,13
+吉田さん　は　日本語　だけで　なく　、　かんこく語　も　話せます　。_Yoshida-san can speak not only...but also ..._3,6,8,10
+21さい　に　なって　、　お酒　が　飲める　よう　に　なった　ので　、　ワイン　を　少し　飲む　よう　に　なった　。_I became able to drink alcohol when I turned 21 so I started to drink wine._1,4,7,8,12,15,20
 まついさん　は　ルームメイト　に　部屋　を　そうじ　して　もらいたがって　います　。_まついさん　は　部屋　を　ルームメイト　に　そうじ　して　もらいたがって　います　。_Matsui-san  wants his roommate to do…._1,11
 私　は　ルームメイト　に　おさら　を　洗って　ほしい　ん　です　。_私　は　おさら　を　ルームメイト　に　洗って　ほしい　ん　です　。_I want my roommate to do..._1,11
