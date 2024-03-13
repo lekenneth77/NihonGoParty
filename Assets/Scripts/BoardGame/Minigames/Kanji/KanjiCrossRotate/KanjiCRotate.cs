@@ -21,6 +21,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
     public int round;
     public Sprite[] pImages;
     public Image[] pIcons;
+    public TextAsset textfile;
 
     private List<string> centerers;
     private List<string> rotators;
@@ -80,8 +81,7 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         centerers = new List<string>();
         rotators = new List<string>();
         chosen = new List<int>();
-        TextAsset txtFile = Resources.Load<TextAsset>("Minigames/Kanji/KanjiCross/kanjicrosses");
-        string[] crosses = txtFile.text.Split("\n"[0]);
+        string[] crosses = textfile.text.Split("\n"[0]);
         foreach(string cross in crosses)
         {
             string[] split = cross.Split("="[0]);

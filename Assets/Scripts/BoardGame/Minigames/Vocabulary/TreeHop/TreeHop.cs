@@ -19,6 +19,7 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     public GameObject failImage;
     private int numPlayers;
     public GameObject Instructions;
+    public TextAsset[] texts;
 
     public PlayableDirector[] directors;
 
@@ -114,7 +115,6 @@ public class TreeHop : Minigame, Controls.ITreeHopActions
     }
 
     private void GetWords() {
-        TextAsset[] texts = Resources.LoadAll<TextAsset>("Minigames/Vocabulary/ChapterVocabulary/");
         HashSet<int> chosenIndicies = new HashSet<int>();
         int random = UnityEngine.Random.Range(0, texts.Length);
         chosenIndicies.Add(random);

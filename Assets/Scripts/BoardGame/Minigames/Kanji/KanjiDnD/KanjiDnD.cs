@@ -25,7 +25,7 @@ public class KanjiDnD : Minigame
     public Image patienceBar;
     public Image emotion;
     public Timer timer;
-    private Sprite[] emotionImgs;
+    public Sprite[] emotionImgs;
 
     //reaction image
     public Image reaction;
@@ -43,8 +43,8 @@ public class KanjiDnD : Minigame
     public Transform exitPt;
 
     public TextAsset textFile;
-    private Sprite[] parts;
-    private Sprite[] fullKanjis;
+    public Sprite[] parts;
+    public Sprite[] fullKanjis;
     private string[] problems;
 
     //result container
@@ -70,10 +70,6 @@ public class KanjiDnD : Minigame
     {
         base.Start();
         timer.TimeUp += TimeOut;
-
-        emotionImgs = Resources.LoadAll<Sprite>("Images/Emotions/");
-        parts = Resources.LoadAll<Sprite>("Minigames/Kanji/KanjiDnD/KanjiParts/");
-        fullKanjis = Resources.LoadAll<Sprite>("Minigames/Kanji/KanjiDnD/FullImages/");
         problems = textFile.text.Split("\n"[0]);
 
         chosenProblems = new HashSet<int>();
@@ -249,7 +245,7 @@ public class KanjiDnD : Minigame
 
         timer.ResetTimer();
 
-        resultKanjis[currentRound].sprite = fullKanjis[random];
+        resultKanjis[currentRound].sprite = fullKanjis[random + 1];
         resultHiras[currentRound].text = parameters[1];
         textBubble.text = parameters[1];
         textBubble.transform.parent.gameObject.SetActive(true);
