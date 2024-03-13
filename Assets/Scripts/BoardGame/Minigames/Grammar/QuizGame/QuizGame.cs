@@ -5,10 +5,11 @@ using UnityEngine.Playables;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.TextCore.Text;
 
 public class QuizGame : Minigame, Controls.IQuizGameActions
 {
-    public TextAsset txtfile;
+    public UnityEngine.TextAsset txtfile;
     public Timer timer;
     public Pedestal[] pedestals;
     public GameObject[] characters;
@@ -51,6 +52,8 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
             numPlayers = 4;
             for (int i = 0; i < numPlayers; i++) {
                 characters[i].transform.position = new Vector3(initialPlayerPosX[i], 0, -1f);
+                characters[i].SetActive(true);
+
             }
         } else {
             //required to be played from a board game
@@ -73,7 +76,7 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         fullViewCam.transform.position = initialCameraPos[numPlayers - 2];
         problems = txtfile.text.Split("\n"[0]);
         chosen = new HashSet<int>();
-        controls.QuizGame.Enable();
+        
         intro.stopped += AfterIntro;
         intro.Play();
 
@@ -160,11 +163,11 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
             answerChoices[r].text = answers[i];
         }
         //lol for now
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        controls.QuizGame.Enable();
         miloCam.SetActive(false);
         answerChoices[0].transform.parent.parent.gameObject.SetActive(true);
         noMorePeople = false;
-        Debug.Log("Round Start!");
     }
 
     public void ChooseAnswer(int i) {
@@ -209,7 +212,6 @@ public class QuizGame : Minigame, Controls.IQuizGameActions
         pedestals[currentPlayerI].Loss();
         if (numAnswered == numPlayers) {
             //bruh someone mustve answered wrong
-            Debug.Log("Choose a different question!");
             StartCoroutine("SetupRound");
         } else { 
             playerCameras[currentPlayerI].SetActive(false);
