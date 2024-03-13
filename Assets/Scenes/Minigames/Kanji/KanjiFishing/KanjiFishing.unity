@@ -1190,8 +1190,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -118.4693, y: 69}
-  m_SizeDelta: {x: -236.9386, y: -166.0257}
+  m_AnchoredPosition: {x: -112.82432, y: 53.506424}
+  m_SizeDelta: {x: -248.22862, y: -197.01285}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &605671123
 MonoBehaviour:
@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose the characters that spell this kanji!
+  m_text: Choose the characters that spell this kanji in any order!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
   m_sharedMaterial: {fileID: 1756495071460396668, guid: da5b12d507fbf1e41bb13658e5d12928, type: 2}
@@ -1240,8 +1240,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2770,7 +2770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1399522190
 RectTransform:
   m_ObjectHideFlags: 0
