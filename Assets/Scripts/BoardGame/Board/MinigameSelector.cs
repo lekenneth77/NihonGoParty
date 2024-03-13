@@ -14,7 +14,7 @@ public class MinigameSelector : MonoBehaviour
     private static List<int> chosen;
     public static event Action<int> gotGame;
 
-    private float[] delayMultipliers = new float[] { 1f, 1.1f, 1.3f };
+    private float[] delayMultipliers = new float[] { 1.1f, 1.2f, 1.3f };
 
     // Start is called before the first frame update
     void Start()
@@ -44,9 +44,8 @@ public class MinigameSelector : MonoBehaviour
         yield return new WaitForSeconds(1f);
         float delayTime = 0.025f;
         int index = 0;
-        float maxTime = UnityEngine.Random.Range(.4f, .6f);
-        //maxTime = 0;
-        float waitTime = 5f;
+        float maxTime = UnityEngine.Random.Range(.35f, .5f);
+        float waitTime = 4.5f;
         while (delayTime < maxTime) {
             GameObject prev = index == 0 ? threeMinigames[2] : threeMinigames[index - 1];
             prev.transform.localScale = Vector3.one;

@@ -2971,7 +2971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2102922005656520667, guid: 117fd486d051b0c4e874284e8f0ba553, type: 3}
       propertyPath: movementSpeed
-      value: 6.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2102922005656520669, guid: 117fd486d051b0c4e874284e8f0ba553, type: 3}
       propertyPath: m_RootOrder
@@ -3200,7 +3200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9098422620718635874, guid: ca5129172ba8ca541bf6eb33aa9dae1b, type: 3}
       propertyPath: movementSpeed
-      value: 6.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9098422620718635884, guid: ca5129172ba8ca541bf6eb33aa9dae1b, type: 3}
       propertyPath: m_RootOrder
@@ -4205,7 +4205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560867314404374457, guid: 9e38dd38cf8eab84080a7b0d5c0f7aee, type: 3}
       propertyPath: movementSpeed
-      value: 6.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7560867314547708428, guid: 9e38dd38cf8eab84080a7b0d5c0f7aee, type: 3}
       propertyPath: debugRoll
@@ -4518,7 +4518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3042227715657558661, guid: b96080fb9d569184a9c1983303836f27, type: 3}
       propertyPath: movementSpeed
-      value: 6.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3042227715830296273, guid: b96080fb9d569184a9c1983303836f27, type: 3}
       propertyPath: debugRoll
@@ -6571,7 +6571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7418800599257526841, guid: 305b93b15e192ba4b911bff884f5a5c1, type: 3}
       propertyPath: movementSpeed
-      value: 6.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7418800599257526847, guid: 305b93b15e192ba4b911bff884f5a5c1, type: 3}
       propertyPath: m_RootOrder
