@@ -6334,7 +6334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 919132147700809081}
   lever: {fileID: 562030497}
-  moveSpeed: 10
+  moveSpeed: 12
   alreadySlowed: 0
 --- !u!1 &1653130291
 GameObject:

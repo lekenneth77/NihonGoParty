@@ -7929,12 +7929,6 @@ MonoBehaviour:
   - {fileID: 1152584279}
   - {fileID: 2037321382}
   - {fileID: 1939935778}
-  charSprites:
-  - {fileID: 21300000, guid: 826bdd69f8afc1e4b801b485a38ec8ba, type: 3}
-  - {fileID: 21300000, guid: edd85dd0b760399488fe52f7b9d3d021, type: 3}
-  - {fileID: 21300000, guid: a0cb02a5e70c833428f957ee0fe73075, type: 3}
-  - {fileID: 21300000, guid: 6adb27885d3ed484bbac9250c941d489, type: 3}
-  - {fileID: 21300000, guid: 5125c183be24d82429d98ddb4baeae0d, type: 3}
   followCam: {fileID: 451346846}
   textfile: {fileID: 4900000, guid: 7e3b58b1cae37184f883adebdb8b77e4, type: 3}
   timer: {fileID: 1647595435}
@@ -7951,6 +7945,40 @@ MonoBehaviour:
   finishImg: {fileID: 2090056823}
   timeoutImg: {fileID: 2263237}
   wrongImg: {fileID: 148502982}
+  ObjectDrawings:
+  - {fileID: 21300000, guid: ae6a2e8d22ad26b43b6f45e3ae08cabd, type: 3}
+  - {fileID: 21300000, guid: cc617f9b709de754f96263c6c16240a7, type: 3}
+  - {fileID: 21300000, guid: d53c4f7b0be8f5d42b6ab2bc81f789b6, type: 3}
+  - {fileID: 21300000, guid: f89336cfced97d54d91c3c00a7606e90, type: 3}
+  - {fileID: 21300000, guid: ed695bbcbb879534795af5caced46772, type: 3}
+  - {fileID: 21300000, guid: 48e4b94d7e2fd914caca4b36de85a0dc, type: 3}
+  - {fileID: 21300000, guid: 31a9d31a6a736014fb98f0292a4481d7, type: 3}
+  - {fileID: 21300000, guid: a13801db12d5ecc44ab47d246a1d9801, type: 3}
+  - {fileID: 21300000, guid: 4234a481d23c0714ea116b123b5b3d8c, type: 3}
+  - {fileID: 21300000, guid: 394a9cc5ad8304f418590e8b102afbf6, type: 3}
+  - {fileID: 21300000, guid: d4639b3f9052e144e965113fab1a878d, type: 3}
+  - {fileID: 21300000, guid: 95158d7014f3ac94b86b289478db810e, type: 3}
+  - {fileID: 21300000, guid: efdd3281cc1adf641a4848e11f954953, type: 3}
+  - {fileID: 21300000, guid: df9bb5e3cbe09fd4a9d88779c2ceb038, type: 3}
+  - {fileID: 21300000, guid: eeae2d29ca9eaca4aa22b71d77b70c95, type: 3}
+  - {fileID: 21300000, guid: 9232e90660623774e85556b3fe435a95, type: 3}
+  - {fileID: 21300000, guid: 45a009ffa09f5804bb023de8da61eb18, type: 3}
+  - {fileID: 21300000, guid: 68645192ce1064f4389465e7a2ee017e, type: 3}
+  - {fileID: 21300000, guid: 41b9268ac6f667c46a27194a807dbd89, type: 3}
+  - {fileID: 21300000, guid: b5db73dc3530da146b3fc02fbdb7f80f, type: 3}
+  - {fileID: 21300000, guid: 6289531703bc6cc4f9764f2687775320, type: 3}
+  - {fileID: 21300000, guid: 42aaa7fe2f72a094aaad6453fc469287, type: 3}
+  - {fileID: 21300000, guid: 96ff310b2a3924f4f9f88efdaf02497c, type: 3}
+  - {fileID: 21300000, guid: fed71faf79f12e246ac7c48906131493, type: 3}
+  - {fileID: 21300000, guid: a934b88dbd6c4d04a8e68d21347cb49a, type: 3}
+  - {fileID: 21300000, guid: 3f790acb7e18d4846b9809bdf63fad68, type: 3}
+  - {fileID: 21300000, guid: 4ca6cc7429a9c6244be3727d98fca89a, type: 3}
+  - {fileID: 21300000, guid: 40652e61e72259d469f85e6d4ca7e960, type: 3}
+  - {fileID: 21300000, guid: 79e7df9fe86770248a2554ad89f422c9, type: 3}
+  - {fileID: 21300000, guid: f15e5b654e35c4447bdabae0c70b4ee7, type: 3}
+  - {fileID: 21300000, guid: 59ea153096470c84092f8a5c1ad92866, type: 3}
+  - {fileID: 21300000, guid: 8bc564b54bbaa474aa2b7b703f975dda, type: 3}
+  - {fileID: 21300000, guid: 91e1aa1a44f6b694180db27f9a64f6d8, type: 3}
   maxRounds: 3
 --- !u!1 &1755903939
 GameObject:

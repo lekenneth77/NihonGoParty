@@ -21,6 +21,7 @@ public class VocabHunt : Minigame
     public GameObject finishImg;
     public GameObject timeoutImg;
     public GameObject wrongImg;
+    public Sprite[] ObjectDrawings;
 
     private string[] objectNames;
     private List<int> chosenIndices;
@@ -68,13 +69,13 @@ public class VocabHunt : Minigame
     private void SetupGame() {
         chosenIndices = new List<int>();
         chosenPositions = new HashSet<int>();
-        Sprite[] sprites = Resources.LoadAll<Sprite>("Minigames/Vocabulary/VocabHunt/ObjectDrawings/");
+        //Sprite[] sprites = Resources.LoadAll<Sprite>("Minigames/Vocabulary/VocabHunt/ObjectDrawings/");
         Transform chosenLayout = layouts[Random.Range(0, layouts.Length)].transform;
         //generate interactables
         for (int i = 0; i < chosenLayout.childCount; i++) {
-            int index = Random.Range(0, sprites.Length);
+            int index = Random.Range(0, ObjectDrawings.Length);
             while (chosenIndices.Contains(index)) {
-                index = Random.Range(0, sprites.Length);
+                index = Random.Range(0, ObjectDrawings.Length);
             }
             chosenIndices.Add(index);
 
@@ -87,7 +88,7 @@ public class VocabHunt : Minigame
             float scalar = scalars[Random.Range(0, scalars.Length)];
             newInter.transform.localScale = new Vector2(scalar, scalar);
             newInter.GetComponent<VocabObject>().id = index;
-            newInter.GetComponent<SpriteRenderer>().sprite = sprites[index];
+            newInter.GetComponent<SpriteRenderer>().sprite = ObjectDrawings[index];
             newInter.GetComponent<BoxCollider2D>().size.Scale(new Vector2(scalar, scalar));
         }
 

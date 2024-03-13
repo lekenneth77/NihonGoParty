@@ -9,7 +9,7 @@ public class KanjiFishing : Minigame
     public TextAsset hiraganaFile;
     public Hook hook;
     public GameObject defFish;
-    private Sprite[] fishSprites;
+    public Sprite[] fishSprites;
     public Transform fishParent;
     public Vector2 startingFishWP;
     public int numSpawns; //min = 10
@@ -41,7 +41,6 @@ public class KanjiFishing : Minigame
         base.Start();
         kanjis = textFile.text.Split("\n"[0]);
         hiraganas = hiraganaFile.text;
-        fishSprites = Resources.LoadAll<Sprite>("Images/KanjiFishing/Fishes/");
         chosen = new HashSet<int>();
         fishies = new List<GameObject>();
 

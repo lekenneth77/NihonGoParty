@@ -665,6 +665,10 @@ MonoBehaviour:
   hiraganaFile: {fileID: 4900000, guid: 2afb3c9c86472a04c98360cd3865e190, type: 3}
   hook: {fileID: 780527987}
   defFish: {fileID: 1823267856}
+  fishSprites:
+  - {fileID: 21300000, guid: d9507477218c62043b3c8df2cffe3288, type: 3}
+  - {fileID: 21300000, guid: 80c0ee9ca1b3ba5429cbf6cfcf711506, type: 3}
+  - {fileID: 21300000, guid: 49954db80f96d3840bda424ba1e9126a, type: 3}
   fishParent: {fileID: 2082044095}
   startingFishWP: {x: 0, y: -3}
   numSpawns: 10
