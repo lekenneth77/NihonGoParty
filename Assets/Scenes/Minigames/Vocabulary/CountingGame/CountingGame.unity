@@ -13184,9 +13184,8 @@ MonoBehaviour:
   - {fileID: 1344106215}
   - {fileID: 919132149028132709}
   nextRoundImage: {fileID: 1482470465}
-  correctIncorrect:
-  - {fileID: 1587653622}
-  - {fileID: 823054409}
+  CorrectImage: {fileID: 1587653622}
+  WrongImage: {fileID: 823054409}
   finished: {fileID: 1382486185}
   spawnPoints:
   - {fileID: 387786238}

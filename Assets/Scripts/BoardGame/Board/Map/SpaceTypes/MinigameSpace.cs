@@ -92,7 +92,7 @@ public class MinigameSpace : BoardSpace
         startedLoad?.Invoke();
         string game = gamesToChooseFrom[i];
         //Minigame.singleplayer = false;
-        //game = "VocabHunt";
+        //game = "CountingGame";
         InvokeLoad("HTP" + game, true);
     }
 

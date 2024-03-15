@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class CountingGame : Minigame, Controls.IQuizGameActions
 {
@@ -16,7 +16,8 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
     private float[] initialPlayerPosX = new float[] { -9f, -3f, 3f, 9f }; //should always be a size of 4
     private Vector3[] initialCameraPos = new Vector3[] { new Vector3(-6f, 7f, -20f), new Vector3(-3f, 7f, -20f), new Vector3(0, 7f, -20f) };
     public GameObject nextRoundImage;
-    public GameObject[] correctIncorrect;
+    public GameObject CorrectImage;
+    public GameObject WrongImage;
     public GameObject finished;
     public Transform[] spawnPoints;
     public Transform runnerFolder;
@@ -85,10 +86,10 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         correctOnes = new List<GameObject>();
         wrongOnes = new List<GameObject>();
 
-        correctCounts = new int[] { Random.Range(3, 7), Random.Range(5, 9), Random.Range(3, 7) };
-        wrongCounts = new int[] { Random.Range(4, 6), Random.Range(6, 8), Random.Range(4, 7) }; //due to jank, this will be multiplied by 2!
-        minSpeed = new float[] { 5f, 7f, 7f};
-        maxSpeed = new float[] { 5f, 10f, 12f };
+        correctCounts = new int[] { Random.Range(3, 7), Random.Range(5, 9), Random.Range(3, 10) };
+        wrongCounts = new int[] { Random.Range(4, 6), Random.Range(6, 8), Random.Range(5, 10) }; //due to jank, this will be multiplied by 2!
+        minSpeed = new float[] { 5f, 7f, 9f};
+        maxSpeed = new float[] { 5f, 10f, 14f };
         minWaitTime = new float[] { 0.5f, 0.25f, 0.15f };
         maxWaitTime = new float[] { 2f, 1f, 0.8f };
 
@@ -96,6 +97,11 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
 
         round = 0;
         StartCoroutine(StartRound(correctCounts[round], wrongCounts[round], minSpeed[round], maxSpeed[round], minWaitTime[round], maxWaitTime[round], round != 0));
+    }
+
+    private void OnDestroy()
+    {
+        Runner.ReachedEnd -= SomeoneGotToEnd;
     }
 
     private IEnumerator StartRound(int numCorr, int numWrong, float minS, float maxS, float minWait, float maxWait, bool disableImg)
@@ -108,8 +114,8 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         if (disableImg) { 
             yield return new WaitForSeconds(5f);
             //choose new counter category
-            correctIncorrect[0].SetActive(false);
-            correctIncorrect[1].SetActive(false);
+            CorrectImage.SetActive(false);
+            WrongImage.SetActive(false);
             nextRoundImage.SetActive(false);
         }
 
@@ -130,7 +136,6 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         GetRunners(wrongOnes, numWrong, -1, minS, maxS);
         GetRunners(wrongOnes, numWrong, -1, minS, maxS);
 
-        //Debug.Log(correctNumber + " " + (numWrong * 2));
         totalNumber = correctNumber + (numWrong * 2);
         yield return new WaitForSeconds(1f); //TODO ADD A STARTING SOMETHING ONCE DONE REMOVE THIS
         controls.QuizGame.Enable();
@@ -190,8 +195,8 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
 
     private IEnumerator Finish() {
         yield return new WaitForSeconds(3f);
-        correctIncorrect[0].SetActive(false);
-        correctIncorrect[1].SetActive(false);
+        CorrectImage.SetActive(false);
+        WrongImage.SetActive(false);
         nextRoundImage.SetActive(false);
         int max = -1;
         int gamer = 0;
@@ -205,7 +210,6 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
         finished.SetActive(true);
         yield return new WaitForSeconds(3f);
         finished.SetActive(false);
-        Debug.Log("Winner Index: " + gamer);
         EndMultiplayerGame(gamer);
     }
 
@@ -236,7 +240,11 @@ public class CountingGame : Minigame, Controls.IQuizGameActions
                 }
             }
             int whichOne = min == -1 ? 0 : 1;
-            correctIncorrect[whichOne].SetActive(true);
+            if (whichOne == 0) {
+                CorrectImage.SetActive(true);
+            } else {
+                WrongImage.SetActive(true);
+            }
             
             nextRoundImage.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "The correct count was " + correctNumber + "!";
             nextRoundImage.SetActive(true);
