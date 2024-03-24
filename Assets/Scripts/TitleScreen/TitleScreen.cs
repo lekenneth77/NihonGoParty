@@ -27,6 +27,15 @@ public class TitleScreen : MonoBehaviour
         BoardController.numPlayers = 0;
         BoardController.wonMinigame = false;
         BoardController.minigameResult = 0;
+        Application.targetFrameRate = 60;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            SceneManager.LoadSceneAsync("Test");
+        }
     }
 
     public IEnumerator DoScreens() {
