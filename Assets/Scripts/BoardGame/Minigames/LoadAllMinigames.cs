@@ -6,10 +6,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class LoadAllMinigames : MonoBehaviour, Controls.IDebugActions
+public class LoadAllMinigames : MonoBehaviour
 {
     public int numPlayers;
-    private Controls controls;
     public GameObject canva;
     public static GameObject canvas;
 
@@ -17,10 +16,18 @@ public class LoadAllMinigames : MonoBehaviour, Controls.IDebugActions
     public GameObject htpStar;
     void Start() {
         canvas = canva;
-        controls = new Controls();
-        controls.Debug.AddCallbacks(this);
-        controls.Debug.Enable();
         Minigame.debug = true;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Slash))
+        {   if (SceneManager.sceneCount > 1)
+            {
+                SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
+                canvas.SetActive(true);
+            }
+        }
     }
 
     public static void ResetCanvas() {
@@ -63,13 +70,6 @@ public class LoadAllMinigames : MonoBehaviour, Controls.IDebugActions
         }
         SceneManager.LoadSceneAsync(game, LoadSceneMode.Additive);
         canvas.SetActive(false);
-    }
-
-    public void OnSlash(InputAction.CallbackContext context)
-    {
-        if (!context.performed) { return; }
-        SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
-        canvas.SetActive(true);
     }
 
     public void LoadTitleScreen() {
