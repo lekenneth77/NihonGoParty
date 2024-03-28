@@ -41,7 +41,7 @@ public class ClickLetter : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnMouseDown() {
         if (!disable && !move_flag) {
             KatakanaScramble.on_hover.SetActive(false);
-            deal_card.Play();
+            //deal_card.Play();
             if (chosen) {
                 KatakanaScramble.remove_pos(this.gameObject);
                 new_pos = original_pos;
