@@ -167,11 +167,11 @@ public class KanjiCRotate : Minigame, Controls.IKanjiCrossRotateActions
         {
             timer.StopTimer();
             gotIt = true;
-            won = player.Win();
             winner = player;
             yield return new WaitForSeconds(1f);
             controls.KanjiCrossRotate.Disable();
             nice.gameObject.SetActive(true);
+            won = player.Win();
             yield return new WaitForSeconds(3f);
             nice.gameObject.SetActive(false);
             ShowAnswer();
