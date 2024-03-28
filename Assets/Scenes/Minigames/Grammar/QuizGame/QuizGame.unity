@@ -1279,15 +1279,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13d07ce9d7f7bd147a485b25ffbf072d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13d07ce9d7f7bd147a485b25ffbf072d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13d07ce9d7f7bd147a485b25ffbf072d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13d07ce9d7f7bd147a485b25ffbf072d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1329,6 +1329,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13d07ce9d7f7bd147a485b25ffbf072d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 13d07ce9d7f7bd147a485b25ffbf072d, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -1336,6 +1340,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 13d07ce9d7f7bd147a485b25ffbf072d, type: 3}
       propertyPath: m_Name
       value: milo-destruction
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 13d07ce9d7f7bd147a485b25ffbf072d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13d07ce9d7f7bd147a485b25ffbf072d, type: 3}
@@ -1394,8 +1402,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 543450652416519811}
-  - {fileID: 315197097}
   - {fileID: 1752529899}
+  - {fileID: 315197097}
   - {fileID: 873568458}
   - {fileID: 759690311}
   m_Father: {fileID: 0}
@@ -3383,9 +3391,9 @@ PlayableDirector:
   - key: {fileID: -341773709117738669, guid: a9ef58229aa3b7c408a62b6068c53caf, type: 2}
     value: {fileID: 1245590275}
   - key: {fileID: 6806996922777687795, guid: a9ef58229aa3b7c408a62b6068c53caf, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 585990646}
   - key: {fileID: -6039423545255826514, guid: a9ef58229aa3b7c408a62b6068c53caf, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 585990645}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &1304856020
